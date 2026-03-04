@@ -1,9 +1,5 @@
 const { chromium } = require('playwright');
 
-/**
- * For each analyzed screenshot item, executes the AI-generated action plan
- * on the Western portal and captures a screenshot.
- */
 async function takePortalScreenshots(portalUrl, login, password, screenshotItems, onProgress) {
   const base = portalUrl.replace(/\/$/, '');
   const results = {};
@@ -22,10 +18,8 @@ async function takePortalScreenshots(portalUrl, login, password, screenshotItems
     const page = await context.newPage();
     page.setDefaultTimeout(20000);
 
-    // Login once
     await loginToPortal(page, base, login, password);
 
-    // Execute action plan for each screenshot
     for (let i = 0; i < screenshotItems.length; i++) {
       const item = screenshotItems[i];
       if (!item.analysis) continue;
@@ -35,19 +29,13 @@ async function takePortalScreenshots(portalUrl, login, password, screenshotItems
 
       try {
         await executeSteps(page, base, steps);
-
-        const buf = await page.screenshot({
-          type: 'png',
-          clip: { x: 0, y: 0, width: 1280, height: 800 },
-        });
-
+        const buf = await page.screenshot({ type: 'png', clip: { x: 0, y: 0, width: 1280, height: 800 } });
         const shotData = { data: buf.toString('base64'), mimeType: 'image/png' };
         results[item.src] = shotData;
         if (item.absoluteUrl) results[item.absoluteUrl] = shotData;
-
-        console.log(`[screenshotter] ✅ Done: "${description}"`);
+        console.log(`[screenshotter] ✅ "${description}"`);
       } catch (err) {
-        console.error(`[screenshotter] ❌ Failed "${description}": ${err.message}`);
+        console.error(`[screenshotter] ❌ "${description}": ${err.message}`);
         if (onProgress) onProgress(i, screenshotItems.length, `Ошибка: ${err.message}`);
       }
     }
@@ -60,183 +48,243 @@ async function takePortalScreenshots(portalUrl, login, password, screenshotItems
   return results;
 }
 
+// ─── Login ────────────────────────────────────────────────────────────────────
+
+async function loginToPortal(page, base, login, password) {
+  console.log(`[login] Opening ${base}/`);
+  await page.goto(`${base}/`, { waitUntil: 'domcontentloaded', timeout: 30000 });
+
+  // Wait up to 8s for either login form or logged-in indicator
+  const state = await waitForLoginOrDashboard(page, 8000);
+
+  if (state === 'dashboard') {
+    console.log('[login] Already logged in');
+    return;
+  }
+
+  if (state === 'not_found') {
+    // Try /login/ path directly
+    console.log('[login] Form not found at /, trying /login/');
+    await page.goto(`${base}/login/`, { waitUntil: 'domcontentloaded', timeout: 20000 });
+    const state2 = await waitForLoginOrDashboard(page, 8000);
+    if (state2 === 'dashboard') return;
+    if (state2 === 'not_found') throw new Error(`Форма входа не найдена. Текущий URL: ${page.url()}`);
+  }
+
+  // Fill credentials
+  await fillField(page, ['input[name="USER_LOGIN"]', 'input[name="login"]', 'input[type="email"]'], login);
+  await fillField(page, ['input[name="USER_PASSWORD"]', 'input[name="password"]', 'input[type="password"]'], password);
+
+  // Submit
+  const submitted = await trySubmit(page);
+  if (!submitted) throw new Error('Не удалось отправить форму входа');
+
+  // Wait for redirect / dashboard
+  await page.waitForTimeout(3000);
+
+  const finalState = await waitForLoginOrDashboard(page, 6000);
+  if (finalState !== 'dashboard') {
+    // Check for error message on the page
+    const errText = await getVisibleError(page);
+    const currentUrl = page.url();
+    throw new Error(errText || `Авторизация не удалась. URL после входа: ${currentUrl}`);
+  }
+
+  console.log(`[login] ✅ Logged in. URL: ${page.url()}`);
+}
+
+async function waitForLoginOrDashboard(page, timeoutMs) {
+  const loginSelectors = [
+    'input[name="USER_LOGIN"]',
+    'input[name="login"]',
+    'input[type="email"][autocomplete]',
+  ];
+  const dashboardSelectors = [
+    '#bx-panel',
+    '.bx-layout-user-block',
+    '.feed-add-post-form',
+    '[class*="global-menu"]',
+    '.crm-btn-add',
+    '.tasks-task-create-btn',
+    '.im-sidebar',
+  ];
+
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    for (const sel of dashboardSelectors) {
+      try {
+        if (await page.locator(sel).first().isVisible({ timeout: 300 })) return 'dashboard';
+      } catch (_) {}
+    }
+    for (const sel of loginSelectors) {
+      try {
+        if (await page.locator(sel).first().isVisible({ timeout: 300 })) return 'login_form';
+      } catch (_) {}
+    }
+    await page.waitForTimeout(500);
+  }
+  return 'not_found';
+}
+
+async function fillField(page, selectors, value) {
+  for (const sel of selectors) {
+    try {
+      const el = page.locator(sel).first();
+      if (await el.isVisible({ timeout: 1500 })) {
+        await el.click({ timeout: 2000 });
+        await el.fill(value, { timeout: 2000 });
+        return true;
+      }
+    } catch (_) {}
+  }
+  console.warn(`[login] Could not fill field with selectors: ${selectors.join(', ')}`);
+  return false;
+}
+
+async function trySubmit(page) {
+  const selectors = [
+    'button[type="submit"]',
+    'input[type="submit"]',
+    '.login-btn',
+    '.bx-login-button',
+    'button.ui-btn',
+  ];
+  for (const sel of selectors) {
+    try {
+      const el = page.locator(sel).first();
+      if (await el.isVisible({ timeout: 1500 })) {
+        await el.click({ timeout: 3000 });
+        return true;
+      }
+    } catch (_) {}
+  }
+  // Fallback: press Enter
+  try {
+    await page.keyboard.press('Enter');
+    return true;
+  } catch (_) {}
+  return false;
+}
+
+async function getVisibleError(page) {
+  const errSelectors = [
+    '.login-form-error',
+    '.bx-login-error',
+    '[class*="error"]',
+    '.alert-danger',
+  ];
+  for (const sel of errSelectors) {
+    try {
+      const el = page.locator(sel).first();
+      if (await el.isVisible({ timeout: 500 })) {
+        const text = await el.innerText();
+        if (text.trim()) return `Ошибка на портале: ${text.trim()}`;
+      }
+    } catch (_) {}
+  }
+  return null;
+}
+
+// ─── Step executor ────────────────────────────────────────────────────────────
+
 async function executeSteps(page, base, steps) {
   for (const step of steps) {
     try {
       await executeStep(page, base, step);
     } catch (err) {
-      // Non-fatal: log and continue to next step
-      console.warn(`[screenshotter] Step ${step.action} failed: ${err.message}`);
+      console.warn(`[screenshotter] Step "${step.action}" failed: ${err.message}`);
     }
   }
 }
 
 async function executeStep(page, base, step) {
   switch (step.action) {
-
     case 'goto': {
       const url = step.path.startsWith('http') ? step.path : `${base}${step.path}`;
       await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 20000 });
       await page.waitForTimeout(1500);
-      // Dismiss any welcome/tutorial popups
       await dismissPopups(page);
       break;
     }
-
     case 'click': {
-      const clicked = await tryClick(page, step.selector, step.fallbackText);
-      if (!clicked) console.warn(`[screenshotter] click: could not find "${step.selector}"`);
+      await tryClick(page, step.selector, step.fallbackText);
       await page.waitForTimeout(800);
       break;
     }
-
     case 'clickText': {
       try {
         await page.getByText(step.text, { exact: false }).first().click({ timeout: 5000 });
       } catch {
-        // Try button role
         await page.getByRole('button', { name: step.text }).first().click({ timeout: 3000 });
       }
       await page.waitForTimeout(800);
       break;
     }
-
     case 'fill': {
-      const selectors = [step.selector, ...(step.fallbacks || [])].filter(Boolean);
-      let filled = false;
-      for (const sel of selectors) {
+      const sels = [step.selector, ...(step.fallbacks || [])].filter(Boolean);
+      for (const sel of sels) {
         try {
           const el = page.locator(sel).first();
           await el.waitFor({ timeout: 4000 });
-          await el.click({ timeout: 3000 });
+          await el.click({ timeout: 2000 });
           await el.fill(step.value || '', { timeout: 3000 });
-          filled = true;
           break;
         } catch (_) {}
       }
-      if (!filled) console.warn(`[screenshotter] fill: could not find field "${step.selector}"`);
       break;
     }
-
     case 'fillByLabel': {
       try {
         await page.getByLabel(step.label, { exact: false }).first().fill(step.value || '', { timeout: 4000 });
-      } catch {
-        console.warn(`[screenshotter] fillByLabel: label "${step.label}" not found`);
-      }
+      } catch { console.warn(`[step] fillByLabel "${step.label}" not found`); }
       break;
     }
-
     case 'select': {
       try {
         await page.locator(step.selector).first().selectOption(step.value, { timeout: 4000 });
-      } catch {
-        console.warn(`[screenshotter] select: "${step.selector}" not found`);
-      }
+      } catch { console.warn(`[step] select "${step.selector}" not found`); }
       break;
     }
-
     case 'keyboard': {
       await page.keyboard.press(step.key || 'Escape');
       await page.waitForTimeout(300);
       break;
     }
-
     case 'wait': {
       await page.waitForTimeout(Math.min(step.ms || 1000, 5000));
       break;
     }
-
     case 'waitForSelector': {
       await page.waitForSelector(step.selector, { timeout: 8000 });
       break;
     }
-
     case 'scroll': {
       await page.evaluate((y) => window.scrollTo(0, y), step.y || 0);
       await page.waitForTimeout(400);
       break;
     }
-
     default:
-      console.warn(`[screenshotter] Unknown action: ${step.action}`);
+      console.warn(`[step] Unknown action: ${step.action}`);
   }
 }
 
 async function tryClick(page, selector, fallbackText) {
-  try {
-    await page.locator(selector).first().click({ timeout: 4000 });
-    return true;
-  } catch (_) {}
-
+  try { await page.locator(selector).first().click({ timeout: 4000 }); return true; } catch (_) {}
   if (fallbackText) {
-    try {
-      await page.getByText(fallbackText, { exact: false }).first().click({ timeout: 3000 });
-      return true;
-    } catch (_) {}
+    try { await page.getByText(fallbackText, { exact: false }).first().click({ timeout: 3000 }); return true; } catch (_) {}
   }
   return false;
 }
 
 async function dismissPopups(page) {
-  const popupSelectors = [
-    '.popup-window-close-icon',
-    '.ui-popup-close',
-    '[data-role="close"]',
-    '.im-notify-container .im-notify-close',
-  ];
-  for (const sel of popupSelectors) {
+  for (const sel of ['.popup-window-close-icon', '.ui-popup-close', '[data-role="close"]']) {
     try {
-      const el = page.locator(sel).first();
-      if (await el.isVisible({ timeout: 500 })) {
-        await el.click({ timeout: 1000 });
-        await page.waitForTimeout(300);
+      if (await page.locator(sel).first().isVisible({ timeout: 400 })) {
+        await page.locator(sel).first().click({ timeout: 1000 });
+        await page.waitForTimeout(200);
       }
     } catch (_) {}
   }
-}
-
-async function loginToPortal(page, base, login, password) {
-  await page.goto(`${base}/`, { waitUntil: 'domcontentloaded', timeout: 25000 });
-  await page.waitForTimeout(1000);
-
-  // Check if already logged in
-  const loginSelectors = ['input[name="USER_LOGIN"]', 'input[name="login"]', 'input[type="email"]'];
-  let hasForm = false;
-  for (const sel of loginSelectors) {
-    try {
-      if (await page.locator(sel).first().isVisible({ timeout: 1000 })) { hasForm = true; break; }
-    } catch (_) {}
-  }
-
-  if (!hasForm) {
-    await page.goto(`${base}/login/`, { waitUntil: 'domcontentloaded', timeout: 15000 });
-    await page.waitForTimeout(500);
-  }
-
-  // Fill login
-  for (const sel of loginSelectors) {
-    try { await page.locator(sel).first().fill(login, { timeout: 3000 }); break; } catch (_) {}
-  }
-
-  // Fill password
-  for (const sel of ['input[name="USER_PASSWORD"]', 'input[name="password"]', 'input[type="password"]']) {
-    try { await page.locator(sel).first().fill(password, { timeout: 3000 }); break; } catch (_) {}
-  }
-
-  // Submit
-  for (const sel of ['button[type="submit"]', 'input[type="submit"]', '.login-btn', '.bx-login-button']) {
-    try { await page.locator(sel).first().click({ timeout: 3000 }); break; } catch (_) {}
-  }
-
-  await page.waitForTimeout(2500);
-
-  const afterUrl = page.url();
-  if (afterUrl.includes('/login') || afterUrl.includes('/auth')) {
-    throw new Error('Ошибка авторизации. Проверьте логин и пароль.');
-  }
-
-  console.log(`[screenshotter] ✅ Logged in, current URL: ${afterUrl}`);
 }
 
 module.exports = { takePortalScreenshots };

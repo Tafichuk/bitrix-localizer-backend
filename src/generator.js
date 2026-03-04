@@ -1,6 +1,5 @@
 const JSZip = require('jszip');
 const cheerio = require('cheerio');
-const axios = require('axios');
 
 const LANG_NAMES = {
   en: 'English', de: 'Deutsch', fr: 'Français',
@@ -21,13 +20,6 @@ async function generateZip(article, translations, screenshotItems, newScreenshot
       try { portalShotMap.set(decodeURIComponent(item.src), shot); } catch (_) {}
       try { portalShotMap.set(decodeURIComponent(item.absoluteUrl), shot); } catch (_) {}
     }
-  }
-
-  // Build lookup for original images: src → absoluteUrl
-  const originalUrlMap = new Map();
-  for (const item of screenshotItems) {
-    originalUrlMap.set(item.src, item.absoluteUrl);
-    originalUrlMap.set(item.absoluteUrl, item.absoluteUrl);
   }
 
   console.log(`[generator] portalShotMap size: ${portalShotMap.size}`);
@@ -62,41 +54,10 @@ async function generateZip(article, translations, screenshotItems, newScreenshot
         return;
       }
 
-      // 2. Скачать оригинальный скрин как fallback
-      const absoluteUrl = originalUrlMap.get(rawSrc);
-      if (absoluteUrl && absoluteUrl.startsWith('http')) {
-        downloadQueue.push({ fileName, absoluteUrl, el: $(el) });
-        $(el).attr('src', `images/${fileName}`);
-        $(el).removeAttr('data-src');
-        $(el).removeAttr('data-lazy-src');
-        console.log(`[generator] ⬇️  Will download original → ${fileName} (${absoluteUrl.slice(0, 60)})`);
-        return;
-      }
-
-      // 3. Оставляем как есть (внешняя ссылка)
-      if (rawSrc.startsWith('http')) {
-        console.log(`[generator] 🔗 External image kept: ${rawSrc.slice(0, 60)}`);
-      }
+      // 2. Нет портального скрина — убираем img из HTML (не нужны оригинальные русские скрины)
+      console.log(`[generator] ⏭️  No portal screenshot for ${rawSrc.slice(0, 60)}, removing img`);
+      $(el).remove();
     });
-
-    // Скачиваем оригинальные изображения параллельно
-    if (downloadQueue.length > 0) {
-      await Promise.allSettled(
-        downloadQueue.map(async ({ fileName, absoluteUrl }) => {
-          try {
-            const resp = await axios.get(absoluteUrl, {
-              responseType: 'arraybuffer',
-              timeout: 15000,
-              headers: { 'User-Agent': 'Mozilla/5.0' },
-            });
-            imgFolder.file(fileName, Buffer.from(resp.data));
-            console.log(`[generator] ✅ Downloaded original: ${fileName}`);
-          } catch (err) {
-            console.warn(`[generator] ⚠️ Failed to download ${absoluteUrl}: ${err.message}`);
-          }
-        })
-      );
-    }
 
     // Получаем финальный HTML контента (body содержимое, без лишних оберток)
     const contentHtml = $('body').html() || $.html();
