@@ -1,92 +1,119 @@
 const Anthropic = require('@anthropic-ai/sdk');
+const cheerio = require('cheerio');
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const LANGUAGE_NAMES = {
-  en: 'English',
-  de: 'German',
-  fr: 'French',
-  es: 'Spanish',
-  pt: 'Portuguese',
-  pl: 'Polish',
-  it: 'Italian',
+  en: 'English', de: 'German', fr: 'French',
+  es: 'Spanish', pt: 'Portuguese', pl: 'Polish', it: 'Italian',
+};
+const LANGUAGE_LABELS = {
+  en: 'English', de: 'Deutsch', fr: 'Français',
+  es: 'Español', pt: 'Português', pl: 'Polski', it: 'Italiano',
 };
 
-const LANGUAGE_LABELS = {
-  en: 'English',
-  de: 'Deutsch',
-  fr: 'Français',
-  es: 'Español',
-  pt: 'Português',
-  pl: 'Polski',
-  it: 'Italiano',
-};
+// Теги, внутри которых текст НЕ переводим
+const SKIP_TAGS = new Set(['script', 'style', 'code', 'pre', 'kbd', 'var', 'samp']);
 
 async function translateContent(article, targetLanguage) {
   const langName = LANGUAGE_NAMES[targetLanguage];
   if (!langName) throw new Error(`Unknown language: ${targetLanguage}`);
 
-  // Translate title
-  const titleResp = await client.messages.create({
-    model: 'claude-haiku-4-5-20251001',
-    max_tokens: 300,
-    system: 'You are a professional translator for Bitrix24 documentation. Translate ONLY the given text, return nothing else.',
-    messages: [{ role: 'user', content: `Translate to ${langName}:\n${article.title}` }],
+  // Загружаем HTML в cheerio
+  const $ = cheerio.load(`<div id="__root__">${article.contentHtml}</div>`, { decodeEntities: false });
+
+  // Собираем все текстовые узлы (только текст, без HTML-тегов)
+  const items = []; // { node, originalData }
+  collectTextNodes($, $('#__root__')[0], items);
+
+  // Список строк для перевода (title первым)
+  const texts = [article.title, ...items.map(it => it.node.data)];
+
+  // Переводим батчами параллельно
+  const translated = await translateAllTexts(texts, langName);
+
+  // Применяем переводы к DOM
+  const translatedTitle = translated[0] || article.title;
+  items.forEach((item, i) => {
+    const t = translated[i + 1];
+    if (t) item.node.data = t;
   });
-  const translatedTitle = titleResp.content[0].text.trim();
-
-  // Translate HTML content — chunk if too long (> 60k chars)
-  const chunks = chunkHtml(article.contentHtml, 50000);
-  const translatedChunks = [];
-
-  for (const chunk of chunks) {
-    const resp = await client.messages.create({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 8192,
-      system: `You are a professional technical translator for Bitrix24 help documentation.
-Translate the HTML content from Russian to ${langName}.
-Rules:
-- Preserve ALL HTML tags, attributes, and structure exactly
-- Keep product names as-is: Bitrix24, CoPilot, CRM, REST API, etc.
-- Translate UI labels and button names naturally for ${langName} speakers
-- Do NOT translate content inside <code> or <pre> tags
-- Do NOT translate URLs or email addresses
-- Return ONLY the translated HTML, no explanations or markdown`,
-      messages: [{
-        role: 'user',
-        content: `Translate this HTML to ${langName}:\n\n${chunk}`,
-      }],
-    });
-    translatedChunks.push(resp.content[0].text.trim());
-  }
 
   return {
     title: translatedTitle,
-    contentHtml: translatedChunks.join('\n'),
+    contentHtml: $('#__root__').html() || '',
     language: targetLanguage,
-    languageName: LANGUAGE_NAMES[targetLanguage],
+    languageName: langName,
     languageLabel: LANGUAGE_LABELS[targetLanguage],
   };
 }
 
-function chunkHtml(html, maxChars) {
-  if (html.length <= maxChars) return [html];
-
-  const chunks = [];
-  let start = 0;
-  while (start < html.length) {
-    let end = start + maxChars;
-    if (end >= html.length) {
-      chunks.push(html.slice(start));
-      break;
+// Рекурсивно собирает текстовые узлы, пропуская code/pre/script
+function collectTextNodes($, el, result) {
+  if (!el || !el.childNodes) return;
+  for (const node of el.childNodes) {
+    if (node.type === 'text') {
+      const text = node.data || '';
+      // Пропускаем пустые строки и одиночные пробелы
+      if (text.trim().length > 1) {
+        result.push({ node });
+      }
+    } else if (node.type === 'tag') {
+      const tag = (node.name || '').toLowerCase();
+      if (!SKIP_TAGS.has(tag)) {
+        collectTextNodes($, node, result);
+      }
     }
-    // Find last closing tag before limit
-    const lastTag = html.lastIndexOf('>', end);
-    if (lastTag > start) end = lastTag + 1;
-    chunks.push(html.slice(start, end));
-    start = end;
   }
-  return chunks;
+}
+
+// Разбиваем тексты на батчи и переводим параллельно
+async function translateAllTexts(texts, langName) {
+  const BATCH_SIZE = 60;       // строк на батч
+  const BATCH_CHARS = 6000;    // символов на батч
+
+  const batches = [];
+  let batch = [];
+  let chars = 0;
+
+  for (const text of texts) {
+    if ((batch.length >= BATCH_SIZE || chars + text.length > BATCH_CHARS) && batch.length > 0) {
+      batches.push(batch);
+      batch = [];
+      chars = 0;
+    }
+    batch.push(text);
+    chars += text.length;
+  }
+  if (batch.length > 0) batches.push(batch);
+
+  // Все батчи параллельно
+  const results = await Promise.all(batches.map(b => translateBatch(b, langName)));
+  return results.flat();
+}
+
+async function translateBatch(texts, langName) {
+  const response = await client.messages.create({
+    model: 'claude-haiku-4-5-20251001',
+    max_tokens: 4096,
+    system: `You translate Russian text strings to ${langName} for Bitrix24 documentation.
+Return ONLY a valid JSON array of translated strings, same count and order as input.
+Rules: keep Bitrix24, CRM, CoPilot, REST API unchanged. No explanations.`,
+    messages: [{
+      role: 'user',
+      content: JSON.stringify(texts),
+    }],
+  });
+
+  const raw = response.content[0].text.trim();
+  const match = raw.match(/\[[\s\S]*\]/);
+  if (!match) throw new Error('Ответ модели не является JSON-массивом');
+
+  const parsed = JSON.parse(match[0]);
+
+  // Если количество не совпадает — возвращаем оригиналы для несовпадающих
+  const result = texts.map((orig, i) => parsed[i] || orig);
+  return result;
 }
 
 module.exports = { translateContent, LANGUAGE_NAMES, LANGUAGE_LABELS };
