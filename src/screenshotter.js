@@ -1,6 +1,6 @@
 const { chromium } = require('playwright');
 
-async function takePortalScreenshots(portalUrl, login, password, screenshotItems, onProgress) {
+async function takePortalScreenshots(portalUrl, sessionCookies, screenshotItems, onProgress) {
   const base = portalUrl.replace(/\/$/, '');
   const results = {};
   let browser;
@@ -15,10 +15,18 @@ async function takePortalScreenshots(portalUrl, login, password, screenshotItems
       viewport: { width: 1280, height: 800 },
       locale: 'en-US',
     });
+
+    // Inject session cookies before creating page
+    const cookies = parseCookieString(sessionCookies, base);
+    if (cookies.length === 0) throw new Error('Не удалось распарсить cookies. Проверьте формат: name=value; name2=value2');
+    await context.addCookies(cookies);
+    console.log(`[screenshotter] Injected ${cookies.length} cookies for ${base}`);
+
     const page = await context.newPage();
     page.setDefaultTimeout(20000);
 
-    await loginToPortal(page, base, login, password);
+    // Verify portal access
+    await verifyPortalAccess(page, base);
 
     for (let i = 0; i < screenshotItems.length; i++) {
       const item = screenshotItems[i];
@@ -48,244 +56,81 @@ async function takePortalScreenshots(portalUrl, login, password, screenshotItems
   return results;
 }
 
-// ─── Login ────────────────────────────────────────────────────────────────────
+// ─── Cookie parsing ────────────────────────────────────────────────────────────
 
-async function loginToPortal(page, base, login, password) {
-  // Шаг 1: авторизуемся через единый паспорт bitrix24.net
-  await loginViaPassport(page, login, password);
+/**
+ * Parses "name=value; name2=value2" cookie string into Playwright cookie objects.
+ * Uses portal URL so cookies are set for the correct domain.
+ */
+function parseCookieString(cookieStr, portalBase) {
+  const cookies = [];
+  if (!cookieStr || !cookieStr.trim()) return cookies;
 
-  // Шаг 2: переходим на портал — сессия подхватится автоматически
-  console.log(`[login] Navigating to portal: ${base}/`);
+  const url = `${portalBase}/`;
+
+  const parts = cookieStr.split(';');
+  for (const part of parts) {
+    const trimmed = part.trim();
+    if (!trimmed) continue;
+    const eq = trimmed.indexOf('=');
+    if (eq < 0) continue;
+    const name = trimmed.slice(0, eq).trim();
+    const value = trimmed.slice(eq + 1).trim();
+    if (!name) continue;
+    cookies.push({ name, value, url });
+  }
+
+  return cookies;
+}
+
+// ─── Portal access verification ───────────────────────────────────────────────
+
+async function verifyPortalAccess(page, base) {
+  console.log(`[screenshotter] Navigating to portal: ${base}/`);
   await page.goto(`${base}/`, { waitUntil: 'domcontentloaded', timeout: 30000 });
-  await page.waitForTimeout(3000);
-
-  const currentUrl = page.url();
-  console.log(`[login] Portal URL after navigation: ${currentUrl}`);
-
-  // Если снова показывает форму логина — пробуем заполнить её напрямую
-  const state = await waitForLoginOrDashboard(page, 10000);
-  if (state === 'dashboard') {
-    console.log(`[login] ✅ Portal loaded. URL: ${page.url()}`);
-    return;
-  }
-  if (state === 'login_form') {
-    console.log('[login] Portal shows login form, filling directly...');
-    await fillAndSubmitForm(page, login, password);
-    await page.waitForTimeout(3000);
-    const finalState = await waitForLoginOrDashboard(page, 10000);
-    if (finalState !== 'dashboard') {
-      const errText = await getVisibleError(page);
-      throw new Error(errText || `Авторизация на портале не удалась. URL: ${page.url()}`);
-    }
-    console.log(`[login] ✅ Logged in via portal form. URL: ${page.url()}`);
-    return;
-  }
-
-  throw new Error(`Портал не загрузился после авторизации. URL: ${page.url()}`);
-}
-
-// Авторизация через https://bitrix24.net/passport/view/
-// Страница — Vue SPA, двухшаговый флоу:
-//   Step 1: ввод email (#login) → Continue (.b24net-text-btn--call-to-action)
-//   Step 2: ввод пароля (.b24net-password-enter-form__password input) → Login (.b24net-password-enter-form__continue-btn)
-async function loginViaPassport(page, login, password) {
-  const passportUrl = 'https://bitrix24.net/passport/view/';
-  console.log(`[login] Opening Bitrix24 passport: ${passportUrl}`);
-  await page.goto(passportUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
   await page.waitForTimeout(2000);
-  console.log(`[login] Passport page loaded. URL: ${page.url()}`);
 
-  // ── Step 1: Email ────────────────────────────────────────────────────────
-  const loginInput = page.locator('#login');
-  try {
-    await loginInput.waitFor({ state: 'visible', timeout: 10000 });
-  } catch {
-    throw new Error(`[login] Поле #login не появилось. URL: ${page.url()}`);
-  }
-  console.log(`[login] Step 1: filling email "${login}"`);
-  await loginInput.click();
-  await loginInput.fill(login);
-  await page.waitForTimeout(300);
-
-  console.log('[login] Clicking Continue button...');
-  const continueBtn = page.locator('button.b24net-text-btn--call-to-action').first();
-  await continueBtn.click();
-  console.log('[login] Continue clicked, waiting for password step...');
-
-  // ── Ждём появления поля пароля ───────────────────────────────────────────
-  const passwordWrapper = page.locator('.b24net-password-enter-form__password');
-  try {
-    await passwordWrapper.waitFor({ state: 'visible', timeout: 10000 });
-  } catch {
-    // Проверяем — может показало ошибку на email
-    const errText = await getVisibleError(page);
-    const emailErr = await getPassportEmailError(page);
-    throw new Error(emailErr || errText || `[login] Поле пароля не появилось после Continue. URL: ${page.url()}`);
-  }
-  console.log('[login] Step 2: password field visible, filling password...');
-
-  // ── Step 2: Password ─────────────────────────────────────────────────────
-  const passwordInput = page.locator('.b24net-password-enter-form__password input').first();
-  await passwordInput.waitFor({ state: 'visible', timeout: 5000 });
-  await passwordInput.click();
-  await passwordInput.fill(password);
-  await page.waitForTimeout(300);
-
-  console.log('[login] Clicking Login button (.b24net-password-enter-form__continue-btn)...');
-  const loginBtn = page.locator('.b24net-password-enter-form__continue-btn').first();
-  await loginBtn.waitFor({ state: 'visible', timeout: 5000 });
-  await loginBtn.click();
-  console.log('[login] Login button clicked, waiting for auth result...');
-
-  // ── Ждём редиректа или подтверждения ─────────────────────────────────────
-  await page.waitForTimeout(4000);
   const currentUrl = page.url();
-  console.log(`[login] After login URL: ${currentUrl}`);
+  console.log(`[screenshotter] Portal URL after navigation: ${currentUrl}`);
 
-  // Успех: URL ушёл с passport/view или появился список порталов
-  if (!currentUrl.includes('passport/view') && currentUrl.includes('bitrix24.net')) {
-    console.log('[login] ✅ Passport login OK (redirected from passport/view)');
-    return;
+  // Check for login redirect
+  if (currentUrl.includes('bitrix24.net') || currentUrl.includes('/login') || currentUrl.includes('/auth')) {
+    throw new Error(`Cookies не действительны или истекли. Портал показывает страницу логина: ${currentUrl}. Обновите cookies.`);
   }
 
-  // Проверяем список порталов (страница выбора аккаунта)
-  const portalListVisible = await page.locator('.b24net-portal-list, .b24net-logging-in__portal-list, [class*="portal-list"]').first().isVisible({ timeout: 1000 }).catch(() => false);
-  if (portalListVisible) {
-    console.log('[login] ✅ Passport login OK (portal list shown)');
-    return;
-  }
-
-  // Всё ещё на passport/view — проверяем ошибку пароля
-  const passErrEl = page.locator('.b24net-password-enter-form .b24net-text-input__error, .b24net-text-input__error').first();
-  const passErr = await passErrEl.isVisible({ timeout: 1000 }).catch(() => false)
-    ? (await passErrEl.innerText().catch(() => '')).trim()
-    : null;
-  if (passErr) throw new Error(`[login] Ошибка пароля: ${passErr}`);
-
-  const visibleErr = await getVisibleError(page);
-  if (visibleErr) throw new Error(`[login] ${visibleErr}`);
-
-  // Паспорт не ушёл с view — всё равно попробуем перейти на портал
-  console.log('[login] ⚠️ Still on passport/view — will attempt portal navigation anyway');
-}
-
-async function getPassportEmailError(page) {
-  for (const sel of ['.b24net-text-input__error', '.b24net-login-enter-form .b24net-text-input__error']) {
-    try {
-      const el = page.locator(sel).first();
-      if (await el.isVisible({ timeout: 500 })) {
-        const t = (await el.innerText()).trim();
-        if (t) return `Email ошибка: ${t}`;
+  // Check for portal dashboard elements
+  const dashboardFound = await isDashboard(page);
+  if (!dashboardFound) {
+    // Give it more time
+    await page.waitForTimeout(3000);
+    const dashboardFound2 = await isDashboard(page);
+    if (!dashboardFound2) {
+      const finalUrl = page.url();
+      if (finalUrl.includes('/login') || finalUrl.includes('/auth') || finalUrl.includes('bitrix24.net')) {
+        throw new Error(`Авторизация через cookies не удалась. URL: ${finalUrl}. Обновите cookies.`);
       }
-    } catch (_) {}
-  }
-  return null;
-}
-
-async function isPasswordFieldVisible(page) {
-  try {
-    return await page.locator('.b24net-password-enter-form__password input').first().isVisible({ timeout: 800 });
-  } catch (_) {}
-  return false;
-}
-
-async function fillAndSubmitForm(page, login, password) {
-  await fillField(page, ['input[name="USER_LOGIN"]', 'input[name="login"]', 'input[type="email"]'], login);
-  await fillField(page, ['input[name="USER_PASSWORD"]', 'input[name="password"]', 'input[type="password"]'], password);
-  const submitted = await trySubmit(page);
-  if (!submitted) throw new Error('Не удалось отправить форму входа');
-}
-
-async function waitForLoginOrDashboard(page, timeoutMs) {
-  const loginSelectors = [
-    'input[name="USER_LOGIN"]',
-    'input[name="login"]',
-    'input[type="email"][autocomplete]',
-  ];
-  const dashboardSelectors = [
-    '#bx-panel',
-    '.bx-layout-user-block',
-    '.feed-add-post-form',
-    '[class*="global-menu"]',
-    '.crm-btn-add',
-    '.tasks-task-create-btn',
-    '.im-sidebar',
-  ];
-
-  const deadline = Date.now() + timeoutMs;
-  while (Date.now() < deadline) {
-    for (const sel of dashboardSelectors) {
-      try {
-        if (await page.locator(sel).first().isVisible({ timeout: 300 })) return 'dashboard';
-      } catch (_) {}
+      // Not clearly a dashboard but not a login page either — proceed
+      console.log(`[screenshotter] ⚠️ Portal loaded but dashboard not confirmed. URL: ${finalUrl}`);
+    } else {
+      console.log(`[screenshotter] ✅ Portal dashboard confirmed. URL: ${page.url()}`);
     }
-    for (const sel of loginSelectors) {
-      try {
-        if (await page.locator(sel).first().isVisible({ timeout: 300 })) return 'login_form';
-      } catch (_) {}
-    }
-    await page.waitForTimeout(500);
+  } else {
+    console.log(`[screenshotter] ✅ Portal access OK. URL: ${page.url()}`);
   }
-  return 'not_found';
 }
 
-async function fillField(page, selectors, value) {
-  for (const sel of selectors) {
-    try {
-      const el = page.locator(sel).first();
-      if (await el.isVisible({ timeout: 1500 })) {
-        await el.click({ timeout: 2000 });
-        await el.fill(value, { timeout: 2000 });
-        return true;
-      }
-    } catch (_) {}
-  }
-  console.warn(`[login] Could not fill field with selectors: ${selectors.join(', ')}`);
-  return false;
-}
-
-async function trySubmit(page) {
+async function isDashboard(page) {
   const selectors = [
-    'button[type="submit"]',
-    'input[type="submit"]',
-    '.login-btn',
-    '.bx-login-button',
-    'button.ui-btn',
+    '#bx-panel', '.bx-layout-user-block', '.feed-add-post-form',
+    '[class*="global-menu"]', '.crm-btn-add', '.tasks-task-create-btn',
+    '.im-sidebar', '.bx-portal-menu', '[class*="bx-header"]',
   ];
   for (const sel of selectors) {
     try {
-      const el = page.locator(sel).first();
-      if (await el.isVisible({ timeout: 1500 })) {
-        await el.click({ timeout: 3000 });
-        return true;
-      }
+      if (await page.locator(sel).first().isVisible({ timeout: 300 })) return true;
     } catch (_) {}
   }
-  // Fallback: press Enter
-  try {
-    await page.keyboard.press('Enter');
-    return true;
-  } catch (_) {}
   return false;
-}
-
-async function getVisibleError(page) {
-  const errSelectors = [
-    '.login-form-error',
-    '.bx-login-error',
-    '[class*="error"]',
-    '.alert-danger',
-  ];
-  for (const sel of errSelectors) {
-    try {
-      const el = page.locator(sel).first();
-      if (await el.isVisible({ timeout: 500 })) {
-        const text = await el.innerText();
-        if (text.trim()) return `Ошибка на портале: ${text.trim()}`;
-      }
-    } catch (_) {}
-  }
-  return null;
 }
 
 // ─── Step executor ────────────────────────────────────────────────────────────

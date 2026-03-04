@@ -21,10 +21,10 @@ app.get('/health', (req, res) => res.json({ status: 'ok', version: '2.0.0' }));
 
 // Start localization job
 app.post('/api/localize', (req, res) => {
-  const { articleUrl, portalUrl, login, password, languages } = req.body;
+  const { articleUrl, portalUrl, sessionCookies, languages } = req.body;
 
-  if (!articleUrl || !portalUrl || !login || !password || !languages?.length) {
-    return res.status(400).json({ error: 'Все поля обязательны' });
+  if (!articleUrl || !portalUrl || !sessionCookies?.trim() || !languages?.length) {
+    return res.status(400).json({ error: 'Все поля обязательны (включая session cookies)' });
   }
 
   const jobId = uuidv4();
@@ -38,7 +38,7 @@ app.post('/api/localize', (req, res) => {
   jobs.set(jobId, job);
 
   // Start background processing
-  processJob(job, { articleUrl, portalUrl, login, password, languages });
+  processJob(job, { articleUrl, portalUrl, sessionCookies, languages });
 
   res.json({ jobId });
 });
@@ -98,7 +98,7 @@ function emit(job, event, data) {
   }
 }
 
-async function processJob(job, { articleUrl, portalUrl, login, password, languages }) {
+async function processJob(job, { articleUrl, portalUrl, sessionCookies, languages }) {
   job.status = 'running';
 
   try {
@@ -163,7 +163,7 @@ async function processJob(job, { articleUrl, portalUrl, login, password, languag
         progress: 60,
       });
       try {
-        const shots = await takePortalScreenshots(portalUrl, login, password, toShoot, (i, total, desc) => {
+        const shots = await takePortalScreenshots(portalUrl, sessionCookies, toShoot, (i, total, desc) => {
           emit(job, 'progress', {
             step: 'screenshot',
             message: `📸 Скриншот ${i + 1}/${total}: ${desc}`,
