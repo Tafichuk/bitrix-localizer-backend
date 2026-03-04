@@ -111,48 +111,44 @@ async function processJob(job, { articleUrl, portalUrl, login, password, languag
       progress: 15,
     });
 
-    // Step 2: Translate for each language
+    // Step 2+3: Перевод и анализ скриншотов — ПАРАЛЛЕЛЬНО
+    emit(job, 'progress', {
+      step: 'translating',
+      message: `🌐 Параллельный перевод на ${languages.length} языков + анализ ${article.images.length} скриншотов...`,
+      progress: 16,
+    });
+
+    const [translationResults, visionResults] = await Promise.all([
+      // Все языки параллельно
+      Promise.allSettled(
+        languages.map(lang => translateContent(article, lang).then(t => ({ lang, t })))
+      ),
+      // Все скриншоты параллельно
+      Promise.allSettled(
+        article.images.map(img => analyzeScreenshot(img.absoluteUrl).then(analysis => ({ img, analysis })))
+      ),
+    ]);
+
     const translations = {};
-    const totalLangs = languages.length;
-    for (let i = 0; i < totalLangs; i++) {
-      const lang = languages[i];
-      emit(job, 'progress', {
-        step: 'translating',
-        message: `🌐 Перевод на ${LANGUAGE_NAMES[lang]}... (${i + 1}/${totalLangs})`,
-        progress: 15 + (i / totalLangs) * 30,
-      });
-      try {
-        translations[lang] = await translateContent(article, lang);
-      } catch (err) {
-        emit(job, 'progress', { step: 'warn', message: `⚠️ Ошибка перевода ${LANGUAGE_NAMES[lang]}: ${err.message}`, progress: 15 + (i / totalLangs) * 30 });
+    for (const res of translationResults) {
+      if (res.status === 'fulfilled') {
+        translations[res.value.lang] = res.value.t;
+        emit(job, 'progress', { step: 'translated', message: `✅ ${LANGUAGE_NAMES[res.value.lang]} готов`, progress: 0 });
+      } else {
+        emit(job, 'progress', { step: 'warn', message: `⚠️ Ошибка перевода: ${res.reason?.message}`, progress: 0 });
       }
     }
-    emit(job, 'progress', { step: 'translated', message: `✅ Переводы готовы для ${Object.keys(translations).length} языков`, progress: 45 });
+    emit(job, 'progress', { step: 'translated', message: `✅ Переводы готовы: ${Object.keys(translations).length} языков`, progress: 60 });
 
-    // Step 3: Analyze screenshots with Claude Vision
     const screenshotAnalyses = [];
-    if (article.images.length > 0) {
-      emit(job, 'progress', { step: 'analyzing', message: `🔎 Анализ ${article.images.length} скриншотов через Claude Vision...`, progress: 47 });
-
-      for (let i = 0; i < article.images.length; i++) {
-        const img = article.images[i];
-        emit(job, 'progress', {
-          step: 'analyzing_img',
-          message: `🔎 Анализирую скриншот ${i + 1}/${article.images.length}...`,
-          progress: 47 + (i / article.images.length) * 13,
-        });
-        try {
-          const analysis = await analyzeScreenshot(img.absoluteUrl);
-          screenshotAnalyses.push({ ...img, analysis });
-          emit(job, 'progress', {
-            step: 'analyzed',
-            message: `  → ${analysis.description} (${analysis.path})`,
-            progress: 47 + ((i + 1) / article.images.length) * 13,
-          });
-        } catch (err) {
-          screenshotAnalyses.push({ ...img, analysis: null });
-          emit(job, 'progress', { step: 'warn', message: `  ⚠️ Скриншот ${i + 1} пропущен: ${err.message}`, progress: 47 + ((i + 1) / article.images.length) * 13 });
-        }
+    for (const res of visionResults) {
+      if (res.status === 'fulfilled') {
+        screenshotAnalyses.push({ ...res.value.img, analysis: res.value.analysis });
+        emit(job, 'progress', { step: 'analyzed', message: `🔎 ${res.value.analysis.description} → ${res.value.analysis.path}`, progress: 0 });
+      } else {
+        const img = article.images[screenshotAnalyses.length];
+        screenshotAnalyses.push({ ...img, analysis: null });
+        emit(job, 'progress', { step: 'warn', message: `⚠️ Скриншот пропущен: ${res.reason?.message}`, progress: 0 });
       }
     }
 

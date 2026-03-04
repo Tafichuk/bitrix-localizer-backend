@@ -41,7 +41,7 @@ async function translateContent(article, targetLanguage) {
 
   for (const chunk of chunks) {
     const resp = await client.messages.create({
-      model: 'claude-opus-4-6',
+      model: 'claude-sonnet-4-6',
       max_tokens: 8192,
       system: `You are a professional technical translator for Bitrix24 help documentation.
 Translate the HTML content from Russian to ${langName}.

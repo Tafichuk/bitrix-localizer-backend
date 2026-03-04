@@ -37,12 +37,12 @@ async function takePortalScreenshots(portalUrl, login, password, screenshotItems
         await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 20000 });
 
         // Wait for content to render
-        await page.waitForTimeout(2500);
+        await page.waitForTimeout(1200);
 
         // Dismiss any modals/popups
         try {
           await page.keyboard.press('Escape');
-          await page.waitForTimeout(300);
+          await page.waitForTimeout(200);
         } catch (_) {}
 
         const screenshotBuffer = await page.screenshot({
@@ -70,7 +70,7 @@ async function takePortalScreenshots(portalUrl, login, password, screenshotItems
 async function loginToPortal(page, base, login, password) {
   // Try direct login page
   await page.goto(`${base}/`, { waitUntil: 'domcontentloaded', timeout: 20000 });
-  await page.waitForTimeout(1500);
+  await page.waitForTimeout(800);
 
   const currentUrl = page.url();
   // Check if already logged in (no login form visible)
@@ -79,7 +79,7 @@ async function loginToPortal(page, base, login, password) {
   if (hasLoginForm === 0) {
     // Try /login/ path
     await page.goto(`${base}/login/`, { waitUntil: 'domcontentloaded', timeout: 15000 });
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(500);
   }
 
   // Fill login form
@@ -113,7 +113,7 @@ async function loginToPortal(page, base, login, password) {
   }
 
   // Wait for redirect after login
-  await page.waitForTimeout(3000);
+  await page.waitForTimeout(2000);
 
   const afterUrl = page.url();
   if (afterUrl.includes('/login') || afterUrl.includes('/auth')) {
