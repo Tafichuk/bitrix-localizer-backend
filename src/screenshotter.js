@@ -85,88 +85,107 @@ async function loginToPortal(page, base, login, password) {
 }
 
 // Авторизация через https://bitrix24.net/passport/view/
+// Страница — Vue SPA, двухшаговый флоу:
+//   Step 1: ввод email (#login) → Continue (.b24net-text-btn--call-to-action)
+//   Step 2: ввод пароля (.b24net-password-enter-form__password input) → Login (.b24net-password-enter-form__continue-btn)
 async function loginViaPassport(page, login, password) {
   const passportUrl = 'https://bitrix24.net/passport/view/';
   console.log(`[login] Opening Bitrix24 passport: ${passportUrl}`);
   await page.goto(passportUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
   await page.waitForTimeout(2000);
-  console.log(`[login] Passport page URL: ${page.url()}`);
+  console.log(`[login] Passport page loaded. URL: ${page.url()}`);
 
-  // Проверяем — возможно уже залогинен
-  const alreadyLoggedIn = await isLoggedInToPassport(page);
-  if (alreadyLoggedIn) {
-    console.log('[login] Already logged in to passport');
+  // ── Step 1: Email ────────────────────────────────────────────────────────
+  const loginInput = page.locator('#login');
+  try {
+    await loginInput.waitFor({ state: 'visible', timeout: 10000 });
+  } catch {
+    throw new Error(`[login] Поле #login не появилось. URL: ${page.url()}`);
+  }
+  console.log(`[login] Step 1: filling email "${login}"`);
+  await loginInput.click();
+  await loginInput.fill(login);
+  await page.waitForTimeout(300);
+
+  console.log('[login] Clicking Continue button...');
+  const continueBtn = page.locator('button.b24net-text-btn--call-to-action').first();
+  await continueBtn.click();
+  console.log('[login] Continue clicked, waiting for password step...');
+
+  // ── Ждём появления поля пароля ───────────────────────────────────────────
+  const passwordWrapper = page.locator('.b24net-password-enter-form__password');
+  try {
+    await passwordWrapper.waitFor({ state: 'visible', timeout: 10000 });
+  } catch {
+    // Проверяем — может показало ошибку на email
+    const errText = await getVisibleError(page);
+    const emailErr = await getPassportEmailError(page);
+    throw new Error(emailErr || errText || `[login] Поле пароля не появилось после Continue. URL: ${page.url()}`);
+  }
+  console.log('[login] Step 2: password field visible, filling password...');
+
+  // ── Step 2: Password ─────────────────────────────────────────────────────
+  const passwordInput = page.locator('.b24net-password-enter-form__password input').first();
+  await passwordInput.waitFor({ state: 'visible', timeout: 5000 });
+  await passwordInput.click();
+  await passwordInput.fill(password);
+  await page.waitForTimeout(300);
+
+  console.log('[login] Clicking Login button (.b24net-password-enter-form__continue-btn)...');
+  const loginBtn = page.locator('.b24net-password-enter-form__continue-btn').first();
+  await loginBtn.waitFor({ state: 'visible', timeout: 5000 });
+  await loginBtn.click();
+  console.log('[login] Login button clicked, waiting for auth result...');
+
+  // ── Ждём редиректа или подтверждения ─────────────────────────────────────
+  await page.waitForTimeout(4000);
+  const currentUrl = page.url();
+  console.log(`[login] After login URL: ${currentUrl}`);
+
+  // Успех: URL ушёл с passport/view или появился список порталов
+  if (!currentUrl.includes('passport/view') && currentUrl.includes('bitrix24.net')) {
+    console.log('[login] ✅ Passport login OK (redirected from passport/view)');
     return;
   }
 
-  // Заполняем логин
-  const loginFilled = await fillField(
-    page,
-    ['input[name="USER_LOGIN"]', 'input[name="login"]', 'input[type="email"]', '#login', '#user-login', 'input[autocomplete="username"]'],
-    login
-  );
-  if (!loginFilled) throw new Error(`Не найдено поле логина на странице паспорта: ${page.url()}`);
-
-  // Проверяем — видно ли поле пароля (двухшаговый флоу)
-  const passwordVisible = await isPasswordFieldVisible(page);
-  if (!passwordVisible) {
-    console.log('[login] Password field not visible, clicking Next...');
-    await trySubmit(page);
-    await page.waitForTimeout(2500);
+  // Проверяем список порталов (страница выбора аккаунта)
+  const portalListVisible = await page.locator('.b24net-portal-list, .b24net-logging-in__portal-list, [class*="portal-list"]').first().isVisible({ timeout: 1000 }).catch(() => false);
+  if (portalListVisible) {
+    console.log('[login] ✅ Passport login OK (portal list shown)');
+    return;
   }
 
-  // Заполняем пароль
-  const passwordFilled = await fillField(
-    page,
-    ['input[name="USER_PASSWORD"]', 'input[name="password"]', 'input[type="password"]', '#password', 'input[autocomplete="current-password"]'],
-    password
-  );
-  if (!passwordFilled) throw new Error(`Не найдено поле пароля на странице паспорта: ${page.url()}`);
+  // Всё ещё на passport/view — проверяем ошибку пароля
+  const passErrEl = page.locator('.b24net-password-enter-form .b24net-text-input__error, .b24net-text-input__error').first();
+  const passErr = await passErrEl.isVisible({ timeout: 1000 }).catch(() => false)
+    ? (await passErrEl.innerText().catch(() => '')).trim()
+    : null;
+  if (passErr) throw new Error(`[login] Ошибка пароля: ${passErr}`);
 
-  // Сабмит
-  await trySubmit(page);
-  console.log('[login] Passport form submitted, waiting...');
-  await page.waitForTimeout(3000);
+  const visibleErr = await getVisibleError(page);
+  if (visibleErr) throw new Error(`[login] ${visibleErr}`);
 
-  // Проверяем успех
-  const loggedIn = await isLoggedInToPassport(page);
-  if (!loggedIn) {
-    const errText = await getVisibleError(page);
-    throw new Error(errText || `Авторизация через паспорт не удалась. URL: ${page.url()}`);
-  }
-  console.log(`[login] ✅ Passport login OK. URL: ${page.url()}`);
+  // Паспорт не ушёл с view — всё равно попробуем перейти на портал
+  console.log('[login] ⚠️ Still on passport/view — will attempt portal navigation anyway');
 }
 
-// Проверяем что мы авторизованы на bitrix24.net (не на форме логина)
-async function isLoggedInToPassport(page) {
-  const url = page.url();
-  // Если URL не содержит login/auth — скорее всего залогинены
-  if (!url.includes('/login') && !url.includes('/auth') && !url.includes('passport/view') && url.includes('bitrix24.net')) {
-    return true;
-  }
-  // Ищем признаки дашборда паспорта
-  for (const sel of ['.passport-user', '.user-name', '[class*="user-block"]', '.b24-user-menu', '#bx-panel']) {
+async function getPassportEmailError(page) {
+  for (const sel of ['.b24net-text-input__error', '.b24net-login-enter-form .b24net-text-input__error']) {
     try {
-      if (await page.locator(sel).first().isVisible({ timeout: 500 })) return true;
+      const el = page.locator(sel).first();
+      if (await el.isVisible({ timeout: 500 })) {
+        const t = (await el.innerText()).trim();
+        if (t) return `Email ошибка: ${t}`;
+      }
     } catch (_) {}
   }
-  // Если форма логина всё ещё видна — не залогинены
-  for (const sel of ['input[name="USER_LOGIN"]', 'input[name="login"]', 'input[type="email"]']) {
-    try {
-      if (await page.locator(sel).first().isVisible({ timeout: 300 })) return false;
-    } catch (_) {}
-  }
-  // Если URL изменился с passport/view — считаем успехом
-  if (!url.includes('passport/view')) return true;
-  return false;
+  return null;
 }
 
 async function isPasswordFieldVisible(page) {
-  for (const sel of ['input[name="USER_PASSWORD"]', 'input[type="password"]', '#password', 'input[autocomplete="current-password"]']) {
-    try {
-      if (await page.locator(sel).first().isVisible({ timeout: 800 })) return true;
-    } catch (_) {}
-  }
+  try {
+    return await page.locator('.b24net-password-enter-form__password input').first().isVisible({ timeout: 800 });
+  } catch (_) {}
   return false;
 }
 
