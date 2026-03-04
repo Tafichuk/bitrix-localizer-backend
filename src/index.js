@@ -123,9 +123,9 @@ async function processJob(job, { articleUrl, portalUrl, login, password, languag
       Promise.allSettled(
         languages.map(lang => translateContent(article, lang).then(t => ({ lang, t })))
       ),
-      // Все скриншоты параллельно
+      // Все скриншоты параллельно (передаём целевой язык для перевода контента)
       Promise.allSettled(
-        article.images.map(img => analyzeScreenshot(img.absoluteUrl).then(analysis => ({ img, analysis })))
+        article.images.map(img => analyzeScreenshot(img.absoluteUrl, languages[0]).then(analysis => ({ img, analysis })))
       ),
     ]);
 
