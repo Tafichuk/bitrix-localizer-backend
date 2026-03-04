@@ -50,12 +50,18 @@ async function takePortalScreenshots(portalUrl, login, password, screenshotItems
           clip: { x: 0, y: 0, width: 1280, height: 800 },
         });
 
-        results[item.src] = {
+        const shotData = {
           data: screenshotBuffer.toString('base64'),
           mimeType: 'image/png',
         };
+        // Store by BOTH src and absoluteUrl for robust matching
+        results[item.src] = shotData;
+        if (item.absoluteUrl) results[item.absoluteUrl] = shotData;
+
+        console.log(`[screenshotter] ✅ Screenshot taken for src="${item.src}" path="${item.analysis.path}"`);
       } catch (err) {
-        console.error(`[screenshotter] Failed for ${item.analysis.path}:`, err.message);
+        console.error(`[screenshotter] ❌ Failed for ${item.analysis.path}:`, err.message);
+        if (onProgress) onProgress(i, screenshotItems.length, `Ошибка: ${err.message}`);
       }
     }
 

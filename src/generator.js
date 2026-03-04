@@ -1,5 +1,6 @@
 const JSZip = require('jszip');
 const cheerio = require('cheerio');
+const axios = require('axios');
 
 const LANG_NAMES = {
   en: 'English', de: 'Deutsch', fr: 'Français',
@@ -9,52 +10,100 @@ const LANG_NAMES = {
 async function generateZip(article, translations, screenshotItems, newScreenshots) {
   const zip = new JSZip();
 
-  // Build screenshot map: originalSrc → { data, mimeType }
-  const screenshotMap = {};
+  // Build lookup: all possible keys for a screenshot item → portal screenshot data
+  // Keys: item.src, item.absoluteUrl, decoded variants
+  const portalShotMap = new Map();
   for (const item of screenshotItems) {
-    if (newScreenshots[item.src]) {
-      screenshotMap[item.src] = newScreenshots[item.src];
+    const shot = newScreenshots[item.src] || newScreenshots[item.absoluteUrl];
+    if (shot) {
+      portalShotMap.set(item.src, shot);
+      portalShotMap.set(item.absoluteUrl, shot);
+      try { portalShotMap.set(decodeURIComponent(item.src), shot); } catch (_) {}
+      try { portalShotMap.set(decodeURIComponent(item.absoluteUrl), shot); } catch (_) {}
     }
   }
+
+  // Build lookup for original images: src → absoluteUrl
+  const originalUrlMap = new Map();
+  for (const item of screenshotItems) {
+    originalUrlMap.set(item.src, item.absoluteUrl);
+    originalUrlMap.set(item.absoluteUrl, item.absoluteUrl);
+  }
+
+  console.log(`[generator] portalShotMap size: ${portalShotMap.size}`);
+  console.log(`[generator] screenshotItems: ${screenshotItems.length}, newScreenshots keys: ${Object.keys(newScreenshots).length}`);
 
   for (const [lang, translation] of Object.entries(translations)) {
     const langFolder = zip.folder(lang);
     const imgFolder = langFolder.folder('images');
 
-    // Process HTML: replace image srcs
+    // Load translated HTML into cheerio
     const $ = cheerio.load(translation.contentHtml, { decodeEntities: false });
-    const usedImages = {};
+
+    let imgCounter = 0;
+    const downloadQueue = []; // { fileName, url } — оригинальные скрины для скачивания
 
     $('img').each((i, el) => {
-      const src = $(el).attr('src') || $(el).attr('data-src');
-      if (!src) return;
+      // Try src, then data-src, then data-lazy-src
+      const rawSrc = $(el).attr('src') || $(el).attr('data-src') || $(el).attr('data-lazy-src') || '';
+      if (!rawSrc) return;
 
-      if (screenshotMap[src]) {
-        // New portal screenshot
-        const fileName = `screenshot_${i + 1}.png`;
-        usedImages[fileName] = screenshotMap[src];
+      imgCounter++;
+      const fileName = `image_${imgCounter}.png`;
+
+      // 1. Есть новый портальный скрин?
+      const portalShot = portalShotMap.get(rawSrc);
+      if (portalShot) {
+        imgFolder.file(fileName, Buffer.from(portalShot.data, 'base64'));
         $(el).attr('src', `images/${fileName}`);
         $(el).removeAttr('data-src');
-      } else {
-        // Keep original URL (absolute)
-        const item = screenshotItems.find(s => s.src === src);
-        if (item) {
-          $(el).attr('src', item.absoluteUrl);
-        }
+        $(el).removeAttr('data-lazy-src');
+        console.log(`[generator] ✅ Portal screenshot → ${fileName} (src: ${rawSrc.slice(0, 60)})`);
+        return;
+      }
+
+      // 2. Скачать оригинальный скрин как fallback
+      const absoluteUrl = originalUrlMap.get(rawSrc);
+      if (absoluteUrl && absoluteUrl.startsWith('http')) {
+        downloadQueue.push({ fileName, absoluteUrl, el: $(el) });
+        $(el).attr('src', `images/${fileName}`);
+        $(el).removeAttr('data-src');
+        $(el).removeAttr('data-lazy-src');
+        console.log(`[generator] ⬇️  Will download original → ${fileName} (${absoluteUrl.slice(0, 60)})`);
+        return;
+      }
+
+      // 3. Оставляем как есть (внешняя ссылка)
+      if (rawSrc.startsWith('http')) {
+        console.log(`[generator] 🔗 External image kept: ${rawSrc.slice(0, 60)}`);
       }
     });
 
-    // Add images to zip
-    for (const [fileName, imgData] of Object.entries(usedImages)) {
-      imgFolder.file(fileName, Buffer.from(imgData.data, 'base64'));
+    // Скачиваем оригинальные изображения параллельно
+    if (downloadQueue.length > 0) {
+      await Promise.allSettled(
+        downloadQueue.map(async ({ fileName, absoluteUrl }) => {
+          try {
+            const resp = await axios.get(absoluteUrl, {
+              responseType: 'arraybuffer',
+              timeout: 15000,
+              headers: { 'User-Agent': 'Mozilla/5.0' },
+            });
+            imgFolder.file(fileName, Buffer.from(resp.data));
+            console.log(`[generator] ✅ Downloaded original: ${fileName}`);
+          } catch (err) {
+            console.warn(`[generator] ⚠️ Failed to download ${absoluteUrl}: ${err.message}`);
+          }
+        })
+      );
     }
 
-    const processedHtml = $.html();
-    const fullHtml = buildHtmlPage(translation.title, processedHtml, lang);
+    // Получаем финальный HTML контента (body содержимое, без лишних оберток)
+    const contentHtml = $('body').html() || $.html();
+    const fullHtml = buildHtmlPage(translation.title, contentHtml, lang);
     langFolder.file('index.html', fullHtml);
   }
 
-  // Add a README
   zip.file('README.txt', buildReadme(Object.keys(translations)));
 
   const buffer = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
@@ -125,20 +174,6 @@ function buildHtmlPage(title, content, lang) {
       border-radius: 0 8px 8px 0;
       color: #1e40af;
     }
-    .note, .tip {
-      background: #f0fdf4;
-      border-left: 4px solid #22c55e;
-      padding: 14px 18px;
-      border-radius: 0 8px 8px 0;
-      margin: 20px 0;
-    }
-    .warning {
-      background: #fffbeb;
-      border-left: 4px solid #f59e0b;
-      padding: 14px 18px;
-      border-radius: 0 8px 8px 0;
-      margin: 20px 0;
-    }
   </style>
 </head>
 <body>
@@ -149,20 +184,7 @@ function buildHtmlPage(title, content, lang) {
 }
 
 function buildReadme(langs) {
-  return `Bitrix24 Localized Articles
-===========================
-
-Generated by Bitrix24 Localizer
-
-Languages included:
-${langs.map(l => `  - ${l}/ → ${LANG_NAMES[l] || l} (index.html)`).join('\n')}
-
-Each language folder contains:
-  - index.html   : The translated article
-  - images/      : New screenshots from your Western portal
-
-To view: open index.html in any web browser.
-`;
+  return `Bitrix24 Localized Articles\n===========================\n\nLanguages: ${langs.join(', ')}\n\nEach folder: index.html + images/\n`;
 }
 
 function escapeHtml(str) {
