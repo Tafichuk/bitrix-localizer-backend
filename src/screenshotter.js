@@ -53,8 +53,18 @@ async function takePortalScreenshots(portalUrl, login, password, screenshotItems
 async function loginToPortal(page, base, login, password) {
   console.log(`[login] Opening ${base}/`);
   await page.goto(`${base}/`, { waitUntil: 'domcontentloaded', timeout: 30000 });
+  await page.waitForTimeout(2000);
 
-  // Wait up to 8s for either login form or logged-in indicator
+  const currentUrl = page.url();
+  console.log(`[login] After initial load URL: ${currentUrl}`);
+
+  // ── Случай 1: редирект на bitrix24.net OAuth ──────────────────────────────
+  if (currentUrl.includes('bitrix24.net')) {
+    await handleOAuthLogin(page, base, login, password);
+    return;
+  }
+
+  // ── Случай 2: своя форма логина на портале ───────────────────────────────
   const state = await waitForLoginOrDashboard(page, 8000);
 
   if (state === 'dashboard') {
@@ -62,35 +72,114 @@ async function loginToPortal(page, base, login, password) {
     return;
   }
 
-  if (state === 'not_found') {
-    // Try /login/ path directly
-    console.log('[login] Form not found at /, trying /login/');
-    await page.goto(`${base}/login/`, { waitUntil: 'domcontentloaded', timeout: 20000 });
-    const state2 = await waitForLoginOrDashboard(page, 8000);
-    if (state2 === 'dashboard') return;
-    if (state2 === 'not_found') throw new Error(`Форма входа не найдена. Текущий URL: ${page.url()}`);
+  if (state === 'login_form') {
+    await fillAndSubmitForm(page, login, password);
+    await page.waitForTimeout(3000);
+    // может снова редиректнуть на oauth
+    if (page.url().includes('bitrix24.net')) {
+      await handleOAuthLogin(page, base, login, password);
+      return;
+    }
+    const finalState = await waitForLoginOrDashboard(page, 8000);
+    if (finalState !== 'dashboard') {
+      const errText = await getVisibleError(page);
+      throw new Error(errText || `Авторизация не удалась. URL: ${page.url()}`);
+    }
+    console.log(`[login] ✅ Logged in. URL: ${page.url()}`);
+    return;
   }
 
-  // Fill credentials
+  // not_found — попробуем /login/
+  console.log('[login] Form not found at /, trying /login/');
+  await page.goto(`${base}/login/`, { waitUntil: 'domcontentloaded', timeout: 20000 });
+  await page.waitForTimeout(1500);
+  if (page.url().includes('bitrix24.net')) {
+    await handleOAuthLogin(page, base, login, password);
+    return;
+  }
+  const state2 = await waitForLoginOrDashboard(page, 8000);
+  if (state2 === 'dashboard') return;
+  if (state2 === 'login_form') {
+    await fillAndSubmitForm(page, login, password);
+    await page.waitForTimeout(3000);
+    const finalState = await waitForLoginOrDashboard(page, 8000);
+    if (finalState !== 'dashboard') {
+      throw new Error(`Авторизация не удалась. URL: ${page.url()}`);
+    }
+    return;
+  }
+  throw new Error(`Форма входа не найдена. URL: ${page.url()}`);
+}
+
+// Обрабатывает OAuth через bitrix24.net
+async function handleOAuthLogin(page, base, login, password) {
+  console.log(`[login] OAuth page: ${page.url()}`);
+
+  // Шаг 1: ввести email/логин
+  const loginFilled = await fillField(
+    page,
+    ['input[name="USER_LOGIN"]', 'input[name="login"]', 'input[type="email"]', '#login', '#user-login'],
+    login
+  );
+  if (!loginFilled) throw new Error(`Не найдено поле логина на OAuth странице: ${page.url()}`);
+
+  // На некоторых версиях OAuth — двухшаговый процесс (сначала email → Next → пароль)
+  // Пробуем нажать Next/Continue если пароль ещё не виден
+  const passwordVisible = await isPasswordFieldVisible(page);
+  if (!passwordVisible) {
+    console.log('[login] Password not visible yet, trying Next button');
+    await trySubmit(page);
+    await page.waitForTimeout(2000);
+  }
+
+  // Шаг 2: ввести пароль
+  await fillField(
+    page,
+    ['input[name="USER_PASSWORD"]', 'input[name="password"]', 'input[type="password"]', '#password'],
+    password
+  );
+
+  // Шаг 3: сабмит
+  await trySubmit(page);
+  console.log('[login] OAuth form submitted, waiting for redirect...');
+
+  // Ждём редиректа обратно на портал
+  try {
+    await page.waitForURL(url => url.includes(new URL(base).hostname), { timeout: 15000 });
+  } catch {
+    // Может быть промежуточная страница подтверждения — кликаем Allow/Authorize если есть
+    const allowBtn = page.getByRole('button', { name: /allow|authorize|accept|yes|continue/i }).first();
+    try {
+      if (await allowBtn.isVisible({ timeout: 3000 })) {
+        await allowBtn.click();
+        await page.waitForURL(url => url.includes(new URL(base).hostname), { timeout: 10000 });
+      }
+    } catch { /* ignore */ }
+  }
+
+  await page.waitForTimeout(2000);
+  const finalState = await waitForLoginOrDashboard(page, 8000);
+  if (finalState !== 'dashboard') {
+    const errText = await getVisibleError(page);
+    throw new Error(errText || `OAuth авторизация не удалась. URL: ${page.url()}`);
+  }
+  console.log(`[login] ✅ OAuth login OK. URL: ${page.url()}`);
+}
+
+async function isPasswordFieldVisible(page) {
+  for (const sel of ['input[name="USER_PASSWORD"]', 'input[type="password"]', '#password']) {
+    try {
+      if (await page.locator(sel).first().isVisible({ timeout: 800 })) return true;
+    } catch (_) {}
+  }
+  return false;
+}
+
+async function fillAndSubmitForm(page, login, password) {
   await fillField(page, ['input[name="USER_LOGIN"]', 'input[name="login"]', 'input[type="email"]'], login);
   await fillField(page, ['input[name="USER_PASSWORD"]', 'input[name="password"]', 'input[type="password"]'], password);
-
-  // Submit
   const submitted = await trySubmit(page);
   if (!submitted) throw new Error('Не удалось отправить форму входа');
-
-  // Wait for redirect / dashboard
-  await page.waitForTimeout(3000);
-
-  const finalState = await waitForLoginOrDashboard(page, 6000);
-  if (finalState !== 'dashboard') {
-    // Check for error message on the page
-    const errText = await getVisibleError(page);
-    const currentUrl = page.url();
-    throw new Error(errText || `Авторизация не удалась. URL после входа: ${currentUrl}`);
-  }
-
-  console.log(`[login] ✅ Logged in. URL: ${page.url()}`);
 }
 
 async function waitForLoginOrDashboard(page, timeoutMs) {
