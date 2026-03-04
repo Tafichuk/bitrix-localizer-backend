@@ -1,7 +1,8 @@
 const { chromium } = require('playwright');
 
-async function takePortalScreenshots(portalUrl, sessionCookies, screenshotItems, onProgress) {
+async function takePortalScreenshots(portalUrl, auth, screenshotItems, onProgress) {
   const base = portalUrl.replace(/\/$/, '');
+  const { sessionCookies, login, password } = auth || {};
   const results = {};
   let browser;
 
@@ -16,17 +17,21 @@ async function takePortalScreenshots(portalUrl, sessionCookies, screenshotItems,
       locale: 'en-US',
     });
 
-    // Inject session cookies before creating page
-    const cookies = parseCookieString(sessionCookies, base);
-    if (cookies.length === 0) throw new Error('Не удалось распарсить cookies. Проверьте формат: name=value; name2=value2');
-    await context.addCookies(cookies);
-    console.log(`[screenshotter] Injected ${cookies.length} cookies for ${base}`);
-
     const page = await context.newPage();
     page.setDefaultTimeout(20000);
 
-    // Verify portal access
-    await verifyPortalAccess(page, base);
+    if (sessionCookies?.trim()) {
+      // ── Вариант 1: cookie-based авторизация ──────────────────────────────
+      const cookies = parseCookieString(sessionCookies, base);
+      if (cookies.length === 0) throw new Error('Не удалось распарсить cookies. Формат: name=value; name2=value2');
+      await context.addCookies(cookies);
+      console.log(`[screenshotter] Injected ${cookies.length} cookies. Verifying portal access...`);
+      await verifyPortalAccess(page, base);
+    } else {
+      // ── Вариант 2: логин через bitrix24.net/passport/view/ ───────────────
+      console.log('[screenshotter] No cookies provided — using passport login');
+      await loginViaPassport(page, base, login, password);
+    }
 
     for (let i = 0; i < screenshotItems.length; i++) {
       const item = screenshotItems[i];
@@ -233,6 +238,73 @@ async function dismissPopups(page) {
       }
     } catch (_) {}
   }
+}
+
+// ─── Passport login (fallback when no cookies) ────────────────────────────────
+
+// Two-step login on https://bitrix24.net/passport/view/ (Vue SPA):
+//   Step 1: #login (email) → button.b24net-text-btn--call-to-action (Continue)
+//   Step 2: .b24net-password-enter-form__password input → .b24net-password-enter-form__continue-btn
+async function loginViaPassport(page, base, login, password) {
+  if (!login || !password) throw new Error('Логин и пароль обязательны когда cookies не указаны');
+
+  const passportUrl = 'https://bitrix24.net/passport/view/';
+  console.log(`[login] Opening passport: ${passportUrl}`);
+  await page.goto(passportUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
+  await page.waitForTimeout(2000);
+  console.log(`[login] Passport loaded. URL: ${page.url()}`);
+
+  // Step 1: email
+  const loginInput = page.locator('#login');
+  await loginInput.waitFor({ state: 'visible', timeout: 10000 });
+  console.log(`[login] Filling email: ${login}`);
+  await loginInput.click();
+  await loginInput.fill(login);
+  await page.waitForTimeout(300);
+
+  console.log('[login] Clicking Continue...');
+  await page.locator('button.b24net-text-btn--call-to-action').first().click();
+
+  // Step 2: wait for password field
+  const passwordWrapper = page.locator('.b24net-password-enter-form__password');
+  try {
+    await passwordWrapper.waitFor({ state: 'visible', timeout: 10000 });
+  } catch {
+    const emailErr = await page.locator('.b24net-text-input__error').first().isVisible({ timeout: 500 }).catch(() => false)
+      ? (await page.locator('.b24net-text-input__error').first().innerText().catch(() => '')).trim()
+      : null;
+    throw new Error(emailErr ? `Email ошибка: ${emailErr}` : `Поле пароля не появилось. URL: ${page.url()}`);
+  }
+
+  console.log('[login] Filling password...');
+  const passwordInput = page.locator('.b24net-password-enter-form__password input').first();
+  await passwordInput.waitFor({ state: 'visible', timeout: 5000 });
+  await passwordInput.click();
+  await passwordInput.fill(password);
+  await page.waitForTimeout(300);
+
+  console.log('[login] Clicking Login button...');
+  await page.locator('.b24net-password-enter-form__continue-btn').first().click();
+  await page.waitForTimeout(4000);
+  console.log(`[login] After submit URL: ${page.url()}`);
+
+  // Check password error
+  const passErrVisible = await page.locator('.b24net-password-enter-form .b24net-text-input__error').first().isVisible({ timeout: 500 }).catch(() => false);
+  if (passErrVisible) {
+    const errText = (await page.locator('.b24net-password-enter-form .b24net-text-input__error').first().innerText().catch(() => '')).trim();
+    throw new Error(`Неверный пароль: ${errText || 'проверьте логин и пароль'}`);
+  }
+
+  // Navigate to portal after successful passport login
+  console.log(`[login] ✅ Passport login OK. Navigating to portal: ${base}/`);
+  await page.goto(`${base}/`, { waitUntil: 'domcontentloaded', timeout: 30000 });
+  await page.waitForTimeout(3000);
+
+  const url = page.url();
+  if (url.includes('/login') || url.includes('/auth') || url.includes('bitrix24.net')) {
+    throw new Error(`Портал не принял сессию. URL: ${url}`);
+  }
+  console.log(`[login] ✅ Portal access OK. URL: ${url}`);
 }
 
 module.exports = { takePortalScreenshots };
