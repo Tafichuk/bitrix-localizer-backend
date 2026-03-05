@@ -1,4 +1,15 @@
 const { chromium } = require('playwright');
+const path = require('path');
+const fs = require('fs');
+
+// ─── Navigation map ────────────────────────────────────────────────────────────
+let navMap = {};
+try {
+  navMap = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'navigation-map.json'), 'utf8'));
+  console.log(`[screenshotter] Navigation map loaded: ${Object.keys(navMap).length} sections`);
+} catch {
+  console.warn('[screenshotter] navigation-map.json not found');
+}
 
 async function takePortalScreenshots(portalUrl, auth, screenshotItems, onProgress) {
   const base = portalUrl.replace(/\/$/, '');
@@ -37,30 +48,27 @@ async function takePortalScreenshots(portalUrl, auth, screenshotItems, onProgres
       const item = screenshotItems[i];
       if (!item.analysis) continue;
 
-      const { steps = [], description = '' } = item.analysis;
+      const { section = 'Feed', step = 'default', description = '' } = item.analysis;
       if (onProgress) onProgress(i, screenshotItems.length, description);
 
       const start = Date.now();
       try {
-        // Hard cap 60s per screenshot (main steps + additionalActions)
-        const additionalActions = (item.analysis.additionalActions || []).map(a => ({ action: a }));
+        // Hard cap 60s per screenshot
         await Promise.race([
-          executeSteps(page, base, [...steps, ...additionalActions]),
+          executeNavigation(page, base, section, step),
           new Promise((_, reject) => setTimeout(() => reject(new Error('Screenshot timeout 60s')), 60000)),
         ]);
         const buf = await page.screenshot({ type: 'png', clip: { x: 0, y: 0, width: 1280, height: 800 } });
         const shotData = { data: buf.toString('base64'), mimeType: 'image/png' };
         results[item.src] = shotData;
         if (item.absoluteUrl) results[item.absoluteUrl] = shotData;
-        console.log(`[screenshotter] ✅ "${description}" (${Date.now() - start}ms)`);
+        console.log(`[screenshotter] ✅ "${section}/${step}" (${Date.now() - start}ms)`);
       } catch (err) {
-        console.error(`[screenshotter] ❌ "${description}" (${Date.now() - start}ms): ${err.message}`);
-        // Fallback: store original Russian screenshot so HTML still has an image
+        console.error(`[screenshotter] ❌ "${section}/${step}" (${Date.now() - start}ms): ${err.message}`);
         if (item.originalData) {
           const fallback = { data: item.originalData, mimeType: item.originalMime || 'image/png', isFallback: true };
           results[item.src] = fallback;
           if (item.absoluteUrl) results[item.absoluteUrl] = fallback;
-          console.log(`[screenshotter] ↩️  Using original RU screenshot as fallback for "${description}"`);
         }
         if (onProgress) onProgress(i, screenshotItems.length, `⚠️ ${err.message}`);
       }
@@ -151,7 +159,113 @@ async function isDashboard(page) {
   return false;
 }
 
-// ─── Step executor ────────────────────────────────────────────────────────────
+// ─── Navigation map executor ──────────────────────────────────────────────────
+
+/**
+ * Navigate to the correct portal page using the pre-defined navigation map.
+ * section = key in navigation-map.json (e.g. "Feed", "CRM_Deals")
+ * step    = step key within section.steps (e.g. "default", "kanban_view")
+ */
+async function executeNavigation(page, base, section, step) {
+  const sectionCfg = navMap[section];
+  if (!sectionCfg) {
+    console.warn(`[nav] Unknown section "${section}", falling back to /stream/`);
+    await page.goto(`${base}/stream/`, { waitUntil: 'domcontentloaded', timeout: 25000 });
+    await page.waitForTimeout(2000);
+    await dismissPopups(page);
+    return;
+  }
+
+  const url = `${base}${sectionCfg.urlPath}`;
+  console.log(`[nav] goto ${url} (${section}/${step})`);
+  await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 25000 });
+  await page.waitForTimeout(2000);
+  await dismissPopups(page);
+
+  // Wait for section's main element
+  if (sectionCfg.waitFor) {
+    try {
+      await page.waitForSelector(sectionCfg.waitFor, { timeout: 8000 });
+    } catch {
+      console.warn(`[nav] waitFor "${sectionCfg.waitFor}" not found, continuing`);
+    }
+  }
+
+  // Execute the chosen step's actions (fall back to 'default')
+  const stepsMap = sectionCfg.steps || {};
+  const actions = stepsMap[step] || stepsMap['default'] || [];
+
+  for (const action of actions) {
+    try {
+      await executeNavAction(page, action);
+    } catch (err) {
+      console.warn(`[nav] action "${action.action}" failed: ${err.message}`);
+    }
+  }
+
+  // Final settle pause before screenshot
+  await page.waitForTimeout(1000);
+}
+
+async function executeNavAction(page, action) {
+  switch (action.action) {
+    case 'waitTimeout':
+      await page.waitForTimeout(Math.min(action.ms || 1000, 5000));
+      break;
+
+    case 'waitForSelector':
+      try {
+        await page.waitForSelector(action.selector, { timeout: 8000 });
+      } catch {
+        console.warn(`[nav] waitForSelector "${action.selector}" not found`);
+      }
+      break;
+
+    case 'clickFirst': {
+      // Try selectors in order until one is visible and clickable
+      let clicked = false;
+      for (const sel of (action.selectors || [])) {
+        try {
+          const el = page.locator(sel).first();
+          if (await el.isVisible({ timeout: 1500 })) {
+            await el.click({ timeout: 3000 });
+            clicked = true;
+            console.log(`[nav] clickFirst hit: "${sel}"`);
+            break;
+          }
+        } catch {}
+      }
+      if (!clicked) console.warn(`[nav] clickFirst: none of [${(action.selectors || []).join(', ')}] visible`);
+      break;
+    }
+
+    case 'click':
+      try {
+        await page.locator(action.selector).first().click({ timeout: 5000 });
+      } catch (e) {
+        console.warn(`[nav] click "${action.selector}" failed: ${e.message}`);
+      }
+      break;
+
+    case 'fill':
+      try {
+        await page.locator(action.selector).first().fill(action.value || '');
+      } catch (e) {
+        console.warn(`[nav] fill "${action.selector}" failed: ${e.message}`);
+      }
+      break;
+
+    case 'scroll':
+      await page.evaluate((px) => window.scrollBy(0, px), action.pixels || 300);
+      await page.waitForTimeout(300);
+      break;
+
+    default:
+      console.warn(`[nav] Unknown action: ${action.action}`);
+  }
+}
+
+// ─── Legacy step executor (kept for any future direct-steps usage) ─────────────
 
 async function executeSteps(page, base, steps) {
   for (const step of steps) {

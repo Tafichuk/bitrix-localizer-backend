@@ -1,2027 +1,260 @@
 {
-  "generated": "2026-03-05T08:23:14.992Z",
-  "totalSections": 30,
-  "visionCallsUsed": 174,
-  "sections": {
-    "Plans and Payments": {
-      "helpdeskSection": "47912",
-      "navigationType": "left_menu",
-      "urlPatterns": [
-        "/feed/",
-        "/",
-        "/crm/lead/list/",
-        "/contact_center/"
+  "Feed": {
+    "urlPath": "/stream/",
+    "waitFor": ".feed-add-post-form-wrap, .feed-post-list",
+    "steps": {
+      "default": [],
+      "pinned_messages": [
+        { "action": "waitForSelector", "selector": ".feed-post-pin-container, .feed-post-pin" }
       ],
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".enterprise-250-modal",
-        "[class*='plan-limits']",
-        "[class*='plan-compatibility']",
-        ".enterprise-plan-modal",
-        "[class*='plan-compatibility-check']"
+      "favorites_filter": [
+        { "action": "clickFirst", "selectors": [".feed-filter-btn", "[data-action='filter']", ".feed-toolbar__filter"] },
+        { "action": "waitTimeout", "ms": 500 },
+        { "action": "clickFirst", "selectors": ["[data-filter='favorites']", "li:has-text('Favorites')", "li:has-text('Избранное')"] },
+        { "action": "waitTimeout", "ms": 800 }
       ],
-      "subsections": {
-        "Leads": {
-          "url": "/crm/lead/list/",
-          "viewType": "kanban",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Feed": {
-      "helpdeskSection": "47478",
-      "navigationType": "modal",
-      "urlPatterns": [
-        "/",
-        "/feed/",
-        "/crm/event/",
-        "/tasks/and/projects/"
+      "create_post": [
+        { "action": "clickFirst", "selectors": [".feed-add-post-form-wrap", ".livefeed-post-text", ".feed-add-post-form textarea"] },
+        { "action": "waitTimeout", "ms": 500 }
       ],
-      "menuSection": "Feed",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".js-send-message-block",
-        ".crm-message-form",
-        ".Device Access modal dialog",
-        ".task-create-modal",
-        ".popup-window",
-        ".task-details-modal"
-      ],
-      "subsections": {
-        "Message": {
-          "url": "/",
-          "viewType": "modal",
-          "needsExpand": false
-        },
-        "Events": {
-          "url": "/crm/event/",
-          "viewType": "create",
-          "needsExpand": false
-        },
-        "Tasks": {
-          "url": "/tasks/and/projects/",
-          "viewType": "list",
-          "needsExpand": false
-        },
-        "Task Details": {
-          "url": "/",
-          "viewType": "detail",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Tasks and Projects": {
-      "helpdeskSection": "47481",
-      "navigationType": "modal",
-      "urlPatterns": [
-        "/tasks/task/list/",
-        "/",
-        "/tasks/",
-        "/crm/task/",
-        "/feed/"
-      ],
-      "menuSection": "Tasks and Projects",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".task-creation-modal",
-        ".task-detail-modal",
-        ".task-chat-panel",
-        ".bx-search-modal",
-        ".bx-tag-selector"
-      ],
-      "subsections": {
-        "Tasks": {
-          "url": "/crm/task/",
-          "viewType": "modal",
-          "needsExpand": false
-        },
-        "Task Details": {
-          "url": "/",
-          "viewType": "detail",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "CRM": {
-      "helpdeskSection": "47482",
-      "navigationType": "left_menu",
-      "urlPatterns": [
-        "/crm/lead/list/",
-        "/crm/lead/view/307/",
-        "/crm/lead/view/340/",
-        "/crm/deal/",
-        "/crm/deal/list/"
-      ],
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".kanban-settings"
-      ],
-      "subsections": {
-        "Leads": {
-          "url": "/crm/lead/view/340/",
-          "viewType": "detail",
-          "needsExpand": false
-        },
-        "Deals": {
-          "url": "/crm/deal/list/",
-          "viewType": "kanban",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Calendar": {
-      "helpdeskSection": "47483",
-      "navigationType": "left_menu",
-      "urlPatterns": [
-        "/calendar/",
-        "/"
-      ],
-      "menuSection": "Calendar",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".event-creation-modal",
-        ".event-form-container",
-        ".bx-switcher-item",
-        ".bx-calendar-dropdown",
-        ".calendar-view-selector",
-        ".meeting-rooms-modal",
-        ".new-meeting-room"
-      ],
-      "subsections": {
-        "Events": {
-          "url": "/calendar/",
-          "viewType": "month",
-          "needsExpand": false
-        },
-        "Meeting room availability": {
-          "url": "/calendar/",
-          "viewType": "calendar",
-          "needsExpand": false
-        },
-        "Add meeting room": {
-          "url": "/",
-          "viewType": "form",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Drive": {
-      "helpdeskSection": "77623",
-      "navigationType": "left_menu",
-      "urlPatterns": [
-        "/drive/",
-        "/"
-      ],
-      "menuSection": "Drive",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".edit-access-dialog",
-        ".access-permissions-form",
-        ".add-button-menu",
-        ".popup-window",
-        ".edit-access-permissions"
-      ],
-      "subsections": {
-        "Company drive": {
-          "url": "/drive/",
-          "viewType": "grid",
-          "needsExpand": false
-        },
-        "My Drive": {
-          "url": "/drive/",
-          "viewType": "permissions_dialog",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Mail": {
-      "helpdeskSection": "47480",
-      "navigationType": "modal",
-      "urlPatterns": [
-        "/",
-        "/mail/",
-        "/marketing/",
-        "/crm/campaign/"
-      ],
-      "menuSection": "Mail",
-      "needsExpand": false,
-      "widgetSelectors": [
-        "[class*='gmail']",
-        "[class*='outlook']",
-        "[class*='icloud']",
-        "[class*='office365']",
-        "[class*='exchange']",
-        "[class*='yahoo']",
-        "[class*='mail']",
-        "[class*='custom']",
-        ".mailbox-settings"
-      ],
-      "subsections": {
-        "Mailbox Integration": {
-          "url": "/",
-          "viewType": "modal",
-          "needsExpand": false
-        },
-        "Inbox": {
-          "url": "/mail/",
-          "viewType": "list",
-          "needsExpand": false
-        },
-        "Campaign": {
-          "url": "/crm/campaign/",
-          "viewType": "template_selection",
-          "needsExpand": false
-        },
-        "Email": {
-          "url": "/",
-          "viewType": "compose",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Workgroups": {
-      "helpdeskSection": "47484",
-      "navigationType": "modal",
-      "urlPatterns": [
-        "/tasks/",
-        "/crm/task/",
-        "/",
-        "/crm/contact/"
-      ],
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".bx-popup-window",
-        ".bx-search-tags",
-        ".bp-user-card",
-        ".bp-contact-information",
-        ".bp-personal-details",
-        ".popup-window",
-        ".popup-button-container"
-      ],
-      "subsections": {
-        "Tasks": {
-          "url": "/crm/task/",
-          "viewType": "modal",
-          "needsExpand": false
-        },
-        "Contact": {
-          "url": "/",
-          "viewType": "detail",
-          "needsExpand": false
-        },
-        "Contacts": {
-          "url": "/crm/contact/",
-          "viewType": "modal",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 4
-    },
-    "CoPilot": {
-      "helpdeskSection": "157576",
-      "navigationType": "modal",
-      "urlPatterns": [
-        "/",
-        "/tasks/task/"
-      ],
-      "menuSection": "Tasks",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".bp-popup-overlay",
-        ".bp-message-compose",
-        ".task-details-modal",
-        ".checklist-container",
-        ".generic-edit-role",
-        ".bp-dialog-content",
-        ".message-compose-modal",
-        ".ui-dialog",
-        ".task-detail-modal",
-        ".task-chat-panel",
-        ".task-chat",
-        ".task-status-summary",
-        ".checklist-section"
-      ],
-      "subsections": {
-        "Message": {
-          "url": "/",
-          "viewType": "compose",
-          "needsExpand": false
-        },
-        "Event Reminders": {
-          "url": "/",
-          "viewType": "modal",
-          "needsExpand": false
-        },
-        "Social media campaign": {
-          "url": "/tasks/task/",
-          "viewType": "detail",
-          "needsExpand": false
-        },
-        "Task Details": {
-          "url": "/tasks/task/",
-          "viewType": "detail",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Contact Center": {
-      "helpdeskSection": "107059",
-      "navigationType": "modal",
-      "urlPatterns": [
-        "/mail/",
-        "/",
-        "/crm/lead/list/"
-      ],
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".mailbox-integration-modal",
-        ".connection-tab",
-        ".balance-and-statistics"
-      ],
-      "subsections": {
-        "Inbox": {
-          "url": "/mail/",
-          "viewType": "list",
-          "needsExpand": false
-        },
-        "Messages": {
-          "url": "/",
-          "viewType": "compose",
-          "needsExpand": false
-        },
-        "Email Services": {
-          "url": "/",
-          "viewType": "service_selection",
-          "needsExpand": false
-        },
-        "Telephony": {
-          "url": "/",
-          "viewType": "modal",
-          "needsExpand": false
-        },
-        "Leads": {
-          "url": "/crm/lead/list/",
-          "viewType": "modal",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Sales Center": {
-      "helpdeskSection": "122783",
-      "navigationType": "left_menu",
-      "urlPatterns": [
-        "/crm/chat/",
-        "/crm/payment_and_delivery/",
-        "/crm/lead/list/",
-        "/",
-        "/crm/deal/63/",
-        "/crm/contact/"
-      ],
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        "[data-widget='crm-online-store']",
-        "[data-widget='crm-payment']",
-        "[data-widget='crm-forms']",
-        "[data-widget='chat-enabled-payments']",
-        "[data-widget='sms-enabled-payments']",
-        "[data-widget='service-booking-sms']",
-        "[data-widget='customer-support']",
-        "[data-widget='sms-provider']",
-        "[data-widget='payment-systems']",
-        "[data-widget='agreements-consents']"
-      ],
-      "subsections": {
-        "Open Channel": {
-          "url": "/crm/chat/",
-          "viewType": "conversation",
-          "needsExpand": false
-        },
-        "Payment and Delivery": {
-          "url": "/crm/payment_and_delivery/",
-          "viewType": "modal",
-          "needsExpand": false
-        },
-        "Leads": {
-          "url": "/crm/lead/list/",
-          "viewType": "list",
-          "needsExpand": false
-        },
-        "CRM Tools": {
-          "url": "/",
-          "viewType": "grid",
-          "needsExpand": false
-        },
-        "Deals": {
-          "url": "/crm/deal/63/",
-          "viewType": "detail",
-          "needsExpand": false
-        },
-        "Contacts": {
-          "url": "/crm/contact/",
-          "viewType": "conversation",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Analytics": {
-      "helpdeskSection": "122485",
-      "navigationType": "left_menu",
-      "urlPatterns": [
-        "/crm/lead/list/",
-        "/crm/analytics/sales_funnel/",
-        "/crm/sales_plan/"
-      ],
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [],
-      "subsections": {
-        "Leads": {
-          "url": "/crm/lead/list/",
-          "viewType": "kanban",
-          "needsExpand": false
-        },
-        "Sales funnel": {
-          "url": "/crm/analytics/sales_funnel/",
-          "viewType": "analytics",
-          "needsExpand": false
-        },
-        "Sales plan": {
-          "url": "/crm/sales_plan/",
-          "viewType": "dashboard",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Inventory Management": {
-      "helpdeskSection": "143966",
-      "navigationType": "left_menu",
-      "urlPatterns": [
-        "/inventory/",
-        "/settings/inventory-management/",
-        "/crm/lead/list/",
-        "/"
-      ],
-      "menuSection": "Inventory",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".bitrix-modal",
-        ".inventory-setup-modal",
-        ".popup-window",
-        ".modal-dialog"
-      ],
-      "subsections": {
-        "Management Settings": {
-          "url": "/settings/inventory-management/",
-          "viewType": "settings",
-          "needsExpand": false
-        },
-        "Leads": {
-          "url": "/crm/lead/list/",
-          "viewType": "kanban",
-          "needsExpand": false
-        },
-        "Inventory management": {
-          "url": "/",
-          "viewType": "onboarding",
-          "needsExpand": false
-        },
-        "Management": {
-          "url": "/inventory/",
-          "viewType": "modal",
-          "needsExpand": false
-        },
-        "Inventory": {
-          "url": "/inventory/",
-          "viewType": "list",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Marketing": {
-      "helpdeskSection": "98283",
-      "navigationType": "modal",
-      "urlPatterns": [
-        "/",
-        "/settings/restrictions/",
-        "/settings/access_permissions/"
-      ],
-      "menuSection": "Settings",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".bx-popup-window",
-        ".popup-window-content",
-        ".popup-window",
-        "[role='dialog']",
-        ".bx-verification-modal",
-        ".bx-sms-verification",
-        ".verify-bitrix24-modal",
-        ".verification-code-input"
-      ],
-      "subsections": {
-        "Recipients": {
-          "url": "/",
-          "viewType": "modal",
-          "needsExpand": false
-        },
-        "Outgoing emails": {
-          "url": "/settings/restrictions/",
-          "viewType": "settings",
-          "needsExpand": false
-        },
-        "Access Permissions": {
-          "url": "/",
-          "viewType": "modal",
-          "needsExpand": false
-        },
-        "Access permissions": {
-          "url": "/settings/access_permissions/",
-          "viewType": "permissions_matrix",
-          "needsExpand": false
-        },
-        "Verification": {
-          "url": "/",
-          "viewType": "modal",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Sites": {
-      "helpdeskSection": "95157",
-      "navigationType": "left_menu",
-      "urlPatterns": [
-        "/sites/",
-        "/",
-        "/settings/site-design/"
-      ],
-      "menuSection": "Sites and stores",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".bx-market-templates-container",
-        ".bx-market-template-item",
-        ".create-image-modal",
-        ".popular-styles",
-        ".create-image-btn"
-      ],
-      "subsections": {
-        "Templates": {
-          "url": "/",
-          "viewType": "grid",
-          "needsExpand": false
-        },
-        "Site design": {
-          "url": "/settings/site-design/",
-          "viewType": "form",
-          "needsExpand": false
-        },
-        "All Sites": {
-          "url": "/sites/",
-          "viewType": "card",
-          "needsExpand": false
-        },
-        "Create AI Image": {
-          "url": "/",
-          "viewType": "modal",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Employees": {
-      "helpdeskSection": "47823",
-      "navigationType": "settings",
-      "urlPatterns": [
-        "/settings/roles/",
-        "/projects/planner/",
-        "/employees/",
-        "/",
-        "/settings/contacts/"
-      ],
-      "menuSection": "Employees",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".invite-users-popup"
-      ],
-      "subsections": {
-        "Departments": {
-          "url": "/settings/roles/",
-          "viewType": "table",
-          "needsExpand": false
-        },
-        "Planner": {
-          "url": "/projects/planner/",
-          "viewType": "kanban",
-          "needsExpand": false
-        },
-        "Contacts": {
-          "url": "/settings/contacts/",
-          "viewType": "settings",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Automation": {
-      "helpdeskSection": "157580",
-      "navigationType": "left_menu",
-      "urlPatterns": [
-        "/crm/deal/list/",
-        "/crm/automation/"
-      ],
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [],
-      "subsections": {
-        "Deals": {
-          "url": "/crm/deal/list/",
-          "viewType": "kanban",
-          "needsExpand": false
-        },
-        "Sales automation": {
-          "url": "/crm/automation/",
-          "viewType": "automation_rules",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Workflows": {
-      "helpdeskSection": "77629",
-      "navigationType": "modal",
-      "urlPatterns": [
-        "/workflows/new/",
-        "/"
-      ],
-      "menuSection": "Workflows",
-      "needsExpand": false,
-      "widgetSelectors": [
-        "[data-section='Workflows']"
-      ],
-      "subsections": {
-        "New workflow": {
-          "url": "/workflows/new/",
-          "viewType": "instructions",
-          "needsExpand": false
-        },
-        "Favorites": {
-          "url": "/",
-          "viewType": "menu",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 2
-    },
-    "Telephony": {
-      "helpdeskSection": "47487",
-      "navigationType": "left_menu",
-      "urlPatterns": [
-        "/",
-        "/crm/lead/list/",
-        "/contact_center/",
-        "/settings/telephony/"
-      ],
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".css_trial_mode_popup",
-        ".trial-mode-restrictions",
-        "[data-plan='free']",
-        "[data-plan='basic']",
-        "[data-plan='standard']",
-        "[data-plan='professional']",
-        ".sales-channels-popup",
-        ".telephony-popup"
-      ],
-      "subsections": {
-        "Information": {
-          "url": "/",
-          "viewType": "modal",
-          "needsExpand": false
-        },
-        "Plans": {
-          "url": "/",
-          "viewType": "tariff",
-          "needsExpand": false
-        },
-        "Leads": {
-          "url": "/crm/lead/list/",
-          "viewType": "list",
-          "needsExpand": false
-        },
-        "Telephony": {
-          "url": "/settings/telephony/",
-          "viewType": "balance_and_statistics",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Settings": {
-      "helpdeskSection": "47836",
-      "navigationType": "left_menu",
-      "urlPatterns": [
-        "/feed/",
-        "/settings/my-bitrix24/",
-        "/settings/my_bitrix24"
-      ],
-      "menuSection": "Tools",
-      "needsExpand": false,
-      "widgetSelectors": [],
-      "subsections": {
-        "Feed": {
-          "url": "/feed/",
-          "viewType": "feed",
-          "needsExpand": false
-        },
-        "Activity stream": {
-          "url": "/feed/",
-          "viewType": "feed",
-          "needsExpand": false
-        },
-        "My Bitrix24": {
-          "url": "/settings/my-bitrix24/",
-          "viewType": "form",
-          "needsExpand": false
-        },
-        "My bitrix24": {
-          "url": "/settings/my_bitrix24",
-          "viewType": "form",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "General questions": {
-      "helpdeskSection": "47492",
-      "navigationType": "top_menu",
-      "urlPatterns": [
-        "/company/",
-        "/",
-        "/partners/",
-        "/settings/my-bitrix24/"
-      ],
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".helpdesk-modal",
-        ".start-page-vibe"
-      ],
-      "subsections": {
-        "Company": {
-          "url": "/company/",
-          "viewType": "detail",
-          "needsExpand": false
-        },
-        "Getting Started": {
-          "url": "/",
-          "viewType": "help",
-          "needsExpand": false
-        },
-        "Partner Directory": {
-          "url": "/partners/",
-          "viewType": "directory",
-          "needsExpand": false
-        },
-        "My Bitrix24": {
-          "url": "/settings/my-bitrix24/",
-          "viewType": "settings_form",
-          "needsExpand": false
-        },
-        "Name": {
-          "url": "/settings/my-bitrix24/",
-          "viewType": "form",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Employee Widget": {
-      "helpdeskSection": "122803",
-      "navigationType": "modal",
-      "urlPatterns": [
-        "/user/profile/",
-        "/crm/contact/",
-        "/feed/",
-        "/",
-        "/collab/collabs/"
-      ],
-      "menuSection": "Collabs",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".user-profile-modal",
-        ".contact-information",
-        ".personal-details",
-        ".invite-users-popup",
-        ".workflows-widget",
-        ".invitation-modal",
-        "input[placeholder*='bitrix24 partner email']",
-        ".add-to-collab",
-        ".employees-list",
-        ".invite-button"
-      ],
-      "subsections": {
-        "Profile": {
-          "url": "/user/profile/",
-          "viewType": "profile",
-          "needsExpand": false
-        },
-        "Contact": {
-          "url": "/crm/contact/",
-          "viewType": "profile",
-          "needsExpand": false
-        },
-        "Invite Bitrix24 partner": {
-          "url": "/",
-          "viewType": "modal",
-          "needsExpand": false
-        },
-        "Photoshoot Collaboration": {
-          "url": "/collab/collabs/",
-          "viewType": "chat",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Collabs": {
-      "helpdeskSection": "162876",
-      "navigationType": "left_menu",
-      "urlPatterns": [
-        "/",
-        "/collab/collabs/",
-        "/feed/",
-        "/collabs/photoshoot-collaboration/"
-      ],
-      "menuSection": "Collabs",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".popup-window",
-        ".ui-dialog"
-      ],
-      "subsections": {
-        "Hackathon": {
-          "url": "/collab/collabs/",
-          "viewType": "chat",
-          "needsExpand": false
-        },
-        "Photoshoot Collaboration": {
-          "url": "/",
-          "viewType": "chat",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Knowledge base": {
-      "helpdeskSection": "127124",
-      "navigationType": "left_menu",
-      "urlPatterns": [
-        "/knowledge_base/",
-        "/",
-        "/workgroup/feed/",
-        "/settings/access_permissions/"
-      ],
-      "menuSection": "Knowledge base",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".kb-template-selector",
-        "[data-template='dark']",
-        "[data-template='light']",
-        ".bx-more-menu",
-        "[data-menu-item='knowledge_base']"
-      ],
-      "subsections": {
-        "Template Selection": {
-          "url": "/",
-          "viewType": "template_selection",
-          "needsExpand": false
-        },
-        "More": {
-          "url": "/",
-          "viewType": "feed",
-          "needsExpand": false
-        },
-        "Feed": {
-          "url": "/workgroup/feed/",
-          "viewType": "feed",
-          "needsExpand": false
-        },
-        "Access Permissions": {
-          "url": "/settings/access_permissions/",
-          "viewType": "form",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "BI Builder": {
-      "helpdeskSection": "157574",
-      "navigationType": "left_menu",
-      "urlPatterns": [
-        "/marketing/dashboard/",
-        "/",
-        "/marketing/dashboards/",
-        "/dashboards/",
-        "/company/dashboards/",
-        "/settings/"
-      ],
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".BI Builder",
-        ".Deal analytics summary",
-        ".ui-dialog-content"
-      ],
-      "subsections": {
-        "Dashboards in Market": {
-          "url": "/marketing/dashboards/",
-          "viewType": "list",
-          "needsExpand": false
-        },
-        "Analytics": {
-          "url": "/",
-          "viewType": "analytics",
-          "needsExpand": false
-        },
-        "Dashboards": {
-          "url": "/company/dashboards/",
-          "viewType": "grid",
-          "needsExpand": false
-        },
-        "BI Builder settings": {
-          "url": "/settings/",
-          "viewType": "settings",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Booking": {
-      "helpdeskSection": "162944",
-      "navigationType": "left_menu",
-      "urlPatterns": [
-        "/crm/booking/",
-        "/",
-        "/crm/",
-        "/calendar/view/",
-        "/crm/calendar/"
-      ],
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".new-resource-modal",
-        "[data-role='industry-selector']"
-      ],
-      "subsections": {
-        "New resource": {
-          "url": "/",
-          "viewType": "modal",
-          "needsExpand": false
-        },
-        "Haircut": {
-          "url": "/crm/",
-          "viewType": "modal",
-          "needsExpand": false
-        },
-        "Resources": {
-          "url": "/crm/",
-          "viewType": "modal",
-          "needsExpand": false
-        },
-        "Bookings": {
-          "url": "/calendar/view/",
-          "viewType": "calendar",
-          "needsExpand": false
-        },
-        "Calendar": {
-          "url": "/crm/calendar/",
-          "viewType": "calendar",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "CRM Payment": {
-      "helpdeskSection": "134832",
-      "navigationType": "modal",
-      "urlPatterns": [
-        "/",
-        "/crm/lead/list/",
-        "/crm/deal/list/",
-        "/crm/deal/view/537/"
-      ],
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        "[data-widget='crm-online-store']",
-        "[data-widget='crm-payment']",
-        "[data-widget='crm-forms']",
-        "[data-widget='chat-enabled-payments']",
-        "[data-widget='sms-enabled-payments']",
-        "[data-widget='service-booking-chat']",
-        "[data-widget='service-booking-sms']",
-        "[data-widget='customer-support']",
-        "[data-widget='recommend']",
-        "[data-widget='sms-provider']",
-        "[data-widget='payment-systems']",
-        "[data-widget='agreements-consents']",
-        ".payment-system-selector"
-      ],
-      "subsections": {
-        "Sign Up": {
-          "url": "/",
-          "viewType": "form",
-          "needsExpand": false
-        },
-        "Email Verification": {
-          "url": "/",
-          "viewType": "modal",
-          "needsExpand": false
-        },
-        "Sales Center": {
-          "url": "/",
-          "viewType": "widget",
-          "needsExpand": false
-        },
-        "Leads": {
-          "url": "/crm/lead/list/",
-          "viewType": "modal",
-          "needsExpand": false
-        },
-        "Sales": {
-          "url": "/crm/deal/list/",
-          "viewType": "detail",
-          "needsExpand": false
-        },
-        "Deals": {
-          "url": "/crm/deal/view/537/",
-          "viewType": "detail",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "e-Signature": {
-      "helpdeskSection": "152650",
-      "navigationType": "left_menu",
-      "urlPatterns": [
-        "/sign-and-manage/",
-        "/settings/access_permissions/",
-        "/crm/deal/list/",
-        "/crm/",
-        "/crm/contact/list/",
-        "/crm/contact/add/"
-      ],
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [],
-      "subsections": {
-        "Access permissions": {
-          "url": "/settings/access_permissions/",
-          "viewType": "permissions_table",
-          "needsExpand": false
-        },
-        "Deals": {
-          "url": "/crm/deal/list/",
-          "viewType": "kanban",
-          "needsExpand": false
-        },
-        "e-Signature": {
-          "url": "/crm/",
-          "viewType": "kanban",
-          "needsExpand": false
-        },
-        "Contacts": {
-          "url": "/crm/contact/add/",
-          "viewType": "form",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "e-Signature for HR": {
-      "helpdeskSection": "159756",
-      "navigationType": "left_menu",
-      "urlPatterns": [
-        "/hr/documents/",
-        "/",
-        "/user/documents/",
-        "/crm/deal/list/",
-        "/crm/"
-      ],
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".modal-dialog",
-        "[data-role='document-upload']",
-        ".sign-document-modal",
-        ".approve-document-modal",
-        ".signing-popup",
-        ".document-signing-modal"
-      ],
-      "subsections": {
-        "HR documents": {
-          "url": "/hr/documents/",
-          "viewType": "kanban",
-          "needsExpand": false
-        },
-        "Documents": {
-          "url": "/",
-          "viewType": "document_upload",
-          "needsExpand": false
-        },
-        "HR bot": {
-          "url": "/crm/",
-          "viewType": "chat",
-          "needsExpand": false
-        },
-        "My documents": {
-          "url": "/user/documents/",
-          "viewType": "list",
-          "needsExpand": false
-        },
-        "Deals": {
-          "url": "/crm/deal/list/",
-          "viewType": "modal",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    },
-    "Online Store": {
-      "helpdeskSection": "108779",
-      "navigationType": "left_menu",
-      "urlPatterns": [
-        "/inventory/product/",
-        "/crm/catalog/section/",
-        "/crm/product/list/",
-        "/crm/product/import/",
-        "/crm/lead/list/",
-        "/inventory/"
-      ],
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".inventory-dropdown",
-        ".product-catalog-menu",
-        ".bitrix24-modal-dialog",
-        ".inventory-onboarding-modal"
-      ],
-      "subsections": {
-        "Product catalog": {
-          "url": "/crm/product/list/",
-          "viewType": "list",
-          "needsExpand": false
-        },
-        "Inventory": {
-          "url": "/crm/product/import/",
-          "viewType": "import",
-          "needsExpand": false
-        },
-        "Leads": {
-          "url": "/crm/lead/list/",
-          "viewType": "kanban",
-          "needsExpand": false
-        },
-        "Management": {
-          "url": "/inventory/",
-          "viewType": "onboarding",
-          "needsExpand": false
-        }
-      },
-      "sampleCount": 6
-    }
-  },
-  "urlPatternMap": {
-    "/feed/": {
-      "section": "Plans and Payments",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".enterprise-250-modal",
-        "[class*='plan-limits']",
-        "[class*='plan-compatibility']",
-        ".enterprise-plan-modal",
-        "[class*='plan-compatibility-check']"
-      ]
-    },
-    "/": {
-      "section": "Plans and Payments",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".enterprise-250-modal",
-        "[class*='plan-limits']",
-        "[class*='plan-compatibility']",
-        ".enterprise-plan-modal",
-        "[class*='plan-compatibility-check']"
-      ]
-    },
-    "/crm/lead/list/": {
-      "section": "Plans and Payments",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".enterprise-250-modal",
-        "[class*='plan-limits']",
-        "[class*='plan-compatibility']",
-        ".enterprise-plan-modal",
-        "[class*='plan-compatibility-check']"
-      ]
-    },
-    "/contact_center/": {
-      "section": "Plans and Payments",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".enterprise-250-modal",
-        "[class*='plan-limits']",
-        "[class*='plan-compatibility']",
-        ".enterprise-plan-modal",
-        "[class*='plan-compatibility-check']"
-      ]
-    },
-    "/crm/event/": {
-      "section": "Feed",
-      "navigationType": "modal",
-      "menuSection": "Feed",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".js-send-message-block",
-        ".crm-message-form",
-        ".Device Access modal dialog",
-        ".task-create-modal",
-        ".popup-window",
-        ".task-details-modal"
-      ]
-    },
-    "/tasks/and/projects/": {
-      "section": "Feed",
-      "navigationType": "modal",
-      "menuSection": "Feed",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".js-send-message-block",
-        ".crm-message-form",
-        ".Device Access modal dialog",
-        ".task-create-modal",
-        ".popup-window",
-        ".task-details-modal"
-      ]
-    },
-    "/tasks/task/list/": {
-      "section": "Tasks and Projects",
-      "navigationType": "modal",
-      "menuSection": "Tasks and Projects",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".task-creation-modal",
-        ".task-detail-modal",
-        ".task-chat-panel",
-        ".bx-search-modal",
-        ".bx-tag-selector"
-      ]
-    },
-    "/tasks/": {
-      "section": "Tasks and Projects",
-      "navigationType": "modal",
-      "menuSection": "Tasks and Projects",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".task-creation-modal",
-        ".task-detail-modal",
-        ".task-chat-panel",
-        ".bx-search-modal",
-        ".bx-tag-selector"
-      ]
-    },
-    "/crm/task/": {
-      "section": "Tasks and Projects",
-      "navigationType": "modal",
-      "menuSection": "Tasks and Projects",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".task-creation-modal",
-        ".task-detail-modal",
-        ".task-chat-panel",
-        ".bx-search-modal",
-        ".bx-tag-selector"
-      ]
-    },
-    "/crm/lead/view/307/": {
-      "section": "CRM",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".kanban-settings"
-      ]
-    },
-    "/crm/lead/view/340/": {
-      "section": "CRM",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".kanban-settings"
-      ]
-    },
-    "/crm/deal/": {
-      "section": "CRM",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".kanban-settings"
-      ]
-    },
-    "/crm/deal/list/": {
-      "section": "CRM",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".kanban-settings"
-      ]
-    },
-    "/calendar/": {
-      "section": "Calendar",
-      "navigationType": "left_menu",
-      "menuSection": "Calendar",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".event-creation-modal",
-        ".event-form-container",
-        ".bx-switcher-item",
-        ".bx-calendar-dropdown",
-        ".calendar-view-selector",
-        ".meeting-rooms-modal",
-        ".new-meeting-room"
-      ]
-    },
-    "/drive/": {
-      "section": "Drive",
-      "navigationType": "left_menu",
-      "menuSection": "Drive",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".edit-access-dialog",
-        ".access-permissions-form",
-        ".add-button-menu",
-        ".popup-window",
-        ".edit-access-permissions"
-      ]
-    },
-    "/mail/": {
-      "section": "Mail",
-      "navigationType": "modal",
-      "menuSection": "Mail",
-      "needsExpand": false,
-      "widgetSelectors": [
-        "[class*='gmail']",
-        "[class*='outlook']",
-        "[class*='icloud']",
-        "[class*='office365']",
-        "[class*='exchange']",
-        "[class*='yahoo']",
-        "[class*='mail']",
-        "[class*='custom']",
-        ".mailbox-settings"
-      ]
-    },
-    "/marketing/": {
-      "section": "Mail",
-      "navigationType": "modal",
-      "menuSection": "Mail",
-      "needsExpand": false,
-      "widgetSelectors": [
-        "[class*='gmail']",
-        "[class*='outlook']",
-        "[class*='icloud']",
-        "[class*='office365']",
-        "[class*='exchange']",
-        "[class*='yahoo']",
-        "[class*='mail']",
-        "[class*='custom']",
-        ".mailbox-settings"
-      ]
-    },
-    "/crm/campaign/": {
-      "section": "Mail",
-      "navigationType": "modal",
-      "menuSection": "Mail",
-      "needsExpand": false,
-      "widgetSelectors": [
-        "[class*='gmail']",
-        "[class*='outlook']",
-        "[class*='icloud']",
-        "[class*='office365']",
-        "[class*='exchange']",
-        "[class*='yahoo']",
-        "[class*='mail']",
-        "[class*='custom']",
-        ".mailbox-settings"
-      ]
-    },
-    "/crm/contact/": {
-      "section": "Workgroups",
-      "navigationType": "modal",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".bx-popup-window",
-        ".bx-search-tags",
-        ".bp-user-card",
-        ".bp-contact-information",
-        ".bp-personal-details",
-        ".popup-window",
-        ".popup-button-container"
-      ]
-    },
-    "/tasks/task/": {
-      "section": "CoPilot",
-      "navigationType": "modal",
-      "menuSection": "Tasks",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".bp-popup-overlay",
-        ".bp-message-compose",
-        ".task-details-modal",
-        ".checklist-container",
-        ".generic-edit-role",
-        ".bp-dialog-content",
-        ".message-compose-modal",
-        ".ui-dialog",
-        ".task-detail-modal",
-        ".task-chat-panel",
-        ".task-chat",
-        ".task-status-summary",
-        ".checklist-section"
-      ]
-    },
-    "/crm/chat/": {
-      "section": "Sales Center",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        "[data-widget='crm-online-store']",
-        "[data-widget='crm-payment']",
-        "[data-widget='crm-forms']",
-        "[data-widget='chat-enabled-payments']",
-        "[data-widget='sms-enabled-payments']",
-        "[data-widget='service-booking-sms']",
-        "[data-widget='customer-support']",
-        "[data-widget='sms-provider']",
-        "[data-widget='payment-systems']",
-        "[data-widget='agreements-consents']"
-      ]
-    },
-    "/crm/payment_and_delivery/": {
-      "section": "Sales Center",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        "[data-widget='crm-online-store']",
-        "[data-widget='crm-payment']",
-        "[data-widget='crm-forms']",
-        "[data-widget='chat-enabled-payments']",
-        "[data-widget='sms-enabled-payments']",
-        "[data-widget='service-booking-sms']",
-        "[data-widget='customer-support']",
-        "[data-widget='sms-provider']",
-        "[data-widget='payment-systems']",
-        "[data-widget='agreements-consents']"
-      ]
-    },
-    "/crm/deal/63/": {
-      "section": "Sales Center",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        "[data-widget='crm-online-store']",
-        "[data-widget='crm-payment']",
-        "[data-widget='crm-forms']",
-        "[data-widget='chat-enabled-payments']",
-        "[data-widget='sms-enabled-payments']",
-        "[data-widget='service-booking-sms']",
-        "[data-widget='customer-support']",
-        "[data-widget='sms-provider']",
-        "[data-widget='payment-systems']",
-        "[data-widget='agreements-consents']"
-      ]
-    },
-    "/crm/analytics/sales_funnel/": {
-      "section": "Analytics",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": []
-    },
-    "/crm/sales_plan/": {
-      "section": "Analytics",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": []
-    },
-    "/inventory/": {
-      "section": "Inventory Management",
-      "navigationType": "left_menu",
-      "menuSection": "Inventory",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".bitrix-modal",
-        ".inventory-setup-modal",
-        ".popup-window",
-        ".modal-dialog"
-      ]
-    },
-    "/settings/inventory-management/": {
-      "section": "Inventory Management",
-      "navigationType": "left_menu",
-      "menuSection": "Inventory",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".bitrix-modal",
-        ".inventory-setup-modal",
-        ".popup-window",
-        ".modal-dialog"
-      ]
-    },
-    "/settings/restrictions/": {
-      "section": "Marketing",
-      "navigationType": "modal",
-      "menuSection": "Settings",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".bx-popup-window",
-        ".popup-window-content",
-        ".popup-window",
-        "[role='dialog']",
-        ".bx-verification-modal",
-        ".bx-sms-verification",
-        ".verify-bitrix24-modal",
-        ".verification-code-input"
-      ]
-    },
-    "/settings/access_permissions/": {
-      "section": "Marketing",
-      "navigationType": "modal",
-      "menuSection": "Settings",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".bx-popup-window",
-        ".popup-window-content",
-        ".popup-window",
-        "[role='dialog']",
-        ".bx-verification-modal",
-        ".bx-sms-verification",
-        ".verify-bitrix24-modal",
-        ".verification-code-input"
-      ]
-    },
-    "/sites/": {
-      "section": "Sites",
-      "navigationType": "left_menu",
-      "menuSection": "Sites and stores",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".bx-market-templates-container",
-        ".bx-market-template-item",
-        ".create-image-modal",
-        ".popular-styles",
-        ".create-image-btn"
-      ]
-    },
-    "/settings/site-design/": {
-      "section": "Sites",
-      "navigationType": "left_menu",
-      "menuSection": "Sites and stores",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".bx-market-templates-container",
-        ".bx-market-template-item",
-        ".create-image-modal",
-        ".popular-styles",
-        ".create-image-btn"
-      ]
-    },
-    "/settings/roles/": {
-      "section": "Employees",
-      "navigationType": "settings",
-      "menuSection": "Employees",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".invite-users-popup"
-      ]
-    },
-    "/projects/planner/": {
-      "section": "Employees",
-      "navigationType": "settings",
-      "menuSection": "Employees",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".invite-users-popup"
-      ]
-    },
-    "/employees/": {
-      "section": "Employees",
-      "navigationType": "settings",
-      "menuSection": "Employees",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".invite-users-popup"
-      ]
-    },
-    "/settings/contacts/": {
-      "section": "Employees",
-      "navigationType": "settings",
-      "menuSection": "Employees",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".invite-users-popup"
-      ]
-    },
-    "/crm/automation/": {
-      "section": "Automation",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": []
-    },
-    "/workflows/new/": {
-      "section": "Workflows",
-      "navigationType": "modal",
-      "menuSection": "Workflows",
-      "needsExpand": false,
-      "widgetSelectors": [
-        "[data-section='Workflows']"
-      ]
-    },
-    "/settings/telephony/": {
-      "section": "Telephony",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".css_trial_mode_popup",
-        ".trial-mode-restrictions",
-        "[data-plan='free']",
-        "[data-plan='basic']",
-        "[data-plan='standard']",
-        "[data-plan='professional']",
-        ".sales-channels-popup",
-        ".telephony-popup"
-      ]
-    },
-    "/settings/my-bitrix24/": {
-      "section": "Settings",
-      "navigationType": "left_menu",
-      "menuSection": "Tools",
-      "needsExpand": false,
-      "widgetSelectors": []
-    },
-    "/settings/my_bitrix24": {
-      "section": "Settings",
-      "navigationType": "left_menu",
-      "menuSection": "Tools",
-      "needsExpand": false,
-      "widgetSelectors": []
-    },
-    "/company/": {
-      "section": "General questions",
-      "navigationType": "top_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".helpdesk-modal",
-        ".start-page-vibe"
-      ]
-    },
-    "/partners/": {
-      "section": "General questions",
-      "navigationType": "top_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".helpdesk-modal",
-        ".start-page-vibe"
-      ]
-    },
-    "/user/profile/": {
-      "section": "Employee Widget",
-      "navigationType": "modal",
-      "menuSection": "Collabs",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".user-profile-modal",
-        ".contact-information",
-        ".personal-details",
-        ".invite-users-popup",
-        ".workflows-widget",
-        ".invitation-modal",
-        "input[placeholder*='bitrix24 partner email']",
-        ".add-to-collab",
-        ".employees-list",
-        ".invite-button"
-      ]
-    },
-    "/collab/collabs/": {
-      "section": "Employee Widget",
-      "navigationType": "modal",
-      "menuSection": "Collabs",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".user-profile-modal",
-        ".contact-information",
-        ".personal-details",
-        ".invite-users-popup",
-        ".workflows-widget",
-        ".invitation-modal",
-        "input[placeholder*='bitrix24 partner email']",
-        ".add-to-collab",
-        ".employees-list",
-        ".invite-button"
-      ]
-    },
-    "/collabs/photoshoot-collaboration/": {
-      "section": "Collabs",
-      "navigationType": "left_menu",
-      "menuSection": "Collabs",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".popup-window",
-        ".ui-dialog"
-      ]
-    },
-    "/knowledge_base/": {
-      "section": "Knowledge base",
-      "navigationType": "left_menu",
-      "menuSection": "Knowledge base",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".kb-template-selector",
-        "[data-template='dark']",
-        "[data-template='light']",
-        ".bx-more-menu",
-        "[data-menu-item='knowledge_base']"
-      ]
-    },
-    "/workgroup/feed/": {
-      "section": "Knowledge base",
-      "navigationType": "left_menu",
-      "menuSection": "Knowledge base",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".kb-template-selector",
-        "[data-template='dark']",
-        "[data-template='light']",
-        ".bx-more-menu",
-        "[data-menu-item='knowledge_base']"
-      ]
-    },
-    "/marketing/dashboard/": {
-      "section": "BI Builder",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".BI Builder",
-        ".Deal analytics summary",
-        ".ui-dialog-content"
-      ]
-    },
-    "/marketing/dashboards/": {
-      "section": "BI Builder",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".BI Builder",
-        ".Deal analytics summary",
-        ".ui-dialog-content"
-      ]
-    },
-    "/dashboards/": {
-      "section": "BI Builder",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".BI Builder",
-        ".Deal analytics summary",
-        ".ui-dialog-content"
-      ]
-    },
-    "/company/dashboards/": {
-      "section": "BI Builder",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".BI Builder",
-        ".Deal analytics summary",
-        ".ui-dialog-content"
-      ]
-    },
-    "/settings/": {
-      "section": "BI Builder",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".BI Builder",
-        ".Deal analytics summary",
-        ".ui-dialog-content"
-      ]
-    },
-    "/crm/booking/": {
-      "section": "Booking",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".new-resource-modal",
-        "[data-role='industry-selector']"
-      ]
-    },
-    "/crm/": {
-      "section": "Booking",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".new-resource-modal",
-        "[data-role='industry-selector']"
-      ]
-    },
-    "/calendar/view/": {
-      "section": "Booking",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".new-resource-modal",
-        "[data-role='industry-selector']"
-      ]
-    },
-    "/crm/calendar/": {
-      "section": "Booking",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".new-resource-modal",
-        "[data-role='industry-selector']"
-      ]
-    },
-    "/crm/deal/view/537/": {
-      "section": "CRM Payment",
-      "navigationType": "modal",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        "[data-widget='crm-online-store']",
-        "[data-widget='crm-payment']",
-        "[data-widget='crm-forms']",
-        "[data-widget='chat-enabled-payments']",
-        "[data-widget='sms-enabled-payments']",
-        "[data-widget='service-booking-chat']",
-        "[data-widget='service-booking-sms']",
-        "[data-widget='customer-support']",
-        "[data-widget='recommend']",
-        "[data-widget='sms-provider']",
-        "[data-widget='payment-systems']",
-        "[data-widget='agreements-consents']",
-        ".payment-system-selector"
-      ]
-    },
-    "/sign-and-manage/": {
-      "section": "e-Signature",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": []
-    },
-    "/crm/contact/list/": {
-      "section": "e-Signature",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": []
-    },
-    "/crm/contact/add/": {
-      "section": "e-Signature",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": []
-    },
-    "/hr/documents/": {
-      "section": "e-Signature for HR",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".modal-dialog",
-        "[data-role='document-upload']",
-        ".sign-document-modal",
-        ".approve-document-modal",
-        ".signing-popup",
-        ".document-signing-modal"
-      ]
-    },
-    "/user/documents/": {
-      "section": "e-Signature for HR",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".modal-dialog",
-        "[data-role='document-upload']",
-        ".sign-document-modal",
-        ".approve-document-modal",
-        ".signing-popup",
-        ".document-signing-modal"
-      ]
-    },
-    "/inventory/product/": {
-      "section": "Online Store",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".inventory-dropdown",
-        ".product-catalog-menu",
-        ".bitrix24-modal-dialog",
-        ".inventory-onboarding-modal"
-      ]
-    },
-    "/crm/catalog/section/": {
-      "section": "Online Store",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".inventory-dropdown",
-        ".product-catalog-menu",
-        ".bitrix24-modal-dialog",
-        ".inventory-onboarding-modal"
-      ]
-    },
-    "/crm/product/list/": {
-      "section": "Online Store",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".inventory-dropdown",
-        ".product-catalog-menu",
-        ".bitrix24-modal-dialog",
-        ".inventory-onboarding-modal"
-      ]
-    },
-    "/crm/product/import/": {
-      "section": "Online Store",
-      "navigationType": "left_menu",
-      "menuSection": "CRM",
-      "needsExpand": false,
-      "widgetSelectors": [
-        ".inventory-dropdown",
-        ".product-catalog-menu",
-        ".bitrix24-modal-dialog",
-        ".inventory-onboarding-modal"
+      "more_menu": [
+        { "action": "clickFirst", "selectors": ["[data-action='more']", "button:has-text('More')", ".feed-more-btn"] },
+        { "action": "waitTimeout", "ms": 500 }
       ]
     }
   },
-  "commonPatterns": {
-    "settingsButton": "gear icon near list header or top-right corner",
-    "createButton": "green Add/Create button, top-right area",
-    "leftMenuExpand": "click parent menu item to expand children (CRM → Deals, Leads…)",
-    "widgetArea": "bottom-right corner or activity feed top area"
+
+  "CRM_Deals": {
+    "urlPath": "/crm/deal/",
+    "waitFor": ".crm-entity-list-container, .crm-kanban, .ui-grid",
+    "steps": {
+      "default": [],
+      "kanban_view": [
+        { "action": "clickFirst", "selectors": ["[data-view='kanban']", ".crm-view-switcher-kanban", "[data-id='kanban']", "button[title*='Kanban' i]"] },
+        { "action": "waitTimeout", "ms": 1000 }
+      ],
+      "list_view": [
+        { "action": "clickFirst", "selectors": ["[data-view='list']", ".crm-view-switcher-list", "[data-id='list']", "button[title*='List' i]"] },
+        { "action": "waitTimeout", "ms": 1000 }
+      ],
+      "create_deal": [
+        { "action": "clickFirst", "selectors": [".crm-btn-add", "[data-action='add']", "button.ui-btn-success", "button:has-text('Create')"] },
+        { "action": "waitTimeout", "ms": 1000 }
+      ],
+      "settings": [
+        { "action": "clickFirst", "selectors": [".crm-btn-settings", "[data-action='settings']", "button[title*='Settings' i]"] },
+        { "action": "waitTimeout", "ms": 500 }
+      ]
+    }
+  },
+
+  "CRM_Leads": {
+    "urlPath": "/crm/lead/list/",
+    "waitFor": ".crm-entity-list-container, .ui-grid",
+    "steps": {
+      "default": [],
+      "create_lead": [
+        { "action": "clickFirst", "selectors": [".crm-btn-add", "button:has-text('Create')"] },
+        { "action": "waitTimeout", "ms": 1000 }
+      ]
+    }
+  },
+
+  "CRM_Contacts": {
+    "urlPath": "/crm/contact/list/",
+    "waitFor": ".crm-entity-list-container, .ui-grid",
+    "steps": {
+      "default": [],
+      "create_contact": [
+        { "action": "clickFirst", "selectors": [".crm-btn-add", "button:has-text('Create')"] },
+        { "action": "waitTimeout", "ms": 1000 }
+      ]
+    }
+  },
+
+  "CRM_Companies": {
+    "urlPath": "/crm/company/list/",
+    "waitFor": ".crm-entity-list-container, .ui-grid",
+    "steps": { "default": [] }
+  },
+
+  "CRM_Invoices": {
+    "urlPath": "/crm/invoice/list/",
+    "waitFor": ".crm-entity-list-container, .ui-grid",
+    "steps": { "default": [] }
+  },
+
+  "CRM_Settings": {
+    "urlPath": "/crm/configs/",
+    "waitFor": ".crm-config-page, .ui-page-section",
+    "steps": { "default": [] }
+  },
+
+  "Tasks": {
+    "urlPath": "/tasks/",
+    "waitFor": ".tasks-page, .tasks-list-container",
+    "steps": {
+      "default": [],
+      "my_tasks": [
+        { "action": "clickFirst", "selectors": ["a:has-text('My tasks')", "[data-tab='my']", "a[href*='mytasks']"] },
+        { "action": "waitTimeout", "ms": 500 }
+      ],
+      "create_task": [
+        { "action": "clickFirst", "selectors": [".tasks-task-create-btn", "button:has-text('Add task')", "[data-action='create-task']"] },
+        { "action": "waitTimeout", "ms": 800 }
+      ],
+      "gantt": [
+        { "action": "clickFirst", "selectors": ["[data-id='gantt']", "button[title*='Gantt' i]"] },
+        { "action": "waitTimeout", "ms": 1000 }
+      ]
+    }
+  },
+
+  "Calendar": {
+    "urlPath": "/calendar/",
+    "waitFor": ".calendar-wrap, .calendar-page",
+    "steps": {
+      "default": [],
+      "create_event": [
+        { "action": "clickFirst", "selectors": [".calendar-add-event-btn", "button:has-text('Create')", ".calendar-btn-add"] },
+        { "action": "waitTimeout", "ms": 800 }
+      ],
+      "month_view": [
+        { "action": "clickFirst", "selectors": ["[data-view='month']", "button:has-text('Month')"] },
+        { "action": "waitTimeout", "ms": 500 }
+      ]
+    }
+  },
+
+  "Drive": {
+    "urlPath": "/disk/",
+    "waitFor": ".disk-folder-list, .disk-file-list",
+    "steps": {
+      "default": [],
+      "upload": [
+        { "action": "clickFirst", "selectors": ["button:has-text('Upload')", ".disk-btn-upload", "[data-action='upload']"] },
+        { "action": "waitTimeout", "ms": 500 }
+      ]
+    }
+  },
+
+  "Messenger": {
+    "urlPath": "/im/",
+    "waitFor": ".im-chat-list, .im-sidebar",
+    "steps": { "default": [] }
+  },
+
+  "Employees": {
+    "urlPath": "/company/",
+    "waitFor": ".staff-page, .user-list, .company-page",
+    "steps": {
+      "default": [],
+      "structure": [
+        { "action": "clickFirst", "selectors": ["a:has-text('Structure')", "[data-tab='structure']", "a[href*='structure']"] },
+        { "action": "waitTimeout", "ms": 800 }
+      ],
+      "invite": [
+        { "action": "clickFirst", "selectors": ["button:has-text('Invite')", ".staff-invite-btn", "a:has-text('Invite user')"] },
+        { "action": "waitTimeout", "ms": 500 }
+      ]
+    }
+  },
+
+  "Telephony": {
+    "urlPath": "/telephony/",
+    "waitFor": ".telephony-page, .crm-entity-list-container",
+    "steps": { "default": [] }
+  },
+
+  "Workflows": {
+    "urlPath": "/bizproc/",
+    "waitFor": ".bizproc-page, .bp-page",
+    "steps": { "default": [] }
+  },
+
+  "Sites": {
+    "urlPath": "/sites/",
+    "waitFor": ".sites-page, .landing-page",
+    "steps": { "default": [] }
+  },
+
+  "Settings": {
+    "urlPath": "/settings/",
+    "waitFor": ".settings-page, .ui-page-section",
+    "steps": { "default": [] }
+  },
+
+  "Tariff_Widget": {
+    "urlPath": "/",
+    "waitFor": "body",
+    "steps": {
+      "default": [
+        { "action": "waitTimeout", "ms": 2000 },
+        { "action": "clickFirst", "selectors": [
+          ".payroll-widget",
+          "[class*='tariff-widget']",
+          "a[href*='/settings/license/']",
+          ".b24-tariff-widget",
+          ".feed-desktop__plan",
+          "[class*='tariff']"
+        ]},
+        { "action": "waitTimeout", "ms": 1500 }
+      ],
+      "limits": [
+        { "action": "waitTimeout", "ms": 2000 },
+        { "action": "clickFirst", "selectors": ["[class*='tariff-widget']", "a[href*='/settings/license/']", "[class*='tariff']"] },
+        { "action": "waitTimeout", "ms": 1500 },
+        { "action": "clickFirst", "selectors": ["button:has-text('Open limits')", "a:has-text('Limits')", "[class*='limits']"] },
+        { "action": "waitTimeout", "ms": 800 }
+      ]
+    }
+  },
+
+  "Analytics": {
+    "urlPath": "/crm/analytics/",
+    "waitFor": ".crm-analytics-page, .crm-report-page",
+    "steps": { "default": [] }
+  },
+
+  "Marketing": {
+    "urlPath": "/marketing/",
+    "waitFor": ".marketing-page, .crm-entity-list-container",
+    "steps": { "default": [] }
+  },
+
+  "Knowledge_Base": {
+    "urlPath": "/knowledge/",
+    "waitFor": ".knowledge-page, .wiki-page",
+    "steps": { "default": [] }
+  },
+
+  "Automation": {
+    "urlPath": "/bizproc/",
+    "waitFor": ".bizproc-page, .automation-page",
+    "steps": { "default": [] }
+  },
+
+  "Contact_Center": {
+    "urlPath": "/contact-center/",
+    "waitFor": ".contact-center-page, .crm-entity-list-container",
+    "steps": { "default": [] }
+  },
+
+  "CoPilot": {
+    "urlPath": "/ai/",
+    "waitFor": ".ai-page, .copilot-page",
+    "steps": { "default": [] }
+  },
+
+  "Inventory": {
+    "urlPath": "/inventory/",
+    "waitFor": ".inventory-page",
+    "steps": { "default": [] }
+  },
+
+  "Timeman": {
+    "urlPath": "/timeman/",
+    "waitFor": ".timeman-page",
+    "steps": { "default": [] }
   }
 }
