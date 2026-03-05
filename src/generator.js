@@ -6,24 +6,22 @@ const LANG_NAMES = {
   es: 'Español', pt: 'Português', pl: 'Polski', it: 'Italiano',
 };
 
-async function generateZip(article, translations, screenshotItems, newScreenshots) {
+async function generateZip(article, translations, screenshotItems, localizedScreenshots) {
   const zip = new JSZip();
 
-  // Build lookup: all possible keys for a screenshot item → portal screenshot data
-  // Keys: item.src, item.absoluteUrl, decoded variants
-  const portalShotMap = new Map();
+  // Build lookup: src/absoluteUrl → { lang: Buffer }
+  const shotMap = new Map();
   for (const item of screenshotItems) {
-    const shot = newScreenshots[item.src] || newScreenshots[item.absoluteUrl];
-    if (shot) {
-      portalShotMap.set(item.src, shot);
-      portalShotMap.set(item.absoluteUrl, shot);
-      try { portalShotMap.set(decodeURIComponent(item.src), shot); } catch (_) {}
-      try { portalShotMap.set(decodeURIComponent(item.absoluteUrl), shot); } catch (_) {}
+    const entry = localizedScreenshots[item.src] || localizedScreenshots[item.absoluteUrl];
+    if (entry) {
+      shotMap.set(item.src, entry);
+      shotMap.set(item.absoluteUrl, entry);
+      try { shotMap.set(decodeURIComponent(item.src), entry); } catch (_) {}
+      try { shotMap.set(decodeURIComponent(item.absoluteUrl), entry); } catch (_) {}
     }
   }
 
-  console.log(`[generator] portalShotMap size: ${portalShotMap.size}`);
-  console.log(`[generator] screenshotItems: ${screenshotItems.length}, newScreenshots keys: ${Object.keys(newScreenshots).length}`);
+  console.log(`[generator] shotMap size: ${shotMap.size}, screenshotItems: ${screenshotItems.length}`);
 
   for (const [lang, translation] of Object.entries(translations)) {
     const langFolder = zip.folder(lang);
@@ -33,7 +31,6 @@ async function generateZip(article, translations, screenshotItems, newScreenshot
     const $ = cheerio.load(translation.contentHtml, { decodeEntities: false });
 
     let imgCounter = 0;
-    const downloadQueue = []; // { fileName, url } — оригинальные скрины для скачивания
 
     $('img').each((i, el) => {
       // Try src, then data-src, then data-lazy-src
@@ -43,19 +40,20 @@ async function generateZip(article, translations, screenshotItems, newScreenshot
       imgCounter++;
       const fileName = `image_${imgCounter}.png`;
 
-      // 1. Есть новый портальный скрин?
-      const portalShot = portalShotMap.get(rawSrc);
-      if (portalShot) {
-        imgFolder.file(fileName, Buffer.from(portalShot.data, 'base64'));
+      // Localized image for this language?
+      const langShots = shotMap.get(rawSrc);
+      const imgBuffer = langShots?.[lang];
+      if (imgBuffer) {
+        imgFolder.file(fileName, imgBuffer);
         $(el).attr('src', `images/${fileName}`);
         $(el).removeAttr('data-src');
         $(el).removeAttr('data-lazy-src');
-        console.log(`[generator] ✅ Portal screenshot → ${fileName} (src: ${rawSrc.slice(0, 60)})`);
+        console.log(`[generator] ✅ Localized [${lang}] → ${fileName} (src: ${rawSrc.slice(0, 60)})`);
         return;
       }
 
-      // 2. Нет портального скрина — убираем img из HTML (не нужны оригинальные русские скрины)
-      console.log(`[generator] ⏭️  No portal screenshot for ${rawSrc.slice(0, 60)}, removing img`);
+      // No localized image — remove the img tag
+      console.log(`[generator] ⏭️  No image for [${lang}] ${rawSrc.slice(0, 60)}, removing img`);
       $(el).remove();
     });
 
