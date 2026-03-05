@@ -1,6 +1,6 @@
 FROM node:20-bookworm-slim
 
-# System deps for Playwright Chromium
+# System deps for Playwright Chromium (кэшируется отдельным слоем)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     libnss3 \
@@ -22,9 +22,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-COPY package.json ./
-RUN npm install && npx playwright install chromium
+# Сначала только package.json — npm install кэшируется если зависимости не менялись
+COPY package.json package-lock.json* ./
+RUN npm install
 
+# Playwright устанавливается отдельным слоем — кэшируется если package.json не менялся
+RUN npx playwright install chromium --with-deps 2>/dev/null || npx playwright install chromium
+
+# Код копируется последним — не инвалидирует кэш зависимостей
 COPY src/ ./src/
 COPY section-map.json ./
 
