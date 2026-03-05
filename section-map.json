@@ -1,0 +1,225 @@
+{
+  "Лента Новостей": {
+    "aliases": ["лента", "feed", "activity", "поток", "новости"],
+    "portalPath": "/stream/",
+    "waitSelector": ".feed-add-post-form-wrap, .feed-post-list",
+    "steps": {
+      "default": [],
+      "pinned": [
+        { "action": "waitForSelector", "selector": ".feed-post-pin, [class*='pin']", "timeout": 5000 }
+      ],
+      "favorites": [
+        { "action": "clickBest", "candidates": [".feed-filter-btn", "[data-action='filter']", "button:has-text('Filter')"] },
+        { "action": "wait", "ms": 600 },
+        { "action": "clickBest", "candidates": ["[data-filter='favorites']", "li:has-text('Favorites')", "li:has-text('Избранное')"] },
+        { "action": "wait", "ms": 600 }
+      ],
+      "create_post": [
+        { "action": "clickBest", "candidates": [".feed-add-post-form-wrap", ".livefeed-post-text", ".feed-add-post-form textarea"] },
+        { "action": "wait", "ms": 500 }
+      ],
+      "more_menu": [
+        { "action": "clickBest", "candidates": ["[data-action='more']", "button:has-text('More')", ".feed-more-btn"] },
+        { "action": "wait", "ms": 500 }
+      ]
+    }
+  },
+
+  "CRM": {
+    "aliases": ["crm", "сделки", "leads", "лиды", "контакты", "contacts", "компании"],
+    "portalPath": "/crm/deal/",
+    "waitSelector": ".crm-entity-list-container, .crm-kanban-wrap, .ui-grid",
+    "steps": {
+      "default": [],
+      "kanban": [
+        { "action": "clickBest", "candidates": ["[data-view='kanban']", ".crm-kanban-link", "a[href*='kanban']", "[data-id='kanban']"] },
+        { "action": "wait", "ms": 1000 }
+      ],
+      "list": [
+        { "action": "clickBest", "candidates": ["[data-view='list']", "[data-id='list']", "button[title*='List' i]"] },
+        { "action": "wait", "ms": 1000 }
+      ],
+      "create": [
+        { "action": "clickBest", "candidates": [".crm-btn-add", "button.ui-btn-success", "button:has-text('Create')", ".crm-entity-add-button"] },
+        { "action": "wait", "ms": 1000 }
+      ],
+      "settings": [
+        { "action": "clickBest", "candidates": [".crm-btn-settings", "[data-action='settings']", "button[title='Settings']"] },
+        { "action": "wait", "ms": 600 }
+      ]
+    }
+  },
+
+  "Задачи и проекты": {
+    "aliases": ["задачи", "tasks", "projects", "проекты"],
+    "portalPath": "/tasks/",
+    "waitSelector": ".tasks-page, .task-list-item",
+    "steps": {
+      "default": [],
+      "create": [
+        { "action": "clickBest", "candidates": ["button:has-text('Add task')", ".task-create-btn", "[data-action='create-task']", ".tasks-task-create-btn"] },
+        { "action": "wait", "ms": 800 }
+      ],
+      "my_tasks": [
+        { "action": "clickBest", "candidates": ["a:has-text('My tasks')", "[data-tab='my']", "a[href*='mytasks']"] },
+        { "action": "wait", "ms": 500 }
+      ],
+      "gantt": [
+        { "action": "clickBest", "candidates": ["[data-id='gantt']", "button[title*='Gantt' i]"] },
+        { "action": "wait", "ms": 1000 }
+      ]
+    }
+  },
+
+  "Мессенджер": {
+    "aliases": ["чат", "messenger", "chat", "im", "messages"],
+    "portalPath": "/im/",
+    "waitSelector": ".im-chat-list, .bx-im-component",
+    "steps": { "default": [] }
+  },
+
+  "Календарь": {
+    "aliases": ["calendar", "events", "события"],
+    "portalPath": "/calendar/",
+    "waitSelector": ".calendar-wrap, .calendar-grid",
+    "steps": {
+      "default": [],
+      "create": [
+        { "action": "clickBest", "candidates": ["button:has-text('Create')", ".calendar-add-btn", ".calendar-add-event-btn"] },
+        { "action": "wait", "ms": 800 }
+      ],
+      "month": [
+        { "action": "clickBest", "candidates": ["[data-view='month']", "button:has-text('Month')"] },
+        { "action": "wait", "ms": 500 }
+      ]
+    }
+  },
+
+  "Диск": {
+    "aliases": ["disk", "drive", "files", "файлы", "хранилище"],
+    "portalPath": "/disk/",
+    "waitSelector": ".disk-folder-list, .disk-page",
+    "steps": { "default": [] }
+  },
+
+  "Сотрудники": {
+    "aliases": ["employees", "hr", "staff", "users", "персонал", "пользователи"],
+    "portalPath": "/company/",
+    "waitSelector": ".staff-page, .user-list-wrap",
+    "steps": {
+      "default": [],
+      "structure": [
+        { "action": "clickBest", "candidates": ["a:has-text('Structure')", "[data-tab='structure']", "a[href*='structure']"] },
+        { "action": "wait", "ms": 800 }
+      ],
+      "invite": [
+        { "action": "clickBest", "candidates": ["button:has-text('Invite')", ".staff-invite-btn"] },
+        { "action": "wait", "ms": 500 }
+      ]
+    }
+  },
+
+  "Тарифы и оплата": {
+    "aliases": ["тариф", "tariff", "plan", "payment", "оплата", "billing", "лимиты", "limits", "plans"],
+    "portalPath": "/",
+    "waitSelector": "body",
+    "steps": {
+      "default": [
+        { "action": "wait", "ms": 2000 },
+        { "action": "clickBest", "candidates": [".payroll-widget", "[class*='tariff-widget']", "a[href*='license']", ".b24-tariff-widget", "[class*='tariff']"] },
+        { "action": "wait", "ms": 1500 }
+      ],
+      "limits": [
+        { "action": "wait", "ms": 2000 },
+        { "action": "clickBest", "candidates": ["[class*='tariff-widget']", "a[href*='license']", "[class*='tariff']"] },
+        { "action": "wait", "ms": 1500 },
+        { "action": "clickBest", "candidates": ["button:has-text('Open limits')", "a:has-text('Limits')", "[class*='limits']"] },
+        { "action": "wait", "ms": 800 }
+      ]
+    }
+  },
+
+  "Настройки": {
+    "aliases": ["settings", "config", "конфигурация", "параметры"],
+    "portalPath": "/settings/",
+    "waitSelector": ".settings-page, .settings-list",
+    "steps": { "default": [] }
+  },
+
+  "Телефония": {
+    "aliases": ["telephony", "phone", "calls", "звонки", "телефон"],
+    "portalPath": "/telephony/",
+    "waitSelector": ".telephony-page",
+    "steps": { "default": [] }
+  },
+
+  "Маркетинг": {
+    "aliases": ["marketing", "campaigns", "рассылки"],
+    "portalPath": "/marketing/",
+    "waitSelector": ".marketing-page",
+    "steps": { "default": [] }
+  },
+
+  "Аналитика": {
+    "aliases": ["analytics", "reports", "отчёты", "отчеты", "воронка"],
+    "portalPath": "/crm/analytics/",
+    "waitSelector": ".crm-analytics-page, .crm-report-page",
+    "steps": { "default": [] }
+  },
+
+  "Автоматизация": {
+    "aliases": ["automation", "bizproc", "workflows", "бизнес-процессы", "роботы"],
+    "portalPath": "/bizproc/",
+    "waitSelector": ".bizproc-page",
+    "steps": { "default": [] }
+  },
+
+  "Контакт-центр": {
+    "aliases": ["contact center", "open channels", "открытые линии", "contactcenter"],
+    "portalPath": "/contact-center/",
+    "waitSelector": ".contact-center-page",
+    "steps": { "default": [] }
+  },
+
+  "База знаний": {
+    "aliases": ["knowledge", "wiki", "база"],
+    "portalPath": "/knowledge/",
+    "waitSelector": ".knowledge-page",
+    "steps": { "default": [] }
+  },
+
+  "Сайты": {
+    "aliases": ["sites", "landing", "лендинг", "stores", "магазины"],
+    "portalPath": "/sites/",
+    "waitSelector": ".sites-page",
+    "steps": { "default": [] }
+  },
+
+  "BI Конструктор": {
+    "aliases": ["bi", "builder", "дашборды", "dashboards"],
+    "portalPath": "/crm/analytics/",
+    "waitSelector": ".crm-analytics-page",
+    "steps": { "default": [] }
+  },
+
+  "Склад": {
+    "aliases": ["inventory", "catalog", "store", "магазин", "товары", "products"],
+    "portalPath": "/inventory/",
+    "waitSelector": ".inventory-page",
+    "steps": { "default": [] }
+  },
+
+  "Учёт рабочего времени": {
+    "aliases": ["timeman", "time tracking", "рабочее время"],
+    "portalPath": "/timeman/",
+    "waitSelector": ".timeman-page",
+    "steps": { "default": [] }
+  },
+
+  "CoPilot": {
+    "aliases": ["copilot", "ai", "искусственный интеллект", "копилот"],
+    "portalPath": "/ai/",
+    "waitSelector": ".ai-page, .copilot-page",
+    "steps": { "default": [] }
+  }
+}
