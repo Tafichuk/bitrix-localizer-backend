@@ -40,20 +40,28 @@ async function takePortalScreenshots(portalUrl, auth, screenshotItems, onProgres
       const { steps = [], description = '' } = item.analysis;
       if (onProgress) onProgress(i, screenshotItems.length, description);
 
+      const start = Date.now();
       try {
-        // Cap total time per screenshot at 30s to avoid indefinite hangs
+        // Hard cap 60s per screenshot
         await Promise.race([
           executeSteps(page, base, steps),
-          new Promise((_, reject) => setTimeout(() => reject(new Error('Screenshot timeout 30s')), 30000)),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('Screenshot timeout 60s')), 60000)),
         ]);
         const buf = await page.screenshot({ type: 'png', clip: { x: 0, y: 0, width: 1280, height: 800 } });
         const shotData = { data: buf.toString('base64'), mimeType: 'image/png' };
         results[item.src] = shotData;
         if (item.absoluteUrl) results[item.absoluteUrl] = shotData;
-        console.log(`[screenshotter] ✅ "${description}"`);
+        console.log(`[screenshotter] ✅ "${description}" (${Date.now() - start}ms)`);
       } catch (err) {
-        console.error(`[screenshotter] ❌ "${description}": ${err.message}`);
-        if (onProgress) onProgress(i, screenshotItems.length, `Ошибка: ${err.message}`);
+        console.error(`[screenshotter] ❌ "${description}" (${Date.now() - start}ms): ${err.message}`);
+        // Fallback: store original Russian screenshot so HTML still has an image
+        if (item.originalData) {
+          const fallback = { data: item.originalData, mimeType: item.originalMime || 'image/png', isFallback: true };
+          results[item.src] = fallback;
+          if (item.absoluteUrl) results[item.absoluteUrl] = fallback;
+          console.log(`[screenshotter] ↩️  Using original RU screenshot as fallback for "${description}"`);
+        }
+        if (onProgress) onProgress(i, screenshotItems.length, `⚠️ ${err.message}`);
       }
     }
 
@@ -166,11 +174,10 @@ async function executeStep(page, base, step) {
     }
 
     case 'waitNetworkIdle': {
-      try {
-        await page.waitForLoadState('networkidle', { timeout: 5000 });
-      } catch {
-        await page.waitForTimeout(1000);
-      }
+      await Promise.race([
+        page.waitForLoadState('networkidle'),
+        page.waitForTimeout(8000),
+      ]);
       break;
     }
 

@@ -114,45 +114,59 @@ async function processJob(job, { articleUrl, portalUrl, login, password, session
       progress: 15,
     });
 
-    // Step 2+3: Перевод и анализ скриншотов — ПАРАЛЛЕЛЬНО
+    // Step 2: Перевод — последовательно по языкам
     emit(job, 'progress', {
       step: 'translating',
-      message: `🌐 Параллельный перевод на ${languages.length} языков + анализ ${article.images.length} скриншотов...`,
+      message: `🌐 Перевод на ${languages.length} язык(ов)...`,
       progress: 16,
     });
 
-    const [translationResults, visionResults] = await Promise.all([
-      // Все языки параллельно
-      Promise.allSettled(
-        languages.map(lang => translateContent(article, lang).then(t => ({ lang, t })))
-      ),
-      // Все скриншоты параллельно (передаём целевой язык для перевода контента)
-      Promise.allSettled(
-        article.images.map(img => analyzeScreenshot(img.absoluteUrl, languages[0]).then(analysis => ({ img, analysis })))
-      ),
-    ]);
-
     const translations = {};
-    for (const res of translationResults) {
-      if (res.status === 'fulfilled') {
-        translations[res.value.lang] = res.value.t;
-        emit(job, 'progress', { step: 'translated', message: `✅ ${LANGUAGE_NAMES[res.value.lang]} готов`, progress: 0 });
-      } else {
-        emit(job, 'progress', { step: 'warn', message: `⚠️ Ошибка перевода: ${res.reason?.message}`, progress: 0 });
+    for (let li = 0; li < languages.length; li++) {
+      const lang = languages[li];
+      try {
+        const t = await translateContent(article, lang);
+        translations[lang] = t;
+        emit(job, 'progress', {
+          step: 'translated',
+          message: `✅ ${LANGUAGE_NAMES[lang]} готов`,
+          progress: 16 + ((li + 1) / languages.length) * 24,
+        });
+      } catch (err) {
+        emit(job, 'progress', { step: 'warn', message: `⚠️ Ошибка перевода ${lang}: ${err.message}`, progress: 0 });
       }
+      if (li < languages.length - 1) await sleep(1000);
     }
-    emit(job, 'progress', { step: 'translated', message: `✅ Переводы готовы: ${Object.keys(translations).length} языков`, progress: 60 });
+    emit(job, 'progress', { step: 'translated', message: `✅ Переводы готовы: ${Object.keys(translations).length} языков`, progress: 40 });
+
+    // Step 3: Пауза перед Vision — снижаем нагрузку на API
+    await sleep(3000);
+
+    // Step 3: Анализ скриншотов — ПОСЛЕДОВАТЕЛЬНО с паузами
+    emit(job, 'progress', {
+      step: 'analyzing',
+      message: `🤖 Анализирую ${article.images.length} скриншотов (последовательно)...`,
+      progress: 42,
+    });
 
     const screenshotAnalyses = [];
-    for (const res of visionResults) {
-      if (res.status === 'fulfilled') {
-        screenshotAnalyses.push({ ...res.value.img, analysis: res.value.analysis });
-        emit(job, 'progress', { step: 'analyzed', message: `🔎 ${res.value.analysis.description} → ${res.value.analysis.path}`, progress: 0 });
-      } else {
-        const img = article.images[screenshotAnalyses.length];
+    for (let si = 0; si < article.images.length; si++) {
+      const img = article.images[si];
+      const analyzeProgress = 42 + ((si + 1) / article.images.length) * 18;
+      try {
+        const analysis = await analyzeScreenshot(img.absoluteUrl, languages[0]);
+        screenshotAnalyses.push({ ...img, analysis });
+        emit(job, 'progress', {
+          step: 'analyzed',
+          message: `🔎 ${si + 1}/${article.images.length}: ${analysis.description}`,
+          progress: analyzeProgress,
+        });
+      } catch (err) {
         screenshotAnalyses.push({ ...img, analysis: null });
-        emit(job, 'progress', { step: 'warn', message: `⚠️ Скриншот пропущен: ${res.reason?.message}`, progress: 0 });
+        emit(job, 'progress', { step: 'warn', message: `⚠️ Скриншот ${si + 1} пропущен: ${err.message}`, progress: analyzeProgress });
       }
+      // 2s pause between vision calls to avoid 429
+      if (si < article.images.length - 1) await sleep(2000);
     }
 
     // Step 4: Take portal screenshots
@@ -170,7 +184,7 @@ async function processJob(job, { articleUrl, portalUrl, login, password, session
           emit(job, 'progress', {
             step: 'screenshot',
             message: `📸 Скриншот ${i + 1}/${total}: ${desc}`,
-            progress: 60 + (i / total) * 25,
+            progress: 62 + (i / total) * 23,
           });
         });
         Object.assign(newScreenshots, shots);
@@ -199,6 +213,8 @@ async function processJob(job, { articleUrl, portalUrl, login, password, session
     job.status = 'error';
   }
 }
+
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
 const LANGUAGE_NAMES = {
   en: 'English', de: 'Deutsch', fr: 'Français',

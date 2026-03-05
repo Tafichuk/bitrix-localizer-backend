@@ -1,5 +1,6 @@
 const Anthropic = require('@anthropic-ai/sdk');
 const axios = require('axios');
+const sharp = require('sharp');
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -124,9 +125,9 @@ Respond ONLY with valid JSON (no markdown, no explanation):
 8. Translate ALL user-entered values to ${langName} (make them realistic)
 9. Keep steps minimal — only what reproduces what's visible`;
 
-  const response = await client.messages.create({
+  const response = await callWithRetry({
     model: 'claude-sonnet-4-6',
-    max_tokens: 1500,
+    max_tokens: 400,
     messages: [{
       role: 'user',
       content: [
@@ -176,6 +177,26 @@ Respond ONLY with valid JSON (no markdown, no explanation):
   return result;
 }
 
+// ─── Retry with exponential backoff on 429 ───────────────────────────────────
+
+async function callWithRetry(params, maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await client.messages.create(params);
+    } catch (err) {
+      if (err.status === 429 && i < maxRetries - 1) {
+        const waitMs = Math.pow(2, i) * 5000; // 5s, 10s, 20s
+        console.warn(`[vision] Rate limit 429, waiting ${waitMs / 1000}s (attempt ${i + 1}/${maxRetries})`);
+        await new Promise(r => setTimeout(r, waitMs));
+      } else {
+        throw err;
+      }
+    }
+  }
+}
+
+// ─── Download + compress image ────────────────────────────────────────────────
+
 async function downloadImage(url) {
   try {
     const resp = await axios.get(url, {
@@ -183,15 +204,24 @@ async function downloadImage(url) {
       timeout: 20000,
       headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' },
     });
-    const ct = resp.headers['content-type'] || 'image/png';
-    const mediaType =
-      ct.includes('jpeg') || ct.includes('jpg') ? 'image/jpeg' :
-      ct.includes('webp') ? 'image/webp' :
-      ct.includes('gif') ? 'image/gif' : 'image/png';
-    return {
-      base64: Buffer.from(resp.data).toString('base64'),
-      mediaType,
-    };
+
+    // Compress: resize to max 800px wide, JPEG 60% quality
+    let compressed;
+    try {
+      compressed = await sharp(Buffer.from(resp.data))
+        .resize({ width: 800, withoutEnlargement: true })
+        .jpeg({ quality: 60 })
+        .toBuffer();
+    } catch {
+      // sharp failed (e.g. GIF/SVG) — use original
+      compressed = Buffer.from(resp.data);
+    }
+
+    const originalKb = Math.round(resp.data.byteLength / 1024);
+    const compressedKb = Math.round(compressed.byteLength / 1024);
+    console.log(`[vision] Image compressed: ${originalKb}KB → ${compressedKb}KB`);
+
+    return { base64: compressed.toString('base64'), mediaType: 'image/jpeg' };
   } catch (err) {
     console.error(`[vision] Failed to download ${url}: ${err.message}`);
     return null;
