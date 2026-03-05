@@ -154,21 +154,123 @@ async function executeStep(page, base, step) {
   switch (step.action) {
     case 'goto': {
       const url = step.path.startsWith('http') ? step.path : `${base}${step.path}`;
-      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 20000 });
-      await page.waitForTimeout(1500);
+      console.log(`[step] goto ${url}`);
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 25000 });
+      await page.waitForTimeout(2000);
       await dismissPopups(page);
       break;
     }
+
+    case 'waitNetworkIdle': {
+      try {
+        await page.waitForLoadState('networkidle', { timeout: 8000 });
+      } catch {
+        // networkidle may never fire on live portals — just wait a bit
+        await page.waitForTimeout(2000);
+      }
+      break;
+    }
+
+    case 'expandMenu': {
+      // Expand a left-menu section (e.g. CRM) if it is collapsed
+      const menuItem = step.menuItem || '';
+      console.log(`[step] expandMenu "${menuItem}"`);
+      const selectors = [
+        `[data-menu-item="${menuItem.toLowerCase()}"]`,
+        `a[href*="/${menuItem.toLowerCase()}/"]`,
+        `.left-menu-item:has-text("${menuItem}")`,
+        `.menu-item-link:has-text("${menuItem}")`,
+      ];
+      let expanded = false;
+      for (const sel of selectors) {
+        try {
+          const el = page.locator(sel).first();
+          if (await el.isVisible({ timeout: 2000 })) {
+            await el.click({ timeout: 3000 });
+            await page.waitForTimeout(600);
+            expanded = true;
+            break;
+          }
+        } catch (_) {}
+      }
+      if (!expanded) console.warn(`[step] expandMenu: "${menuItem}" not found`);
+      break;
+    }
+
+    case 'switchView': {
+      const viewType = (step.viewType || 'list').toLowerCase();
+      console.log(`[step] switchView "${viewType}"`);
+      const viewSelectors = {
+        list: [
+          '[data-id="list"]', '.crm-toolbar-list-btn', 'button[title*="List" i]',
+          '[data-view="list"]', '.ui-grid-header-btn[data-value="list"]',
+        ],
+        kanban: [
+          '[data-id="kanban"]', '.crm-toolbar-kanban-btn', 'button[title*="Kanban" i]',
+          '[data-view="kanban"]', '.ui-grid-header-btn[data-value="kanban"]',
+        ],
+        calendar: [
+          '[data-id="calendar"]', 'button[title*="Calendar" i]',
+          '[data-view="calendar"]',
+        ],
+        gantt: [
+          '[data-id="gantt"]', 'button[title*="Gantt" i]',
+        ],
+      };
+      const sels = viewSelectors[viewType] || [];
+      let switched = false;
+      for (const sel of sels) {
+        try {
+          const el = page.locator(sel).first();
+          if (await el.isVisible({ timeout: 2000 })) {
+            await el.click({ timeout: 3000 });
+            await page.waitForTimeout(1500);
+            switched = true;
+            break;
+          }
+        } catch (_) {}
+      }
+      if (!switched) console.warn(`[step] switchView: "${viewType}" button not found`);
+      break;
+    }
+
+    case 'openCreateForm': {
+      console.log('[step] openCreateForm');
+      const createSelectors = [
+        '.crm-btn-add', '[data-action="add"]', 'button.ui-btn-success',
+        '.tasks-task-create-btn', '[data-action="create-task"]',
+        'button:has-text("Create")', 'a:has-text("Create")',
+        '[data-role="create-btn"]',
+      ];
+      let opened = false;
+      for (const sel of createSelectors) {
+        try {
+          const el = page.locator(sel).first();
+          if (await el.isVisible({ timeout: 2000 })) {
+            await el.click({ timeout: 3000 });
+            await page.waitForTimeout(1500);
+            opened = true;
+            break;
+          }
+        } catch (_) {}
+      }
+      if (!opened) console.warn('[step] openCreateForm: create button not found');
+      break;
+    }
+
     case 'click': {
-      await tryClick(page, step.selector, step.fallbackText);
+      await tryClickWithRetry(page, step.selector, step.fallbackText);
       await page.waitForTimeout(800);
       break;
     }
     case 'clickText': {
+      let clicked = false;
       try {
         await page.getByText(step.text, { exact: false }).first().click({ timeout: 5000 });
-      } catch {
-        await page.getByRole('button', { name: step.text }).first().click({ timeout: 3000 });
+        clicked = true;
+      } catch {}
+      if (!clicked) {
+        try { await page.getByRole('button', { name: step.text }).first().click({ timeout: 3000 }); } catch {}
       }
       await page.waitForTimeout(800);
       break;
@@ -221,8 +323,17 @@ async function executeStep(page, base, step) {
   }
 }
 
-async function tryClick(page, selector, fallbackText) {
-  try { await page.locator(selector).first().click({ timeout: 4000 }); return true; } catch (_) {}
+async function tryClickWithRetry(page, selector, fallbackText, retries = 2) {
+  for (let i = 0; i <= retries; i++) {
+    try {
+      const el = page.locator(selector).first();
+      if (await el.isVisible({ timeout: 3000 })) {
+        await el.click({ timeout: 4000 });
+        return true;
+      }
+    } catch (_) {}
+    if (i < retries) await page.waitForTimeout(1000);
+  }
   if (fallbackText) {
     try { await page.getByText(fallbackText, { exact: false }).first().click({ timeout: 3000 }); return true; } catch (_) {}
   }
