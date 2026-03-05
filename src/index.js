@@ -5,11 +5,15 @@ const { v4: uuidv4 } = require('uuid');
 
 const { parseArticle } = require('./scraper');
 const { translateContent } = require('./translator');
-const { localizeImage } = require('./image-localizer');
+const { takeScreenshotWithComputerUse, loadPortalAuth } = require('./computer-use-screenshot');
 const { generateZip } = require('./generator');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const PORTAL_URL = process.env.PORTAL_URL || '';
+
+// Pre-load portal auth once at startup
+const portalCookies = loadPortalAuth();
 
 // In-memory job store
 const jobs = new Map();
@@ -17,7 +21,11 @@ const jobs = new Map();
 app.use(cors({ origin: process.env.FRONTEND_URL || '*' }));
 app.use(express.json({ limit: '10mb' }));
 
-app.get('/health', (req, res) => res.json({ status: 'ok', version: '4.0.0' }));
+app.get('/health', (req, res) => res.json({
+  status: 'ok',
+  version: '5.0.0',
+  portalConfigured: !!PORTAL_URL && portalCookies.length > 0,
+}));
 
 // Start localization job
 app.post('/api/localize', (req, res) => {
@@ -124,69 +132,91 @@ async function processJob(job, { articleUrl, languages }) {
       }
       if (li < languages.length - 1) await sleep(1000);
     }
-    emit(job, 'progress', { step: 'translated', message: `✅ Переводы готовы: ${Object.keys(translations).length} языков`, progress: 40 });
+    emit(job, 'progress', { step: 'translated', message: `✅ Переводы готовы`, progress: 40 });
 
-    // Step 3: Localize images via Claude Vision
-    // localizedScreenshots: { [src]: { [lang]: Buffer } }
-    const localizedScreenshots = {};
+    // Step 3: Computer Use screenshots
+    // portalScreenshots: { [src]: { [lang]: Buffer } }
+    const portalScreenshots = {};
     const screenshots = article.screenshots;
 
-    if (screenshots.length > 0) {
+    if (screenshots.length > 0 && PORTAL_URL && portalCookies.length > 0) {
       emit(job, 'progress', {
-        step: 'localizing_img',
-        message: `🖼️ Локализую ${screenshots.length} скриншот(ов) для ${languages.length} языка(ов)...`,
+        step: 'screenshots',
+        message: `📸 Computer Use: воспроизвожу ${screenshots.length} скриншот(ов)...`,
         progress: 42,
       });
 
+      const axios = require('axios');
       const totalOps = screenshots.length * languages.length;
       let doneOps = 0;
 
       for (let si = 0; si < screenshots.length; si++) {
         const img = screenshots[si];
-        localizedScreenshots[img.src] = {};
-        localizedScreenshots[img.absoluteUrl] = localizedScreenshots[img.src];
+        portalScreenshots[img.src] = {};
+        portalScreenshots[img.absoluteUrl] = portalScreenshots[img.src];
+
+        // Download original Russian screenshot for Computer Use context
+        let origBase64 = null;
+        try {
+          const resp = await axios.get(img.absoluteUrl, {
+            responseType: 'arraybuffer', timeout: 20000,
+            headers: { 'User-Agent': 'Mozilla/5.0' },
+          });
+          const sharp = require('sharp');
+          const compressed = await sharp(Buffer.from(resp.data))
+            .resize({ width: 1280, withoutEnlargement: true })
+            .jpeg({ quality: 75 })
+            .toBuffer();
+          origBase64 = compressed.toString('base64');
+        } catch (e) {
+          emit(job, 'progress', { step: 'warn', message: `⚠️ Не удалось скачать оригинал ${si + 1}: ${e.message}`, progress: 0 });
+        }
+
+        const description = img.alt || img.context || `Screenshot ${si + 1} from Bitrix24 helpdesk article`;
 
         for (let li = 0; li < languages.length; li++) {
           const lang = languages[li];
           try {
-            const buffer = await localizeImage(img.absoluteUrl, lang);
-            localizedScreenshots[img.src][lang] = buffer;
             emit(job, 'progress', {
-              step: 'localizing_img',
-              message: `🖼️ ${si + 1}/${screenshots.length} [${LANGUAGE_NAMES[lang] || lang}]: локализован`,
+              step: 'screenshot',
+              message: `📸 ${si + 1}/${screenshots.length} [${LANGUAGE_NAMES[lang] || lang}]: Computer Use...`,
+              progress: 42 + (doneOps / totalOps) * 43,
+            });
+
+            const buffer = await takeScreenshotWithComputerUse(
+              PORTAL_URL,
+              portalCookies,
+              description,
+              origBase64 || ''
+            );
+            portalScreenshots[img.src][lang] = buffer;
+
+            emit(job, 'progress', {
+              step: 'screenshot',
+              message: `✅ ${si + 1}/${screenshots.length} [${LANGUAGE_NAMES[lang] || lang}]: готово`,
               progress: 42 + (++doneOps / totalOps) * 43,
             });
           } catch (err) {
-            emit(job, 'progress', {
-              step: 'warn',
-              message: `⚠️ Скрин ${si + 1} [${lang}] — ошибка: ${err.message}`,
-              progress: 0,
-            });
-            // Use original image as fallback
-            try {
-              const axios = require('axios');
-              const orig = await axios.get(img.absoluteUrl, { responseType: 'arraybuffer', timeout: 20000 });
-              localizedScreenshots[img.src][lang] = Buffer.from(orig.data);
-            } catch (_) {}
+            emit(job, 'progress', { step: 'warn', message: `⚠️ Скрин ${si + 1} [${lang}]: ${err.message}`, progress: 0 });
             ++doneOps;
           }
 
-          if (li < languages.length - 1) await sleep(1500);
+          if (li < languages.length - 1) await sleep(2000);
         }
 
         if (si < screenshots.length - 1) await sleep(1000);
       }
 
-      emit(job, 'progress', {
-        step: 'localized_img',
-        message: `✅ Все скриншоты локализованы`,
-        progress: 85,
-      });
+      emit(job, 'progress', { step: 'screenshots_done', message: '✅ Все скриншоты сделаны', progress: 85 });
+
+    } else if (screenshots.length > 0) {
+      const reason = !PORTAL_URL ? 'PORTAL_URL не настроен' : 'PORTAL_AUTH_JSON не настроен';
+      emit(job, 'progress', { step: 'warn', message: `⚠️ Скриншоты пропущены: ${reason}`, progress: 85 });
     }
 
     // Step 4: Generate ZIP
     emit(job, 'progress', { step: 'generating', message: '📦 Генерация HTML файлов...', progress: 90 });
-    const zipBuffer = await generateZip(article, translations, screenshots, localizedScreenshots);
+    const zipBuffer = await generateZip(article, translations, screenshots, portalScreenshots);
     job.zipBuffer = zipBuffer;
 
     emit(job, 'progress', { step: 'done', message: '✅ Готово! Скачивайте архив.', progress: 100 });
@@ -215,4 +245,4 @@ setInterval(() => {
   }
 }, 30 * 60 * 1000);
 
-app.listen(PORT, () => console.log(`Bitrix Localizer Backend v4 running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Bitrix Localizer Backend v5 running on port ${PORT}`));
