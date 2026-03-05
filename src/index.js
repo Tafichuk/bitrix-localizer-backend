@@ -5,7 +5,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const { parseArticle } = require('./scraper');
 const { translateContent } = require('./translator');
-const { takeScreenshotWithComputerUse, loadPortalAuth } = require('./computer-use-screenshot');
+const { takeScreenshotWithComputerUse, loadPortalAuth, openBrowserSession, closeBrowserSession } = require('./computer-use-screenshot');
 const { generateZip } = require('./generator');
 
 const app = express();
@@ -142,72 +142,75 @@ async function processJob(job, { articleUrl, languages }) {
     if (screenshots.length > 0 && PORTAL_URL && portalCookies.length > 0) {
       emit(job, 'progress', {
         step: 'screenshots',
-        message: `📸 Computer Use: воспроизвожу ${screenshots.length} скриншот(ов)...`,
+        message: `📸 Computer Use: ${screenshots.length} скриншот(ов), открываю браузер...`,
         progress: 42,
       });
 
       const axios = require('axios');
+      const sharp = require('sharp');
       const totalOps = screenshots.length * languages.length;
       let doneOps = 0;
+      let session = null;
 
-      for (let si = 0; si < screenshots.length; si++) {
-        const img = screenshots[si];
-        portalScreenshots[img.src] = {};
-        portalScreenshots[img.absoluteUrl] = portalScreenshots[img.src];
+      try {
+        // One browser session for all screenshots in this job
+        session = await openBrowserSession(PORTAL_URL, portalCookies);
 
-        // Download original Russian screenshot for Computer Use context
-        let origBase64 = null;
-        try {
-          const resp = await axios.get(img.absoluteUrl, {
-            responseType: 'arraybuffer', timeout: 20000,
-            headers: { 'User-Agent': 'Mozilla/5.0' },
-          });
-          const sharp = require('sharp');
-          const compressed = await sharp(Buffer.from(resp.data))
-            .resize({ width: 1280, withoutEnlargement: true })
-            .jpeg({ quality: 75 })
-            .toBuffer();
-          origBase64 = compressed.toString('base64');
-        } catch (e) {
-          emit(job, 'progress', { step: 'warn', message: `⚠️ Не удалось скачать оригинал ${si + 1}: ${e.message}`, progress: 0 });
-        }
+        for (let si = 0; si < screenshots.length; si++) {
+          const img = screenshots[si];
+          portalScreenshots[img.src] = {};
+          portalScreenshots[img.absoluteUrl] = portalScreenshots[img.src];
 
-        const description = img.alt || img.context || `Screenshot ${si + 1} from Bitrix24 helpdesk article`;
-
-        for (let li = 0; li < languages.length; li++) {
-          const lang = languages[li];
+          // Download + compress original Russian screenshot as visual context for Claude
+          let origBase64 = null;
           try {
-            emit(job, 'progress', {
-              step: 'screenshot',
-              message: `📸 ${si + 1}/${screenshots.length} [${LANGUAGE_NAMES[lang] || lang}]: Computer Use...`,
-              progress: 42 + (doneOps / totalOps) * 43,
+            const resp = await axios.get(img.absoluteUrl, {
+              responseType: 'arraybuffer', timeout: 20000,
+              headers: { 'User-Agent': 'Mozilla/5.0' },
             });
-
-            const buffer = await takeScreenshotWithComputerUse(
-              PORTAL_URL,
-              portalCookies,
-              description,
-              origBase64 || ''
-            );
-            portalScreenshots[img.src][lang] = buffer;
-
-            emit(job, 'progress', {
-              step: 'screenshot',
-              message: `✅ ${si + 1}/${screenshots.length} [${LANGUAGE_NAMES[lang] || lang}]: готово`,
-              progress: 42 + (++doneOps / totalOps) * 43,
-            });
-          } catch (err) {
-            emit(job, 'progress', { step: 'warn', message: `⚠️ Скрин ${si + 1} [${lang}]: ${err.message}`, progress: 0 });
-            ++doneOps;
+            const compressed = await sharp(Buffer.from(resp.data))
+              .resize({ width: 1280, withoutEnlargement: true })
+              .jpeg({ quality: 75 })
+              .toBuffer();
+            origBase64 = compressed.toString('base64');
+          } catch (e) {
+            emit(job, 'progress', { step: 'warn', message: `⚠️ Оригинал ${si + 1} недоступен: ${e.message}`, progress: 0 });
           }
 
-          if (li < languages.length - 1) await sleep(2000);
+          const description = img.alt || img.context || `Screenshot ${si + 1} from Bitrix24 article`;
+
+          // Same screenshot works for all languages (portal language is fixed)
+          emit(job, 'progress', {
+            step: 'screenshot',
+            message: `📸 ${si + 1}/${screenshots.length}: Computer Use...`,
+            progress: 42 + (doneOps / totalOps) * 43,
+          });
+
+          let buffer = null;
+          try {
+            buffer = await takeScreenshotWithComputerUse(session.page, PORTAL_URL, description, origBase64 || '');
+          } catch (err) {
+            emit(job, 'progress', { step: 'warn', message: `⚠️ Скрин ${si + 1}: ${err.message}`, progress: 0 });
+          }
+
+          // Assign same buffer to all requested languages
+          for (const lang of languages) {
+            portalScreenshots[img.src][lang] = buffer;
+            doneOps++;
+          }
+
+          emit(job, 'progress', {
+            step: 'screenshot',
+            message: `✅ ${si + 1}/${screenshots.length}: готово`,
+            progress: 42 + (doneOps / totalOps) * 43,
+          });
         }
 
-        if (si < screenshots.length - 1) await sleep(1000);
-      }
+        emit(job, 'progress', { step: 'screenshots_done', message: '✅ Все скриншоты сделаны', progress: 85 });
 
-      emit(job, 'progress', { step: 'screenshots_done', message: '✅ Все скриншоты сделаны', progress: 85 });
+      } finally {
+        if (session) await closeBrowserSession(session);
+      }
 
     } else if (screenshots.length > 0) {
       const reason = !PORTAL_URL ? 'PORTAL_URL не настроен' : 'PORTAL_AUTH_JSON не настроен';
