@@ -41,7 +41,11 @@ async function takePortalScreenshots(portalUrl, auth, screenshotItems, onProgres
       if (onProgress) onProgress(i, screenshotItems.length, description);
 
       try {
-        await executeSteps(page, base, steps);
+        // Cap total time per screenshot at 30s to avoid indefinite hangs
+        await Promise.race([
+          executeSteps(page, base, steps),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('Screenshot timeout 30s')), 30000)),
+        ]);
         const buf = await page.screenshot({ type: 'png', clip: { x: 0, y: 0, width: 1280, height: 800 } });
         const shotData = { data: buf.toString('base64'), mimeType: 'image/png' };
         results[item.src] = shotData;
@@ -163,10 +167,9 @@ async function executeStep(page, base, step) {
 
     case 'waitNetworkIdle': {
       try {
-        await page.waitForLoadState('networkidle', { timeout: 8000 });
+        await page.waitForLoadState('networkidle', { timeout: 5000 });
       } catch {
-        // networkidle may never fire on live portals — just wait a bit
-        await page.waitForTimeout(2000);
+        await page.waitForTimeout(1000);
       }
       break;
     }
@@ -185,9 +188,9 @@ async function executeStep(page, base, step) {
       for (const sel of selectors) {
         try {
           const el = page.locator(sel).first();
-          if (await el.isVisible({ timeout: 2000 })) {
-            await el.click({ timeout: 3000 });
-            await page.waitForTimeout(600);
+          if (await el.isVisible({ timeout: 1000 })) {
+            await el.click({ timeout: 2000 });
+            await page.waitForTimeout(500);
             expanded = true;
             break;
           }
@@ -222,9 +225,9 @@ async function executeStep(page, base, step) {
       for (const sel of sels) {
         try {
           const el = page.locator(sel).first();
-          if (await el.isVisible({ timeout: 2000 })) {
-            await el.click({ timeout: 3000 });
-            await page.waitForTimeout(1500);
+          if (await el.isVisible({ timeout: 1000 })) {
+            await el.click({ timeout: 2000 });
+            await page.waitForTimeout(1000);
             switched = true;
             break;
           }
@@ -310,7 +313,12 @@ async function executeStep(page, base, step) {
       break;
     }
     case 'waitForSelector': {
-      await page.waitForSelector(step.selector, { timeout: 8000 });
+      // Short timeout — element may not appear if popup/panel wasn't triggered
+      try {
+        await page.waitForSelector(step.selector, { timeout: 3000 });
+      } catch {
+        console.warn(`[step] waitForSelector: "${step.selector}" not found within 3s, continuing`);
+      }
       break;
     }
     case 'scroll': {
