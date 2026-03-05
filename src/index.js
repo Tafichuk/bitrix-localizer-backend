@@ -172,22 +172,30 @@ async function processJob(job, { articleUrl, languages }) {
 
         emit(job, 'progress', {
           step: 'screenshots',
-          message: `📸 Computer Use: ${screenshots.length} скриншот(ов) параллельно...`,
+          message: `📸 Computer Use: ${screenshots.length} скриншот(ов)...`,
           progress: 44,
         });
 
-        // Take all screenshots in parallel — each gets its own page within shared context
-        const shotBuffers = await Promise.all(screenshots.map(async (img, si) => {
+        // Последовательная обработка скринов с паузой 5s между ними (rate limit)
+        const shotBuffers = [];
+        for (let si = 0; si < screenshots.length; si++) {
+          const img = screenshots[si];
           const description = img.alt || img.context || `Screenshot ${si + 1} from Bitrix24 article`;
+          emit(job, 'progress', {
+            step: 'screenshot',
+            message: `📸 ${si + 1}/${screenshots.length}: Computer Use...`,
+            progress: 44 + (si / screenshots.length) * 40,
+          });
           try {
             const buf = await takeScreenshotWithComputerUse(session.context, PORTAL_URL, description, originals[si] || '');
-            emit(job, 'progress', { step: 'screenshot', message: `✅ ${si + 1}/${screenshots.length}: готово`, progress: 0 });
-            return buf;
+            emit(job, 'progress', { step: 'screenshot', message: `✅ ${si + 1}/${screenshots.length}: готово`, progress: 44 + ((si + 1) / screenshots.length) * 40 });
+            shotBuffers.push(buf);
           } catch (err) {
             emit(job, 'progress', { step: 'warn', message: `⚠️ Скрин ${si + 1}: ${err.message}`, progress: 0 });
-            return null;
+            shotBuffers.push(null);
           }
-        }));
+          if (si < screenshots.length - 1) await sleep(5000);
+        }
 
         // Assign results
         screenshots.forEach((img, si) => {
