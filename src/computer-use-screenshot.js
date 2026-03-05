@@ -6,8 +6,7 @@ const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 const MAX_ITERATIONS = 5;
 const DISPLAY_WIDTH = 1280;
 const DISPLAY_HEIGHT = 800;
-const API_TIMEOUT_MS = 60_000;    // max 60s per Claude call
-const FN_TIMEOUT_MS  = 4 * 60_000; // max 4min per screenshot
+const CLAUDE_TIMEOUT = 60_000;
 
 /**
  * Loads portal auth cookies from PORTAL_AUTH_JSON env var (base64-encoded auth.json).
@@ -31,16 +30,27 @@ function loadPortalAuth() {
 
 /**
  * Creates a shared browser session for the portal (call once per job).
- * Returns { browser, context, page } — caller must call closeBrowserSession() when done.
  */
 async function openBrowserSession(portalUrl, cookies) {
-  const browser = await chromium.launch({ headless: true, args: ['--no-sandbox', '--disable-dev-shm-usage'] });
-  const context = await browser.newContext({ viewport: { width: DISPLAY_WIDTH, height: DISPLAY_HEIGHT } });
+  const browser = await chromium.launch({
+    headless: true,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+      `--window-size=${DISPLAY_WIDTH},${DISPLAY_HEIGHT}`,
+    ],
+  });
+
+  const context = await browser.newContext({
+    viewport: { width: DISPLAY_WIDTH, height: DISPLAY_HEIGHT },
+  });
 
   if (Array.isArray(cookies) && cookies.length > 0) {
     const sanitized = cookies.map(c => {
       const cookie = { ...c };
-      if (cookie.domain && cookie.domain.startsWith('.')) cookie.domain = cookie.domain.slice(1);
+      if (cookie.domain?.startsWith('.')) cookie.domain = cookie.domain.slice(1);
       delete cookie.url;
       return cookie;
     });
@@ -60,33 +70,27 @@ async function closeBrowserSession({ browser }) {
 }
 
 /**
- * Calls the Anthropic Computer Use API with a hard timeout.
+ * CDP-based hover — reliably triggers CSS :hover in headless mode.
  */
-async function callClaudeWithTimeout(params) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), API_TIMEOUT_MS);
-  try {
-    return await anthropic.beta.messages.create({ ...params, signal: controller.signal });
-  } finally {
-    clearTimeout(timer);
-  }
+async function hoverWithCDP(page, x, y) {
+  const client = await page.context().newCDPSession(page);
+  await client.send('Input.dispatchMouseEvent', { type: 'mouseMoved', x, y, modifiers: 0 });
+  await page.waitForTimeout(500);
+  await client.send('Input.dispatchMouseEvent', { type: 'mouseMoved', x: x + 1, y: y + 1, modifiers: 0 });
+  await page.waitForTimeout(300);
 }
 
 /**
  * Uses Claude Computer Use to navigate the portal to match the target screenshot.
  * Reuses an existing page rather than launching a new browser each time.
- * Has an overall timeout of FN_TIMEOUT_MS.
  */
 async function takeScreenshotWithComputerUse(page, portalUrl, targetDescription, originalScreenshotB64) {
-  const deadline = Date.now() + FN_TIMEOUT_MS;
-
-  // Always navigate to portal root before each screenshot to get a clean starting state
+  // Always navigate to portal root before each screenshot for a clean starting state
   await page.goto(portalUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
-  await page.waitForTimeout(1500);
+  await page.waitForTimeout(2000);
 
   const initScreenshot = await page.screenshot({ type: 'jpeg', quality: 65 });
   const initBase64 = initScreenshot.toString('base64');
-
   const hasOriginal = !!originalScreenshotB64;
 
   const messages = [
@@ -104,7 +108,7 @@ Description: ${targetDescription}
 Portal: ${portalUrl}
 
 Current browser state shown below. Navigate efficiently — call take_final_screenshot as soon as the state matches.
-If you reach the target in the first look, call take_final_screenshot immediately.`,
+If the state already matches, call take_final_screenshot immediately.`,
         },
         {
           type: 'image',
@@ -118,17 +122,12 @@ If you reach the target in the first look, call take_final_screenshot immediatel
   let iterations = 0;
 
   while (!finalScreenshot && iterations < MAX_ITERATIONS) {
-    if (Date.now() > deadline) {
-      console.warn('[computer-use] Overall timeout reached, using current state');
-      break;
-    }
-
     iterations++;
     console.log(`[computer-use] Iteration ${iterations}/${MAX_ITERATIONS}`);
 
     let response;
     try {
-      response = await callClaudeWithTimeout({
+      const apiCall = anthropic.beta.messages.create({
         model: 'claude-sonnet-4-5-20250929',
         max_tokens: 1024,
         betas: ['computer-use-2025-01-24'],
@@ -152,31 +151,28 @@ If you reach the target in the first look, call take_final_screenshot immediatel
         ],
         messages,
       });
+      const timeout = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Claude API timeout')), CLAUDE_TIMEOUT)
+      );
+      response = await Promise.race([apiCall, timeout]);
     } catch (err) {
-      if (err.name === 'AbortError' || err.message?.includes('abort')) {
-        console.warn('[computer-use] API call timed out, using current state');
-      } else {
-        console.error('[computer-use] API error:', err.message);
-      }
+      console.warn('[computer-use] API error:', err.message?.slice(0, 200));
       break;
     }
 
     messages.push({ role: 'assistant', content: response.content });
 
-    // Collect all tool results for this turn into one user message
     const toolResults = [];
 
     for (const block of response.content) {
       if (block.type === 'text') {
         console.log(`[computer-use] Claude: ${block.text.slice(0, 100)}`);
       }
-
       if (block.type === 'tool_use') {
         if (block.name === 'take_final_screenshot') {
           console.log(`[computer-use] ✅ ${block.input.reason?.slice(0, 80)}`);
           finalScreenshot = await page.screenshot({ type: 'png' });
           toolResults.push({ type: 'tool_result', tool_use_id: block.id, content: 'Done.' });
-
         } else if (block.name === 'computer') {
           await executeAction(page, block.input);
           const shot = await page.screenshot({ type: 'jpeg', quality: 65 });
@@ -189,7 +185,6 @@ If you reach the target in the first look, call take_final_screenshot immediatel
       }
     }
 
-    // Push all tool results as a single user message (required by API)
     if (toolResults.length > 0) {
       messages.push({ role: 'user', content: toolResults });
     }
@@ -199,9 +194,8 @@ If you reach the target in the first look, call take_final_screenshot immediatel
       finalScreenshot = await page.screenshot({ type: 'png' });
     }
 
-    // Trim accumulated intermediate screenshots from messages to prevent context bloat.
-    // Keep only: first user message (with original + init), last assistant, last user tool_result.
-    if (messages.length > 6) {
+    // Keep context lean: first message + last 4
+    if (messages.length > 7) {
       messages.splice(1, messages.length - 5);
     }
   }
@@ -236,8 +230,7 @@ async function executeAction(page, action) {
       await page.waitForTimeout(500);
       break;
     case 'mouse_move':
-      await page.mouse.move(action.coordinate[0], action.coordinate[1]);
-      await page.waitForTimeout(200);
+      await hoverWithCDP(page, action.coordinate[0], action.coordinate[1]);
       break;
     case 'type':
       await page.keyboard.type(action.text);
