@@ -54,6 +54,25 @@ Left-menu sections and their URLs:
   Reports             → /report/
   Settings            → /settings/
 
+═══ NAVIGATION TYPES ════════════════════════════════════════════════
+Set "navigationType" to one of:
+  "left_menu" — page reached via left sidebar (most common)
+  "widget"    — content shown after clicking a homepage widget (tariff, limits, demo banner)
+  "modal"     — a modal/popup dialog open over another page
+  "settings"  — page within /settings/ section
+  "top_menu"  — reached via top bar / notification bell
+
+Widget navigation examples (use navigationType="widget"):
+  - "Мой тариф" / tariff info panel — shown after clicking tariff widget (bottom-right or top-right area)
+  - Limits counter (Лимиты) — clicked from homepage widget
+  - Demo period / trial expiry banners — click to open tariff upgrade screen
+  For all widget screenshots: urlPath="/", widgetSelectors=[list of candidate CSS selectors]
+
+Known widget selectors (provide the most likely ones in widgetSelectors):
+  Tariff widget:  [".b24-tariff-info", ".tariff-block", "[class*='tariff']", ".b24net-tariff", ".feed-desktop__plan"]
+  Limits widget:  [".b24-limits-widget", "[class*='limits']", ".feed-desktop-limits"]
+  Demo banner:    [".b24-demo-panel", "[class*='demo']", ".feed-desktop__demo"]
+
 ═══ IMPORTANT DISTINCTIONS ══════════════════════════════════════════
 - Bitrix24 UI labels (buttons, column headers, menu items) = DO NOT recreate in fill steps
 - User-entered content (names, titles, descriptions, comments, field values) = MUST translate to ${langName}
@@ -66,6 +85,7 @@ Left-menu sections and their URLs:
 {"action":"openCreateForm"}
 {"action":"click",           "selector":".css", "fallbackText":"Button label"}
 {"action":"clickText",       "text":"Visible text"}
+{"action":"clickWidget",     "widgetSelectors":[".b24-tariff-info","[class*='tariff']"]}
 {"action":"fill",            "selector":".css", "value":"translated text", "fallbacks":[".alt"]}
 {"action":"fillByLabel",     "label":"Field label", "value":"translated text"}
 {"action":"select",          "selector":"select.css", "value":"option value"}
@@ -105,6 +125,8 @@ Respond ONLY with valid JSON (no markdown, no explanation):
   "subsection": "Deals",
   "urlPath": "/crm/deal/list/",
   "viewType": "list",
+  "navigationType": "left_menu",
+  "widgetSelectors": [],
   "description": "CRM Deals list view (max 80 chars, English)",
   "hasUserContent": false,
   "steps": [
@@ -123,11 +145,13 @@ Respond ONLY with valid JSON (no markdown, no explanation):
 6. Add "fill" steps ONLY for user-entered content visible in the screenshot — translate to ${langName}
 7. If no user content: hasUserContent=false, omit fill steps
 8. Translate ALL user-entered values to ${langName} (make them realistic)
-9. Keep steps minimal — only what reproduces what's visible`;
+9. Keep steps minimal — only what reproduces what's visible
+10. If navigationType="widget": urlPath="/", first goto "/", then wait 2000ms, then {"action":"clickWidget","widgetSelectors":[...]}
+11. Always set "navigationType" — default to "left_menu" if unsure`;
 
   const response = await callWithRetry({
     model: 'claude-sonnet-4-6',
-    max_tokens: 400,
+    max_tokens: 600,
     messages: [{
       role: 'user',
       content: [
@@ -173,6 +197,10 @@ Respond ONLY with valid JSON (no markdown, no explanation):
   // Back-compat: populate .path for downstream consumers
   result.path = result.urlPath || result.path || '/';
   if (!result.path.startsWith('/')) result.path = '/';
+
+  // Ensure navigationType is set
+  if (!result.navigationType) result.navigationType = 'left_menu';
+  if (!result.widgetSelectors) result.widgetSelectors = [];
 
   return result;
 }

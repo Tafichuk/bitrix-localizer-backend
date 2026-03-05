@@ -268,6 +268,32 @@ async function executeStep(page, base, step) {
       break;
     }
 
+    case 'clickWidget': {
+      const widgetSels = [
+        ...(step.widgetSelectors || []),
+        // Common Bitrix24 tariff/limits widget selectors
+        '.b24-tariff-info', '.tariff-block', "[class*='tariff']",
+        '.b24net-tariff', '.feed-desktop__plan',
+        '.b24-limits-widget', "[class*='limits']", '.feed-desktop-limits',
+        '.b24-demo-panel', "[class*='demo']", '.feed-desktop__demo',
+      ];
+      let clicked = false;
+      for (const sel of widgetSels) {
+        try {
+          const el = page.locator(sel).first();
+          if (await el.isVisible({ timeout: 1000 })) {
+            await el.click({ timeout: 2000 });
+            await page.waitForTimeout(2000);
+            clicked = true;
+            console.log(`[step] clickWidget: found "${sel}"`);
+            break;
+          }
+        } catch (_) {}
+      }
+      if (!clicked) console.warn('[step] clickWidget: no widget found, proceeding anyway');
+      break;
+    }
+
     case 'click': {
       await tryClickWithRetry(page, step.selector, step.fallbackText);
       await page.waitForTimeout(800);

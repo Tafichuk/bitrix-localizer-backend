@@ -60,6 +60,13 @@ async function scrapeArticle(url) {
     if (src.includes('icon') || src.includes('logo') || src.includes('pixel') || src.includes('spacer')) return;
     if (src.endsWith('.svg') || src.endsWith('.gif')) return;
     if (seen.has(src)) return;
+
+    // Skip author photos (Problem 1)
+    if (isAuthorPhoto($, el, src)) return;
+
+    // Skip tiny images — icons/avatars by explicit dimensions (Problem 5)
+    if (isTooSmall($, el)) return;
+
     seen.add(src);
 
     const absoluteUrl = src.startsWith('http') ? src : `${HELPDESK_BASE}${src.startsWith('/') ? '' : '/'}${src}`;
@@ -76,6 +83,42 @@ async function scrapeArticle(url) {
   const contentHtml = $content.html() || '';
 
   return { title, contentHtml, images, sourceUrl: url };
+}
+
+/**
+ * Returns true if the image looks like an author's portrait photo.
+ * Covers: CDN user-photo URL patterns, alt = "First Last" name, inside .author container.
+ */
+function isAuthorPhoto($, el, src) {
+  // Bitrix24 CDN pattern for user photos: /main/abc/ (3 hex chars)
+  if (/\/main\/[a-f0-9]{3}\//i.test(src)) return true;
+
+  // URL path contains avatar/author/portrait
+  if (/\/(avatar|portrait|author)\//i.test(src)) return true;
+
+  // resize_cache with photo/avatar/portrait — thumbnail of a person
+  if (/resize_cache.*\/(photo|avatar|portrait)/i.test(src)) return true;
+
+  // Alt text looks like a personal name: two words, each starting with uppercase letter
+  const alt = ($(el).attr('alt') || '').trim();
+  if (/^[A-ZА-ЯЁ][a-zа-яё]+ [A-ZА-ЯЁ][a-zа-яё]+$/.test(alt)) return true;
+
+  // Image is inside an author-type container
+  if ($(el).closest('[class*="author"], .help-article__author, .article__author').length) return true;
+
+  return false;
+}
+
+/**
+ * Returns true if the image has explicit tiny dimensions (icon/avatar range).
+ * Only checks HTML attributes — does not download.
+ */
+function isTooSmall($, el) {
+  const w = parseInt($(el).attr('width') || '0', 10);
+  const h = parseInt($(el).attr('height') || '0', 10);
+  if (w > 0 && w < 100) return true;
+  if (h > 0 && h < 100) return true;
+  return false;
 }
 
 module.exports = { scrapeArticle };
