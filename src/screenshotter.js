@@ -42,9 +42,10 @@ async function takePortalScreenshots(portalUrl, auth, screenshotItems, onProgres
 
       const start = Date.now();
       try {
-        // Hard cap 60s per screenshot
+        // Hard cap 60s per screenshot (main steps + additionalActions)
+        const additionalActions = (item.analysis.additionalActions || []).map(a => ({ action: a }));
         await Promise.race([
-          executeSteps(page, base, steps),
+          executeSteps(page, base, [...steps, ...additionalActions]),
           new Promise((_, reject) => setTimeout(() => reject(new Error('Screenshot timeout 60s')), 60000)),
         ]);
         const buf = await page.screenshot({ type: 'png', clip: { x: 0, y: 0, width: 1280, height: 800 } });
@@ -291,6 +292,89 @@ async function executeStep(page, base, step) {
         } catch (_) {}
       }
       if (!clicked) console.warn('[step] clickWidget: no widget found, proceeding anyway');
+      break;
+    }
+
+    case 'scroll_to_pinned': {
+      // Scroll to pinned messages area at top of Feed
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await page.waitForTimeout(500);
+      for (const sel of ['.feed-post-pin', '.feed-add-post-form-wrap', '.feed-post-pinned']) {
+        try {
+          if (await page.locator(sel).first().isVisible({ timeout: 1000 })) {
+            await page.locator(sel).first().scrollIntoViewIfNeeded();
+            break;
+          }
+        } catch {}
+      }
+      break;
+    }
+
+    case 'click_filter_button': {
+      for (const sel of [
+        '.feed-filter-btn', '[data-action="filter"]',
+        'button:has-text("Filter")', '.feed-toolbar-filter', '[class*="filter-btn"]',
+      ]) {
+        try {
+          const el = page.locator(sel).first();
+          if (await el.isVisible({ timeout: 1000 })) {
+            await el.click({ timeout: 2000 });
+            await page.waitForTimeout(500);
+            break;
+          }
+        } catch {}
+      }
+      break;
+    }
+
+    case 'select_favorites_filter': {
+      for (const sel of [
+        '[data-filter="favorites"]', 'li:has-text("Favorites")',
+        'li:has-text("Избранное")', '[data-value="favorites"]',
+      ]) {
+        try {
+          const el = page.locator(sel).first();
+          if (await el.isVisible({ timeout: 2000 })) {
+            await el.click({ timeout: 2000 });
+            await page.waitForTimeout(500);
+            break;
+          }
+        } catch {}
+      }
+      break;
+    }
+
+    case 'expand_pinned_messages': {
+      for (const sel of [
+        '.feed-post-pin-expand', '[data-action="expand-pinned"]',
+        '.feed-post-pin .feed-post-pin-more', 'button:has-text("Show all")',
+      ]) {
+        try {
+          const el = page.locator(sel).first();
+          if (await el.isVisible({ timeout: 1000 })) {
+            await el.click({ timeout: 2000 });
+            await page.waitForTimeout(500);
+            break;
+          }
+        } catch {}
+      }
+      break;
+    }
+
+    case 'click_more_menu': {
+      for (const sel of [
+        '[data-action="more"]', 'button:has-text("More")', 'button:has-text("Ещё")',
+        '.feed-more-btn', '[class*="more-btn"]', '.ui-btn-more',
+      ]) {
+        try {
+          const el = page.locator(sel).first();
+          if (await el.isVisible({ timeout: 1000 })) {
+            await el.click({ timeout: 2000 });
+            await page.waitForTimeout(500);
+            break;
+          }
+        } catch {}
+      }
       break;
     }
 

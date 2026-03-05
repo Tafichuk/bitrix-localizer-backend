@@ -37,6 +37,37 @@ async function analyzeScreenshot(imageUrl, targetLanguage) {
   const prompt = `You are analyzing a screenshot from a RUSSIAN Bitrix24 portal.
 Your task: produce a precise Playwright action plan to reproduce this screenshot on a Western (English-language) Bitrix24 portal, translating all user-entered text to ${langName}.
 
+═══ CRITICAL SECTION → URL MAPPING (always use these, no exceptions) ═══
+Лента / Лента новостей / Feed / Activity Stream / "MESSAGE СОБЫТИЕ ОПРОС" buttons → /stream/
+Сотрудники / Employees / HR / Staff / People                                        → /company/
+CRM                                                                                  → /crm/
+Сделки / Deals                                                                       → /crm/deal/list/
+Лиды / Leads                                                                         → /crm/lead/list/
+Контакты / Contacts                                                                  → /crm/contact/list/
+Компании / Companies                                                                 → /crm/company/list/
+Счета / Invoices                                                                     → /crm/invoice/list/
+Задачи / Tasks                                                                       → /tasks/
+Проекты / Workgroups / Groups                                                        → /workgroups/
+Диск / Drive                                                                         → /disk/
+Календарь / Calendar                                                                 → /calendar/
+Почта / Mail                                                                         → /mail/
+Чат / Chat / Messenger / IM                                                          → /im/
+Телефония / Telephony                                                                → /telephony/
+Маркетинг / Marketing                                                                → /marketing/
+Аналитика / Analytics / Sales Funnel                                                 → /crm/analytics/
+Сайты / Sites                                                                        → /sites/
+База знаний / Knowledge Base                                                         → /knowledge/
+CoPilot / Копилот                                                                    → /ai/
+Учёт рабочего времени / Time Tracking                                                → /timeman/
+Бизнес-процессы / Workflows / Bizproc                                                → /bizproc/
+Склад / Inventory / Catalog                                                          → /inventory/
+Настройки / Settings                                                                 → /settings/
+Мой тариф / My Plan / Тариф / Tariff / Лимиты / Limits / Demo banner                → navigationType="widget", urlPath="/"
+
+⚠️ FEED RULE: If the screenshot shows a text compose area with buttons like
+   "MESSAGE", "СОБЫТИЕ", "ЗАДАЧА", "ОПРОС", "ФАЙЛ" OR shows a news/activity stream
+   with posts from colleagues — urlPath MUST be "/stream/", NEVER "/company/".
+
 ═══ NAVIGATION STRUCTURE ════════════════════════════════════════════
 Left-menu sections and their URLs:
   Feed / Activity     → /stream/
@@ -128,6 +159,23 @@ General:
   modal close:     .popup-window-close-icon, .ui-popup-close
   slide panel:     .side-panel-wrapper, .side-panel-content
 
+═══ SPECIFIC UI ELEMENTS (set elementToShow + additionalActions) ═══
+Scan the screenshot for these specific elements and set accordingly:
+  Pinned messages banner / закреплённые сообщения (pin/булавка icon visible)
+    → elementToShow: "pinned_message_banner", additionalActions: ["scroll_to_pinned"]
+  Favorites filter open / фильтр Избранное активен
+    → elementToShow: "favorites_filter", additionalActions: ["click_filter_button", "select_favorites_filter"]
+  "Ещё" / "More" menu open (dropdown with extra options)
+    → elementToShow: "more_menu_open", additionalActions: ["click_more_menu"]
+  Collapsed/expanded post section
+    → elementToShow: "collapsed_posts", additionalActions: ["expand_pinned_messages"]
+  Search bar open
+    → elementToShow: "search_open", additionalActions: []
+  Notification panel / колокольчик open
+    → elementToShow: "notification_panel", additionalActions: []
+  No specific element — just the default page view
+    → elementToShow: null, additionalActions: []
+
 ═══ REQUIRED RESPONSE FORMAT ════════════════════════════════════════
 Respond ONLY with valid JSON (no markdown, no explanation):
 {
@@ -137,6 +185,8 @@ Respond ONLY with valid JSON (no markdown, no explanation):
   "viewType": "list",
   "navigationType": "left_menu",
   "widgetSelectors": [],
+  "elementToShow": null,
+  "additionalActions": [],
   "description": "CRM Deals list view (max 80 chars, English)",
   "hasUserContent": false,
   "steps": [
@@ -157,11 +207,12 @@ Respond ONLY with valid JSON (no markdown, no explanation):
 8. Translate ALL user-entered values to ${langName} (make them realistic)
 9. Keep steps minimal — only what reproduces what's visible
 10. If navigationType="widget": urlPath="/", first goto "/", then wait 2000ms, then {"action":"clickWidget","widgetSelectors":[...]}
-11. Always set "navigationType" — default to "left_menu" if unsure`;
+11. Always set "navigationType" — default to "left_menu" if unsure
+12. Set elementToShow and additionalActions based on SPECIFIC UI ELEMENTS rules above`;
 
   const response = await callWithRetry({
     model: 'claude-sonnet-4-6',
-    max_tokens: 600,
+    max_tokens: 700,
     messages: [{
       role: 'user',
       content: [
@@ -172,10 +223,8 @@ Respond ONLY with valid JSON (no markdown, no explanation):
   });
 
   const text = response.content[0].text.trim();
-  const jsonMatch = text.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) throw new Error('Vision did not return JSON');
-
-  const result = JSON.parse(jsonMatch[0]);
+  // Проблема 1: robustly parse JSON, never crash on malformed output
+  const result = parseClaudeJSON(text);
 
   // Normalise: ensure steps array exists
   if (!result.steps || result.steps.length === 0) {
@@ -216,6 +265,77 @@ Respond ONLY with valid JSON (no markdown, no explanation):
   enrichWithNavMap(result);
 
   return result;
+}
+
+// ─── Robust JSON parser (Problem 1) ──────────────────────────────────────────
+
+const VISION_FALLBACK = {
+  navigationType: 'left_menu',
+  urlPath: '/stream/',
+  section: 'Feed',
+  subsection: null,
+  viewType: 'list',
+  widgetSelectors: [],
+  elementToShow: null,
+  additionalActions: [],
+  description: 'Feed (fallback — JSON parse failed)',
+  hasUserContent: false,
+  steps: [
+    { action: 'goto', path: '/stream/' },
+    { action: 'waitNetworkIdle' },
+    { action: 'wait', ms: 1500 },
+  ],
+};
+
+function parseClaudeJSON(text) {
+  // Strip markdown code blocks if present
+  text = text.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
+
+  // Attempt 1: direct parse
+  try { return JSON.parse(text); } catch {}
+
+  // Extract the outermost {...} object
+  const m = text.match(/\{[\s\S]*\}/);
+  if (!m) {
+    console.warn('[vision] parseClaudeJSON: no JSON object found. Raw:', text.slice(0, 200));
+    return { ...VISION_FALLBACK };
+  }
+  let s = m[0];
+
+  // Attempt 2: parse extracted block
+  try { return JSON.parse(s); } catch {}
+
+  // Attempt 3: fix trailing commas
+  let fixed = s.replace(/,(\s*[}\]])/g, '$1');
+  try { return JSON.parse(fixed); } catch {}
+
+  // Attempt 4: escape literal control characters inside JSON string values
+  // Matches "..." including escaped sequences, fixes unescaped \n \r \t inside
+  try {
+    let fixed2 = fixed.replace(/"((?:[^"\\]|\\.)*)"/gs, (full, inner) => {
+      const escaped = inner
+        .replace(/\r\n/g, '\\n')
+        .replace(/\n/g, '\\n')
+        .replace(/\r/g, '\\r')
+        .replace(/\t/g, '\\t')
+        .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
+      return `"${escaped}"`;
+    });
+    return JSON.parse(fixed2);
+  } catch {}
+
+  // Attempt 5: collapse all whitespace (drastic but handles most layout issues)
+  try {
+    let fixed3 = s
+      .replace(/[\r\n\t]+/g, ' ')
+      .replace(/,(\s*[}\]])/g, '$1')
+      .replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":');
+    return JSON.parse(fixed3);
+  } catch {}
+
+  // Fallback: never crash, return safe default
+  console.warn('[vision] parseClaudeJSON: all attempts failed. Raw:', text.slice(0, 300));
+  return { ...VISION_FALLBACK };
 }
 
 // ─── Retry with exponential backoff on 429 ───────────────────────────────────
