@@ -1,8 +1,18 @@
 const Anthropic = require('@anthropic-ai/sdk');
 const axios = require('axios');
 const sharp = require('sharp');
+const path = require('path');
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
+// ─── Navigation map (built by scripts/build-nav-map.js) ──────────────────────
+let navMap = null;
+try {
+  navMap = require(path.join(__dirname, '..', 'navigation-map.json'));
+  console.log(`[vision] Navigation map loaded: ${Object.keys(navMap.urlPatternMap || {}).length} URL patterns`);
+} catch {
+  console.log('[vision] Navigation map not found — full AI analysis will be used for every image');
+}
 
 /**
  * Analyzes a screenshot from the Russian Bitrix24 portal.
@@ -202,6 +212,9 @@ Respond ONLY with valid JSON (no markdown, no explanation):
   if (!result.navigationType) result.navigationType = 'left_menu';
   if (!result.widgetSelectors) result.widgetSelectors = [];
 
+  // Enrich with navigation map data (validated from bulk analysis)
+  enrichWithNavMap(result);
+
   return result;
 }
 
@@ -253,6 +266,56 @@ async function downloadImage(url) {
   } catch (err) {
     console.error(`[vision] Failed to download ${url}: ${err.message}`);
     return null;
+  }
+}
+
+// ─── Nav map enrichment ────────────────────────────────────────────────────────
+
+/**
+ * Enriches a Vision AI result with data from the navigation map.
+ * Uses longest-prefix matching on urlPath so /crm/deal/list/ matches /crm/.
+ * Merges navigationType (map wins if AI returned default 'left_menu'),
+ * and appends any known widgetSelectors.
+ */
+function enrichWithNavMap(result) {
+  if (!navMap || !navMap.urlPatternMap) return;
+
+  const urlPath = result.urlPath || result.path || '/';
+
+  // Exact match first
+  let match = navMap.urlPatternMap[urlPath];
+
+  // Longest-prefix match (skip the bare "/" catch-all unless nothing else fits)
+  if (!match) {
+    let bestLen = 0;
+    for (const [pattern, data] of Object.entries(navMap.urlPatternMap)) {
+      if (pattern === '/') continue; // skip generic fallback for now
+      if (urlPath.startsWith(pattern) && pattern.length > bestLen) {
+        match = data;
+        bestLen = pattern.length;
+      }
+    }
+  }
+
+  // Final fallback: bare "/"
+  if (!match) match = navMap.urlPatternMap['/'];
+
+  if (!match) return;
+
+  // Only override navigationType if AI returned the generic default and map has something specific
+  if (result.navigationType === 'left_menu' && match.navigationType && match.navigationType !== 'left_menu') {
+    result.navigationType = match.navigationType;
+    console.log(`[vision] navMap override navigationType → ${match.navigationType} for ${urlPath}`);
+  }
+
+  // Merge widgetSelectors from map
+  if (match.widgetSelectors && match.widgetSelectors.length > 0) {
+    result.widgetSelectors = [...new Set([...(result.widgetSelectors || []), ...match.widgetSelectors])];
+  }
+
+  // Set menuSection hint if AI left it empty
+  if (!result.section && match.section) {
+    result.section = match.section;
   }
 }
 
