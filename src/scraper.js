@@ -76,14 +76,23 @@ async function parseArticle(url) {
 
     seen.add(src);
     const absoluteUrl = src.startsWith('http') ? src : `${HELPDESK_BASE}${src.startsWith('/') ? '' : '/'}${src}`;
-    const context = getContext($, el);
+    const imgCtx = getImageContext($, el);
+
+    // combined = rich haystack for nav_map matching + Claude context
+    const combined = [imgCtx.heading, imgCtx.text_before, alt, imgCtx.text_after, imgCtx.caption]
+      .filter(Boolean).join(' ').replace(/\s+/g, ' ').trim().slice(0, 600);
 
     screenshots.push({
       index: screenshots.length,
       src,
       absoluteUrl,
       alt,
-      context,
+      heading:     imgCtx.heading,
+      text_before: imgCtx.text_before,
+      text_after:  imgCtx.text_after,
+      caption:     imgCtx.caption,
+      context:     combined,   // backward-compat field — now contains full combined text
+      combined,                // explicit alias for new callers
     });
   });
 
@@ -92,17 +101,71 @@ async function parseArticle(url) {
   return { title, breadcrumbs, blocks, screenshots, contentHtml, sourceUrl: url };
 }
 
-// ── Section heading above the image (for Vision context) ─────────────────────
-function getContext($, imgEl) {
-  let prev = $(imgEl).prev();
-  for (let i = 0; i < 5; i++) {
-    if (!prev.length) break;
-    if (prev.is('h1,h2,h3,h4,p')) return prev.text().trim().slice(0, 120);
-    prev = prev.prev();
+// ── Rich image context extraction ────────────────────────────────────────────
+// Walks UP the ancestor chain at each level collecting prev/next sibling text,
+// stopping once we have heading + text or have gone 8 levels deep.
+function getImageContext($, imgEl) {
+  const $img = $(imgEl);
+
+  let heading     = '';
+  let text_before = '';
+  let text_after  = '';
+
+  // Walk up ancestor levels, collecting sibling text at each level.
+  // Typical helpdesk structure: img → a → div[center] → article-content
+  // At the article-content level, the h2 tags are direct siblings of the div.
+  let $node = $img;
+  for (let depth = 0; depth < 8; depth++) {
+    const $parent = $node.parent();
+    if (!$parent.length || $parent.is('body,html')) break;
+
+    // ── prev siblings at this level ───────────────────────────────────────
+    if (!heading || !text_before) {
+      const prevParts = [];
+      let prev = $node.prev();
+      for (let i = 0; i < 8 && prev.length; i++) {
+        if (!heading && prev.is('h2,h3')) {
+          heading = prev.text().trim().slice(0, 120);
+        } else if (!heading && prev.is('h1,h4')) {
+          heading = prev.text().trim().slice(0, 120);
+        }
+        const t = prev.text().replace(/\s+/g, ' ').trim();
+        if (t && !prev.is('img')) prevParts.unshift(t);
+        prev = prev.prev();
+      }
+      if (!text_before && prevParts.length) {
+        text_before = prevParts.join(' ').slice(-300);
+      }
+    }
+
+    // ── next siblings at this level ───────────────────────────────────────
+    if (!text_after) {
+      const afterParts = [];
+      let next = $node.next();
+      for (let i = 0; i < 5 && next.length; i++) {
+        const t = next.text().replace(/\s+/g, ' ').trim();
+        if (t && !next.is('img')) afterParts.push(t);
+        next = next.next();
+      }
+      if (afterParts.length) text_after = afterParts.join(' ').slice(0, 300);
+    }
+
+    // Stop early once we have everything
+    if (heading && text_before && text_after) break;
+
+    $node = $parent;
   }
-  // Fallback: check parent's nearest heading
-  const heading = $(imgEl).closest('section, div').find('h1,h2,h3,h4').first().text().trim();
-  return heading.slice(0, 120);
+
+  // Fallback heading: first h2/h3 in the enclosing article block
+  if (!heading) {
+    heading = $img.closest('[class*="article"], [class*="content"], section, article')
+      .find('h2,h3').first().text().trim().slice(0, 120);
+  }
+
+  // ── Figcaption ────────────────────────────────────────────────────────────
+  const caption = $img.closest('figure').find('figcaption').text().trim().slice(0, 150);
+
+  return { heading, text_before, text_after, caption };
 }
 
 // ── Author photo detection ────────────────────────────────────────────────────
