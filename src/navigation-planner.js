@@ -85,7 +85,7 @@ function findNavMapMatch(screenshotContext, screenshotAlt, articleSection) {
     }
   }
 
-  if (bestScore >= 1 && bestState) {
+  if (bestScore >= 2 && bestState) {
     console.log(`[nav_map] ✅ Match: "${bestState.label}" (section: ${bestSection}, score: ${bestScore})`);
     return bestState;
   }
