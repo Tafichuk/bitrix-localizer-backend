@@ -160,9 +160,11 @@ function isProfilePage(section, context, alt) {
  * @param {string} articleSection - раздел статьи из хлебных крошек
  * @param {string} screenshotContext - контекст скрина (параграф рядом с img)
  * @param {string} screenshotAlt - alt текст img
+ * @param {string} [articleUrl=''] - URL исходной статьи helpdesk (опционально)
+ * @param {string} [articleTitle=''] - заголовок статьи (опционально)
  * @returns {object|null} план навигации или null при ошибке
  */
-async function planNavigation(originalScreenshotBase64, articleSection, screenshotContext, screenshotAlt) {
+async function planNavigation(originalScreenshotBase64, articleSection, screenshotContext, screenshotAlt, articleUrl = '', articleTitle = '') {
   // ── Спецобработчик: страница профиля пользователя ────────────────────────────
   if (isProfilePage(articleSection, screenshotContext, screenshotAlt)) {
     console.log('[planner] 👤 Profile page detected → /company/personal/user/1/');
@@ -187,7 +189,18 @@ async function planNavigation(originalScreenshotBase64, articleSection, screensh
   console.warn(`[planner] ⚠️ No nav_map match for: ${`${screenshotContext || screenshotAlt || articleSection}`.slice(0, 50)}`);
 
   // ── Затем ищем в базе знаний ─────────────────────────────────────────────────
-  const kbPattern = findBestPattern(articleSection, screenshotContext, screenshotAlt);
+  // Guard: helpdesk breadcrumbs are JS-rendered so section is ALWAYS "Feed" (fallback).
+  // In that case KB scoring is dominated by the section match (+50 pts) and returns
+  // Feed patterns regardless of the actual screenshot content → false positives.
+  // When section is the fallback we skip KB entirely and let Claude see the real screenshot.
+  // Exception: if we have a non-empty context paragraph (>10 chars), KB may still be useful.
+  const isFallbackSection = !articleSection || articleSection === 'Feed' || articleSection === 'Лента';
+  const hasContext = screenshotContext && screenshotContext.length > 10;
+
+  const kbPattern = (isFallbackSection && !hasContext)
+    ? (() => { console.log('[planner] KB skipped — fallback section (breadcrumbs not loaded)'); return null; })()
+    : findBestPattern(articleSection, screenshotContext, screenshotAlt);
+
   if (kbPattern) {
     const plan = patternToPlan(kbPattern);
     console.log(`[planner] ✅ KB hit (score ${kbPattern.verificationScore}%): ${kbPattern.pageTitle}`);
@@ -195,6 +208,16 @@ async function planNavigation(originalScreenshotBase64, articleSection, screensh
   }
 
   console.log('[planner] KB miss → Claude Sonnet...');
+
+  // Build context block — include article URL and title when available for better Claude accuracy
+  const contextLines = [
+    `Article section: ${articleSection || 'unknown (breadcrumbs not loaded via JS)'}`,
+    articleUrl   ? `Article URL: ${articleUrl}`     : null,
+    articleTitle ? `Article title: ${articleTitle}` : null,
+    screenshotAlt     ? `Image alt text: ${screenshotAlt}`            : null,
+    screenshotContext ? `Image surrounding text: ${screenshotContext}` : null,
+  ].filter(Boolean).join('\n');
+
   let response;
   try {
     response = await Promise.race([
@@ -207,13 +230,14 @@ async function planNavigation(originalScreenshotBase64, articleSection, screensh
             {
               type: 'text',
               text: `You are analyzing a Bitrix24 interface screenshot from a Russian helpdesk article.
-Article section: ${articleSection || 'unknown'}
+${contextLines}
 
 IMPORTANT: The target portal viewport is ${PORTAL_WIDTH}x${PORTAL_HEIGHT}px.
 The screenshot you see is from a Russian Bitrix24 portal with the same layout.
 Provide x,y coordinates as if clicking on a ${PORTAL_WIDTH}x${PORTAL_HEIGHT} viewport.
 
 Analyze this screenshot and return a JSON navigation plan to reproduce this exact UI state.
+Use the article URL and title (if provided) as strong hints about which Bitrix24 section this belongs to.
 
 Bitrix24 URL map:
 - Feed / Лента / Actualités → /stream/
