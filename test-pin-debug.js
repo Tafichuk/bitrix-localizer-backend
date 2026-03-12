@@ -3,7 +3,7 @@ const { loginToPortal } = require('./src/screenshotter');
 const path = require('path');
 const fs = require('fs');
 
-const PORTAL_URL = 'https://bxtest21.bitrix24.fr';
+const PORTAL_URL = 'https://testportal.bitrix24.com';
 const DEBUG = path.join(__dirname, 'debug');
 fs.mkdirSync(DEBUG, { recursive: true });
 

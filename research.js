@@ -2,7 +2,7 @@ const { chromium } = require('playwright');
 const path = require('path');
 const fs = require('fs');
 
-const PORTAL_URL = 'https://bxtest21.bitrix24.fr';
+const PORTAL_URL = 'https://testportal.bitrix24.com';
 const LOGIN = 'fra7882@gmail.com';
 const PASSWORD = 'Roslombard312';
 
@@ -15,7 +15,7 @@ async function research() {
 
   // ─── Step 0: Try direct portal login page ────────────────────────────────
   console.log('\n=== STEP 0: Try portal login page directly ===');
-  await page.goto('https://bxtest21.bitrix24.fr/auth/', { waitUntil: 'domcontentloaded', timeout: 30000 });
+  await page.goto('https://testportal.bitrix24.com/auth/', { waitUntil: 'domcontentloaded', timeout: 30000 });
   await page.waitForTimeout(3000);
   await page.screenshot({ path: path.join(debugDir, '0_portal_auth.png') });
   console.log('Portal auth URL:', page.url());

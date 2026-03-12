@@ -1,7 +1,10 @@
-const Anthropic = require('@anthropic-ai/sdk');
-const cheerio = require('cheerio');
+const OpenAI = require('openai');
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+let _openai = null;
+function getOpenAI() {
+  if (!_openai) _openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  return _openai;
+}
 
 const LANGUAGE_NAMES = {
   en: 'English', de: 'German', fr: 'French',
@@ -12,108 +15,75 @@ const LANGUAGE_LABELS = {
   es: 'Español', pt: 'Português', pl: 'Polski', it: 'Italiano',
 };
 
-// Теги, внутри которых текст НЕ переводим
-const SKIP_TAGS = new Set(['script', 'style', 'code', 'pre', 'kbd', 'var', 'samp']);
+async function translateArticle(blocks, languages) {
+  const textsJson = JSON.stringify(blocks.map(b => b.text));
 
+  const response = await getOpenAI().chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [{
+      role: 'system',
+      content: `Translate Bitrix24 helpdesk article from Russian.
+Return ONLY a JSON object where keys are language codes and
+values are arrays of translated texts in same order as input.
+Keep HTML tags unchanged. Keep technical terms: CRM, Bitrix24, CoPilot, REST API, etc.
+Languages to translate: ${languages.join(', ')}`,
+    }, {
+      role: 'user',
+      content: textsJson,
+    }],
+    temperature: 0.2,
+    response_format: { type: 'json_object' },
+  });
+
+  return JSON.parse(response.choices[0].message.content);
+}
+
+// Main entry point used by index.js — translates one article to one language
 async function translateContent(article, targetLanguage) {
   const langName = LANGUAGE_NAMES[targetLanguage];
   if (!langName) throw new Error(`Unknown language: ${targetLanguage}`);
 
-  // Загружаем HTML в cheerio
-  const $ = cheerio.load(`<div id="__root__">${article.contentHtml}</div>`, { decodeEntities: false });
+  // Build flat list of text items: [title, ...text nodes from HTML]
+  const { parseTextBlocks, applyTranslations } = require('./translator-dom');
+  const blocks = [{ text: article.title }, ...parseTextBlocks(article.contentHtml)];
 
-  // Собираем все текстовые узлы (только текст, без HTML-тегов)
-  const items = []; // { node, originalData }
-  collectTextNodes($, $('#__root__')[0], items);
+  const result = await translateArticle(blocks, [targetLanguage]);
+  const translated = result[targetLanguage];
+  if (!Array.isArray(translated) || translated.length < 1) {
+    throw new Error(`OpenAI returned no translations for ${targetLanguage}`);
+  }
 
-  // Список строк для перевода (title первым)
-  const texts = [article.title, ...items.map(it => it.node.data)];
-
-  // Переводим батчами параллельно
-  const translated = await translateAllTexts(texts, langName);
-
-  // Применяем переводы к DOM
   const translatedTitle = translated[0] || article.title;
-  items.forEach((item, i) => {
-    const t = translated[i + 1];
-    if (t) item.node.data = t;
-  });
+  const translatedHtml = applyTranslations(article.contentHtml, blocks.slice(1), translated.slice(1));
 
   return {
     title: translatedTitle,
-    contentHtml: $('#__root__').html() || '',
+    contentHtml: translatedHtml,
     language: targetLanguage,
     languageName: langName,
     languageLabel: LANGUAGE_LABELS[targetLanguage],
   };
 }
 
-// Рекурсивно собирает текстовые узлы, пропуская code/pre/script
-function collectTextNodes($, el, result) {
-  if (!el || !el.childNodes) return;
-  for (const node of el.childNodes) {
-    if (node.type === 'text') {
-      const text = node.data || '';
-      // Пропускаем пустые строки и одиночные пробелы
-      if (text.trim().length > 1) {
-        result.push({ node });
-      }
-    } else if (node.type === 'tag') {
-      const tag = (node.name || '').toLowerCase();
-      if (!SKIP_TAGS.has(tag)) {
-        collectTextNodes($, node, result);
-      }
-    }
-  }
+// Batch translate all languages in one API call
+async function translateContentBatch(article, languages) {
+  const { parseTextBlocks, applyTranslations } = require('./translator-dom');
+  const blocks = [{ text: article.title }, ...parseTextBlocks(article.contentHtml)];
+
+  const result = await translateArticle(blocks, languages);
+
+  return languages.reduce((acc, lang) => {
+    const translated = result[lang];
+    if (!Array.isArray(translated) || translated.length < 1) return acc;
+    acc[lang] = {
+      title: translated[0] || article.title,
+      contentHtml: applyTranslations(article.contentHtml, blocks.slice(1), translated.slice(1)),
+      language: lang,
+      languageName: LANGUAGE_NAMES[lang],
+      languageLabel: LANGUAGE_LABELS[lang],
+    };
+    return acc;
+  }, {});
 }
 
-// Разбиваем тексты на батчи и переводим параллельно
-async function translateAllTexts(texts, langName) {
-  const BATCH_SIZE = 60;       // строк на батч
-  const BATCH_CHARS = 6000;    // символов на батч
-
-  const batches = [];
-  let batch = [];
-  let chars = 0;
-
-  for (const text of texts) {
-    if ((batch.length >= BATCH_SIZE || chars + text.length > BATCH_CHARS) && batch.length > 0) {
-      batches.push(batch);
-      batch = [];
-      chars = 0;
-    }
-    batch.push(text);
-    chars += text.length;
-  }
-  if (batch.length > 0) batches.push(batch);
-
-  // Все батчи параллельно
-  const results = await Promise.all(batches.map(b => translateBatch(b, langName)));
-  return results.flat();
-}
-
-async function translateBatch(texts, langName) {
-  const response = await client.messages.create({
-    model: 'claude-haiku-4-5-20251001',
-    max_tokens: 4096,
-    system: `You translate Russian text strings to ${langName} for Bitrix24 documentation.
-Return ONLY a valid JSON array of translated strings, same count and order as input.
-Rules: keep Bitrix24, CRM, CoPilot, REST API unchanged. No explanations.`,
-    messages: [{
-      role: 'user',
-      content: JSON.stringify(texts),
-    }],
-  });
-
-  const raw = response.content[0].text.trim();
-  const match = raw.match(/\[[\s\S]*\]/);
-  if (!match) throw new Error('Ответ модели не является JSON-массивом');
-
-  const parsed = JSON.parse(match[0]);
-
-  // Если количество не совпадает — возвращаем оригиналы для несовпадающих
-  const result = texts.map((orig, i) => parsed[i] || orig);
-  return result;
-}
-
-module.exports = { translateContent, LANGUAGE_NAMES, LANGUAGE_LABELS };
+module.exports = { translateContent, translateContentBatch, translateArticle, LANGUAGE_NAMES, LANGUAGE_LABELS };

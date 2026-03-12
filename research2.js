@@ -2,7 +2,7 @@ const { chromium } = require('playwright');
 const path = require('path');
 const fs = require('fs');
 
-const PORTAL_URL = 'https://bxtest21.bitrix24.fr';
+const PORTAL_URL = 'https://testportal.bitrix24.com';
 const LOGIN = 'fra7882@gmail.com';
 const PASSWORD = 'Roslombard312';
 

@@ -12,7 +12,7 @@
  * Take one of the 5 Feed screenshots.
  *
  * @param {import('playwright').BrowserContext} context
- * @param {string} portalUrl   e.g. "https://bxtest21.bitrix24.fr"
+ * @param {string} portalUrl   e.g. "https://testportal.bitrix24.com"
  * @param {number} index       1-based screenshot number (1..5)
  * @returns {Promise<Buffer>}  PNG buffer
  */
