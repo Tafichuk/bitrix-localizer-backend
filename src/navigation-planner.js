@@ -18,7 +18,11 @@ const NAV_MAP_TTL = 5 * 60 * 1000;
 function loadNavMap() {
   const now = Date.now();
   if (_navMap && now - _navMapLoadedAt < NAV_MAP_TTL) return _navMap;
-  const p = path.join(__dirname, '..', '..', 'data', 'navigation_map.json');
+  // Check local copy (Docker /app/) first, then monorepo data/ for local dev
+  const p = [
+    path.join(__dirname, '..', 'navigation_map.json'),
+    path.join(__dirname, '..', '..', 'data', 'navigation_map.json'),
+  ].find(f => fs.existsSync(f));
   try {
     _navMap = JSON.parse(fs.readFileSync(p, 'utf8'));
     _navMapLoadedAt = now;

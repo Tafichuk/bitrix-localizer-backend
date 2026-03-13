@@ -1,0 +1,6213 @@
+{
+  "messenger": {
+    "base_url": "/online/",
+    "states": [
+      {
+        "label": "Messenger — Chats (base)",
+        "url": "/online/",
+        "selector": "a[href='/online/']",
+        "keywords_ru": [
+          "мессенджер",
+          "чат",
+          "сообщения",
+          "последние",
+          "сайдбар",
+          "боковая панель",
+          "левое меню",
+          "панель навигации"
+        ],
+        "keywords_en": [
+          "messenger",
+          "chats",
+          "messages",
+          "recent",
+          "sidebar",
+          "side panel",
+          "left menu",
+          "navigation panel"
+        ],
+        "screenshot": "crawl_messenger_01.png"
+      },
+      {
+        "label": "Tab: Chats",
+        "url": "/online/",
+        "selector": "text=Chats",
+        "keywords_ru": [
+          "chats"
+        ],
+        "keywords_en": [
+          "chats"
+        ],
+        "screenshot": "crawl_messenger_02.png"
+      },
+      {
+        "label": "Tab: Task chats",
+        "url": "/online/",
+        "selector": "text=Task chats",
+        "keywords_ru": [
+          "чаты задач",
+          "задачи"
+        ],
+        "keywords_en": [
+          "task chats",
+          "tasks"
+        ],
+        "screenshot": "crawl_messenger_03.png"
+      },
+      {
+        "label": "Tab: CoPilot",
+        "url": "/online/",
+        "selector": "text=CoPilot",
+        "keywords_ru": [
+          "копилот",
+          "помощник"
+        ],
+        "keywords_en": [
+          "copilot",
+          "assistant"
+        ],
+        "screenshot": "crawl_messenger_04.png"
+      },
+      {
+        "label": "Tab: Collabs",
+        "url": "/online/",
+        "selector": "text=Collabs",
+        "keywords_ru": [
+          "collabs"
+        ],
+        "keywords_en": [
+          "collabs"
+        ],
+        "screenshot": "crawl_messenger_05.png"
+      },
+      {
+        "label": "Tab: Channels",
+        "url": "/online/",
+        "selector": "text=Channels",
+        "keywords_ru": [
+          "каналы"
+        ],
+        "keywords_en": [
+          "channels"
+        ],
+        "screenshot": "crawl_messenger_06.png"
+      },
+      {
+        "label": "Tab: Contact Center",
+        "url": "/online/",
+        "selector": "text=Contact Center",
+        "keywords_ru": [
+          "contact",
+          "center"
+        ],
+        "keywords_en": [
+          "contact",
+          "center"
+        ],
+        "screenshot": "crawl_messenger_07.png"
+      },
+      {
+        "label": "Tab: Notifications",
+        "url": "/online/",
+        "selector": "text=Notifications",
+        "keywords_ru": [
+          "уведомления"
+        ],
+        "keywords_en": [
+          "notifications"
+        ],
+        "screenshot": "crawl_messenger_08.png"
+      },
+      {
+        "label": "Tab: Telephony",
+        "url": "/online/",
+        "selector": "text=Telephony",
+        "keywords_ru": [
+          "telephony"
+        ],
+        "keywords_en": [
+          "telephony"
+        ],
+        "screenshot": "crawl_messenger_09.png"
+      },
+      {
+        "label": "More > Bitrix 24",
+        "url": "/",
+        "selector": "text=Bitrix 24",
+        "keywords_ru": [
+          "bitrix"
+        ],
+        "keywords_en": [
+          "bitrix"
+        ],
+        "screenshot": "crawl_messenger_10.png"
+      },
+      {
+        "label": "More > Collaboration",
+        "url": "/online/",
+        "selector": "text=Collaboration",
+        "keywords_ru": [
+          "collaboration"
+        ],
+        "keywords_en": [
+          "collaboration"
+        ],
+        "screenshot": "crawl_messenger_10.png"
+      },
+      {
+        "label": "More > Messenger",
+        "url": "/online/",
+        "selector": "text=Messenger",
+        "keywords_ru": [
+          "messenger"
+        ],
+        "keywords_en": [
+          "messenger"
+        ],
+        "screenshot": "crawl_messenger_10.png"
+      },
+      {
+        "label": "More > Feed",
+        "url": "/stream/",
+        "selector": "text=Feed",
+        "keywords_ru": [
+          "feed"
+        ],
+        "keywords_en": [
+          "feed"
+        ],
+        "screenshot": "crawl_messenger_10.png"
+      },
+      {
+        "label": "More > Collabs",
+        "url": "/online/?IM_COLLAB",
+        "selector": "text=Collabs",
+        "keywords_ru": [
+          "collabs"
+        ],
+        "keywords_en": [
+          "collabs"
+        ],
+        "screenshot": "crawl_messenger_10.png"
+      },
+      {
+        "label": "Action: btn@286,91",
+        "url": "/online/",
+        "selector": ".bx-im-list-container-base-header-menu__icon",
+        "keywords_ru": [
+          "btn@286,91"
+        ],
+        "keywords_en": [
+          "btn@286,91"
+        ],
+        "screenshot": "crawl_messenger_11.png"
+      },
+      {
+        "label": "Action: btn@332,91",
+        "url": "/online/",
+        "selector": ".bx-im-search-input__search-icon",
+        "keywords_ru": [
+          "btn@332,91"
+        ],
+        "keywords_en": [
+          "btn@332,91"
+        ],
+        "screenshot": "crawl_messenger_12.png"
+      },
+      {
+        "label": "Action: btn@462,91",
+        "url": "/online/",
+        "selector": ".bx-im-search-input__element",
+        "keywords_ru": [
+          "btn@462,91"
+        ],
+        "keywords_en": [
+          "btn@462,91"
+        ],
+        "screenshot": "crawl_messenger_13.png"
+      },
+      {
+        "label": "Action: btn@622,91",
+        "url": "/online/",
+        "selector": ".bx-im-list-container-recent__create-chat_icon",
+        "keywords_ru": [
+          "btn@622,91"
+        ],
+        "keywords_en": [
+          "btn@622,91"
+        ],
+        "screenshot": "crawl_messenger_14.png"
+      },
+      {
+        "label": "Action: btn@622,91",
+        "url": "/online/",
+        "selector": ".bx-im-list-container-recent__create-chat_icon_status",
+        "keywords_ru": [
+          "btn@622,91"
+        ],
+        "keywords_en": [
+          "btn@622,91"
+        ],
+        "screenshot": "crawl_messenger_15.png"
+      },
+      {
+        "label": "Chat item — hover (action buttons visible)",
+        "url": "/online/",
+        "selector": "[class*='bx-im-list-recent-item']",
+        "keywords_ru": [
+          "чат",
+          "наведение",
+          "кнопки действий"
+        ],
+        "keywords_en": [
+          "chat",
+          "hover",
+          "action buttons"
+        ],
+        "screenshot": "crawl_messenger_16.png"
+      },
+      {
+        "label": "Chat item — right-click context menu",
+        "url": "/online/",
+        "selector": "[class*='bx-im-list-recent-item']",
+        "keywords_ru": [
+          "контекстное меню",
+          "закрепить",
+          "прочитать",
+          "удалить"
+        ],
+        "keywords_en": [
+          "Select your Bitrix24 most used items",
+          "This will streamline your daily routine: the selected tool w",
+          "CRM Automate sales improve conversions and communicate with ",
+          "CRM",
+          "Automate sales"
+        ],
+        "screenshot": "crawl_messenger_17.png",
+        "menu_items": [
+          "Select your Bitrix24 most used items",
+          "This will streamline your daily routine: the selected tool w",
+          "CRM Automate sales improve conversions and communicate with ",
+          "CRM",
+          "Automate sales",
+          "improve conversions and communicate with customers",
+          "Tasks and projects Work together and stay on schedule teamwo",
+          "Tasks and projects"
+        ]
+      },
+      {
+        "label": "Messenger — final state",
+        "url": "/online/",
+        "selector": "a[href='/online/']",
+        "keywords_ru": [
+          "мессенджер"
+        ],
+        "keywords_en": [
+          "messenger"
+        ],
+        "screenshot": "crawl_messenger_18.png"
+      }
+    ]
+  },
+  "notifications": {
+    "base_url": "/online/",
+    "entry_selector": ":text('Notifications')",
+    "states": [
+      {
+        "label": "Messenger — base (Chats)",
+        "url": "/online/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "мессенджер",
+          "чаты",
+          "онлайн"
+        ],
+        "keywords_en": [
+          "messenger",
+          "chats",
+          "online"
+        ],
+        "screenshot": "crawl_notifications_01.png"
+      },
+      {
+        "label": "More dropdown open",
+        "url": "/online/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-text-box:text('More')",
+            "label": "More tab in top nav"
+          }
+        ],
+        "keywords_ru": [
+          "ещё",
+          "больше",
+          "меню"
+        ],
+        "keywords_en": [
+          "more",
+          "dropdown",
+          "menu"
+        ],
+        "screenshot": "crawl_notifications_02.png",
+        "note": "Contains: Chats, Task chats, CoPilot, Collabs, Channels, Contact Center, Notifications, Telephony, Market, Settings, Settings, Configure menu, Finish customization, Reset menu, Hidden, Drag here to hide"
+      },
+      {
+        "label": "Notifications panel",
+        "url": "/online/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-text-box:text('More')",
+            "label": "More tab in top nav"
+          },
+          {
+            "selector": ".main-buttons-submenu-item:text('Notifications')",
+            "label": "Notifications item in More dropdown"
+          }
+        ],
+        "keywords_ru": [
+          "уведомления",
+          "оповещения"
+        ],
+        "keywords_en": [
+          "notifications",
+          "alerts",
+          "notification panel"
+        ],
+        "screenshot": "crawl_notifications_03.png"
+      },
+      {
+        "label": "Online Settings — Appearance",
+        "url": "/online/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-text-box:text('More')",
+            "label": "More tab in top nav"
+          },
+          {
+            "selector": ".main-buttons-submenu-item:text('Settings')",
+            "label": "Settings item in More dropdown"
+          }
+        ],
+        "keywords_ru": [
+          "настройки мессенджера",
+          "внешний вид"
+        ],
+        "keywords_en": [
+          "messenger settings",
+          "appearance",
+          "theme"
+        ],
+        "screenshot": "crawl_notifications_04.png"
+      },
+      {
+        "label": "Online Settings — Notifications",
+        "url": "/online/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-text-box:text('More')",
+            "label": "More tab in top nav"
+          },
+          {
+            "selector": ".main-buttons-submenu-item:text('Settings')",
+            "label": "Settings item in More dropdown"
+          },
+          {
+            "selector": ".bx-im-settings-section-list__item:text('Notifications')",
+            "label": "Notifications section"
+          }
+        ],
+        "keywords_ru": [
+          "настройки уведомлений",
+          "звук уведомлений"
+        ],
+        "keywords_en": [
+          "notification settings",
+          "notification sound",
+          "disable notifications"
+        ],
+        "screenshot": "crawl_notifications_05.png"
+      },
+      {
+        "label": "Online Settings — Hotkeys",
+        "url": "/online/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-text-box:text('More')",
+            "label": "More tab in top nav"
+          },
+          {
+            "selector": ".main-buttons-submenu-item:text('Settings')",
+            "label": "Settings item in More dropdown"
+          },
+          {
+            "selector": ".bx-im-settings-section-list__item:text('Hotkeys')",
+            "label": "Hotkeys section"
+          }
+        ],
+        "keywords_ru": [
+          "горячие клавиши",
+          "сочетания клавиш"
+        ],
+        "keywords_en": [
+          "hotkeys",
+          "keyboard shortcuts"
+        ],
+        "screenshot": "crawl_notifications_06.png"
+      },
+      {
+        "label": "Online Settings — Chat list",
+        "url": "/online/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-text-box:text('More')",
+            "label": "More tab in top nav"
+          },
+          {
+            "selector": ".main-buttons-submenu-item:text('Settings')",
+            "label": "Settings item in More dropdown"
+          },
+          {
+            "selector": ".bx-im-settings-section-list__item:text('Chat list')",
+            "label": "Chat list section"
+          }
+        ],
+        "keywords_ru": [
+          "список чатов",
+          "настройки чата"
+        ],
+        "keywords_en": [
+          "chat list",
+          "chat settings"
+        ],
+        "screenshot": "crawl_notifications_07.png"
+      }
+    ]
+  },
+  "feed": {
+    "base_url": "/stream/",
+    "entry_selector": "a[href*='/stream/'], #bx_left_menu_menu_live_feed a",
+    "states": [
+      {
+        "label": "Feed — all posts",
+        "url": "/stream/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "лента",
+          "новости",
+          "активность",
+          "все записи",
+          "поток"
+        ],
+        "keywords_en": [
+          "feed",
+          "activity",
+          "stream",
+          "all posts",
+          "news feed"
+        ],
+        "screenshot": "crawl_feed_01.png"
+      },
+      {
+        "label": "Feed — create post (MESSAGE form)",
+        "url": "/stream/",
+        "click_sequence": [
+          {
+            "selector": ".feed-add-post-micro",
+            "label": "Send message… (expand form)"
+          }
+        ],
+        "keywords_ru": [
+          "создать пост",
+          "написать сообщение",
+          "новая запись",
+          "поле ввода"
+        ],
+        "keywords_en": [
+          "create post",
+          "write message",
+          "new post",
+          "message form",
+          "send message"
+        ],
+        "screenshot": "crawl_feed_02.png",
+        "note": "Form toolbar: CoPilot, File, Create document, Mention, Quote, Add tag, Record Video"
+      },
+      {
+        "label": "Feed — create event (EVENT tab)",
+        "url": "/stream/",
+        "click_sequence": [
+          {
+            "selector": ".feed-add-post-form-link:nth-of-type(2)",
+            "label": "EVENT tab"
+          }
+        ],
+        "keywords_ru": [
+          "создать событие",
+          "мероприятие",
+          "встреча",
+          "календарь"
+        ],
+        "keywords_en": [
+          "create event",
+          "meeting",
+          "calendar event",
+          "event form"
+        ],
+        "screenshot": "crawl_feed_03.png"
+      },
+      {
+        "label": "Feed — create poll (POLL tab)",
+        "url": "/stream/",
+        "click_sequence": [
+          {
+            "selector": ".feed-add-post-form-link:nth-of-type(3)",
+            "label": "POLL tab"
+          }
+        ],
+        "keywords_ru": [
+          "создать опрос",
+          "голосование",
+          "вопрос"
+        ],
+        "keywords_en": [
+          "create poll",
+          "vote",
+          "survey",
+          "poll form"
+        ],
+        "screenshot": "crawl_feed_04.png"
+      },
+      {
+        "label": "Feed — attach file (FILE tab)",
+        "url": "/stream/",
+        "click_sequence": [
+          {
+            "selector": ".feed-add-post-form-link:nth-of-type(4)",
+            "label": "FILE tab"
+          }
+        ],
+        "keywords_ru": [
+          "загрузить файл",
+          "прикрепить файл",
+          "файл"
+        ],
+        "keywords_en": [
+          "upload file",
+          "attach file",
+          "file upload",
+          "file form"
+        ],
+        "screenshot": "crawl_feed_05.png"
+      },
+      {
+        "label": "Feed — MORE post type dropdown",
+        "url": "/stream/",
+        "click_sequence": [
+          {
+            "selector": ".feed-add-post-form-link-more",
+            "label": "MORE tab"
+          }
+        ],
+        "keywords_ru": [
+          "создать пост",
+          "благодарность",
+          "объявление",
+          "workflow"
+        ],
+        "keywords_en": [
+          "more post types",
+          "appreciation",
+          "announcement",
+          "workflow"
+        ],
+        "screenshot": "crawl_feed_06.png",
+        "note": "Contains: Appreciation, Announcement, Workflow"
+      },
+      {
+        "label": "Feed — create Appreciation",
+        "url": "/stream/",
+        "click_sequence": [
+          {
+            "selector": ".feed-add-post-form-link-more",
+            "label": "MORE tab"
+          },
+          {
+            "selector": ".feed-add-post-form-grat",
+            "label": "Appreciation item"
+          }
+        ],
+        "keywords_ru": [
+          "благодарность",
+          "выразить благодарность",
+          "похвала"
+        ],
+        "keywords_en": [
+          "appreciation",
+          "gratitude",
+          "kudos",
+          "praise"
+        ],
+        "screenshot": "crawl_feed_07.png"
+      },
+      {
+        "label": "Feed — filter / search panel",
+        "url": "/stream/",
+        "click_sequence": [
+          {
+            "selector": "#LIVEFEED_search",
+            "label": "Filter and search input"
+          }
+        ],
+        "keywords_ru": [
+          "фильтр",
+          "поиск",
+          "избранное",
+          "объявления",
+          "моя активность"
+        ],
+        "keywords_en": [
+          "filter",
+          "search",
+          "filter panel",
+          "workflows",
+          "favorites",
+          "announcements"
+        ],
+        "screenshot": "crawl_feed_08.png",
+        "note": "Left presets: Filter, Workflows, Extranet, Favorites, Announcements, My Activity, Work. Fields: Date, Type, Author, To"
+      },
+      {
+        "label": "Feed — post More menu",
+        "url": "/stream/",
+        "click_sequence": [
+          {
+            "selector": ".feed-post-more-link",
+            "label": "More link on post"
+          }
+        ],
+        "keywords_ru": [
+          "меню поста",
+          "закрепить",
+          "добавить в избранное",
+          "редактировать",
+          "удалить"
+        ],
+        "keywords_en": [
+          "post menu",
+          "pin",
+          "add to favorites",
+          "edit post",
+          "delete post",
+          "copy link"
+        ],
+        "screenshot": "crawl_feed_09.png",
+        "note": "Items: Pin, Add to favorites, Open message, Copy link, Add recipients, Edit, Hide, Create task, Delete"
+      },
+      {
+        "label": "Feed — Like reactions bar",
+        "url": "/stream/",
+        "click_sequence": [
+          {
+            "selector": ".feed-inform-ilike",
+            "label": "Hover over Like button"
+          }
+        ],
+        "keywords_ru": [
+          "лайк",
+          "реакция",
+          "нравится",
+          "эмодзи реакция"
+        ],
+        "keywords_en": [
+          "like",
+          "reaction",
+          "emoji reaction",
+          "like button",
+          "reactions bar"
+        ],
+        "screenshot": "crawl_feed_10.png",
+        "note": "Hover (not click) to show reactions bar. Reaction bar: not appeared — auto-dismissed"
+      },
+      {
+        "label": "Feed — comment section",
+        "url": "/stream/",
+        "click_sequence": [
+          {
+            "selector": ".feed-inform-comments",
+            "label": "Comment button on post"
+          }
+        ],
+        "keywords_ru": [
+          "комментарий",
+          "добавить комментарий",
+          "ответить"
+        ],
+        "keywords_en": [
+          "comment",
+          "add comment",
+          "reply",
+          "comment section",
+          "comment form"
+        ],
+        "screenshot": "crawl_feed_11.png"
+      },
+      {
+        "label": "Feed — Favorites filter",
+        "url": "/stream/",
+        "click_sequence": [
+          {
+            "selector": "#LIVEFEED_search",
+            "label": "Filter input"
+          },
+          {
+            "selector": ".main-ui-filter-sidebar-item-text:text('Favorites')",
+            "label": "Favorites preset"
+          }
+        ],
+        "keywords_ru": [
+          "избранное",
+          "сохранённые записи",
+          "закладки"
+        ],
+        "keywords_en": [
+          "favorites",
+          "saved posts",
+          "bookmarks",
+          "starred"
+        ],
+        "screenshot": "crawl_feed_12.png"
+      },
+      {
+        "label": "Feed — Announcements filter",
+        "url": "/stream/",
+        "click_sequence": [
+          {
+            "selector": "#LIVEFEED_search",
+            "label": "Filter input"
+          },
+          {
+            "selector": ".main-ui-filter-sidebar-item-text:text('Announcements')",
+            "label": "Announcements preset"
+          }
+        ],
+        "keywords_ru": [
+          "объявления",
+          "фильтр объявлений"
+        ],
+        "keywords_en": [
+          "announcements",
+          "announcement filter",
+          "company announcements"
+        ],
+        "screenshot": "crawl_feed_13.png"
+      },
+      {
+        "label": "Feed — post full view",
+        "url": "/company/personal/user/1/blog/1/",
+        "click_sequence": [
+          {
+            "selector": ".feed-post-title",
+            "label": "Post title link"
+          }
+        ],
+        "keywords_ru": [
+          "просмотр поста",
+          "открыть запись",
+          "детали поста"
+        ],
+        "keywords_en": [
+          "post view",
+          "open post",
+          "post detail",
+          "message detail"
+        ],
+        "screenshot": "crawl_feed_14.png"
+      }
+    ]
+  },
+  "collabs": {
+    "base_url": "/online/",
+    "entry_selector": ".main-buttons-item-text-box:text('Collabs')",
+    "states": [
+      {
+        "label": "Collabs — /online/ base",
+        "url": "/online/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "мессенджер",
+          "чаты",
+          "онлайн"
+        ],
+        "keywords_en": [
+          "messenger",
+          "chats",
+          "online"
+        ],
+        "screenshot": "crawl_collabs_01.png"
+      },
+      {
+        "label": "Collabs — empty state",
+        "url": "/online/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-text-box:text('Collabs')",
+            "label": "Collabs tab in /online/ top nav"
+          }
+        ],
+        "keywords_ru": [
+          "коллабы",
+          "совместная работа",
+          "нет коллабов"
+        ],
+        "keywords_en": [
+          "collabs",
+          "collaboration",
+          "collab empty",
+          "co-working space"
+        ],
+        "screenshot": "crawl_collabs_02.png",
+        "note": "Empty state: 'This screen will show the collabs you're a member of.' + CREATE COLLAB button"
+      },
+      {
+        "label": "Collabs — create collab form",
+        "url": "/online/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-text-box:text('Collabs')",
+            "label": "Collabs tab in /online/ top nav"
+          },
+          {
+            "selector": ".bx-im-button__scope",
+            "label": "CREATE COLLAB button"
+          }
+        ],
+        "keywords_ru": [
+          "создать коллаб",
+          "новый коллаб",
+          "форма создания"
+        ],
+        "keywords_en": [
+          "create collab",
+          "new collab",
+          "collab form",
+          "collab description"
+        ],
+        "screenshot": "crawl_collabs_03.png",
+        "note": "Form fields: Collab description (title input), Access permissions, Auto delete messages (dropdown: Never)"
+      },
+      {
+        "label": "Collabs — new collab list item",
+        "url": "/online/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-text-box:text('Collabs')",
+            "label": "Collabs tab in /online/ top nav"
+          },
+          {
+            "selector": ".bx-im-button__scope",
+            "label": "CREATE COLLAB button"
+          }
+        ],
+        "keywords_ru": [
+          "новый коллаб",
+          "элемент списка коллабов"
+        ],
+        "keywords_en": [
+          "new collab",
+          "collab list item",
+          "create a collab"
+        ],
+        "screenshot": "crawl_collabs_04.png"
+      },
+      {
+        "label": "Collabs — intro panel",
+        "url": "/online/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-text-box:text('Collabs')",
+            "label": "Collabs tab in /online/ top nav"
+          }
+        ],
+        "keywords_ru": [
+          "коллаб инструкция",
+          "рабочее пространство",
+          "внешние команды"
+        ],
+        "keywords_en": [
+          "collab intro",
+          "co-working space",
+          "external teams",
+          "outside teams"
+        ],
+        "screenshot": "crawl_collabs_05.png",
+        "note": "Right panel: 'Communicate with outside teams', 'Strictly business', 'Discussions always bring about result'"
+      },
+      {
+        "label": "Collabs — collab item hover",
+        "url": "/online/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-text-box:text('Collabs')",
+            "label": "Collabs tab in /online/ top nav"
+          }
+        ],
+        "keywords_ru": [
+          "коллаб меню",
+          "действия коллаба"
+        ],
+        "keywords_en": [
+          "collab item",
+          "hover",
+          "collab actions"
+        ],
+        "screenshot": "crawl_collabs_06.png"
+      },
+      {
+        "label": "Collabs — item context menu",
+        "url": "/online/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-text-box:text('Collabs')",
+            "label": "Collabs tab in /online/ top nav"
+          }
+        ],
+        "keywords_ru": [
+          "контекстное меню коллаба"
+        ],
+        "keywords_en": [
+          "collab context menu",
+          "collab options"
+        ],
+        "screenshot": "crawl_collabs_07.png",
+        "note": "Menu items: "
+      }
+    ]
+  },
+  "calendar": {
+    "base_url": "/calendar/",
+    "entry_selector": "a[href*='/calendar/'], .left-menu-item:text('Calendar')",
+    "views": [
+      "month",
+      "week",
+      "day",
+      "schedule"
+    ],
+    "states": [
+      {
+        "label": "Calendar — Month view",
+        "url": "/calendar/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "календарь",
+          "месяц",
+          "события"
+        ],
+        "keywords_en": [
+          "calendar",
+          "month",
+          "month view",
+          "events"
+        ],
+        "screenshot": "crawl_calendar_01.png",
+        "note": "Default view: Month grid with day numbers, week headers (Mon–Sun)"
+      },
+      {
+        "label": "Calendar — Day view",
+        "url": "/calendar/",
+        "click_sequence": [
+          {
+            "selector": ".ui-nav-panel__item:text('Day')",
+            "label": "Day view tab"
+          }
+        ],
+        "keywords_ru": [
+          "день",
+          "расписание дня",
+          "события дня"
+        ],
+        "keywords_en": [
+          "day view",
+          "day schedule",
+          "calendar day"
+        ],
+        "screenshot": "crawl_calendar_02.png"
+      },
+      {
+        "label": "Calendar — Week view",
+        "url": "/calendar/",
+        "click_sequence": [
+          {
+            "selector": ".ui-nav-panel__item:text('Week')",
+            "label": "Week view tab"
+          }
+        ],
+        "keywords_ru": [
+          "неделя",
+          "расписание недели",
+          "события недели"
+        ],
+        "keywords_en": [
+          "week view",
+          "week schedule",
+          "calendar week"
+        ],
+        "screenshot": "crawl_calendar_03.png"
+      },
+      {
+        "label": "Calendar — Schedule view",
+        "url": "/calendar/",
+        "click_sequence": [
+          {
+            "selector": ".ui-nav-panel__item:text('Schedule')",
+            "label": "Schedule view tab"
+          }
+        ],
+        "keywords_ru": [
+          "расписание",
+          "список событий",
+          "agenda"
+        ],
+        "keywords_en": [
+          "schedule view",
+          "agenda",
+          "event list",
+          "calendar list"
+        ],
+        "screenshot": "crawl_calendar_04.png"
+      },
+      {
+        "label": "Calendar — calendars slider",
+        "url": "/calendar/",
+        "click_sequence": [
+          {
+            "selector": ".ui-btn-light-border",
+            "label": "Calendars button"
+          }
+        ],
+        "keywords_ru": [
+          "список календарей",
+          "мои календари",
+          "создать календарь"
+        ],
+        "keywords_en": [
+          "calendars list",
+          "my calendars",
+          "new calendar",
+          "company calendar",
+          "calendar slider"
+        ],
+        "screenshot": "crawl_calendar_05.png",
+        "note": "Slider shows: NEW CALENDAR button, MY CALENDARS section, COMPANY CALENDARS section"
+      },
+      {
+        "label": "Calendar — create event form",
+        "url": "/calendar/",
+        "click_sequence": [
+          {
+            "selector": ".ui-toolbar-after-title-buttons .ui-btn",
+            "label": "Create event button"
+          }
+        ],
+        "keywords_ru": [
+          "создать событие",
+          "новое событие",
+          "форма события"
+        ],
+        "keywords_en": [
+          "create event",
+          "new event",
+          "event form",
+          "event title",
+          "date time"
+        ],
+        "screenshot": "crawl_calendar_06.png",
+        "note": "Form fields: event title, date/time, calendar selector, guests, location, description"
+      },
+      {
+        "label": "Calendar — Week view with events",
+        "url": "/calendar/",
+        "click_sequence": [
+          {
+            "selector": ".ui-nav-panel__item:text('Week')",
+            "label": "Week view tab"
+          }
+        ],
+        "keywords_ru": [
+          "неделя с событиями",
+          "расписание недели"
+        ],
+        "keywords_en": [
+          "week view events",
+          "weekly schedule",
+          "calendar week events"
+        ],
+        "screenshot": "crawl_calendar_07.png"
+      }
+    ]
+  },
+  "documents": {
+    "base_url": "/company/personal/user/1/disk/documents/",
+    "states": [
+      {
+        "label": "Documents — main view",
+        "url": "/company/personal/user/1/disk/documents/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "документы",
+          "мои документы"
+        ],
+        "keywords_en": [
+          "documents",
+          "my documents"
+        ],
+        "screenshot": "crawl_documents_01.png"
+      },
+      {
+        "label": "Documents — List tab",
+        "url": "/company/personal/user/1/disk/documents/",
+        "click_sequence": [
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Tab: List"
+          }
+        ],
+        "keywords_ru": [
+          "документы",
+          "list"
+        ],
+        "keywords_en": [
+          "documents",
+          "list"
+        ],
+        "screenshot": "crawl_documents_02.png"
+      },
+      {
+        "label": "Documents — Create menu",
+        "url": "/company/personal/user/1/disk/documents/",
+        "click_sequence": [
+          {
+            "selector": "button:has-text('Create')",
+            "label": "Create button"
+          }
+        ],
+        "keywords_ru": [
+          "создать документ",
+          "новый документ",
+          "таблица",
+          "презентация"
+        ],
+        "keywords_en": [
+          "create document",
+          "new document",
+          "spreadsheet",
+          "presentation"
+        ],
+        "screenshot": "crawl_documents_03.png"
+      },
+      {
+        "label": "Documents — view toggle",
+        "url": "/company/personal/user/1/disk/documents/",
+        "click_sequence": [
+          {
+            "selector": "[class*='view-mode']",
+            "label": "View toggle button"
+          }
+        ],
+        "keywords_ru": [
+          "вид отображения",
+          "список",
+          "сетка"
+        ],
+        "keywords_en": [
+          "view mode",
+          "list view",
+          "grid view",
+          "tile view"
+        ],
+        "screenshot": "crawl_documents_04.png"
+      },
+      {
+        "label": "Documents — search",
+        "url": "/company/personal/user/1/disk/documents/",
+        "click_sequence": [
+          {
+            "selector": "input[placeholder*='search' i]",
+            "label": "Search input"
+          }
+        ],
+        "keywords_ru": [
+          "поиск документов",
+          "найти файл"
+        ],
+        "keywords_en": [
+          "search documents",
+          "search files",
+          "find document"
+        ],
+        "screenshot": "crawl_documents_05.png"
+      },
+      {
+        "label": "Documents — create Bitrix24 Docs",
+        "url": "/company/personal/user/1/disk/documents/",
+        "click_sequence": [
+          {
+            "selector": "button:has-text('Create')",
+            "label": "Create button"
+          },
+          {
+            "selector": ".menu-popup-item:has-text('Bitrix24 Docs')",
+            "label": "Bitrix24 Docs"
+          }
+        ],
+        "keywords_ru": [
+          "создать документ",
+          "bitrix24 docs"
+        ],
+        "keywords_en": [
+          "create document",
+          "bitrix24 docs",
+          "new file"
+        ],
+        "screenshot": "crawl_documents_08.png"
+      },
+      {
+        "label": "Documents — create Board",
+        "url": "/company/personal/user/1/disk/documents/",
+        "click_sequence": [
+          {
+            "selector": "button:has-text('Create')",
+            "label": "Create button"
+          },
+          {
+            "selector": ".menu-popup-item:has-text('Board')",
+            "label": "Board"
+          }
+        ],
+        "keywords_ru": [
+          "создать документ",
+          "board"
+        ],
+        "keywords_en": [
+          "create document",
+          "board",
+          "new file"
+        ],
+        "screenshot": "crawl_documents_09.png"
+      },
+      {
+        "label": "Documents — create Google Docs",
+        "url": "/company/personal/user/1/disk/documents/",
+        "click_sequence": [
+          {
+            "selector": "button:has-text('Create')",
+            "label": "Create button"
+          },
+          {
+            "selector": ".menu-popup-item:has-text('Google Docs')",
+            "label": "Google Docs"
+          }
+        ],
+        "keywords_ru": [
+          "создать документ",
+          "google docs"
+        ],
+        "keywords_en": [
+          "create document",
+          "google docs",
+          "new file"
+        ],
+        "screenshot": "crawl_documents_10.png"
+      },
+      {
+        "label": "Documents — Grid tab",
+        "url": "/company/personal/user/1/disk/documents/",
+        "click_sequence": [
+          {
+            "selector": ".ui-nav-panel__item:text('Grid')",
+            "label": "Grid tab"
+          }
+        ],
+        "keywords_ru": [
+          "вид сетки",
+          "документы сетка"
+        ],
+        "keywords_en": [
+          "grid view",
+          "documents grid",
+          "file grid"
+        ],
+        "screenshot": "crawl_documents_11.png"
+      }
+    ]
+  },
+  "boards": {
+    "base_url": "/company/personal/user/1/disk/boards/",
+    "states": [
+      {
+        "label": "Boards — main view",
+        "url": "/company/personal/user/1/disk/boards/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "доски",
+          "канбан",
+          "список досок"
+        ],
+        "keywords_en": [
+          "boards",
+          "kanban",
+          "boards list"
+        ],
+        "screenshot": "crawl_boards_01.png"
+      },
+      {
+        "label": "Boards — List tab",
+        "url": "/company/personal/user/1/disk/boards/",
+        "click_sequence": [
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Tab: List"
+          }
+        ],
+        "keywords_ru": [
+          "доски",
+          "list"
+        ],
+        "keywords_en": [
+          "boards",
+          "list"
+        ],
+        "screenshot": "crawl_boards_02.png"
+      },
+      {
+        "label": "Boards — create board form",
+        "url": "/company/personal/user/1/disk/boards/",
+        "click_sequence": [
+          {
+            "selector": "button:has-text('Create')",
+            "label": "Create board button"
+          }
+        ],
+        "keywords_ru": [
+          "создать доску",
+          "новая доска",
+          "форма создания доски"
+        ],
+        "keywords_en": [
+          "create board",
+          "new board",
+          "board form",
+          "board name"
+        ],
+        "screenshot": "crawl_boards_03.png"
+      },
+      {
+        "label": "Boards — create board form fields",
+        "url": "/company/personal/user/1/disk/boards/",
+        "click_sequence": [
+          {
+            "selector": "button:has-text('Create')",
+            "label": "Create button"
+          }
+        ],
+        "keywords_ru": [
+          "форма создания доски",
+          "название доски",
+          "описание доски"
+        ],
+        "keywords_en": [
+          "create board form",
+          "board name",
+          "board description",
+          "board type"
+        ],
+        "screenshot": "crawl_boards_04.png",
+        "note": "Form fields: text:find people, documents, and more, text:FIND, text:, text:, text:"
+      },
+      {
+        "label": "Boards — Grid view",
+        "url": "/company/personal/user/1/disk/boards/",
+        "click_sequence": [
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Grid view"
+          }
+        ],
+        "keywords_ru": [
+          "доски",
+          "grid"
+        ],
+        "keywords_en": [
+          "boards",
+          "grid",
+          "grid view"
+        ],
+        "screenshot": "crawl_boards_05.png"
+      },
+      {
+        "label": "Boards — Tile view",
+        "url": "/company/personal/user/1/disk/boards/",
+        "click_sequence": [
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Tile view"
+          }
+        ],
+        "keywords_ru": [
+          "доски",
+          "tile"
+        ],
+        "keywords_en": [
+          "boards",
+          "tile",
+          "tile view"
+        ],
+        "screenshot": "crawl_boards_06.png"
+      },
+      {
+        "label": "Boards — search",
+        "url": "/company/personal/user/1/disk/boards/",
+        "click_sequence": [
+          {
+            "selector": "input[type='search']",
+            "label": "Search"
+          }
+        ],
+        "keywords_ru": [
+          "поиск досок"
+        ],
+        "keywords_en": [
+          "search boards",
+          "find board"
+        ],
+        "screenshot": "crawl_boards_07.png"
+      }
+    ]
+  },
+  "drive": {
+    "base_url": "/company/personal/user/1/disk/path/",
+    "states": [
+      {
+        "label": "Drive — main view",
+        "url": "/company/personal/user/1/disk/path/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "диск",
+          "мои файлы",
+          "хранилище",
+          "синхронизация",
+          "синхронизировать диск",
+          "десктоп приложение",
+          "компьютер",
+          "подключить диск",
+          "мой диск",
+          "загрузить"
+        ],
+        "keywords_en": [
+          "drive",
+          "my drive",
+          "files",
+          "storage",
+          "sync",
+          "synchronization",
+          "synchronize drive",
+          "desktop app",
+          "desktop application",
+          "computer sync",
+          "connect drive",
+          "my disk",
+          "upload",
+          "cloud storage"
+        ],
+        "screenshot": "crawl_drive_01.png"
+      },
+      {
+        "label": "Drive — Add/Upload menu",
+        "url": "/company/personal/user/1/disk/path/",
+        "click_sequence": [
+          {
+            "selector": ".bx-disk-interface-button-add",
+            "label": "Add button"
+          }
+        ],
+        "keywords_ru": [
+          "загрузить файл",
+          "создать папку",
+          "создать документ",
+          "способ",
+          "способ добавить",
+          "добавление файлов"
+        ],
+        "keywords_en": [
+          "upload file",
+          "create folder",
+          "create document",
+          "add file"
+        ],
+        "screenshot": "crawl_drive_02.png",
+        "note": "Menu items: File, Folder, Bitrix24 Docs, Board, Google Docs, MS Office Online, Office 365, Desktop applications"
+      },
+      {
+        "label": "Drive — create folder dialog",
+        "url": "/company/personal/user/1/disk/path/",
+        "click_sequence": [
+          {
+            "selector": ".bx-disk-interface-button-add",
+            "label": "Add button"
+          },
+          {
+            "selector": ".menu-popup-item:has-text('folder')",
+            "label": "Create folder item"
+          }
+        ],
+        "keywords_ru": [
+          "создать папку",
+          "новая папка",
+          "название папки"
+        ],
+        "keywords_en": [
+          "create folder",
+          "new folder",
+          "folder name",
+          "folder dialog"
+        ],
+        "screenshot": "crawl_drive_03.png"
+      },
+      {
+        "label": "Drive — view toggle (grid/list)",
+        "url": "/company/personal/user/1/disk/path/",
+        "click_sequence": [
+          {
+            "selector": "[class*='view-mode']",
+            "label": "View toggle"
+          }
+        ],
+        "keywords_ru": [
+          "вид отображения",
+          "список",
+          "сетка",
+          "переключение вида"
+        ],
+        "keywords_en": [
+          "view mode",
+          "list view",
+          "grid view",
+          "tile view",
+          "switch view"
+        ],
+        "screenshot": "crawl_drive_04.png"
+      },
+      {
+        "label": "Drive — file hover",
+        "url": "/company/personal/user/1/disk/path/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "наведение на файл",
+          "действия с файлом",
+          "файл",
+          "наведение",
+          "файлы"
+        ],
+        "keywords_en": [
+          "file hover",
+          "file actions",
+          "file item",
+          "file",
+          "hover"
+        ],
+        "screenshot": "crawl_drive_05.png"
+      },
+      {
+        "label": "Drive — file selected toolbar",
+        "url": "/company/personal/user/1/disk/path/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "выбранный файл",
+          "тулбар файла",
+          "поделиться",
+          "скачать"
+        ],
+        "keywords_en": [
+          "file selected",
+          "file toolbar",
+          "share",
+          "download",
+          "rename",
+          "copy"
+        ],
+        "screenshot": "crawl_drive_06.png"
+      },
+      {
+        "label": "Drive — file context menu",
+        "url": "/company/personal/user/1/disk/path/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "контекстное меню файла",
+          "скачать",
+          "переименовать",
+          "удалить",
+          "поделиться",
+          "заблокировать документ",
+          "заблокировать файл",
+          "блокировка"
+        ],
+        "keywords_en": [
+          "file context menu",
+          "download",
+          "rename",
+          "delete",
+          "share",
+          "copy",
+          "move",
+          "block document",
+          "lock file"
+        ],
+        "screenshot": "crawl_drive_07.png",
+        "note": "Menu items: File, Folder, Bitrix24 Docs, Board, Google Docs, MS Office Online, Office 365, Desktop applications"
+      },
+      {
+        "label": "Drive — search",
+        "url": "/company/personal/user/1/disk/path/",
+        "click_sequence": [
+          {
+            "selector": "input[placeholder*='search' i]",
+            "label": "Search input"
+          }
+        ],
+        "keywords_ru": [
+          "поиск файлов",
+          "найти документ",
+          "поиск на диске"
+        ],
+        "keywords_en": [
+          "search drive",
+          "search files",
+          "find document",
+          "file search"
+        ],
+        "screenshot": "crawl_drive_08.png"
+      },
+      {
+        "label": "Drive — Recycle bin",
+        "url": "/company/personal/user/1/disk/trashcan/",
+        "click_sequence": [
+          {
+            "selector": "a:has-text('Recycle')",
+            "label": "Trash link"
+          }
+        ],
+        "keywords_ru": [
+          "корзина",
+          "удалённые файлы",
+          "восстановить",
+          "корзина диска",
+          "мусор",
+          "корзина файлов"
+        ],
+        "keywords_en": [
+          "trash",
+          "recycle bin",
+          "deleted files",
+          "restore",
+          "drive trash"
+        ],
+        "screenshot": "crawl_drive_09.png"
+      },
+      {
+        "label": "Drive — sort menu",
+        "url": "/company/personal/user/1/disk/path/",
+        "click_sequence": [
+          {
+            "selector": ".disk-folder-list-sorting",
+            "label": "Sort button"
+          }
+        ],
+        "keywords_ru": [
+          "сортировка файлов",
+          "по дате",
+          "по имени",
+          "по размеру",
+          "сортировка",
+          "упорядочить",
+          "порядок"
+        ],
+        "keywords_en": [
+          "sort files",
+          "sort by date",
+          "sort by name",
+          "sort by size",
+          "sort",
+          "sorting",
+          "order"
+        ],
+        "screenshot": "crawl_drive_10.png",
+        "note": "Sort options: File, Folder, Bitrix24 Docs, Board, Google Docs, MS Office Online, Office 365, Desktop applications, By date changed, By ID, By name, By size, Reverse, Mixed sorting"
+      },
+      {
+        "label": "Drive — folder hover (actions)",
+        "url": "/company/personal/user/1/disk/path/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "наведение на папку",
+          "действия папки"
+        ],
+        "keywords_en": [
+          "folder hover",
+          "folder actions",
+          "folder menu"
+        ],
+        "screenshot": "crawl_drive_11.png"
+      },
+      {
+        "label": "Drive — open folder",
+        "url": "/company/personal/user/1/disk/path/",
+        "click_sequence": [
+          {
+            "selector": ".disk-folder-list-item",
+            "label": "Open folder"
+          }
+        ],
+        "keywords_ru": [
+          "открытая папка",
+          "содержимое папки",
+          "файлы в папке",
+          "папка",
+          "директория",
+          "каталог диска"
+        ],
+        "keywords_en": [
+          "open folder",
+          "folder contents",
+          "files in folder",
+          "inside folder",
+          "folder",
+          "directory",
+          "drive folder"
+        ],
+        "screenshot": "crawl_drive_12.png"
+      },
+      {
+        "label": "Drive — file selected (full toolbar)",
+        "url": "/company/personal/user/1/disk/path/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "файл выбран",
+          "тулбар файла",
+          "поделиться",
+          "скачать",
+          "переименовать"
+        ],
+        "keywords_en": [
+          "file selected",
+          "file toolbar",
+          "share button",
+          "download",
+          "rename",
+          "copy"
+        ],
+        "screenshot": "crawl_drive_13.png"
+      },
+      {
+        "label": "Drive — file context menu (inside folder)",
+        "url": "/company/personal/user/1/disk/path/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "контекстное меню файла",
+          "скачать",
+          "переименовать",
+          "удалить",
+          "поделиться"
+        ],
+        "keywords_en": [
+          "file context menu",
+          "download",
+          "rename",
+          "delete",
+          "share",
+          "copy",
+          "move"
+        ],
+        "screenshot": "crawl_drive_14.png",
+        "note": "Menu items: File, Folder, Bitrix24 Docs, Board, Google Docs, MS Office Online, Office 365, Desktop applications, Open, Download, Share, Rename, Copy, Move, Delete"
+      },
+      {
+        "label": "Drive — folder context menu",
+        "url": "/company/personal/user/1/disk/path/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "контекстное меню папки",
+          "скачать",
+          "поделиться",
+          "переименовать",
+          "удалить"
+        ],
+        "keywords_en": [
+          "folder context menu",
+          "open",
+          "download",
+          "share",
+          "rename",
+          "copy",
+          "move",
+          "delete"
+        ],
+        "screenshot": "crawl_drive_15.png",
+        "note": "Menu items: Open, Download, Share, Rename, Copy, Move, Delete"
+      },
+      {
+        "label": "Drive — Share dialog",
+        "url": "/company/personal/user/1/disk/path/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "диалог поделиться",
+          "публичная ссылка",
+          "права доступа",
+          "внешний доступ"
+        ],
+        "keywords_en": [
+          "share dialog",
+          "public link",
+          "access rights",
+          "share with users",
+          "external access"
+        ],
+        "screenshot": "crawl_drive_16.png"
+      }
+    ]
+  },
+  "webmail": {
+    "base_url": "/mail/",
+    "states": [
+      {
+        "label": "Webmail — main view",
+        "url": "/mail/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "почта",
+          "вебмейл",
+          "входящие"
+        ],
+        "keywords_en": [
+          "webmail",
+          "email",
+          "inbox"
+        ],
+        "screenshot": "crawl_webmail_01.png"
+      },
+      {
+        "label": "Webmail — settings",
+        "url": "/mail/",
+        "click_sequence": [
+          {
+            "selector": "a[href*='settings']",
+            "label": "Settings"
+          }
+        ],
+        "keywords_ru": [
+          "настройки почты",
+          "почтовый ящик"
+        ],
+        "keywords_en": [
+          "mail settings",
+          "mailbox settings",
+          "email settings"
+        ],
+        "screenshot": "crawl_webmail_02.png"
+      },
+      {
+        "label": "Webmail — add mailbox",
+        "url": "/mail/",
+        "click_sequence": [
+          {
+            "selector": "a:has-text('Connect')",
+            "label": "Add mailbox"
+          }
+        ],
+        "keywords_ru": [
+          "добавить почтовый ящик",
+          "подключить почту"
+        ],
+        "keywords_en": [
+          "add mailbox",
+          "connect email",
+          "add email account"
+        ],
+        "screenshot": "crawl_webmail_03.png"
+      },
+      {
+        "label": "Webmail — settings",
+        "url": "/mail/settings/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "почта",
+          "settings"
+        ],
+        "keywords_en": [
+          "webmail",
+          "settings"
+        ],
+        "screenshot": "crawl_webmail_04.png"
+      },
+      {
+        "label": "Webmail — connect mailbox",
+        "url": "/mail/settings/mailboxes/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "почта",
+          "connect mailbox"
+        ],
+        "keywords_en": [
+          "webmail",
+          "connect mailbox"
+        ],
+        "screenshot": "crawl_webmail_05.png"
+      },
+      {
+        "label": "Webmail — signature",
+        "url": "/mail/settings/signature/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "почта",
+          "signature"
+        ],
+        "keywords_en": [
+          "webmail",
+          "signature"
+        ],
+        "screenshot": "crawl_webmail_06.png"
+      },
+      {
+        "label": "Webmail — notification settings",
+        "url": "/mail/settings/notifications/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "почта",
+          "notification settings"
+        ],
+        "keywords_en": [
+          "webmail",
+          "notification settings"
+        ],
+        "screenshot": "crawl_webmail_07.png"
+      },
+      {
+        "label": "Webmail — antispam settings",
+        "url": "/mail/settings/antispam/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "почта",
+          "antispam settings"
+        ],
+        "keywords_en": [
+          "webmail",
+          "antispam settings"
+        ],
+        "screenshot": "crawl_webmail_08.png"
+      }
+    ]
+  },
+  "workgroups": {
+    "base_url": "/workgroups/",
+    "states": [
+      {
+        "label": "Workgroups — main view",
+        "url": "/workgroups/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "рабочие группы",
+          "группы",
+          "все группы"
+        ],
+        "keywords_en": [
+          "workgroups",
+          "groups",
+          "all groups"
+        ],
+        "screenshot": "crawl_workgroups_01.png"
+      },
+      {
+        "label": "Workgroups — create group form",
+        "url": "/workgroups/",
+        "click_sequence": [
+          {
+            "selector": "a[href*='groups/create']",
+            "label": "Create group"
+          }
+        ],
+        "keywords_ru": [
+          "создать группу",
+          "новая группа",
+          "тип группы"
+        ],
+        "keywords_en": [
+          "create group",
+          "new group",
+          "group type",
+          "open group",
+          "closed group"
+        ],
+        "screenshot": "crawl_workgroups_02.png",
+        "note": "Group types: Open / Closed / Secret"
+      },
+      {
+        "label": "Workgroups — group type selection",
+        "url": "/workgroups/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "тип группы",
+          "открытая группа",
+          "закрытая группа",
+          "секретная"
+        ],
+        "keywords_en": [
+          "group type",
+          "open group",
+          "closed group",
+          "secret group"
+        ],
+        "screenshot": "crawl_workgroups_03.png"
+      },
+      {
+        "label": "Workgroups — search",
+        "url": "/workgroups/",
+        "click_sequence": [
+          {
+            "selector": "input[placeholder*='search' i]",
+            "label": "Search"
+          }
+        ],
+        "keywords_ru": [
+          "поиск групп",
+          "найти группу"
+        ],
+        "keywords_en": [
+          "search groups",
+          "find group",
+          "group search"
+        ],
+        "screenshot": "crawl_workgroups_04.png"
+      },
+      {
+        "label": "Workgroups — create group form",
+        "url": "/company/personal/user/1/groups/create/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "создать группу",
+          "название группы",
+          "описание",
+          "тип группы",
+          "открытая",
+          "закрытая",
+          "секретная"
+        ],
+        "keywords_en": [
+          "create group",
+          "group name",
+          "group description",
+          "open",
+          "closed",
+          "secret",
+          "group type"
+        ],
+        "screenshot": "crawl_workgroups_05.png",
+        "note": "Fields: find people, documents, a"
+      },
+      {
+        "label": "Workgroups — create group (bottom)",
+        "url": "/company/personal/user/1/groups/create/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "настройки группы",
+          "участники",
+          "наблюдатели"
+        ],
+        "keywords_en": [
+          "group settings",
+          "members",
+          "observers",
+          "group privacy"
+        ],
+        "screenshot": "crawl_workgroups_06.png"
+      }
+    ]
+  },
+  "tasks": {
+    "base_url": "/company/personal/user/1/tasks/",
+    "states": [
+      {
+        "label": "Tasks — main view (list)",
+        "url": "/company/personal/user/1/tasks/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "задачи",
+          "список задач",
+          "мои задачи",
+          "сортировка задач",
+          "фильтр задач",
+          "просроченная задача",
+          "подзадача",
+          "фильтр",
+          "все задачи",
+          "сайдбар",
+          "боковая панель",
+          "левое меню",
+          "панель навигации"
+        ],
+        "keywords_en": [
+          "tasks",
+          "task list",
+          "my tasks",
+          "task sorting",
+          "task filter",
+          "overdue task",
+          "subtask",
+          "filter tasks",
+          "all tasks",
+          "sidebar",
+          "side panel",
+          "left menu",
+          "navigation panel"
+        ],
+        "screenshot": "crawl_tasks_01.png"
+      },
+      {
+        "label": "Tasks — My tasks\nCreate\nAll  view",
+        "url": "/company/personal/user/1/tasks/",
+        "click_sequence": [
+          {
+            "selector": "[class*='task'][class*='mode']",
+            "label": "My tasks\nCreate\nAll  view button"
+          }
+        ],
+        "keywords_ru": [
+          "задачи",
+          "my tasks\ncreate\nall  вид",
+          "my tasks\ncreate\nall "
+        ],
+        "keywords_en": [
+          "tasks",
+          "my tasks\ncreate\nall ",
+          "my tasks\ncreate\nall  view"
+        ],
+        "screenshot": "crawl_tasks_02.png"
+      },
+      {
+        "label": "Tasks — task hover",
+        "url": "/company/personal/user/1/tasks/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "наведение на задачу",
+          "действия с задачей"
+        ],
+        "keywords_en": [
+          "task hover",
+          "task actions"
+        ],
+        "screenshot": "crawl_tasks_03.png"
+      },
+      {
+        "label": "Tasks — task context menu",
+        "url": "/company/personal/user/1/tasks/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "контекстное меню задачи",
+          "редактировать",
+          "удалить задачу",
+          "завершить"
+        ],
+        "keywords_en": [
+          "task context menu",
+          "edit task",
+          "delete task",
+          "complete task",
+          "task actions"
+        ],
+        "screenshot": "crawl_tasks_04.png",
+        "note": "Menu: Task, Task using template, All templates, Group subtasks, Group by projects, Sort, Default deadline, Empty deadline notification, Import list, Export to Microsoft Excel, Synchronize list"
+      },
+      {
+        "label": "Tasks — task detail",
+        "url": "/company/personal/user/1/tasks/",
+        "click_sequence": [
+          {
+            "selector": "[class*='task'][class*='item']",
+            "label": "Open task"
+          }
+        ],
+        "keywords_ru": [
+          "детали задачи",
+          "просмотр задачи",
+          "ответственный",
+          "дедлайн",
+          "комментарии",
+          "подзадача",
+          "чеклист",
+          "комментарий задачи"
+        ],
+        "keywords_en": [
+          "task detail",
+          "view task",
+          "assignee",
+          "deadline",
+          "comments",
+          "subtasks",
+          "checklist",
+          "subtask",
+          "task comment"
+        ],
+        "screenshot": "crawl_tasks_05.png"
+      },
+      {
+        "label": "Tasks — Kanban view",
+        "url": "/company/personal/user/1/tasks?view=kanban",
+        "click_sequence": [
+          {
+            "selector": "[class*='task'][class*='view']",
+            "label": "Kanban view button"
+          }
+        ],
+        "keywords_ru": [
+          "канбан",
+          "доска задач",
+          "колонки задач",
+          "доска",
+          "колонки"
+        ],
+        "keywords_en": [
+          "kanban",
+          "kanban board",
+          "task columns",
+          "task cards",
+          "board",
+          "columns"
+        ],
+        "screenshot": "crawl_tasks_06.png"
+      },
+      {
+        "label": "Tasks — Gantt view",
+        "url": "/company/personal/user/1/tasks?view=gantt",
+        "click_sequence": [
+          {
+            "selector": "[class*='task'][class*='view']",
+            "label": "Gantt view button"
+          }
+        ],
+        "keywords_ru": [
+          "диаграмма ганта",
+          "временная шкала",
+          "график задач"
+        ],
+        "keywords_en": [
+          "gantt chart",
+          "timeline",
+          "task schedule",
+          "project timeline"
+        ],
+        "screenshot": "crawl_tasks_07.png"
+      },
+      {
+        "label": "Tasks — Projects",
+        "url": "/company/personal/user/1/tasks/",
+        "click_sequence": [
+          {
+            "selector": "a:has-text('Projects')",
+            "label": "Projects tab"
+          }
+        ],
+        "keywords_ru": [
+          "проекты",
+          "список проектов",
+          "создать проект"
+        ],
+        "keywords_en": [
+          "projects",
+          "project list",
+          "create project"
+        ],
+        "screenshot": "crawl_tasks_08.png"
+      },
+      {
+        "label": "Tasks — create project form",
+        "url": "/company/personal/user/1/tasks/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "создать проект",
+          "новый проект",
+          "название проекта"
+        ],
+        "keywords_en": [
+          "create project",
+          "new project",
+          "project name",
+          "project deadline"
+        ],
+        "screenshot": "crawl_tasks_09.png"
+      },
+      {
+        "label": "Tasks — Efficiency",
+        "url": "/company/personal/user/1/tasks/effective/",
+        "click_sequence": [
+          {
+            "selector": "a:has-text('Efficiency')",
+            "label": "Efficiency tab"
+          }
+        ],
+        "keywords_ru": [
+          "эффективность",
+          "просроченные задачи",
+          "отчёт",
+          "просроченные",
+          "опоздание",
+          "незавершённые задачи"
+        ],
+        "keywords_en": [
+          "efficiency",
+          "overdue tasks",
+          "task report",
+          "deadline",
+          "overdue",
+          "late tasks"
+        ],
+        "screenshot": "crawl_tasks_10.png"
+      },
+      {
+        "label": "Tasks — Planner view",
+        "url": "/company/personal/user/1/tasks/",
+        "click_sequence": [
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Planner"
+          }
+        ],
+        "keywords_ru": [
+          "задачи",
+          "планировщик"
+        ],
+        "keywords_en": [
+          "tasks",
+          "planner",
+          "planner view"
+        ],
+        "screenshot": "crawl_tasks_11.png"
+      },
+      {
+        "label": "Tasks — Calendar view",
+        "url": "/company/personal/user/1/tasks/",
+        "click_sequence": [
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Calendar"
+          }
+        ],
+        "keywords_ru": [
+          "задачи",
+          "календарь задач"
+        ],
+        "keywords_en": [
+          "tasks",
+          "calendar",
+          "calendar view"
+        ],
+        "screenshot": "crawl_tasks_12.png"
+      },
+      {
+        "label": "Tasks — Gantt view",
+        "url": "/company/personal/user/1/tasks/",
+        "click_sequence": [
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Gantt"
+          }
+        ],
+        "keywords_ru": [
+          "задачи",
+          "диаграмма ганта"
+        ],
+        "keywords_en": [
+          "tasks",
+          "gantt",
+          "gantt view"
+        ],
+        "screenshot": "crawl_tasks_13.png"
+      },
+      {
+        "label": "Tasks — Flows",
+        "url": "/company/personal/user/1/tasks/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Flows"
+          }
+        ],
+        "keywords_ru": [
+          "задачи",
+          "flows"
+        ],
+        "keywords_en": [
+          "tasks",
+          "flows"
+        ],
+        "screenshot": "crawl_tasks_14.png"
+      },
+      {
+        "label": "Tasks — Scrum",
+        "url": "/company/personal/user/1/tasks/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Scrum"
+          }
+        ],
+        "keywords_ru": [
+          "задачи",
+          "scrum"
+        ],
+        "keywords_en": [
+          "tasks",
+          "scrum"
+        ],
+        "screenshot": "crawl_tasks_15.png"
+      },
+      {
+        "label": "Tasks — 100% Efficiency",
+        "url": "/company/personal/user/1/tasks/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "100% Efficiency"
+          }
+        ],
+        "keywords_ru": [
+          "задачи",
+          "efficiency"
+        ],
+        "keywords_en": [
+          "tasks",
+          "efficiency"
+        ],
+        "screenshot": "crawl_tasks_16.png"
+      },
+      {
+        "label": "Tasks — Templates",
+        "url": "/company/personal/user/1/tasks/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Templates"
+          }
+        ],
+        "keywords_ru": [
+          "задачи",
+          "task templates"
+        ],
+        "keywords_en": [
+          "tasks",
+          "task templates"
+        ],
+        "screenshot": "crawl_tasks_17.png"
+      },
+      {
+        "label": "Tasks — Create task form",
+        "url": "/company/personal/user/1/tasks/",
+        "click_sequence": [
+          {
+            "selector": ".ui-btn-main",
+            "label": "Create"
+          },
+          {
+            "selector": ".menu-popup-item:has-text('Task')",
+            "label": "Task"
+          }
+        ],
+        "keywords_ru": [
+          "создать задачу",
+          "название задачи",
+          "дедлайн",
+          "ответственный",
+          "приоритет",
+          "теги"
+        ],
+        "keywords_en": [
+          "create task",
+          "task title",
+          "deadline",
+          "assignee",
+          "priority",
+          "tags",
+          "description"
+        ],
+        "screenshot": "crawl_tasks_18.png",
+        "note": "Fields: Title, Title"
+      }
+    ]
+  },
+  "crm": {
+    "base_url": "/crm/deal/",
+    "entry_selector": ".menu-item-link",
+    "states": [
+      {
+        "label": "CRM — main (Deals list)",
+        "url": "/crm/deal/list/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "crm",
+          "сделки",
+          "список сделок",
+          "сайдбар",
+          "боковая панель",
+          "левое меню",
+          "панель навигации"
+        ],
+        "keywords_en": [
+          "crm",
+          "deals",
+          "deal list",
+          "crm main",
+          "sidebar",
+          "side panel",
+          "left menu",
+          "navigation panel"
+        ],
+        "screenshot": "crawl_crm_01.png"
+      },
+      {
+        "label": "CRM — Leads",
+        "url": "/crm/lead/kanban/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Leads"
+          }
+        ],
+        "keywords_ru": [
+          "лиды",
+          "список лидов",
+          "новый лид"
+        ],
+        "keywords_en": [
+          "leads",
+          "lead list",
+          "new lead"
+        ],
+        "screenshot": "crawl_crm_02.png"
+      },
+      {
+        "label": "CRM — Leads List",
+        "url": "/crm/lead/kanban/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Leads"
+          },
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "List"
+          }
+        ],
+        "keywords_ru": [
+          "список",
+          "список leads",
+          "лиды"
+        ],
+        "keywords_en": [
+          "list",
+          "leads list",
+          "leads"
+        ],
+        "screenshot": "crawl_crm_03.png"
+      },
+      {
+        "label": "CRM — Leads Activities",
+        "url": "/crm/lead/kanban/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Leads"
+          },
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Activities"
+          }
+        ],
+        "keywords_ru": [
+          "активности",
+          "действия crm",
+          "лиды"
+        ],
+        "keywords_en": [
+          "activities",
+          "crm activities",
+          "leads"
+        ],
+        "screenshot": "crawl_crm_04.png"
+      },
+      {
+        "label": "CRM — Leads Calendar",
+        "url": "/crm/lead/kanban/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Leads"
+          },
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Calendar"
+          }
+        ],
+        "keywords_ru": [
+          "календарь crm",
+          "встречи",
+          "лиды"
+        ],
+        "keywords_en": [
+          "crm calendar",
+          "meetings",
+          "leads"
+        ],
+        "screenshot": "crawl_crm_05.png"
+      },
+      {
+        "label": "CRM — Leads create form",
+        "url": "/crm/lead/kanban/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Leads"
+          },
+          {
+            "selector": ".ui-btn-main",
+            "label": "Create button"
+          }
+        ],
+        "keywords_ru": [
+          "создать лиды",
+          "новый лиды",
+          "форма создания",
+          "поля crm"
+        ],
+        "keywords_en": [
+          "create leads",
+          "new leads",
+          "create form",
+          "crm fields"
+        ],
+        "screenshot": "crawl_crm_06.png",
+        "note": "Fields: Title, Title, Title"
+      },
+      {
+        "label": "CRM — Deals",
+        "url": "/crm/deal/list/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Deals"
+          }
+        ],
+        "keywords_ru": [
+          "сделки",
+          "список сделок",
+          "воронка продаж"
+        ],
+        "keywords_en": [
+          "deals",
+          "deal list",
+          "sales pipeline"
+        ],
+        "screenshot": "crawl_crm_07.png"
+      },
+      {
+        "label": "CRM — Deals Kanban",
+        "url": "/crm/deal/kanban/category/0/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Deals"
+          },
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Kanban"
+          }
+        ],
+        "keywords_ru": [
+          "канбан",
+          "воронка",
+          "стадии сделок",
+          "сделки"
+        ],
+        "keywords_en": [
+          "kanban",
+          "pipeline",
+          "funnel",
+          "stages",
+          "deals"
+        ],
+        "screenshot": "crawl_crm_08.png",
+        "note": "Pipeline stages: Delete, Deal lost, Analyze failure, Deal won, New\n0, New\n0, New\n0, New\n0, New, $0\nQuick Deal, Contact Center\nAutom, Contact Center, Automatic deal sourc, Import data from oth, CRM solution presets, Create papers\n0, Create papers\n0, Create papers\n0, Create papers\n0, Create papers, $0, Invoice\n0, Invoice\n0, Invoice\n0, Invoice\n0, Invoice, $0, In progress\n0, In progress\n0, In progress\n0, In progress\n0, In progress, $0, Final invoice\n0, Final invoice\n0, Final invoice\n0, Final invoice\n0, Final invoice, $0"
+      },
+      {
+        "label": "CRM — Deals Activities",
+        "url": "/crm/deal/activity/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Deals"
+          },
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Activities"
+          }
+        ],
+        "keywords_ru": [
+          "активности",
+          "действия crm",
+          "сделки"
+        ],
+        "keywords_en": [
+          "activities",
+          "crm activities",
+          "deals"
+        ],
+        "screenshot": "crawl_crm_09.png"
+      },
+      {
+        "label": "CRM — Deals Calendar",
+        "url": "/crm/deal/calendar/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Deals"
+          },
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Calendar"
+          }
+        ],
+        "keywords_ru": [
+          "календарь crm",
+          "встречи",
+          "сделки"
+        ],
+        "keywords_en": [
+          "crm calendar",
+          "meetings",
+          "deals"
+        ],
+        "screenshot": "crawl_crm_10.png"
+      },
+      {
+        "label": "CRM — Deals create form",
+        "url": "/crm/deal/list/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Deals"
+          },
+          {
+            "selector": ".ui-btn-main",
+            "label": "Create button"
+          }
+        ],
+        "keywords_ru": [
+          "создать сделки",
+          "новый сделки",
+          "форма создания",
+          "поля crm"
+        ],
+        "keywords_en": [
+          "create deals",
+          "new deals",
+          "create form",
+          "crm fields"
+        ],
+        "screenshot": "crawl_crm_11.png",
+        "note": "Fields: "
+      },
+      {
+        "label": "CRM — Contacts",
+        "url": "/crm/contact/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Contacts"
+          }
+        ],
+        "keywords_ru": [
+          "контакты",
+          "список контактов",
+          "новый контакт"
+        ],
+        "keywords_en": [
+          "contacts",
+          "contact list",
+          "new contact"
+        ],
+        "screenshot": "crawl_crm_12.png"
+      },
+      {
+        "label": "CRM — Companies",
+        "url": "/crm/company/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Companies"
+          }
+        ],
+        "keywords_ru": [
+          "компании",
+          "список компаний",
+          "новая компания"
+        ],
+        "keywords_en": [
+          "companies",
+          "company list",
+          "new company"
+        ],
+        "screenshot": "crawl_crm_13.png"
+      },
+      {
+        "label": "CRM — Quotes",
+        "url": "/crm/quote/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Quotes"
+          }
+        ],
+        "keywords_ru": [
+          "коммерческие предложения",
+          "кп",
+          "новое кп"
+        ],
+        "keywords_en": [
+          "quotes",
+          "quote list",
+          "new quote"
+        ],
+        "screenshot": "crawl_crm_14.png"
+      },
+      {
+        "label": "CRM — Quotes Kanban",
+        "url": "/crm/quote/kanban/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Quotes"
+          },
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Kanban"
+          }
+        ],
+        "keywords_ru": [
+          "канбан",
+          "воронка",
+          "стадии сделок",
+          "коммерческие предложения"
+        ],
+        "keywords_en": [
+          "kanban",
+          "pipeline",
+          "funnel",
+          "stages",
+          "quotes"
+        ],
+        "screenshot": "crawl_crm_15.png",
+        "note": "Pipeline stages: Delete, Declined, Analyze decline, Accepted, New\n0, New\n0, New\n0, New\n0, New, $0\nQuick estimate, Sent to client\n0, Sent to client\n0, Sent to client\n0, Sent to client\n0, Sent to client, $0"
+      },
+      {
+        "label": "CRM — Quotes List",
+        "url": "/crm/quote/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Quotes"
+          },
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "List"
+          }
+        ],
+        "keywords_ru": [
+          "список",
+          "список quotes",
+          "коммерческие предложения"
+        ],
+        "keywords_en": [
+          "list",
+          "quotes list",
+          "quotes"
+        ],
+        "screenshot": "crawl_crm_16.png"
+      },
+      {
+        "label": "CRM — Quotes Deadlines",
+        "url": "/crm/quote/deadlines/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Quotes"
+          },
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Deadlines"
+          }
+        ],
+        "keywords_ru": [
+          "quotes",
+          "deadlines",
+          "коммерческие предложения"
+        ],
+        "keywords_en": [
+          "quotes",
+          "deadlines",
+          "quotes"
+        ],
+        "screenshot": "crawl_crm_17.png"
+      },
+      {
+        "label": "CRM — Invoices",
+        "url": "/crm/invoice/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Invoices"
+          }
+        ],
+        "keywords_ru": [
+          "счета",
+          "выставить счёт",
+          "новый счёт"
+        ],
+        "keywords_en": [
+          "invoices",
+          "invoice list",
+          "new invoice"
+        ],
+        "screenshot": "crawl_crm_18.png"
+      },
+      {
+        "label": "CRM — Invoices Kanban",
+        "url": "/crm/invoice/kanban/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Invoices"
+          },
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Kanban"
+          }
+        ],
+        "keywords_ru": [
+          "канбан",
+          "воронка",
+          "стадии сделок",
+          "счета"
+        ],
+        "keywords_en": [
+          "kanban",
+          "pipeline",
+          "funnel",
+          "stages",
+          "invoices"
+        ],
+        "screenshot": "crawl_crm_19.png",
+        "note": "Pipeline stages: Delete, Unpaid, Paid, New\n0, New\n0, New\n0, New\n0, New, $0, Sent to customer\n0, Sent to customer\n0, Sent to customer\n0, Sent to customer\n0, Sent to customer, $0"
+      },
+      {
+        "label": "CRM — Invoices List",
+        "url": "/crm/invoice/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Invoices"
+          },
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "List"
+          }
+        ],
+        "keywords_ru": [
+          "список",
+          "список invoices",
+          "счета"
+        ],
+        "keywords_en": [
+          "list",
+          "invoices list",
+          "invoices"
+        ],
+        "screenshot": "crawl_crm_20.png"
+      },
+      {
+        "label": "CRM — Inventory dropdown",
+        "url": "/crm/deal/list/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Inventory"
+          }
+        ],
+        "keywords_ru": [
+          "инвентарь crm",
+          "смарт счета",
+          "продукты crm",
+          "каталог"
+        ],
+        "keywords_en": [
+          "inventory",
+          "smart invoices",
+          "products",
+          "catalog",
+          "crm catalog"
+        ],
+        "screenshot": "crawl_crm_21.png",
+        "note": "Items: "
+      },
+      {
+        "label": "CRM — Customers dropdown",
+        "url": "/crm/deal/list/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Customers"
+          }
+        ],
+        "keywords_ru": [
+          "клиенты crm",
+          "контакты",
+          "компании"
+        ],
+        "keywords_en": [
+          "customers",
+          "contacts",
+          "companies",
+          "crm customers"
+        ],
+        "screenshot": "crawl_crm_22.png",
+        "note": "Items: "
+      },
+      {
+        "label": "CRM — Sales dropdown",
+        "url": "/crm/deal/list/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Sales"
+          }
+        ],
+        "keywords_ru": [
+          "продажи crm",
+          "сделки",
+          "лиды"
+        ],
+        "keywords_en": [
+          "sales",
+          "deals",
+          "leads",
+          "crm sales"
+        ],
+        "screenshot": "crawl_crm_23.png",
+        "note": "Items: "
+      },
+      {
+        "label": "CRM — Analytics dropdown",
+        "url": "/crm/deal/list/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Analytics"
+          }
+        ],
+        "keywords_ru": [
+          "аналитика crm",
+          "отчёты crm",
+          "статистика продаж"
+        ],
+        "keywords_en": [
+          "crm analytics",
+          "crm reports",
+          "sales statistics"
+        ],
+        "screenshot": "crawl_crm_24.png",
+        "note": "Items: "
+      },
+      {
+        "label": "CRM — Smart Process Automation",
+        "url": "/crm/type/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Smart Process Automation"
+          }
+        ],
+        "keywords_ru": [
+          "смарт-процессы",
+          "spa crm",
+          "автоматизация crm",
+          "кастомные процессы"
+        ],
+        "keywords_en": [
+          "smart process automation",
+          "spa",
+          "custom process",
+          "crm automation"
+        ],
+        "screenshot": "crawl_crm_25.png"
+      },
+      {
+        "label": "CRM — My Activities",
+        "url": "/crm/activity/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "My activities"
+          }
+        ],
+        "keywords_ru": [
+          "мои активности crm",
+          "звонки",
+          "встречи",
+          "задачи crm"
+        ],
+        "keywords_en": [
+          "my activities",
+          "crm activities",
+          "calls",
+          "meetings",
+          "crm tasks"
+        ],
+        "screenshot": "crawl_crm_26.png"
+      },
+      {
+        "label": "CRM — History",
+        "url": "/crm/events/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "History"
+          }
+        ],
+        "keywords_ru": [
+          "история crm",
+          "события crm",
+          "лог изменений"
+        ],
+        "keywords_en": [
+          "crm history",
+          "crm events",
+          "change log"
+        ],
+        "screenshot": "crawl_crm_27.png"
+      },
+      {
+        "label": "CRM — Recycle Bin",
+        "url": "/crm/recyclebin/",
+        "click_sequence": [
+          {
+            "selector": ".crm-menu-item-wrap",
+            "label": "Recycle Bin"
+          }
+        ],
+        "keywords_ru": [
+          "корзина crm",
+          "удалённые записи crm",
+          "восстановить"
+        ],
+        "keywords_en": [
+          "crm recycle bin",
+          "deleted crm items",
+          "restore"
+        ],
+        "screenshot": "crawl_crm_28.png"
+      }
+    ]
+  },
+  "booking": {
+    "base_url": "/online-booking/",
+    "entry_selector": ".menu-item-link",
+    "states": [
+      {
+        "label": "Booking — main page",
+        "url": "/booking/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "бронирование",
+          "онлайн запись",
+          "расписание"
+        ],
+        "keywords_en": [
+          "booking",
+          "online booking",
+          "schedule"
+        ],
+        "screenshot": "crawl_booking_01.png"
+      },
+      {
+        "label": "Booking — Bookings",
+        "url": "/booking/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Bookings"
+          }
+        ],
+        "keywords_ru": [
+          "бронирование",
+          "bookings",
+          "запись"
+        ],
+        "keywords_en": [
+          "booking",
+          "bookings",
+          "schedule"
+        ],
+        "screenshot": "crawl_booking_02.png"
+      },
+      {
+        "label": "Booking — Services",
+        "url": "/booking/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Services"
+          }
+        ],
+        "keywords_ru": [
+          "бронирование",
+          "services",
+          "запись"
+        ],
+        "keywords_en": [
+          "booking",
+          "services",
+          "schedule"
+        ],
+        "screenshot": "crawl_booking_03.png"
+      },
+      {
+        "label": "Booking — More",
+        "url": "/booking/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "More"
+          }
+        ],
+        "keywords_ru": [
+          "бронирование",
+          "more",
+          "запись"
+        ],
+        "keywords_en": [
+          "booking",
+          "more",
+          "schedule"
+        ],
+        "screenshot": "crawl_booking_04.png"
+      },
+      {
+        "label": "Booking — create form",
+        "url": "/booking/",
+        "click_sequence": [
+          {
+            "selector": "button.ui-btn",
+            "label": "Booking extensions"
+          }
+        ],
+        "keywords_ru": [
+          "создать бронирование",
+          "новая запись",
+          "форма записи"
+        ],
+        "keywords_en": [
+          "create booking",
+          "new appointment",
+          "booking form"
+        ],
+        "screenshot": "crawl_booking_05.png"
+      },
+      {
+        "label": "Booking — Services",
+        "url": "/crm/catalog/list/0/?IBLOCK_ID=15&type=CRM_PRODUCT_CATALOG&lang=en&find_section_section=0&SECTION_ID=0&apply_filter=Y&sliderList=Y&showToolbar=Y&createBtnItems%5B0%5D=service&preset_id=booking_services&with_preset=Y",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Services"
+          }
+        ],
+        "keywords_ru": [
+          "ресурсы",
+          "услуги",
+          "персонал"
+        ],
+        "keywords_en": [
+          "resources",
+          "services",
+          "staff"
+        ],
+        "screenshot": "crawl_booking_06.png"
+      }
+    ]
+  },
+  "inventory": {
+    "base_url": "/shop/documents/receipt_adjustment/",
+    "entry_selector": ".menu-item-link",
+    "states": [
+      {
+        "label": "Inventory — main page",
+        "url": "/shop/documents/receipt_adjustment/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "склад",
+          "инвентарь",
+          "управление складом",
+          "складской учёт",
+          "накладная"
+        ],
+        "keywords_en": [
+          "inventory",
+          "warehouse",
+          "stock management",
+          "inventory management"
+        ],
+        "screenshot": "crawl_inventory_01.png"
+      },
+      {
+        "label": "Inventory — Inventory (Receipts)",
+        "url": "/shop/documents/receipt_adjustment/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Inventory (Receipts)"
+          }
+        ],
+        "keywords_ru": [
+          "поступление товара",
+          "складской учёт",
+          "приход",
+          "инвентарь"
+        ],
+        "keywords_en": [
+          "inventory",
+          "receipt",
+          "stock receipt",
+          "goods receipt"
+        ],
+        "screenshot": "crawl_inventory_02.png"
+      },
+      {
+        "label": "Inventory — Sales Orders",
+        "url": "/shop/documents/sales_order/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Sales Orders"
+          }
+        ],
+        "keywords_ru": [
+          "заказы на продажу",
+          "продажа",
+          "отгрузка"
+        ],
+        "keywords_en": [
+          "sales orders",
+          "shipment",
+          "outgoing"
+        ],
+        "screenshot": "crawl_inventory_03.png"
+      },
+      {
+        "label": "Inventory — Transfers",
+        "url": "/shop/documents/moving/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Transfers"
+          }
+        ],
+        "keywords_ru": [
+          "перемещение",
+          "перемещение товаров",
+          "складской перевод"
+        ],
+        "keywords_en": [
+          "transfer",
+          "stock transfer",
+          "moving"
+        ],
+        "screenshot": "crawl_inventory_04.png"
+      },
+      {
+        "label": "Inventory — Write-offs",
+        "url": "/shop/documents/deduct/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Write-offs"
+          }
+        ],
+        "keywords_ru": [
+          "списание",
+          "списание товаров",
+          "инвентарь"
+        ],
+        "keywords_en": [
+          "write-off",
+          "deduct",
+          "stock write-off"
+        ],
+        "screenshot": "crawl_inventory_05.png"
+      },
+      {
+        "label": "Inventory — Products",
+        "url": "/shop/documents-catalog/?find_section_section=0&SECTION_ID=0&apply_filter=Y",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Products"
+          }
+        ],
+        "keywords_ru": [
+          "товары",
+          "каталог товаров",
+          "список товаров",
+          "управление товарами"
+        ],
+        "keywords_en": [
+          "products",
+          "product catalog",
+          "catalog",
+          "goods"
+        ],
+        "screenshot": "crawl_inventory_06.png"
+      },
+      {
+        "label": "Inventory — Products create form",
+        "url": "/shop/documents-catalog/?find_section_section=0&SECTION_ID=0&apply_filter=Y",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Products"
+          },
+          {
+            "selector": ".ui-btn-main",
+            "label": "Create"
+          }
+        ],
+        "keywords_ru": [
+          "создать документ",
+          "новый документ",
+          "products"
+        ],
+        "keywords_en": [
+          "create document",
+          "new document",
+          "products"
+        ],
+        "screenshot": "crawl_inventory_07.png",
+        "note": "Create button: 'Create'"
+      },
+      {
+        "label": "Inventory — Store Adjustments",
+        "url": "/shop/documents/store_adjustment/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Store Adjustments"
+          }
+        ],
+        "keywords_ru": [
+          "корректировка склада",
+          "инвентаризация",
+          "пересчёт"
+        ],
+        "keywords_en": [
+          "store adjustment",
+          "stock adjustment",
+          "inventory count"
+        ],
+        "screenshot": "crawl_inventory_08.png"
+      },
+      {
+        "label": "Inventory — Settings",
+        "url": "/shop/settings/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Settings"
+          }
+        ],
+        "keywords_ru": [
+          "настройки склада",
+          "конфигурация инвентаря"
+        ],
+        "keywords_en": [
+          "inventory settings",
+          "warehouse settings"
+        ],
+        "screenshot": "crawl_inventory_09.png"
+      },
+      {
+        "label": "Inventory — Customers",
+        "url": "/shop/documents/receipt_adjustment/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Customers"
+          }
+        ],
+        "keywords_ru": [
+          "клиенты",
+          "покупатели"
+        ],
+        "keywords_en": [
+          "customers",
+          "buyers"
+        ],
+        "screenshot": "crawl_inventory_10.png"
+      },
+      {
+        "label": "Inventory — Analytics",
+        "url": "/shop/documents/receipt_adjustment/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Analytics"
+          }
+        ],
+        "keywords_ru": [
+          "аналитика склада",
+          "отчёты",
+          "остатки"
+        ],
+        "keywords_en": [
+          "analytics",
+          "reports",
+          "stock balance"
+        ],
+        "screenshot": "crawl_inventory_11.png"
+      }
+    ]
+  },
+  "marketing": {
+    "base_url": "/marketing/",
+    "entry_selector": ".menu-item-link",
+    "states": [
+      {
+        "label": "Marketing — main page",
+        "url": "/marketing/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "маркетинг",
+          "рассылки",
+          "кампании"
+        ],
+        "keywords_en": [
+          "marketing",
+          "campaigns",
+          "mailing"
+        ],
+        "screenshot": "crawl_marketing_01.png"
+      },
+      {
+        "label": "Marketing — Campaigns",
+        "url": "/marketing/letter/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Campaigns"
+          }
+        ],
+        "keywords_ru": [
+          "кампании",
+          "рассылки",
+          "список кампаний",
+          "маркетинг"
+        ],
+        "keywords_en": [
+          "campaigns",
+          "mailing",
+          "campaign list",
+          "marketing"
+        ],
+        "screenshot": "crawl_marketing_02.png"
+      },
+      {
+        "label": "Marketing — Campaigns Campaigns",
+        "url": "/marketing/letter/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Campaigns"
+          },
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Campaigns"
+          }
+        ],
+        "keywords_ru": [
+          "campaigns рассылка"
+        ],
+        "keywords_en": [
+          "campaigns campaign"
+        ],
+        "screenshot": "crawl_marketing_03.png"
+      },
+      {
+        "label": "Marketing — create campaign dialog",
+        "url": "/marketing/letter/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Campaigns"
+          },
+          {
+            "selector": "button.ui-btn",
+            "label": "Create campaign"
+          }
+        ],
+        "keywords_ru": [
+          "создать кампанию",
+          "новая кампания",
+          "тип рассылки"
+        ],
+        "keywords_en": [
+          "create campaign",
+          "new campaign",
+          "campaign type"
+        ],
+        "screenshot": "crawl_marketing_04.png"
+      },
+      {
+        "label": "Marketing — Ads",
+        "url": "/marketing/ads/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Ads"
+          }
+        ],
+        "keywords_ru": [
+          "реклама",
+          "рекламные объявления",
+          "таргетинг"
+        ],
+        "keywords_en": [
+          "ads",
+          "advertising",
+          "targeting"
+        ],
+        "screenshot": "crawl_marketing_05.png"
+      },
+      {
+        "label": "Marketing — Sales Boost",
+        "url": "/marketing/rc/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Sales Boost"
+          }
+        ],
+        "keywords_ru": [
+          "стимулирование продаж",
+          "скидки",
+          "акции"
+        ],
+        "keywords_en": [
+          "sales boost",
+          "discounts",
+          "promotions"
+        ],
+        "screenshot": "crawl_marketing_06.png"
+      },
+      {
+        "label": "Marketing — Black List",
+        "url": "/marketing/blacklist/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Black List"
+          }
+        ],
+        "keywords_ru": [
+          "чёрный список",
+          "отписки",
+          "блокировка"
+        ],
+        "keywords_en": [
+          "black list",
+          "unsubscribe",
+          "blocklist"
+        ],
+        "screenshot": "crawl_marketing_07.png"
+      },
+      {
+        "label": "Marketing — Recipients",
+        "url": "/marketing/contact/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Recipients"
+          }
+        ],
+        "keywords_ru": [
+          "получатели",
+          "контакты рассылки",
+          "список получателей"
+        ],
+        "keywords_en": [
+          "recipients",
+          "contacts",
+          "mailing list"
+        ],
+        "screenshot": "crawl_marketing_08.png"
+      },
+      {
+        "label": "Marketing — Segments",
+        "url": "/marketing/segment/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Segments"
+          }
+        ],
+        "keywords_ru": [
+          "сегменты",
+          "аудитория",
+          "сегмент клиентов",
+          "таргетинг"
+        ],
+        "keywords_en": [
+          "segments",
+          "audience",
+          "customer segment",
+          "targeting"
+        ],
+        "screenshot": "crawl_marketing_09.png"
+      },
+      {
+        "label": "Marketing — create segment",
+        "url": "/marketing/segment/edit/31/?IS_NEW=Y",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Segments"
+          },
+          {
+            "selector": "[class*='add'][class*='btn']",
+            "label": "Create segment"
+          }
+        ],
+        "keywords_ru": [
+          "создать сегмент",
+          "новый сегмент",
+          "фильтр аудитории"
+        ],
+        "keywords_en": [
+          "create segment",
+          "new segment",
+          "audience filter"
+        ],
+        "screenshot": "crawl_marketing_10.png"
+      },
+      {
+        "label": "Marketing — My Templates",
+        "url": "/marketing/template/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "My Templates"
+          }
+        ],
+        "keywords_ru": [
+          "шаблоны",
+          "шаблон письма",
+          "мои шаблоны"
+        ],
+        "keywords_en": [
+          "templates",
+          "my templates",
+          "email template"
+        ],
+        "screenshot": "crawl_marketing_11.png"
+      },
+      {
+        "label": "Marketing — template editor",
+        "url": "/marketing/template/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "My Templates"
+          },
+          {
+            "selector": "[class*='add'][class*='btn']",
+            "label": "Create template"
+          }
+        ],
+        "keywords_ru": [
+          "редактор шаблона",
+          "создать шаблон",
+          "html редактор"
+        ],
+        "keywords_en": [
+          "template editor",
+          "create template",
+          "html editor"
+        ],
+        "screenshot": "crawl_marketing_12.png"
+      }
+    ]
+  },
+  "sites": {
+    "base_url": "/sites/",
+    "entry_selector": ".menu-item-link",
+    "states": [
+      {
+        "label": "Sites — main page",
+        "url": "/sites/sites/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "сайты",
+          "список сайтов",
+          "конструктор сайтов",
+          "лендинг",
+          "создать сайт",
+          "сайт",
+          "страница",
+          "публикация",
+          "домен"
+        ],
+        "keywords_en": [
+          "sites",
+          "site list",
+          "website builder",
+          "landing page",
+          "create site",
+          "site",
+          "website",
+          "publish",
+          "domain"
+        ],
+        "screenshot": "crawl_sites_01.png"
+      },
+      {
+        "label": "Sites — Online stores",
+        "url": "/shop/stores/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Online stores"
+          }
+        ],
+        "keywords_ru": [
+          "интернет магазин",
+          "магазины",
+          "онлайн магазин",
+          "создать магазин",
+          "магазин",
+          "каталог товаров",
+          "товар"
+        ],
+        "keywords_en": [
+          "online stores",
+          "e-commerce",
+          "shop",
+          "create store",
+          "store",
+          "product catalog"
+        ],
+        "screenshot": "crawl_sites_02.png"
+      },
+      {
+        "label": "Sites — CRM forms",
+        "url": "/crm/webform/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "CRM forms"
+          }
+        ],
+        "keywords_ru": [
+          "crm формы",
+          "веб форма",
+          "форма обратной связи",
+          "форма захвата лидов",
+          "форма сайта",
+          "форма"
+        ],
+        "keywords_en": [
+          "crm forms",
+          "web form",
+          "feedback form",
+          "lead capture form",
+          "site form",
+          "form",
+          "contact form"
+        ],
+        "screenshot": "crawl_sites_03.png"
+      },
+      {
+        "label": "Sites — Inventory",
+        "url": "/sites/sites/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Inventory"
+          }
+        ],
+        "keywords_ru": [
+          "товары для сайта",
+          "каталог",
+          "инвентарь сайта"
+        ],
+        "keywords_en": [
+          "site inventory",
+          "product catalog",
+          "site products"
+        ],
+        "screenshot": "crawl_sites_04.png"
+      },
+      {
+        "label": "Sites — Customers",
+        "url": "/sites/sites/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Customers"
+          }
+        ],
+        "keywords_ru": [
+          "клиенты сайта",
+          "контакты сайта",
+          "покупатели"
+        ],
+        "keywords_en": [
+          "site customers",
+          "site contacts",
+          "buyers"
+        ],
+        "screenshot": "crawl_sites_05.png"
+      },
+      {
+        "label": "Sites — Payment systems and Delivery",
+        "url": "/sites/sites/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Payment systems and Delivery"
+          }
+        ],
+        "keywords_ru": [
+          "оплата",
+          "доставка",
+          "способы оплаты",
+          "платёжные системы"
+        ],
+        "keywords_en": [
+          "payment systems",
+          "delivery",
+          "payment methods"
+        ],
+        "screenshot": "crawl_sites_06.png"
+      },
+      {
+        "label": "Sites — Templates",
+        "url": "/sites/templates/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Templates"
+          }
+        ],
+        "keywords_ru": [
+          "шаблоны сайтов",
+          "шаблон лендинга",
+          "готовые шаблоны",
+          "дизайн сайта",
+          "блок",
+          "блоки сайта",
+          "виджет"
+        ],
+        "keywords_en": [
+          "site templates",
+          "landing templates",
+          "ready templates",
+          "website design",
+          "block",
+          "widget",
+          "site template",
+          "design"
+        ],
+        "screenshot": "crawl_sites_07.png"
+      },
+      {
+        "label": "Sites — Recycle bin",
+        "url": "/sites/sites/",
+        "click_sequence": [
+          {
+            "selector": "button.ui-btn",
+            "label": "Recycle bin"
+          }
+        ],
+        "keywords_ru": [
+          "корзина сайтов",
+          "удалённые сайты"
+        ],
+        "keywords_en": [
+          "site recycle bin",
+          "deleted sites"
+        ],
+        "screenshot": "crawl_sites_08.png"
+      },
+      {
+        "label": "Sites — create site dialog",
+        "url": "/sites/sites/",
+        "click_sequence": [
+          {
+            "selector": "[class*='add'][class*='btn']",
+            "label": "Create"
+          }
+        ],
+        "keywords_ru": [
+          "создать сайт",
+          "новый сайт",
+          "шаблон сайта",
+          "тип сайта",
+          "создание сайта",
+          "страница сайта"
+        ],
+        "keywords_en": [
+          "create site",
+          "new site",
+          "site template",
+          "site type",
+          "create website"
+        ],
+        "screenshot": "crawl_sites_09.png"
+      },
+      {
+        "label": "Sites — create store dialog",
+        "url": "/shop/stores/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Online stores"
+          },
+          {
+            "selector": "[class*='add'][class*='btn']",
+            "label": "Create"
+          }
+        ],
+        "keywords_ru": [
+          "создать магазин",
+          "новый магазин",
+          "интернет магазин",
+          "шаблон магазина"
+        ],
+        "keywords_en": [
+          "create store",
+          "new store",
+          "online store",
+          "store template"
+        ],
+        "screenshot": "crawl_sites_10.png"
+      },
+      {
+        "label": "Sites — CRM Forms create",
+        "url": "/sites/site/3/view/1/?formCreated=y",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "CRM forms"
+          },
+          {
+            "selector": "[class*='add'][class*='btn']",
+            "label": "Add"
+          }
+        ],
+        "keywords_ru": [
+          "создать форму",
+          "новая форма",
+          "crm форма",
+          "форма захвата"
+        ],
+        "keywords_en": [
+          "create form",
+          "new form",
+          "crm form",
+          "lead form"
+        ],
+        "screenshot": "crawl_sites_11.png"
+      }
+    ]
+  },
+  "esignature_hr": {
+    "base_url": "/sign/b2e/",
+    "entry_selector": ".menu-item-link",
+    "states": [
+      {
+        "label": "e-Signature HR — main page",
+        "url": "/sign/b2e/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "кадровый документооборот",
+          "hr документы",
+          "электронная подпись кадры",
+          "подписание документов",
+          "трудовой договор"
+        ],
+        "keywords_en": [
+          "e-signature hr",
+          "hr documents",
+          "electronic signature",
+          "employment contract",
+          "hr workflow"
+        ],
+        "screenshot": "crawl_esignature_hr_01.png"
+      },
+      {
+        "label": "e-Signature HR — Kanban view",
+        "url": "/sign/b2e/",
+        "click_sequence": [
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Kanban"
+          }
+        ],
+        "keywords_ru": [
+          "hr документы",
+          "kanban",
+          "кадры"
+        ],
+        "keywords_en": [
+          "hr documents",
+          "kanban",
+          "hr"
+        ],
+        "screenshot": "crawl_esignature_hr_02.png"
+      },
+      {
+        "label": "e-Signature HR — List view",
+        "url": "/sign/b2e/list/",
+        "click_sequence": [
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "List"
+          }
+        ],
+        "keywords_ru": [
+          "hr документы",
+          "list",
+          "кадры"
+        ],
+        "keywords_en": [
+          "hr documents",
+          "list",
+          "hr"
+        ],
+        "screenshot": "crawl_esignature_hr_03.png"
+      },
+      {
+        "label": "e-Signature HR — My documents",
+        "url": "/sign/b2e/my-documents/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "My documents"
+          }
+        ],
+        "keywords_ru": [
+          "мои документы",
+          "личные документы",
+          "подписанные мной"
+        ],
+        "keywords_en": [
+          "my documents",
+          "personal documents",
+          "signed documents"
+        ],
+        "screenshot": "crawl_esignature_hr_04.png"
+      },
+      {
+        "label": "e-Signature HR — Company vault",
+        "url": "/sign/b2e/mysafe/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Company vault"
+          }
+        ],
+        "keywords_ru": [
+          "корпоративное хранилище",
+          "архив документов",
+          "хранилище hr"
+        ],
+        "keywords_en": [
+          "company vault",
+          "document archive",
+          "hr storage"
+        ],
+        "screenshot": "crawl_esignature_hr_05.png"
+      },
+      {
+        "label": "e-Signature HR — Document templates",
+        "url": "/sign/b2e/employee/templates",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Document templates"
+          }
+        ],
+        "keywords_ru": [
+          "шаблоны документов",
+          "шаблон hr",
+          "шаблон договора"
+        ],
+        "keywords_en": [
+          "document templates",
+          "hr templates",
+          "contract template"
+        ],
+        "screenshot": "crawl_esignature_hr_06.png"
+      },
+      {
+        "label": "e-Signature HR — Editor fields",
+        "url": "/sign/b2e/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Editor fields"
+          }
+        ],
+        "keywords_ru": [
+          "поля редактора",
+          "поля документа",
+          "переменные документа"
+        ],
+        "keywords_en": [
+          "editor fields",
+          "document fields",
+          "document variables"
+        ],
+        "screenshot": "crawl_esignature_hr_07.png"
+      },
+      {
+        "label": "e-Signature HR — create document dialog",
+        "url": "/sign/b2e/",
+        "click_sequence": [
+          {
+            "selector": ".ui-btn-main",
+            "label": "Create"
+          }
+        ],
+        "keywords_ru": [
+          "создать документ",
+          "новый документ hr",
+          "загрузить документ",
+          "тип документа"
+        ],
+        "keywords_en": [
+          "create document",
+          "new hr document",
+          "upload document",
+          "document type"
+        ],
+        "screenshot": "crawl_esignature_hr_08.png",
+        "note": ""
+      },
+      {
+        "label": "e-Signature HR — template editor",
+        "url": "/sign/b2e/doc/0/?folderId=0&isOpenedAsFolder=N&mode=template",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Document templates"
+          },
+          {
+            "selector": ".ui-btn-main",
+            "label": "Create"
+          }
+        ],
+        "keywords_ru": [
+          "редактор шаблона hr",
+          "создать шаблон",
+          "шаблон кадрового документа"
+        ],
+        "keywords_en": [
+          "hr template editor",
+          "create template",
+          "hr document template"
+        ],
+        "screenshot": "crawl_esignature_hr_09.png"
+      }
+    ]
+  },
+  "esignature": {
+    "base_url": "/sign/",
+    "entry_selector": ".menu-item-link",
+    "states": [
+      {
+        "label": "e-Signature — main page",
+        "url": "/sign/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "электронная подпись",
+          "подписание документов",
+          "отправить на подпись",
+          "контрагент"
+        ],
+        "keywords_en": [
+          "e-signature",
+          "sign document",
+          "send for signing",
+          "counterparty",
+          "contract signing"
+        ],
+        "screenshot": "crawl_esignature_01.png"
+      },
+      {
+        "label": "e-Signature — My vault",
+        "url": "/sign/mysafe/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "My vault"
+          }
+        ],
+        "keywords_ru": [
+          "мой сейф",
+          "хранилище подписей",
+          "подписанные документы"
+        ],
+        "keywords_en": [
+          "my vault",
+          "signed documents",
+          "document vault"
+        ],
+        "screenshot": "crawl_esignature_02.png"
+      },
+      {
+        "label": "e-Signature — Contacts",
+        "url": "/sign/contact/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Contacts"
+          }
+        ],
+        "keywords_ru": [
+          "контакты подписания",
+          "контрагенты",
+          "получатели подписи"
+        ],
+        "keywords_en": [
+          "sign contacts",
+          "counterparties",
+          "signing recipients"
+        ],
+        "screenshot": "crawl_esignature_03.png"
+      },
+      {
+        "label": "e-Signature — Access permissions",
+        "url": "/sign/config/permission/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Access permissions"
+          }
+        ],
+        "keywords_ru": [
+          "права доступа",
+          "разрешения",
+          "настройки доступа"
+        ],
+        "keywords_en": [
+          "access permissions",
+          "permissions",
+          "access settings"
+        ],
+        "screenshot": "crawl_esignature_04.png"
+      },
+      {
+        "label": "e-Signature — Documents",
+        "url": "/sign/documents/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "список документов",
+          "все документы подписания",
+          "документы контрагентов"
+        ],
+        "keywords_en": [
+          "documents list",
+          "all sign documents",
+          "counterparty documents"
+        ],
+        "screenshot": "crawl_esignature_05.png"
+      },
+      {
+        "label": "e-Signature — Templates",
+        "url": "/sign/templates/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "шаблоны подписи",
+          "шаблон договора",
+          "шаблон документа для подписи"
+        ],
+        "keywords_en": [
+          "sign templates",
+          "contract template",
+          "document template",
+          "signature template"
+        ],
+        "screenshot": "crawl_esignature_06.png"
+      },
+      {
+        "label": "e-Signature — template editor",
+        "url": "/sign/doc/0/?categoryId=0",
+        "click_sequence": [
+          {
+            "selector": "[class*='add'][class*='btn']",
+            "label": "Sign"
+          }
+        ],
+        "keywords_ru": [
+          "редактор шаблона подписи",
+          "создать шаблон подписи"
+        ],
+        "keywords_en": [
+          "sign template editor",
+          "create signature template"
+        ],
+        "screenshot": "crawl_esignature_07.png"
+      },
+      {
+        "label": "e-Signature — sign/create dialog",
+        "url": "/sign/",
+        "click_sequence": [
+          {
+            "selector": "[class*='add'][class*='btn']",
+            "label": "Sign"
+          }
+        ],
+        "keywords_ru": [
+          "создать документ на подпись",
+          "загрузить документ",
+          "отправить на подпись"
+        ],
+        "keywords_en": [
+          "create sign document",
+          "upload document",
+          "send for signing"
+        ],
+        "screenshot": "crawl_esignature_08.png",
+        "note": ""
+      }
+    ]
+  },
+  "bi_builder": {
+    "base_url": "/bi/dashboard/",
+    "entry_selector": ".menu-item-link",
+    "states": [
+      {
+        "label": "BI Builder — main page",
+        "url": "/bi/dashboard/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "би билдер",
+          "дашборд",
+          "аналитика",
+          "отчёты",
+          "бизнес аналитика",
+          "визуализация данных"
+        ],
+        "keywords_en": [
+          "bi builder",
+          "dashboard",
+          "analytics",
+          "reports",
+          "business intelligence",
+          "data visualization"
+        ],
+        "screenshot": "crawl_bi_builder_01.png"
+      },
+      {
+        "label": "BI Builder — Dashboards in Market",
+        "url": "/market/collection/bi_constructor_dashboards/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Dashboards in Market"
+          }
+        ],
+        "keywords_ru": [
+          "маркет дашборды",
+          "готовые дашборды",
+          "маркетплейс"
+        ],
+        "keywords_en": [
+          "market dashboards",
+          "ready dashboards",
+          "marketplace"
+        ],
+        "screenshot": "crawl_bi_builder_02.png"
+      },
+      {
+        "label": "BI Builder — Order custom dashboard",
+        "url": "/bi/dashboard/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Order custom dashboard"
+          }
+        ],
+        "keywords_ru": [
+          "заказать дашборд",
+          "разработка дашборда"
+        ],
+        "keywords_en": [
+          "order dashboard",
+          "custom dashboard",
+          "dashboard development"
+        ],
+        "screenshot": "crawl_bi_builder_03.png"
+      },
+      {
+        "label": "BI Builder — Feedback",
+        "url": "/bi/dashboard/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Feedback"
+          }
+        ],
+        "keywords_ru": [
+          "обратная связь",
+          "отзыв",
+          "поддержка"
+        ],
+        "keywords_en": [
+          "feedback",
+          "support",
+          "review"
+        ],
+        "screenshot": "crawl_bi_builder_04.png"
+      },
+      {
+        "label": "BI Builder — Settings",
+        "url": "/bi/dashboard/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Settings"
+          }
+        ],
+        "keywords_ru": [
+          "настройки аналитики",
+          "источники данных",
+          "конфигурация"
+        ],
+        "keywords_en": [
+          "analytics settings",
+          "data sources",
+          "configuration"
+        ],
+        "screenshot": "crawl_bi_builder_05.png"
+      },
+      {
+        "label": "BI Builder — create dashboard dialog",
+        "url": "/bi/dashboard/",
+        "click_sequence": [
+          {
+            "selector": ".ui-btn-main",
+            "label": "Create"
+          }
+        ],
+        "keywords_ru": [
+          "создать дашборд",
+          "новый дашборд",
+          "новый отчёт",
+          "тип дашборда"
+        ],
+        "keywords_en": [
+          "create dashboard",
+          "new dashboard",
+          "new report",
+          "dashboard type"
+        ],
+        "screenshot": "crawl_bi_builder_06.png",
+        "note": ""
+      },
+      {
+        "label": "BI Builder — dashboard item hover",
+        "url": "/bi/dashboard/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "карточка дашборда",
+          "hover дашборд",
+          "действия дашборда"
+        ],
+        "keywords_en": [
+          "dashboard card",
+          "dashboard hover",
+          "dashboard actions"
+        ],
+        "screenshot": "crawl_bi_builder_07.png"
+      },
+      {
+        "label": "BI Builder — dashboard context menu",
+        "url": "/bi/dashboard/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "контекстное меню дашборда",
+          "редактировать дашборд",
+          "удалить дашборд"
+        ],
+        "keywords_en": [
+          "dashboard context menu",
+          "edit dashboard",
+          "delete dashboard"
+        ],
+        "screenshot": "crawl_bi_builder_08.png",
+        "note": "Items: []"
+      }
+    ]
+  },
+  "employees": {
+    "base_url": "/company/",
+    "entry_selector": ".menu-item-link",
+    "states": [
+      {
+        "label": "Employees — main page",
+        "url": "/company/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "сотрудники",
+          "список сотрудников",
+          "найти сотрудника",
+          "поиск по сотрудникам",
+          "сотрудник",
+          "отдел",
+          "пригласить"
+        ],
+        "keywords_en": [
+          "employees",
+          "employee list",
+          "find employee",
+          "search employees",
+          "employee",
+          "department",
+          "invite",
+          "people"
+        ],
+        "screenshot": "crawl_employees_01.png"
+      },
+      {
+        "label": "Employees — Company Structure",
+        "url": "/hr/structure/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Company Structure"
+          }
+        ],
+        "keywords_ru": [
+          "структура компании",
+          "оргструктура",
+          "отделы",
+          "иерархия",
+          "руководители",
+          "структура"
+        ],
+        "keywords_en": [
+          "company structure",
+          "org chart",
+          "departments",
+          "hierarchy",
+          "managers",
+          "structure"
+        ],
+        "screenshot": "crawl_employees_02.png"
+      },
+      {
+        "label": "Employees — Time and reports",
+        "url": "/company/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Time and reports"
+          }
+        ],
+        "keywords_ru": [
+          "время и отчёты",
+          "рабочее время",
+          "отчёты по времени",
+          "явка",
+          "отсутствие",
+          "явка сотрудника"
+        ],
+        "keywords_en": [
+          "time and reports",
+          "work time",
+          "time reports",
+          "attendance",
+          "absence",
+          "schedule"
+        ],
+        "screenshot": "crawl_employees_03.png"
+      },
+      {
+        "label": "Employees — employee profile",
+        "url": "/company/personal/user/1/calendar/?EVENT_ID=NEW",
+        "click_sequence": [
+          {
+            "selector": "a[href*='/company/personal/user/']",
+            "label": "Employee"
+          }
+        ],
+        "keywords_ru": [
+          "профиль сотрудника",
+          "карточка сотрудника",
+          "личная страница",
+          "информация о сотруднике",
+          "пользователь",
+          "аккаунт сотрудника"
+        ],
+        "keywords_en": [
+          "employee profile",
+          "employee card",
+          "personal page",
+          "employee info",
+          "user profile"
+        ],
+        "screenshot": "crawl_employees_04.png"
+      },
+      {
+        "label": "Employees — profile tab Day",
+        "url": "/company/personal/user/1/calendar/?EVENT_ID=NEW",
+        "click_sequence": [
+          {
+            "selector": "a[href*='/company/personal/user/']",
+            "label": "Employee"
+          },
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Day"
+          }
+        ],
+        "keywords_ru": [
+          "профиль day"
+        ],
+        "keywords_en": [
+          "profile day"
+        ],
+        "screenshot": "crawl_employees_05.png"
+      },
+      {
+        "label": "Employees — profile tab Week",
+        "url": "/company/personal/user/1/calendar/?EVENT_ID=NEW",
+        "click_sequence": [
+          {
+            "selector": "a[href*='/company/personal/user/']",
+            "label": "Employee"
+          },
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Week"
+          }
+        ],
+        "keywords_ru": [
+          "профиль week"
+        ],
+        "keywords_en": [
+          "profile week"
+        ],
+        "screenshot": "crawl_employees_06.png"
+      },
+      {
+        "label": "Employees — profile tab Month",
+        "url": "/company/personal/user/1/calendar/?EVENT_ID=NEW",
+        "click_sequence": [
+          {
+            "selector": "a[href*='/company/personal/user/']",
+            "label": "Employee"
+          },
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Month"
+          }
+        ],
+        "keywords_ru": [
+          "профиль month"
+        ],
+        "keywords_en": [
+          "profile month"
+        ],
+        "screenshot": "crawl_employees_07.png"
+      },
+      {
+        "label": "Employees — profile tab Schedule",
+        "url": "/company/personal/user/1/calendar/?EVENT_ID=NEW",
+        "click_sequence": [
+          {
+            "selector": "a[href*='/company/personal/user/']",
+            "label": "Employee"
+          },
+          {
+            "selector": ".ui-nav-panel__item",
+            "label": "Schedule"
+          }
+        ],
+        "keywords_ru": [
+          "профиль schedule"
+        ],
+        "keywords_en": [
+          "profile schedule"
+        ],
+        "screenshot": "crawl_employees_08.png"
+      },
+      {
+        "label": "Employees — invite dialog",
+        "url": "/company/",
+        "click_sequence": [
+          {
+            "selector": "[class*='add'][class*='btn']",
+            "label": "Invite"
+          }
+        ],
+        "keywords_ru": [
+          "пригласить сотрудника",
+          "добавить сотрудника",
+          "новый сотрудник",
+          "приглашение",
+          "пригласить"
+        ],
+        "keywords_en": [
+          "invite employee",
+          "add employee",
+          "new employee",
+          "invitation",
+          "invite"
+        ],
+        "screenshot": "crawl_employees_09.png",
+        "note": ""
+      },
+      {
+        "label": "Employees — Knowledge base",
+        "url": "/kb/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Knowledge base"
+          }
+        ],
+        "keywords_ru": [
+          "база знаний",
+          "wiki",
+          "корпоративные знания",
+          "документация компании"
+        ],
+        "keywords_en": [
+          "knowledge base",
+          "wiki",
+          "corporate knowledge",
+          "company documentation"
+        ],
+        "screenshot": "crawl_employees_10.png"
+      },
+      {
+        "label": "Employees — Video Conferencing",
+        "url": "/conference/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Video Conferencing"
+          }
+        ],
+        "keywords_ru": [
+          "видеоконференция",
+          "видеозвонок",
+          "онлайн встреча",
+          "конференция"
+        ],
+        "keywords_en": [
+          "video conferencing",
+          "video call",
+          "online meeting",
+          "conference"
+        ],
+        "screenshot": "crawl_employees_11.png"
+      }
+    ]
+  },
+  "automation": {
+    "base_url": "/automation/",
+    "entry_selector": ".menu-item-link",
+    "states": [
+      {
+        "label": "Automation — main page",
+        "url": "/automation/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "автоматизация",
+          "бизнес-процессы",
+          "роботы",
+          "триггеры",
+          "воркфлоу",
+          "смарт сценарии"
+        ],
+        "keywords_en": [
+          "automation",
+          "business processes",
+          "robots",
+          "triggers",
+          "workflow",
+          "smart scenarios"
+        ],
+        "screenshot": "crawl_automation_01.png"
+      },
+      {
+        "label": "Automation — Workflows",
+        "url": "/bizproc/userprocesses/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Workflows"
+          }
+        ],
+        "keywords_ru": [
+          "воркфлоу",
+          "бизнес-процессы",
+          "рабочие процессы",
+          "шаблоны процессов",
+          "автоматизация задач"
+        ],
+        "keywords_en": [
+          "workflows",
+          "business processes",
+          "process templates",
+          "task automation"
+        ],
+        "screenshot": "crawl_automation_02.png"
+      },
+      {
+        "label": "Automation — Automation rules and triggers",
+        "url": "/automation/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Automation rules and triggers"
+          }
+        ],
+        "keywords_ru": [
+          "правила автоматизации",
+          "триггеры",
+          "роботы crm",
+          "автоматические действия"
+        ],
+        "keywords_en": [
+          "automation rules",
+          "triggers",
+          "crm robots",
+          "automatic actions"
+        ],
+        "screenshot": "crawl_automation_03.png"
+      },
+      {
+        "label": "Automation — NEW Automated solutions",
+        "url": "/automation/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "NEW Automated solutions"
+          }
+        ],
+        "keywords_ru": [
+          "готовые решения",
+          "автоматизированные решения",
+          "смарт сценарии"
+        ],
+        "keywords_en": [
+          "automated solutions",
+          "ready solutions",
+          "smart scenarios"
+        ],
+        "screenshot": "crawl_automation_04.png"
+      },
+      {
+        "label": "Automation — RPA",
+        "url": "/rpa/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "RPA"
+          }
+        ],
+        "keywords_ru": [
+          "rpa",
+          "роботизированная автоматизация",
+          "robotic process automation"
+        ],
+        "keywords_en": [
+          "rpa",
+          "robotic process automation",
+          "process robot"
+        ],
+        "screenshot": "crawl_automation_05.png"
+      },
+      {
+        "label": "Automation — Analytics",
+        "url": "/automation/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Analytics"
+          }
+        ],
+        "keywords_ru": [
+          "аналитика автоматизации",
+          "статистика процессов",
+          "отчёты автоматизации"
+        ],
+        "keywords_en": [
+          "automation analytics",
+          "process statistics",
+          "automation reports"
+        ],
+        "screenshot": "crawl_automation_06.png"
+      }
+    ]
+  },
+  "market": {
+    "base_url": "/market/",
+    "entry_selector": ".menu-marketplace-group",
+    "states": [
+      {
+        "label": "Market — All applications",
+        "url": "/market/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "маркет",
+          "маркетплейс",
+          "все приложения",
+          "каталог приложений",
+          "интеграции",
+          "установить приложение",
+          "готовые решения"
+        ],
+        "keywords_en": [
+          "market",
+          "marketplace",
+          "all applications",
+          "app catalog",
+          "integrations",
+          "install app",
+          "ready solutions"
+        ],
+        "screenshot": "crawl_market_01.png"
+      },
+      {
+        "label": "Market — Installed apps",
+        "url": "/market/installed/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Installed"
+          }
+        ],
+        "keywords_ru": [
+          "установленные",
+          "мои приложения",
+          "установленные приложения"
+        ],
+        "keywords_en": [
+          "installed",
+          "my apps",
+          "installed applications"
+        ],
+        "screenshot": "crawl_market_02.png"
+      },
+      {
+        "label": "Market — Developer resources",
+        "url": "/devops/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Developer resources"
+          }
+        ],
+        "keywords_ru": [
+          "разработчик",
+          "devops",
+          "разработка приложений",
+          "партнёрам"
+        ],
+        "keywords_en": [
+          "developer",
+          "devops",
+          "app development",
+          "partner resources"
+        ],
+        "screenshot": "crawl_market_03.png"
+      },
+      {
+        "label": "Market — Favorites",
+        "url": "/market/favorites/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "избранное",
+          "закладки",
+          "сохранённые приложения"
+        ],
+        "keywords_en": [
+          "favorites",
+          "bookmarks",
+          "saved apps"
+        ],
+        "screenshot": "crawl_market_04.png"
+      },
+      {
+        "label": "Market — Category: Sales and CRM",
+        "url": "/market/category/crm/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "crm",
+          "продажи",
+          "категория crm",
+          "приложения для crm"
+        ],
+        "keywords_en": [
+          "crm",
+          "sales",
+          "crm category",
+          "crm apps"
+        ],
+        "screenshot": "crawl_market_05.png"
+      },
+      {
+        "label": "Market — Category: Integrations",
+        "url": "/market/category/integration/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "интеграции",
+          "подключить сервисы",
+          "категория интеграции"
+        ],
+        "keywords_en": [
+          "integrations",
+          "connect services",
+          "integration apps"
+        ],
+        "screenshot": "crawl_market_06.png"
+      },
+      {
+        "label": "Market — Category: Communication channels",
+        "url": "/market/category/communication/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "коммуникации",
+          "мессенджеры",
+          "каналы связи",
+          "телефония"
+        ],
+        "keywords_en": [
+          "communication",
+          "messengers",
+          "communication channels",
+          "telephony"
+        ],
+        "screenshot": "crawl_market_07.png"
+      },
+      {
+        "label": "Market — Category: Automation",
+        "url": "/market/category/automation/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "автоматизация",
+          "роботы",
+          "категория автоматизации",
+          "бизнес-процессы"
+        ],
+        "keywords_en": [
+          "automation",
+          "robots",
+          "automation category",
+          "business processes"
+        ],
+        "screenshot": "crawl_market_08.png"
+      },
+      {
+        "label": "Market — Category: Marketing and newsletters",
+        "url": "/market/category/marketing/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "маркетинг",
+          "рассылки",
+          "email-маркетинг",
+          "категория маркетинг"
+        ],
+        "keywords_en": [
+          "marketing",
+          "newsletters",
+          "email marketing",
+          "marketing apps"
+        ],
+        "screenshot": "crawl_market_09.png"
+      },
+      {
+        "label": "Market — Category: Analytics and reports",
+        "url": "/market/category/analytics/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "аналитика",
+          "отчёты",
+          "статистика",
+          "категория аналитика"
+        ],
+        "keywords_en": [
+          "analytics",
+          "reports",
+          "statistics",
+          "analytics apps"
+        ],
+        "screenshot": "crawl_market_10.png"
+      },
+      {
+        "label": "Market — Category: HR management",
+        "url": "/market/category/hr/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "hr",
+          "управление персоналом",
+          "кадры",
+          "категория hr"
+        ],
+        "keywords_en": [
+          "hr",
+          "human resources",
+          "hr management",
+          "hr apps"
+        ],
+        "screenshot": "crawl_market_11.png"
+      },
+      {
+        "label": "Market — Category: Tasks and projects",
+        "url": "/market/category/projects/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "задачи",
+          "проекты",
+          "управление проектами",
+          "категория задачи"
+        ],
+        "keywords_en": [
+          "tasks",
+          "projects",
+          "project management",
+          "tasks apps"
+        ],
+        "screenshot": "crawl_market_12.png"
+      },
+      {
+        "label": "Market — Top free solutions",
+        "url": "/market/category/integrations/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "бесплатные",
+          "топ бесплатные",
+          "лучшие бесплатные решения"
+        ],
+        "keywords_en": [
+          "top free",
+          "free solutions",
+          "free apps",
+          "best free"
+        ],
+        "screenshot": "crawl_market_13.png"
+      },
+      {
+        "label": "Market — Collection: New apps",
+        "url": "/market/collection/18170402/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "новые приложения",
+          "коллекция",
+          "новинки маркета"
+        ],
+        "keywords_en": [
+          "new apps",
+          "collection",
+          "new market apps"
+        ],
+        "screenshot": "crawl_market_14.png"
+      },
+      {
+        "label": "Market — Collection: Business telephony",
+        "url": "/market/collection/15503020/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "телефония",
+          "коллекция телефония",
+          "ip-телефония",
+          "звонки"
+        ],
+        "keywords_en": [
+          "telephony",
+          "business telephony",
+          "ip-telephony",
+          "calls"
+        ],
+        "screenshot": "crawl_market_15.png"
+      },
+      {
+        "label": "Market — Collection: Contact center for messengers",
+        "url": "/market/collection/19505608/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "контакт-центр",
+          "мессенджеры",
+          "коллекция мессенджеры"
+        ],
+        "keywords_en": [
+          "contact center",
+          "messengers",
+          "messenger integration"
+        ],
+        "screenshot": "crawl_market_16.png"
+      },
+      {
+        "label": "Market — App detail: Wazzup (example)",
+        "url": "/market/detail/wazzup.apps/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "страница приложения",
+          "детали приложения",
+          "установить приложение",
+          "описание приложения",
+          "отзывы приложения"
+        ],
+        "keywords_en": [
+          "app page",
+          "app details",
+          "install app",
+          "app description",
+          "app reviews"
+        ],
+        "screenshot": "crawl_market_17.png"
+      },
+      {
+        "label": "Market — My reviews",
+        "url": "/market/reviews/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "мои отзывы",
+          "оценки приложений",
+          "рейтинги приложений"
+        ],
+        "keywords_en": [
+          "my reviews",
+          "app ratings",
+          "app reviews"
+        ],
+        "screenshot": "crawl_market_18.png"
+      }
+    ]
+  },
+  "developer": {
+    "base_url": "/devops/",
+    "entry_selector": ".menu-item-link[href='/devops/']",
+    "states": [
+      {
+        "label": "Developer — Common use cases",
+        "url": "/devops/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "разработчикам",
+          "варианты использования",
+          "вебхуки",
+          "api",
+          "входящий вебхук",
+          "исходящий вебхук",
+          "rest api",
+          "интеграция"
+        ],
+        "keywords_en": [
+          "developer",
+          "common use cases",
+          "webhooks",
+          "api",
+          "inbound webhook",
+          "outbound webhook",
+          "rest api",
+          "integration"
+        ],
+        "screenshot": "crawl_developer_01.png"
+      },
+      {
+        "label": "Developer — Integrations list",
+        "url": "/devops/list/",
+        "click_sequence": [
+          {
+            "selector": "a[href='/devops/list/']",
+            "label": "Integrations"
+          }
+        ],
+        "keywords_ru": [
+          "интеграции",
+          "список интеграций",
+          "приложения",
+          "вебхуки",
+          "локальное приложение"
+        ],
+        "keywords_en": [
+          "integrations",
+          "integration list",
+          "applications",
+          "webhooks",
+          "local app"
+        ],
+        "screenshot": "crawl_developer_02.png"
+      },
+      {
+        "label": "Developer — Statistics",
+        "url": "/devops/statistic/",
+        "click_sequence": [
+          {
+            "selector": "a[href='/devops/statistic/']",
+            "label": "Statistics"
+          }
+        ],
+        "keywords_ru": [
+          "статистика",
+          "статистика api",
+          "вызовы rest",
+          "лимиты api"
+        ],
+        "keywords_en": [
+          "statistics",
+          "api statistics",
+          "rest calls",
+          "api limits"
+        ],
+        "screenshot": "crawl_developer_03.png"
+      },
+      {
+        "label": "Developer — Webhooks (create)",
+        "url": "/devops/webhooks/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "вебхук",
+          "создать вебхук",
+          "входящий вебхук",
+          "исходящий вебхук"
+        ],
+        "keywords_en": [
+          "webhook",
+          "create webhook",
+          "inbound webhook",
+          "outbound webhook"
+        ],
+        "screenshot": "crawl_developer_04.png"
+      },
+      {
+        "label": "Developer — Apps (local app)",
+        "url": "/devops/apps/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "приложение",
+          "локальное приложение",
+          "создать приложение",
+          "oauth"
+        ],
+        "keywords_en": [
+          "app",
+          "local app",
+          "create application",
+          "oauth"
+        ],
+        "screenshot": "crawl_developer_05.png"
+      },
+      {
+        "label": "Developer — Event handlers",
+        "url": "/devops/events/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "обработчики событий",
+          "события",
+          "event handler",
+          "хук событий"
+        ],
+        "keywords_en": [
+          "event handlers",
+          "events",
+          "event handler",
+          "event hook"
+        ],
+        "screenshot": "crawl_developer_06.png"
+      }
+    ]
+  },
+  "settings": {
+    "base_url": "/settings/configs/",
+    "entry_selector": ".menu-item-link[href='/settings/configs/']",
+    "states": [
+      {
+        "label": "Settings — Account Settings",
+        "url": "/settings/configs/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "настройки аккаунта",
+          "настройки портала",
+          "настройки битрикс24",
+          "общие настройки",
+          "параметры аккаунта"
+        ],
+        "keywords_en": [
+          "account settings",
+          "portal settings",
+          "bitrix24 settings",
+          "general settings",
+          "account parameters"
+        ],
+        "screenshot": "crawl_settings_01.png"
+      },
+      {
+        "label": "Settings — Event Log",
+        "url": "/settings/configs/event_log.php",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Event Log"
+          }
+        ],
+        "keywords_ru": [
+          "журнал событий",
+          "лог событий",
+          "события системы",
+          "аудит"
+        ],
+        "keywords_en": [
+          "event log",
+          "system events",
+          "audit log",
+          "activity log"
+        ],
+        "screenshot": "crawl_settings_02.png"
+      },
+      {
+        "label": "Settings — Blacklist",
+        "url": "/settings/configs/mail_blacklist.php",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Blacklist"
+          }
+        ],
+        "keywords_ru": [
+          "чёрный список",
+          "блокировка email",
+          "спам фильтр"
+        ],
+        "keywords_en": [
+          "blacklist",
+          "email block",
+          "spam filter",
+          "mail blacklist"
+        ],
+        "screenshot": "crawl_settings_03.png"
+      },
+      {
+        "label": "Settings — Subscription / License",
+        "url": "/settings/license.php",
+        "click_sequence": [],
+        "keywords_ru": [
+          "тариф",
+          "подписка",
+          "лицензия",
+          "план битрикс24",
+          "апгрейд тарифа"
+        ],
+        "keywords_en": [
+          "subscription",
+          "license",
+          "tariff",
+          "bitrix24 plan",
+          "upgrade plan"
+        ],
+        "screenshot": "crawl_settings_04.png"
+      },
+      {
+        "label": "Settings — CRM: General",
+        "url": "/crm/configs/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "настройки crm",
+          "crm конфигурация",
+          "настройки воронки продаж"
+        ],
+        "keywords_en": [
+          "crm settings",
+          "crm configuration",
+          "sales funnel settings"
+        ],
+        "screenshot": "crawl_settings_05.png"
+      },
+      {
+        "label": "Settings — CRM: Statuses & Dropdowns",
+        "url": "/crm/configs/status/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "статусы crm",
+          "выпадающие списки crm",
+          "стадии сделки"
+        ],
+        "keywords_en": [
+          "crm statuses",
+          "crm dropdowns",
+          "deal stages"
+        ],
+        "screenshot": "crawl_settings_06.png"
+      },
+      {
+        "label": "Settings — CRM: Currency",
+        "url": "/crm/configs/currency/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "валюта",
+          "настройки валют",
+          "курс валют"
+        ],
+        "keywords_en": [
+          "currency",
+          "currency settings",
+          "exchange rates"
+        ],
+        "screenshot": "crawl_settings_07.png"
+      },
+      {
+        "label": "Settings — CRM: Custom Fields",
+        "url": "/crm/configs/fields/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "пользовательские поля",
+          "настройка полей crm",
+          "доп. поля"
+        ],
+        "keywords_en": [
+          "custom fields",
+          "crm fields",
+          "additional fields"
+        ],
+        "screenshot": "crawl_settings_08.png"
+      },
+      {
+        "label": "Settings — CRM: Deal Pipelines",
+        "url": "/crm/configs/deal_category/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "воронки сделок",
+          "направления crm",
+          "категории сделок"
+        ],
+        "keywords_en": [
+          "deal pipelines",
+          "crm directions",
+          "deal categories"
+        ],
+        "screenshot": "crawl_settings_09.png"
+      },
+      {
+        "label": "Settings — CRM: Access Permissions",
+        "url": "/crm/perms/all/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "права доступа crm",
+          "разрешения crm",
+          "роли crm"
+        ],
+        "keywords_en": [
+          "crm permissions",
+          "crm access rights",
+          "crm roles"
+        ],
+        "screenshot": "crawl_settings_10.png"
+      },
+      {
+        "label": "Settings — CRM: My Company Details",
+        "url": "/crm/configs/mycompany/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "реквизиты компании",
+          "данные компании",
+          "моя компания"
+        ],
+        "keywords_en": [
+          "company details",
+          "my company",
+          "company requisites"
+        ],
+        "screenshot": "crawl_settings_11.png"
+      },
+      {
+        "label": "Settings — CRM: Payment Systems",
+        "url": "/crm/configs/ps/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "платёжные системы",
+          "оплата crm",
+          "приём платежей"
+        ],
+        "keywords_en": [
+          "payment systems",
+          "crm payments",
+          "payment methods"
+        ],
+        "screenshot": "crawl_settings_12.png"
+      },
+      {
+        "label": "Settings — CRM: Other Settings",
+        "url": "/crm/configs/config/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "другие настройки crm",
+          "прочие настройки crm"
+        ],
+        "keywords_en": [
+          "other crm settings",
+          "miscellaneous crm settings"
+        ],
+        "screenshot": "crawl_settings_13.png"
+      },
+      {
+        "label": "Settings — e-Signature Permissions",
+        "url": "/sign/config/permission/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "права доступа эп",
+          "настройки подписи",
+          "разрешения электронной подписи"
+        ],
+        "keywords_en": [
+          "e-signature permissions",
+          "sign settings",
+          "signature access"
+        ],
+        "screenshot": "crawl_settings_14.png"
+      },
+      {
+        "label": "Settings — CRM: Automation/BP",
+        "url": "/crm/configs/bp/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "бизнес-процессы crm",
+          "автоматизация crm",
+          "bp crm"
+        ],
+        "keywords_en": [
+          "crm business processes",
+          "crm automation",
+          "crm bp"
+        ],
+        "screenshot": "crawl_settings_15.png"
+      },
+      {
+        "label": "Settings — CRM: Analytical Reports",
+        "url": "/crm/configs/widget/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "аналитические отчёты crm",
+          "настройки отчётов",
+          "виджеты crm"
+        ],
+        "keywords_en": [
+          "analytical reports",
+          "crm reports settings",
+          "crm widgets"
+        ],
+        "screenshot": "crawl_settings_16.png"
+      },
+      {
+        "label": "Settings — CRM: Email Templates",
+        "url": "/crm/configs/mailtemplate/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "шаблоны email crm",
+          "почтовые шаблоны crm"
+        ],
+        "keywords_en": [
+          "email templates crm",
+          "mail templates crm"
+        ],
+        "screenshot": "crawl_settings_17.png"
+      },
+      {
+        "label": "Settings — CRM: Locations",
+        "url": "/crm/configs/locations/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "местоположения",
+          "регионы",
+          "настройки локаций"
+        ],
+        "keywords_en": [
+          "locations",
+          "regions",
+          "location settings"
+        ],
+        "screenshot": "crawl_settings_18.png"
+      },
+      {
+        "label": "Settings — CRM: Taxes",
+        "url": "/crm/configs/tax/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "налоги",
+          "ставки налогов",
+          "настройки налогов"
+        ],
+        "keywords_en": [
+          "taxes",
+          "tax rates",
+          "tax settings"
+        ],
+        "screenshot": "crawl_settings_19.png"
+      },
+      {
+        "label": "Settings — CRM: Units of Measurement",
+        "url": "/crm/configs/measure/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "настройки crm",
+          "units of measurement",
+          "crm конфигурация"
+        ],
+        "keywords_en": [
+          "crm settings",
+          "units of measurement",
+          "crm configuration"
+        ],
+        "screenshot": "crawl_settings_20.png"
+      },
+      {
+        "label": "Settings — CRM: Product Properties",
+        "url": "/crm/configs/productprops/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "настройки crm",
+          "product properties",
+          "crm конфигурация"
+        ],
+        "keywords_en": [
+          "crm settings",
+          "product properties",
+          "crm configuration"
+        ],
+        "screenshot": "crawl_settings_21.png"
+      },
+      {
+        "label": "Settings — CRM: Contact or Company Details Templates",
+        "url": "/crm/configs/preset/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "настройки crm",
+          "contact or company details templates",
+          "crm конфигурация"
+        ],
+        "keywords_en": [
+          "crm settings",
+          "contact or company details templates",
+          "crm configuration"
+        ],
+        "screenshot": "crawl_settings_22.png"
+      },
+      {
+        "label": "Settings — CardDAV / CalDAV Sync",
+        "url": "/company/personal/user/1/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "carddav",
+          "caldav",
+          "синхронизация контактов",
+          "синхронизация календаря",
+          "синхронизация задач",
+          "подключить внешний календарь",
+          "мобильный телефон",
+          "apple iphone",
+          "ipad",
+          "протокол carddav",
+          "протокол caldav"
+        ],
+        "keywords_en": [
+          "carddav",
+          "caldav",
+          "sync contacts",
+          "calendar sync",
+          "task sync",
+          "connect external calendar",
+          "mobile sync",
+          "iphone sync",
+          "carddav protocol",
+          "caldav protocol"
+        ],
+        "screenshot": "crawl_settings_carddav.png"
+      }
+    ]
+  },
+  "subscription": {
+    "base_url": "/settings/license.php",
+    "entry_selector": "a[href*='license.php']",
+    "states": [
+      {
+        "label": "Subscription — My Bitrix24 Plan",
+        "url": "/settings/license.php",
+        "click_sequence": [],
+        "keywords_ru": [
+          "подписка",
+          "тариф",
+          "мой план",
+          "план битрикс24",
+          "лицензия",
+          "текущий план",
+          "обновить план"
+        ],
+        "keywords_en": [
+          "subscription",
+          "tariff",
+          "my plan",
+          "bitrix24 plan",
+          "license",
+          "current plan",
+          "upgrade plan"
+        ],
+        "screenshot": "crawl_subscription_01.png"
+      },
+      {
+        "label": "Subscription — Upgrade / Order Details",
+        "url": "/settings/license_all.php",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Upgrade"
+          }
+        ],
+        "keywords_ru": [
+          "обновление плана",
+          "заказ",
+          "стоимость планов",
+          "выбор тарифа",
+          "купить план",
+          "детали заказа"
+        ],
+        "keywords_en": [
+          "upgrade plan",
+          "order details",
+          "plan pricing",
+          "choose plan",
+          "buy plan",
+          "order"
+        ],
+        "screenshot": "crawl_subscription_02.png"
+      },
+      {
+        "label": "Subscription — Customization request",
+        "url": "/settings/partner_order.php",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Customization request"
+          }
+        ],
+        "keywords_ru": [
+          "запрос кастомизации",
+          "индивидуальное решение",
+          "партнёрский заказ"
+        ],
+        "keywords_en": [
+          "customization request",
+          "custom solution",
+          "partner order"
+        ],
+        "screenshot": "crawl_subscription_03.png"
+      },
+      {
+        "label": "Subscription — Trial mode",
+        "url": "/settings/license_demo.php",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Trial mode"
+          }
+        ],
+        "keywords_ru": [
+          "пробный режим",
+          "триал",
+          "демо-период",
+          "бесплатный период"
+        ],
+        "keywords_en": [
+          "trial mode",
+          "trial",
+          "demo period",
+          "free trial"
+        ],
+        "screenshot": "crawl_subscription_04.png"
+      },
+      {
+        "label": "Subscription — Support24",
+        "url": "/settings/support.php",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Support24"
+          }
+        ],
+        "keywords_ru": [
+          "поддержка",
+          "support24",
+          "техническая поддержка",
+          "обращение в поддержку"
+        ],
+        "keywords_en": [
+          "support",
+          "support24",
+          "technical support",
+          "customer support"
+        ],
+        "screenshot": "crawl_subscription_05.png"
+      },
+      {
+        "label": "Subscription — Purchase History",
+        "url": "/settings/order/",
+        "click_sequence": [
+          {
+            "selector": ".main-buttons-item-link",
+            "label": "Purchase History"
+          }
+        ],
+        "keywords_ru": [
+          "история покупок",
+          "история платежей",
+          "счета",
+          "транзакции"
+        ],
+        "keywords_en": [
+          "purchase history",
+          "payment history",
+          "invoices",
+          "transactions"
+        ],
+        "screenshot": "crawl_subscription_06.png"
+      }
+    ]
+  },
+  "mcp_connections": {
+    "base_url": "/mcp/",
+    "entry_selector": "a[href='/mcp/']",
+    "states": [
+      {
+        "label": "MCP — Connections",
+        "url": "/mcp/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "mcp",
+          "mcp подключения",
+          "model context protocol",
+          "ai подключения",
+          "внешние ai системы",
+          "подключить ai"
+        ],
+        "keywords_en": [
+          "mcp",
+          "mcp connections",
+          "model context protocol",
+          "ai connections",
+          "external ai systems",
+          "connect ai"
+        ],
+        "screenshot": "crawl_mcp_01.png"
+      },
+      {
+        "label": "MCP — Get connection token",
+        "url": "/mcp/",
+        "click_sequence": [
+          {
+            "selector": "button.ui-btn",
+            "label": "Get connection token"
+          }
+        ],
+        "keywords_ru": [
+          "токен подключения",
+          "mcp токен",
+          "ключ подключения mcp",
+          "mcp сервер токен"
+        ],
+        "keywords_en": [
+          "connection token",
+          "mcp token",
+          "mcp server token",
+          "api token mcp"
+        ],
+        "screenshot": "crawl_mcp_02.png"
+      },
+      {
+        "label": "MCP — Add connection (Market MCP apps)",
+        "url": "/market/category/mcp/",
+        "click_sequence": [
+          {
+            "selector": "[class*='add'][class*='btn']",
+            "label": "Add"
+          }
+        ],
+        "keywords_ru": [
+          "добавить mcp подключение",
+          "mcp приложения",
+          "маркет mcp",
+          "mcp коннекторы"
+        ],
+        "keywords_en": [
+          "add mcp connection",
+          "mcp apps marketplace",
+          "market mcp",
+          "mcp connectors"
+        ],
+        "screenshot": "crawl_mcp_03.png"
+      },
+      {
+        "label": "MCP — AI Settings (MCP config)",
+        "url": "/settings/configs/?page=aiassistant_mcp",
+        "click_sequence": [],
+        "keywords_ru": [
+          "настройки ai mcp",
+          "конфигурация mcp",
+          "параметры mcp",
+          "настройки model context protocol"
+        ],
+        "keywords_en": [
+          "ai mcp settings",
+          "mcp configuration",
+          "mcp parameters",
+          "model context protocol settings"
+        ],
+        "screenshot": "crawl_mcp_04.png"
+      },
+      {
+        "label": "MCP — Market: MCP apps category",
+        "url": "/market/category/mcp/",
+        "click_sequence": [],
+        "keywords_ru": [
+          "mcp приложения",
+          "маркет mcp",
+          "mcp коннекторы",
+          "подключить внешние ai"
+        ],
+        "keywords_en": [
+          "mcp apps",
+          "market mcp",
+          "mcp connectors",
+          "connect external ai",
+          "mcp marketplace"
+        ],
+        "screenshot": "crawl_mcp_05.png"
+      }
+    ]
+  }
+}

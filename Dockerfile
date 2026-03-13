@@ -31,6 +31,6 @@ RUN npx playwright install chromium --with-deps 2>/dev/null || npx playwright in
 
 # Код копируется последним — не инвалидирует кэш зависимостей
 COPY src/ ./src/
-COPY knowledge-base.json ./
+COPY navigation_map.json ./
 
 CMD ["node", "src/index.js"]
