@@ -147,7 +147,31 @@ async function takeScreenshotWithComputerUse(context, portalUrl, targetDescripti
     console.log(`🌐 Навигация на: ${targetUrl}`);
 
     await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
-    await page.waitForTimeout(2000);
+    // ФИКС 1: Wait longer so skeleton loaders have time to resolve
+    await page.waitForTimeout(8000);
+    await page.waitForFunction(() => {
+      const skeletons = document.querySelectorAll(
+        '.ui-skeleton, [class*="skeleton"], [class*="loader"]'
+      );
+      return skeletons.length === 0;
+    }, { timeout: 15000 }).catch(() => {});
+    await page.waitForTimeout(3000);
+
+    // ФИКС 2: URL guard — if we were redirected away from expected section, re-navigate
+    if (plan?.url) {
+      const expectedBase = plan.url.split('/').filter(Boolean)[0];
+      const currentPath = new URL(page.url()).pathname;
+      if (expectedBase && !currentPath.includes(expectedBase)) {
+        console.warn(`[computer-use] ⚠️ Redirect detected: expected ${plan.url}, got ${currentPath}. Re-navigating...`);
+        await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
+        await page.waitForTimeout(8000);
+        await page.waitForFunction(() => {
+          const s = document.querySelectorAll('.ui-skeleton,[class*="skeleton"],[class*="loader"]');
+          return s.length === 0;
+        }, { timeout: 15000 }).catch(() => {});
+        await page.waitForTimeout(3000);
+      }
+    }
 
     // Координаты из плана ненадёжны (разные размеры скринов) — передаём шаги
     // как текстовые инструкции в Computer Use, а не выполняем вслепую.
