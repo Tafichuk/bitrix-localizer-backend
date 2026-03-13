@@ -1,0 +1,890 @@
+[
+  {
+    "art": {
+      "id": 1,
+      "label": "CRM — Сделки",
+      "url": "https://helpdesk.bitrix24.ru/open/17707848/",
+      "section": "CRM"
+    },
+    "title": "Поддержка24",
+    "imgCount": 11,
+    "rows": [
+      {
+        "idx": "img_1",
+        "heading": "В каких случаях лиды и сделки считаются повторными",
+        "found": "CRM — main (Deals list)",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_2",
+        "heading": "В каких случаях лиды и сделки считаются повторными",
+        "found": "Feed — filter / search panel",
+        "url": "/stream/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_3",
+        "heading": "Как найти повторные лиды и сделки",
+        "found": "Messenger — Chats (base)",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_4",
+        "heading": "Как найти повторные лиды и сделки",
+        "found": "CRM — Sales dropdown",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_5",
+        "heading": "Как найти повторные лиды и сделки",
+        "found": "CRM — Sales dropdown",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_6",
+        "heading": "Как найти повторные лиды и сделки",
+        "found": "CRM — Sales dropdown",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_7",
+        "heading": "Как найти повторные лиды и сделки",
+        "found": "CRM — Sales dropdown",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_8",
+        "heading": "Как настроить сценарий создания повторных лидов",
+        "found": "CRM — Companies",
+        "url": "/crm/company/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_9",
+        "heading": "Как настроить сценарий создания повторных лидов",
+        "found": "CRM — Companies",
+        "url": "/crm/company/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_10",
+        "heading": "Как настроить сценарий создания повторных лидов",
+        "found": "CRM — Companies",
+        "url": "/crm/company/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_11",
+        "heading": "Повторные лиды и сделки: что это и как с ними работать",
+        "found": "CRM — Sales dropdown",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      }
+    ]
+  },
+  {
+    "art": {
+      "id": 2,
+      "label": "CRM — Контакты",
+      "url": "https://helpdesk.bitrix24.ru/open/24856238/",
+      "section": "CRM"
+    },
+    "title": "Поддержка24",
+    "imgCount": 9,
+    "rows": [
+      {
+        "idx": "img_1",
+        "heading": "Как настроить формат отображения имени контакта",
+        "found": "Messenger — Chats (base)",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_2",
+        "heading": "Как настроить формат отображения имени контакта",
+        "found": "CRM — main (Deals list)",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_3",
+        "heading": "Как настроить формат отображения имени контакта",
+        "found": "CRM — main (Deals list)",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_4",
+        "heading": "Как настроить формат отображения имени контакта",
+        "found": "CRM — main (Deals list)",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_5",
+        "heading": "Настроить поля",
+        "found": "(no match)",
+        "url": "—",
+        "score": 0,
+        "source": "Claude"
+      },
+      {
+        "idx": "img_6",
+        "heading": "Как настроить формат отображения имени контакта",
+        "found": "Sites — CRM forms",
+        "url": "/crm/webform/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_7",
+        "heading": "Как настроить формат отображения имени контакта",
+        "found": "Sites — CRM forms",
+        "url": "/crm/webform/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_8",
+        "heading": "Как настроить формат отображения имени контакта",
+        "found": "Messenger — Chats (base)",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_9",
+        "heading": "Как настроить формат отображения имени контакта",
+        "found": "Messenger — Chats (base)",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      }
+    ]
+  },
+  {
+    "art": {
+      "id": 3,
+      "label": "Tasks — Создание",
+      "url": "https://helpdesk.bitrix24.ru/open/27047638/",
+      "section": "Задачи и проекты"
+    },
+    "title": "Поддержка24",
+    "imgCount": 11,
+    "rows": [
+      {
+        "idx": "img_1",
+        "heading": "Как работать с карточкой задачи",
+        "found": "Messenger — Chats (base)",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_2",
+        "heading": "Как работать с задачами в Битрикс24",
+        "found": "Drive — file hover",
+        "url": "/company/personal/user/1/disk/path/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_3",
+        "heading": "Как работать с задачами в Битрикс24",
+        "found": "Messenger — Chats (base)",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_4",
+        "heading": "Как работать с задачами в Битрикс24",
+        "found": "Tab: Task chats",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_5",
+        "heading": "Как работать с задачами в Битрикс24",
+        "found": "Messenger — Chats (base)",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_6",
+        "heading": "Как работать с задачами в Битрикс24",
+        "found": "Feed — attach file (FILE tab)",
+        "url": "/stream/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_7",
+        "heading": "Как работать с коллегами в задаче и не терять договоренности",
+        "found": "Drive — file hover",
+        "url": "/company/personal/user/1/disk/path/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_8",
+        "heading": "Как работать с коллегами в задаче и не терять договоренности",
+        "found": "Messenger — Chats (base)",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_9",
+        "heading": "Как работать с коллегами в задаче и не терять договоренности",
+        "found": "Messenger — Chats (base)",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_10",
+        "heading": "Как работать с задачами в Битрикс24",
+        "found": "Messenger — Chats (base)",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_11",
+        "heading": "Как завершить задачу",
+        "found": "Tab: Task chats",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      }
+    ]
+  },
+  {
+    "art": {
+      "id": 4,
+      "label": "Tasks — Канбан",
+      "url": "https://helpdesk.bitrix24.ru/open/21839648/",
+      "section": "Задачи и проекты"
+    },
+    "title": "Поддержка24",
+    "imgCount": 13,
+    "rows": [
+      {
+        "idx": "img_1",
+        "heading": "Как работать с канбаном в CRM",
+        "found": "CRM — main (Deals list)",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_2",
+        "heading": "Как настроить канбан для сделок",
+        "found": "Drive — file context menu",
+        "url": "/company/personal/user/1/disk/path/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_3",
+        "heading": "Как настроить канбан для сделок",
+        "found": "Feed — post More menu",
+        "url": "/stream/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_4",
+        "heading": "Как работать с канбаном в CRM",
+        "found": "CRM — main (Deals list)",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_5",
+        "heading": "Как работать с канбаном в CRM",
+        "found": "CRM — main (Deals list)",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_6",
+        "heading": "Как работать с канбаном в CRM",
+        "found": "CRM — main (Deals list)",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_7",
+        "heading": "Как работать с канбаном в CRM",
+        "found": "CRM — main (Deals list)",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_8",
+        "heading": "Как работать с канбаном в CRM",
+        "found": "CRM — main (Deals list)",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_9",
+        "heading": "Как работать с канбаном в CRM",
+        "found": "CRM — main (Deals list)",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_10",
+        "heading": "Как работать со сделками в канбане",
+        "found": "CRM — main (Deals list)",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_11",
+        "heading": "Как работать со сделками в канбане",
+        "found": "CRM — main (Deals list)",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_12",
+        "heading": "Как работать со сделками в канбане",
+        "found": "Boards — main view",
+        "url": "/company/personal/user/1/disk/boards/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_13",
+        "heading": "Как работать с канбаном в CRM",
+        "found": "Tasks — Kanban view",
+        "url": "/company/personal/user/1/tasks?view=kanban",
+        "score": "?",
+        "source": "NavMap"
+      }
+    ]
+  },
+  {
+    "art": {
+      "id": 5,
+      "label": "Calendar — События",
+      "url": "https://helpdesk.bitrix24.ru/open/25570792/",
+      "section": "Календарь"
+    },
+    "title": "Поддержка24",
+    "imgCount": 12,
+    "rows": [
+      {
+        "idx": "img_1",
+        "heading": "Мой календарь: как планировать встречи и события",
+        "found": "Calendar — Month view",
+        "url": "/calendar/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_2",
+        "heading": "Мой календарь: как планировать встречи и события",
+        "found": "Calendar — Month view",
+        "url": "/calendar/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_3",
+        "heading": "Мой календарь: как планировать встречи и события",
+        "found": "Calendar — Month view",
+        "url": "/calendar/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_4",
+        "heading": "Мой календарь: как планировать встречи и события",
+        "found": "Calendar — Month view",
+        "url": "/calendar/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_5",
+        "heading": "Мой календарь: как планировать встречи и события",
+        "found": "Calendar — Month view",
+        "url": "/calendar/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_6",
+        "heading": "Мой календарь: как планировать встречи и события",
+        "found": "Calendar — Month view",
+        "url": "/calendar/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_7",
+        "heading": "Мой календарь: как планировать встречи и события",
+        "found": "Calendar — Month view",
+        "url": "/calendar/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_8",
+        "heading": "Мой календарь: как планировать встречи и события",
+        "found": "Calendar — Month view",
+        "url": "/calendar/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_9",
+        "heading": "Мой календарь: как планировать встречи и события",
+        "found": "Calendar — Month view",
+        "url": "/calendar/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_10",
+        "heading": "Мой календарь: как планировать встречи и события",
+        "found": "Calendar — Month view",
+        "url": "/calendar/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_11",
+        "heading": "Мой календарь: как планировать встречи и события",
+        "found": "Calendar — Month view",
+        "url": "/calendar/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_12",
+        "heading": "Мой календарь: как планировать встречи и события",
+        "found": "Calendar — Month view",
+        "url": "/calendar/",
+        "score": "?",
+        "source": "NavMap"
+      }
+    ]
+  },
+  {
+    "art": {
+      "id": 6,
+      "label": "Messenger — Чаты",
+      "url": "https://helpdesk.bitrix24.ru/open/25548220/",
+      "section": "Мессенджер"
+    },
+    "title": "Поддержка24",
+    "imgCount": 6,
+    "rows": [
+      {
+        "idx": "img_1",
+        "heading": "Новый Мессенджер 3.0",
+        "found": "Messenger — Chats (base)",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_2",
+        "heading": "Мультипространство для совместной работы",
+        "found": "Employees — main page",
+        "url": "/company/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_3",
+        "heading": "Безопасные чаты",
+        "found": "Messenger — Chats (base)",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_4",
+        "heading": "Опросы в чатах",
+        "found": "Messenger — Chats (base)",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_5",
+        "heading": "Быстрый доступ к информации",
+        "found": "Messenger — Chats (base)",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_6",
+        "heading": "BitrixGPT — помощник для работы",
+        "found": "Messenger — Chats (base)",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      }
+    ]
+  },
+  {
+    "art": {
+      "id": 7,
+      "label": "Employees — Структура",
+      "url": "https://helpdesk.bitrix24.ru/open/23039004/",
+      "section": "Сотрудники"
+    },
+    "title": "Поддержка24",
+    "imgCount": 11,
+    "rows": [
+      {
+        "idx": "img_1",
+        "heading": "Структура компании: новый интерфейс и возможности",
+        "found": "Employees — Company Structure",
+        "url": "/hr/structure/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_2",
+        "heading": "Как работать со структурой компании",
+        "found": "Employees — main page",
+        "url": "/company/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_3",
+        "heading": "Как работать со структурой компании",
+        "found": "Employees — main page",
+        "url": "/company/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_4",
+        "heading": "Структура компании: новый интерфейс и возможности",
+        "found": "Employees — main page",
+        "url": "/company/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_5",
+        "heading": "Структура компании: новый интерфейс и возможности",
+        "found": "Employees — main page",
+        "url": "/company/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_6",
+        "heading": "Структура компании: новый интерфейс и возможности",
+        "found": "Employees — Company Structure",
+        "url": "/hr/structure/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_7",
+        "heading": "Структура компании: новый интерфейс и возможности",
+        "found": "Employees — main page",
+        "url": "/company/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_8",
+        "heading": "Структура компании: новый интерфейс и возможности",
+        "found": "Employees — main page",
+        "url": "/company/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_9",
+        "heading": "Структура компании: новый интерфейс и возможности",
+        "found": "Employees — main page",
+        "url": "/company/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_10",
+        "heading": "Структура компании: новый интерфейс и возможности",
+        "found": "Employees — main page",
+        "url": "/company/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_11",
+        "heading": "Структура компании: новый интерфейс и возможности",
+        "found": "Employees — main page",
+        "url": "/company/",
+        "score": "?",
+        "source": "NavMap"
+      }
+    ]
+  },
+  {
+    "art": {
+      "id": 8,
+      "label": "Marketing — Рассылки",
+      "url": "https://helpdesk.bitrix24.ru/open/12302778/",
+      "section": "Маркетинг"
+    },
+    "title": "Поддержка24",
+    "imgCount": 8,
+    "rows": [
+      {
+        "idx": "img_1",
+        "heading": "Как настроить персонализированную рассылку",
+        "found": "Marketing — main page",
+        "url": "/marketing/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_2",
+        "heading": "Как работают параметры на примере email рассылки",
+        "found": "Messenger — Chats (base)",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_3",
+        "heading": "Как работают параметры на примере email рассылки",
+        "found": "Messenger — Chats (base)",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_4",
+        "heading": "Для чего нужны параметры",
+        "found": "CRM — main (Deals list)",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_5",
+        "heading": "Для чего нужны параметры",
+        "found": "CRM — Leads",
+        "url": "/crm/lead/kanban/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_6",
+        "heading": "Для чего нужны параметры",
+        "found": "Chat item — right-click context menu",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_7",
+        "heading": "Как настроить персонализированную рассылку",
+        "found": "Chat item — right-click context menu",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_8",
+        "heading": "Как настроить персонализированную рассылку",
+        "found": "Chat item — right-click context menu",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      }
+    ]
+  },
+  {
+    "art": {
+      "id": 9,
+      "label": "Automation — Роботы",
+      "url": "https://helpdesk.bitrix24.ru/open/6908975/",
+      "section": "CRM"
+    },
+    "title": "Поддержка24",
+    "imgCount": 9,
+    "rows": [
+      {
+        "idx": "img_1",
+        "heading": "Роботы и триггеры в CRM",
+        "found": "CRM — main (Deals list)",
+        "url": "/crm/deal/list/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_2",
+        "heading": "Роботы и триггеры в Битрикс24",
+        "found": "Automation — main page",
+        "url": "/automation/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_3",
+        "heading": "Роботы и триггеры в задачах",
+        "found": "Automation — main page",
+        "url": "/automation/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_4",
+        "heading": "Роботы и триггеры в задачах",
+        "found": "Automation — main page",
+        "url": "/automation/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_5",
+        "heading": "Роботы и триггеры в разделе Подпись",
+        "found": "Automation — main page",
+        "url": "/automation/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_6",
+        "heading": "Роботы и триггеры в разделе Подпись",
+        "found": "Automation — main page",
+        "url": "/automation/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_7",
+        "heading": "Роботы и триггеры в цифровых рабочих местах",
+        "found": "Automation — main page",
+        "url": "/automation/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_8",
+        "heading": "Роботы и триггеры в цифровых рабочих местах",
+        "found": "Automation — main page",
+        "url": "/automation/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_9",
+        "heading": "Роботы и триггеры в цифровых рабочих местах",
+        "found": "Employees — main page",
+        "url": "/company/",
+        "score": "?",
+        "source": "NavMap"
+      }
+    ]
+  },
+  {
+    "art": {
+      "id": 10,
+      "label": "Sites — Конструктор",
+      "url": "https://helpdesk.bitrix24.ru/open/19564392/",
+      "section": "Сайты"
+    },
+    "title": "Поддержка24",
+    "imgCount": 6,
+    "rows": [
+      {
+        "idx": "img_1",
+        "heading": "Как начать работу с BitrixGPT",
+        "found": "Sites — main page",
+        "url": "/sites/sites/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_2",
+        "heading": "Как BitrixGPT помогает работать с текстом",
+        "found": "Messenger — Chats (base)",
+        "url": "/online/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_3",
+        "heading": "Как BitrixGPT помогает работать с текстом",
+        "found": "More > Bitrix 24",
+        "url": "/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_4",
+        "heading": "Как BitrixGPT помогает работать с текстом",
+        "found": "More > Bitrix 24",
+        "url": "/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_5",
+        "heading": "Как BitrixGPT помогает работать с текстом",
+        "found": "More > Bitrix 24",
+        "url": "/",
+        "score": "?",
+        "source": "NavMap"
+      },
+      {
+        "idx": "img_6",
+        "heading": "Как создать текст с BitrixGPT",
+        "found": "More > Bitrix 24",
+        "url": "/",
+        "score": "?",
+        "source": "NavMap"
+      }
+    ]
+  }
+]

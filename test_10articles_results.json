@@ -1,0 +1,229 @@
+[
+  {
+    "art": {
+      "id": 2,
+      "label": "CRM — Контакты",
+      "url": "https://helpdesk.bitrix24.ru/open/24856238/",
+      "section": "CRM"
+    },
+    "routing": {
+      "title": "Поддержка24",
+      "imgCount": 9,
+      "rows": [
+        {
+          "idx": "img_1",
+          "heading": "Как настроить формат отображения имени контакта",
+          "found": "Messenger — Chats (base)",
+          "url": "/online/",
+          "source": "NavMap",
+          "score": "?"
+        },
+        {
+          "idx": "img_2",
+          "heading": "Как настроить формат отображения имени контакта",
+          "found": "CRM — main (Deals list)",
+          "url": "/crm/deal/list/",
+          "source": "NavMap",
+          "score": "?"
+        },
+        {
+          "idx": "img_3",
+          "heading": "Как настроить формат отображения имени контакта",
+          "found": "CRM — main (Deals list)",
+          "url": "/crm/deal/list/",
+          "source": "NavMap",
+          "score": "?"
+        },
+        {
+          "idx": "img_4",
+          "heading": "Как настроить формат отображения имени контакта",
+          "found": "CRM — main (Deals list)",
+          "url": "/crm/deal/list/",
+          "source": "NavMap",
+          "score": "?"
+        },
+        {
+          "idx": "img_5",
+          "heading": "Настроить поля",
+          "found": "(no match)",
+          "url": "—",
+          "source": "Claude",
+          "score": 0
+        },
+        {
+          "idx": "img_6",
+          "heading": "Как настроить формат отображения имени контакта",
+          "found": "Sites — CRM forms",
+          "url": "/crm/webform/",
+          "source": "NavMap",
+          "score": "?"
+        },
+        {
+          "idx": "img_7",
+          "heading": "Как настроить формат отображения имени контакта",
+          "found": "Sites — CRM forms",
+          "url": "/crm/webform/",
+          "source": "NavMap",
+          "score": "?"
+        },
+        {
+          "idx": "img_8",
+          "heading": "Как настроить формат отображения имени контакта",
+          "found": "Messenger — Chats (base)",
+          "url": "/online/",
+          "source": "NavMap",
+          "score": "?"
+        },
+        {
+          "idx": "img_9",
+          "heading": "Как настроить формат отображения имени контакта",
+          "found": "Messenger — Chats (base)",
+          "url": "/online/",
+          "source": "NavMap",
+          "score": "?"
+        }
+      ]
+    },
+    "jobId": "09f42532-7bab-45b5-85b4-9089a2b50774",
+    "zipFile": "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art2.zip",
+    "imgDir": "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art2_imgs",
+    "images": [
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art2_imgs/en/images/image_10.png",
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art2_imgs/en/images/image_2.png",
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art2_imgs/en/images/image_3.png",
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art2_imgs/en/images/image_4.png",
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art2_imgs/en/images/image_5.png",
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art2_imgs/en/images/image_6.png",
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art2_imgs/en/images/image_7.png",
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art2_imgs/en/images/image_8.png",
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art2_imgs/en/images/image_9.png"
+    ]
+  },
+  {
+    "art": {
+      "id": 5,
+      "label": "Calendar — События",
+      "url": "https://helpdesk.bitrix24.ru/open/25570792/",
+      "section": "Календарь"
+    },
+    "routing": {
+      "title": "Поддержка24",
+      "imgCount": 12,
+      "rows": [
+        {
+          "idx": "img_1",
+          "heading": "Мой календарь: как планировать встречи и события",
+          "found": "Calendar — Month view",
+          "url": "/calendar/",
+          "source": "NavMap",
+          "score": "?"
+        },
+        {
+          "idx": "img_2",
+          "heading": "Мой календарь: как планировать встречи и события",
+          "found": "Calendar — Month view",
+          "url": "/calendar/",
+          "source": "NavMap",
+          "score": "?"
+        },
+        {
+          "idx": "img_3",
+          "heading": "Мой календарь: как планировать встречи и события",
+          "found": "Calendar — Month view",
+          "url": "/calendar/",
+          "source": "NavMap",
+          "score": "?"
+        },
+        {
+          "idx": "img_4",
+          "heading": "Мой календарь: как планировать встречи и события",
+          "found": "Calendar — Month view",
+          "url": "/calendar/",
+          "source": "NavMap",
+          "score": "?"
+        },
+        {
+          "idx": "img_5",
+          "heading": "Мой календарь: как планировать встречи и события",
+          "found": "Calendar — Month view",
+          "url": "/calendar/",
+          "source": "NavMap",
+          "score": "?"
+        },
+        {
+          "idx": "img_6",
+          "heading": "Мой календарь: как планировать встречи и события",
+          "found": "Calendar — Month view",
+          "url": "/calendar/",
+          "source": "NavMap",
+          "score": "?"
+        },
+        {
+          "idx": "img_7",
+          "heading": "Мой календарь: как планировать встречи и события",
+          "found": "Calendar — Month view",
+          "url": "/calendar/",
+          "source": "NavMap",
+          "score": "?"
+        },
+        {
+          "idx": "img_8",
+          "heading": "Мой календарь: как планировать встречи и события",
+          "found": "Calendar — Month view",
+          "url": "/calendar/",
+          "source": "NavMap",
+          "score": "?"
+        },
+        {
+          "idx": "img_9",
+          "heading": "Мой календарь: как планировать встречи и события",
+          "found": "Calendar — Month view",
+          "url": "/calendar/",
+          "source": "NavMap",
+          "score": "?"
+        },
+        {
+          "idx": "img_10",
+          "heading": "Мой календарь: как планировать встречи и события",
+          "found": "Calendar — Month view",
+          "url": "/calendar/",
+          "source": "NavMap",
+          "score": "?"
+        },
+        {
+          "idx": "img_11",
+          "heading": "Мой календарь: как планировать встречи и события",
+          "found": "Calendar — Month view",
+          "url": "/calendar/",
+          "source": "NavMap",
+          "score": "?"
+        },
+        {
+          "idx": "img_12",
+          "heading": "Мой календарь: как планировать встречи и события",
+          "found": "Calendar — Month view",
+          "url": "/calendar/",
+          "source": "NavMap",
+          "score": "?"
+        }
+      ]
+    },
+    "jobId": "b6faeda7-2c31-4fb3-a672-a4589738de3d",
+    "zipFile": "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art5.zip",
+    "imgDir": "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art5_imgs",
+    "images": [
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art5_imgs/en/images/image_10.png",
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art5_imgs/en/images/image_11.png",
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art5_imgs/en/images/image_12.png",
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art5_imgs/en/images/image_13.png",
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art5_imgs/en/images/image_2.png",
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art5_imgs/en/images/image_3.png",
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art5_imgs/en/images/image_4.png",
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art5_imgs/en/images/image_5.png",
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art5_imgs/en/images/image_6.png",
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art5_imgs/en/images/image_7.png",
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art5_imgs/en/images/image_8.png",
+      "/Users/tafichuk/bitrix-localizer/backend/test_10articles_out/art5_imgs/en/images/image_9.png"
+    ]
+  }
+]

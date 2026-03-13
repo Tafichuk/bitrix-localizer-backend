@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support24</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 24px;
+      color: #1e293b;
+      line-height: 1.75;
+      background: #fff;
+    }
+    h1 { font-size: 30px; font-weight: 700; margin: 0 0 32px; color: #0f172a; line-height: 1.3; }
+    h2 { font-size: 22px; font-weight: 600; margin: 40px 0 16px; color: #0f172a; }
+    h3 { font-size: 18px; font-weight: 600; margin: 28px 0 12px; color: #1e293b; }
+    h4 { font-size: 16px; font-weight: 600; margin: 20px 0 10px; }
+    p { margin: 0 0 16px; }
+    ul, ol { padding-left: 28px; margin: 0 0 16px; }
+    li { margin-bottom: 8px; }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      margin: 20px 0;
+      display: block;
+    }
+    code {
+      background: #f1f5f9;
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-family: 'SFMono-Regular', Consolas, monospace;
+      font-size: 0.9em;
+      color: #0f172a;
+    }
+    pre {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 20px;
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+    pre code { background: none; padding: 0; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th { background: #f8fafc; font-weight: 600; text-align: left; }
+    th, td { padding: 10px 14px; border: 1px solid #e2e8f0; }
+    tr:nth-child(even) { background: #f8fafc; }
+    blockquote {
+      border-left: 4px solid #3b82f6;
+      margin: 20px 0;
+      padding: 12px 20px;
+      background: #eff6ff;
+      border-radius: 0 8px 8px 0;
+      color: #1e40af;
+    }
+  </style>
+</head>
+<body>
+  <h1>Support24</h1>
+  <div class="header-section" data-bx-header="">
+			<div class="header-section__inner" data-bx-header-inner="">
+				<div class="header-section__advertising">
+					<div id="bxdynamic_advertising_header_infoline_banner_start" style="display:none"></div><div id="bxdynamic_advertising_header_infoline_banner_end" style="display:none"></div>				</div>
+				<div class="header-section__content">
+					<div class="header-content">
+						<div class="header-content__header header-content__header_mobile">
+							<div class="header-content__logo">
+								<div class="header-logo">
+									<a href="https://www.bitrix24.ru" class="header-logo__link" aria-label="Bitrix24">									<span class="header-logo__svg">
+										<svg data-logo="" width="195" height="35" viewBox="0 0 195 35" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.755 22.17v-7.991h1.921c1.72 0 3.136.2 4.146.81 1.01.605 1.62 1.62 1.62 3.235 0 2.73-1.62 3.946-5.461 3.946H4.755zM.1 26.01h6.776c7.587 0 10.321-3.34 10.321-7.991 0-3.136-1.315-5.26-3.64-6.476-1.82-1.01-4.146-1.315-6.981-1.315h-1.82v-6.07h10.216L16.187.412H0v25.594h.1v.004zm20.233 0h4.45l5.766-8.296c1.115-1.516 1.921-3.035 2.43-3.845h.1c-.1 1.115-.2 2.53-.2 3.945v8.092h4.551V7.703h-4.45l-5.766 8.296c-1.01 1.516-1.921 3.035-2.43 3.845h-.1c.1-1.114.2-2.53.2-3.945V7.807h-4.551V26.02v-.008zm24.888 0h4.655V11.544h5.461L56.552 7.7H39.656v3.845h5.565v14.467zm17.502 9.206v-9.206c.91.305 1.82.405 2.83.405 5.767 0 9.512-3.945 9.512-9.611s-3.44-9.611-10.016-9.611c-2.53 0-4.956.505-6.981 1.114l.1 26.91h4.555zm0-13.151V11.344c.71-.2 1.315-.305 2.125-.305 3.34 0 5.461 1.82 5.461 5.766 0 3.54-1.72 5.766-5.16 5.766-.91 0-1.62-.2-2.43-.506h.004zm15.072 3.945h4.451l5.766-8.296c1.115-1.516 1.92-3.035 2.43-3.845h.1c-.1 1.115-.2 2.53-.2 3.945v8.092h4.55V7.703h-4.45l-5.766 8.296c-1.01 1.516-1.92 3.035-2.43 3.845h-.1c.1-1.114.2-2.53.2-3.945V7.807h-4.55V26.02v-.008zm20.742 0h4.656v-7.586h2.73c.506 0 1.011.505 1.62 1.72l2.326 5.866h4.956l-3.34-6.98c-.606-1.216-1.215-1.921-2.126-2.226v-.1c1.516-.91 1.721-3.54 2.631-4.856.305-.405.71-.606 1.315-.606.305 0 .71 0 1.01.2V7.499c-.505-.2-1.415-.304-1.92-.304-1.62 0-2.631.605-3.34 1.62-1.516 2.225-1.516 6.07-3.745 6.07h-2.126V7.703h-4.655v18.312l.008-.004zm26.605.405c2.53 0 4.855-.81 6.271-1.82l-1.316-3.136c-1.315.71-2.53 1.215-4.25 1.215-3.135 0-5.16-2.025-5.16-5.766 0-3.34 2.025-5.97 5.461-5.97 1.82 0 3.135.505 4.45 1.415V8.41c-1.01-.606-2.63-1.215-4.955-1.215-5.462 0-9.712 4.045-9.712 9.811 0 5.26 3.236 9.407 9.206 9.407l.005.004z" fill="#0BBBEF"></path><path d="M185.084 19.828c-5.461 0-9.812-4.351-9.916-9.916 0-5.462 4.451-9.916 9.916-9.916 5.465 0 9.916 4.45 9.916 9.916 0 5.465-4.451 9.915-9.916 9.915zm0-17.41c-4.121 0-7.494 3.373-7.494 7.494.092 4.216 3.373 7.494 7.494 7.494 4.121 0 7.494-3.374 7.494-7.494 0-4.121-3.373-7.495-7.494-7.495z" fill="#005893"></path><path d="M183.827 4.839h1.933v6.521h-1.933V4.84z" fill="#005893"></path><path d="M190.353 9.427v1.933h-6.521V9.427h6.521zM134.047 26.011h17.807v-3.945h-11.736c1.62-6.476 11.532-7.891 11.532-15.073 0-3.845-2.631-6.676-8.196-6.676-3.441 0-6.476 1.01-8.497 2.025l1.215 3.64c1.821-.91 3.946-1.72 6.576-1.72 2.025 0 3.946.91 3.946 3.236 0 5.261-11.637 5.666-12.647 18.513zm29.74-6.271v6.271h4.551V19.74h3.845v-3.845h-3.845V.317h-3.341l-12.646 16.388v3.035h11.436zm-6.271-3.64 6.475-8.702c0 .71-.2 2.935-.2 4.956v3.64h-3.036c-.91 0-2.63.101-3.235.101l-.004.004z" fill="#005893"></path></svg>									</span>
+									</a>								</div>
+							</div>
+							<div class="header-content__buttons">
+																<div class="header-content__switch">
+									<div class="header-menu-switch" data-bx-header-menu-switch="">
+										<div></div>
+										<div></div>
+										<div></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="header-content__dropdown" data-bx-header-menu-dropdown-section="">
+							<div class="header-content-dropdown" data-bx-header-menu-dropdown-content="">
+								<div class="header-content-dropdown__inner">
+																		<div class="header-content-dropdown__logo">
+										<div class="header-logo">
+											<a href="https://www.bitrix24.ru" class="header-logo__link" aria-label="Bitrix24">											<span class="header-logo__svg">
+												<svg data-logo="" width="195" height="35" viewBox="0 0 195 35" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.755 22.17v-7.991h1.921c1.72 0 3.136.2 4.146.81 1.01.605 1.62 1.62 1.62 3.235 0 2.73-1.62 3.946-5.461 3.946H4.755zM.1 26.01h6.776c7.587 0 10.321-3.34 10.321-7.991 0-3.136-1.315-5.26-3.64-6.476-1.82-1.01-4.146-1.315-6.981-1.315h-1.82v-6.07h10.216L16.187.412H0v25.594h.1v.004zm20.233 0h4.45l5.766-8.296c1.115-1.516 1.921-3.035 2.43-3.845h.1c-.1 1.115-.2 2.53-.2 3.945v8.092h4.551V7.703h-4.45l-5.766 8.296c-1.01 1.516-1.921 3.035-2.43 3.845h-.1c.1-1.114.2-2.53.2-3.945V7.807h-4.551V26.02v-.008zm24.888 0h4.655V11.544h5.461L56.552 7.7H39.656v3.845h5.565v14.467zm17.502 9.206v-9.206c.91.305 1.82.405 2.83.405 5.767 0 9.512-3.945 9.512-9.611s-3.44-9.611-10.016-9.611c-2.53 0-4.956.505-6.981 1.114l.1 26.91h4.555zm0-13.151V11.344c.71-.2 1.315-.305 2.125-.305 3.34 0 5.461 1.82 5.461 5.766 0 3.54-1.72 5.766-5.16 5.766-.91 0-1.62-.2-2.43-.506h.004zm15.072 3.945h4.451l5.766-8.296c1.115-1.516 1.92-3.035 2.43-3.845h.1c-.1 1.115-.2 2.53-.2 3.945v8.092h4.55V7.703h-4.45l-5.766 8.296c-1.01 1.516-1.92 3.035-2.43 3.845h-.1c.1-1.114.2-2.53.2-3.945V7.807h-4.55V26.02v-.008zm20.742 0h4.656v-7.586h2.73c.506 0 1.011.505 1.62 1.72l2.326 5.866h4.956l-3.34-6.98c-.606-1.216-1.215-1.921-2.126-2.226v-.1c1.516-.91 1.721-3.54 2.631-4.856.305-.405.71-.606 1.315-.606.305 0 .71 0 1.01.2V7.499c-.505-.2-1.415-.304-1.92-.304-1.62 0-2.631.605-3.34 1.62-1.516 2.225-1.516 6.07-3.745 6.07h-2.126V7.703h-4.655v18.312l.008-.004zm26.605.405c2.53 0 4.855-.81 6.271-1.82l-1.316-3.136c-1.315.71-2.53 1.215-4.25 1.215-3.135 0-5.16-2.025-5.16-5.766 0-3.34 2.025-5.97 5.461-5.97 1.82 0 3.135.505 4.45 1.415V8.41c-1.01-.606-2.63-1.215-4.955-1.215-5.462 0-9.712 4.045-9.712 9.811 0 5.26 3.236 9.407 9.206 9.407l.005.004z" fill="#0BBBEF"></path><path d="M185.084 19.828c-5.461 0-9.812-4.351-9.916-9.916 0-5.462 4.451-9.916 9.916-9.916 5.465 0 9.916 4.45 9.916 9.916 0 5.465-4.451 9.915-9.916 9.915zm0-17.41c-4.121 0-7.494 3.373-7.494 7.494.092 4.216 3.373 7.494 7.494 7.494 4.121 0 7.494-3.374 7.494-7.494 0-4.121-3.373-7.495-7.494-7.495z" fill="#005893"></path><path d="M183.827 4.839h1.933v6.521h-1.933V4.84z" fill="#005893"></path><path d="M190.353 9.427v1.933h-6.521V9.427h6.521zM134.047 26.011h17.807v-3.945h-11.736c1.62-6.476 11.532-7.891 11.532-15.073 0-3.845-2.631-6.676-8.196-6.676-3.441 0-6.476 1.01-8.497 2.025l1.215 3.64c1.821-.91 3.946-1.72 6.576-1.72 2.025 0 3.946.91 3.946 3.236 0 5.261-11.637 5.666-12.647 18.513zm29.74-6.271v6.271h4.551V19.74h3.845v-3.845h-3.845V.317h-3.341l-12.646 16.388v3.035h11.436zm-6.271-3.64 6.475-8.702c0 .71-.2 2.935-.2 4.956v3.64h-3.036c-.91 0-2.63.101-3.235.101l-.004.004z" fill="#005893"></path></svg>											</span>
+											</a>										</div>
+									</div>
+																			<div class="header-content-dropdown__menu">
+											<div class="header-content-dropdown__container header-content-dropdown__container_viewport_desktop">
+		<div class="header-menu">
+						<div class="header-menu__section">
+										<div class="header-menu__item" data-initializer="">
+						<a href="https://www.bitrix24.ru/features/all.php" class="header-menu__link" target="_blank">Features</a>					</div>
+									</div>
+								<div class="header-menu__section">
+										<div class="header-menu__item" data-initializer="">
+						<a href="https://www.bitrix24.ru/prices/" class="header-menu__link" target="_blank">Pricing</a>					</div>
+									</div>
+								<div class="header-menu__section">
+										<div class="header-menu__item" data-initializer="">
+						<a href="https://www.bitrix24.ru/apps/market.php" class="header-menu__link" target="_blank">Integrations</a>					</div>
+									</div>
+								<div class="header-menu__section">
+										<div class="header-menu__item" data-initializer="">
+						<a href="https://www.bitrix24.ru/partners/" class="header-menu__link" target="_blank">Implementation</a>					</div>
+									</div>
+								<div class="header-menu__section">
+										<div class="header-menu__item" data-initializer="">
+						<a href="https://apidocs.bitrix24.ru/" class="header-menu__link" target="_blank">For Developers</a>							<span class="header-menu__labels">
+																	<span class="header-menu__label header-menu__label_type_new">New</span>
+																</span>
+												</div>
+									</div>
+					</div>
+	</div>
+<div class="header-content-dropdown__container header-content-dropdown__container_viewport_mobile">
+	<div class="bx-helpdesk-search-block">
+		<div class="close-btn-mob" id="close-btn-mob"></div>
+		<div class="bx-helpdesk-search-inner">
+			<form action="/search.php" method="GET" class="bx-helpdesk-search-form">
+				<input class="bx-helpdesk-search-form-input" name="q" value="" placeholder="Я ищу" type="text">
+				<input class="bx-helpdesk-search-form-search-btn" type="submit" value="Найти">
+			</form>
+		</div>
+	</div>
+		<div class="bx-helpdesk-section-block" id="helpdesk_article_sections_oNnjF">
+		<div class="bx-helpdesk-section-cnr">
+			<div class="bx-helpdesk-section-title-cnr">
+				<div class="bx-helpdesk-section-title-text">Read ready-made answers</div>
+			</div>
+			<div class="bx-helpdesk-section-list-cnr">
+				<div class="bx-helpdesk-section-list">
+								<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="72193">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">New articles</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="148408">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Bitrix24 Support</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="149484">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Registration and login</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="163442">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Security in Bitrix24</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="46467">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Rates and payment</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="49549">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Getting started</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="156918">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">AI in Bitrix24</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="108537">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">News Feed</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="90967">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Tasks and Projects</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="53533">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Messenger</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="162712">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Collabs</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="45923">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Groups</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="91477">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Calendar</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="90543">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Drive</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="127046">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Knowledge Base</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="105667">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Websites</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="108513">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Online Store</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="143888">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Inventory Accounting</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="106531">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Mail</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="94657">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">CRM</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="162832">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Online Booking</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="158972">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">KEDO</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="160630">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Signature</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="96471">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Marketing</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="121989">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Sales Center</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="122293">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Analytics</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="157396">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">BI Constructor</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="157494">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Automation</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="104395">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">1C and Bitrix24 Integration</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="45989">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Employees</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="56679">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Business Processes</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="45922">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Marketplace</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="106801">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Contact Center</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="45992">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Settings</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="48602">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Employee Widget</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="45939">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Telephony</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="45937">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Bitrix24 App</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="45945">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">General Questions</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="109831">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Bitrix24 Out of the Box</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="143812">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Changes in Articles (Archive)</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+							</div>
+			</div>
+		</div>
+	</div>
+	</div>										</div>
+																				<div class="header-content-dropdown__buttons">
+																							<div class="header-content-dropdown__control header-content-dropdown__control_registration">
+														<div class="header-registration">
+		<a class="header-button header-button_green header-registration__button" href="https://www.bitrix24.ru/create.php?b24_type=social">Get it for free</a>	</div>
+												</div>
+																								<div class="header-content-dropdown__control header-content-dropdown__control_authorization">
+														<div class="header-authorization">
+		<div class="portal-auth-bitrix24" data-pab-section="">
+			<div class="portal-auth-bitrix24__button portal-auth-bitrix24__button_type_1" data-pab-button="">
+			<div class="portal-auth-bitrix24__icon" data-pab-icon="">
+				<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.508 15.652a.8.8 0 0 0 .502-.914l-.263-1.34c0-.56-.745-1.2-2.213-1.572a5.035 5.035 0 0 1-1.401-.626c-.094-.053-.08-.541-.08-.541l-.473-.071c0-.04-.04-.626-.04-.626.565-.186.507-1.287.507-1.287.36.196.593-.675.593-.675.425-1.21-.211-1.137-.211-1.137a7.467 7.467 0 0 0 0-2.227c-.283-2.45-4.543-1.785-4.038-.985-1.244-.225-.96 2.555-.96 2.555l.27.72c-.375.238-.301.512-.219.817.034.128.07.26.075.399.026.694.459.55.459.55.027 1.145.602 1.294.602 1.294.108.72.04.597.04.597l-.511.06c.007.164-.007.328-.04.488-.298.13-.48.234-.66.336-.185.105-.368.21-.67.34-1.156.497-2.412 1.143-2.635 2.014-.066.254-.13.596-.188.953-.06.374.148.74.504.87 1.552.567 3.304.903 5.162.943h.748c1.85-.04 3.594-.373 5.14-.935z"></path></svg>
+			</div>
+			<div class="portal-auth-bitrix24__message">
+				Login			</div>
+		</div>
+			<div class="portal-auth-bitrix24__popup">
+		<div class="portal-auth-bitrix24-popup" data-pab-popup="">
+			<div class="portal-auth-bitrix24-popup__close" data-close=""></div>
+			<div id="bx-sb-portal-auth-bitrix24" class="portal-auth-bitrix24-popup__content">
+								<div class="portal-auth-bitrix24-popup__loader">
+					<div class="bx-ui-preloader__default"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>	</div>
+												</div>
+																						</div>
+																		</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			<div class="body-wrap bxst-main-wrapp" data-sb-content-body="">
+			<div class="header-content-area-section header-content-area-section_gradient">
+					<div class="header-content-area">
+				<div class="header-content-area__outer">
+					<div class="header-content-area__inner">
+						<div class="header-content-area-content">
+							<h1 class="header-content-area-content__title">Support24</h1>						</div>
+											</div>
+				</div>
+			</div>
+						<div>
+							</div>
+				</div>
+		<div class="st-bdb-gray">
+		<div class="wrap">
+			<div class="crumb">
+				<div class="crumb-link crumb-link_link"><a href="/">Support24</a></div>
+									<div class="crumb-link">
+						<span>Messenger</span>						</div>					<div class="crumb-link">
+						<span>Messenger 3.0</span>						</div>			</div>
+		</div>
+	</div>
+		<div class="article st-bdb-gray">
+		<div class="wrap detail-article">
+			<div class="article-wrap">
+				<h1 class="article-title">New Messenger 3.0</h1>
+<div class="bx-help-media-info">
+			<div class="bx-help-post-author">
+								<div class="bx-help-post-author-img">
+						
+					</div>
+								<div class="bx-help-post-author-info">
+				<div class="bx-help-post-author-name">Author: Alexandra Gavrilova</div>
+				<div class="bx-help-post-author-date">Last updated: November 5, 2025</div>
+			</div>
+		</div>
+		
+    </div>
+<div class="bx-help-post-text-block js-help-post-text-block">
+	<p>The messenger has become the central section for collaboration. Upon entering Bitrix24, the user lands in chats — this helps to immediately engage in communication with colleagues and quickly get involved in current tasks. A newcomer does not need to navigate the interface to start working.<br> 
+
+<a href="https://helpdesk.bitrix24.ru/open/17373696/" target="_blank"><u>Messenger: interface and features</u></a></p>
+
+<p>
+    In this article, we will discuss the main features of the messenger:
+    </p><ul>
+        <li><a href="#1"><u>multi-space for collaboration,</u></a></li>
+        <li><a href="#2"><u>secure chats,</u></a></li>
+        <li><a href="#3"><u>polls in chats,</u></a></li>
+        <li><a href="#4"><u>quick access to information,</u></a></li>
+        <li><a href="#5"><u>BitrixGPT — a work assistant.</u></a></li>
+    </ul>
+<p></p>
+
+<div style="text-align: center;">
+<a href="/images/helpdesk/screenshots/ru/ag/newmessenger/1.jpg" class="ge-modal-img_r m-image">
+<img alt="messenger1.jpg" src="images/image_2.png" title="messenger1.jpg">
+</a>
+</div><br>
+
+
+<h2 id="1">Multi-space for collaboration</h2>
+<p>Messenger 3.0 is a unified workspace where tools are interconnected. There is no need to install and configure different applications — Bitrix24 has everything you need for work: chats, tasks, calendar, documents, and other tools.</p>
+<p>
+    You can create tasks and meetings in chats from specific messages or without linking to them. You can switch from the chat to the task card and vice versa. Switching between tools happens without unnecessary clicks and windows. This helps the team save time and work productively on any devices.<br>
+    <a href="https://helpdesk.bitrix24.ru/open/22164104" target="_blank"><u> How to create a task or meeting from a message</u></a>
+</p>
+<p>In the chat, you can forward messages, pin them, and add them to favorites. Stay close to your colleagues even remotely: share emotions in chats, react to messages.</p>
+
+<div style="text-align: center;">
+<a href="/images/helpdesk/screenshots/ru/ag/newmessenger/2.jpg" class="ge-modal-img_r m-image">
+<img alt="messenger2.jpg" src="images/image_3.png" title="messenger2.jpg">
+</a>
+</div><br>
+
+
+<h2 id="2">Secure chats</h2>
+<p><b>In chats, only company employees are present.</b>New employees are automatically added to the chats and channels of their department, while dismissed employees lose access to Bitrix24.</p>
+<p>
+    An outsider cannot write or call in the chat, impersonate a colleague, and gain access to the correspondence. This protects against phishing attacks, spam, and data leaks.<br>
+    <a href="https://helpdesk.bitrix24.ru/open/17412872/" target="_blank"><u> Chats in Bitrix24: how to choose the right one</u></a>
+</p>
+<p>
+    <b>Automatic message deletion.</b> Set the retention period for correspondence after which messages in the chat will disappear by themselves. This is important if you discuss confidential topics, personal data, or temporary tasks that quickly lose relevance.<br>
+    <a href="https://helpdesk.bitrix24.ru/open/24402288/" target="_blank"><u> How to set up auto-deletion of messages in Bitrix24 chats</u></a><br>
+    <a href="https://helpdesk.bitrix24.ru/open/24560328/" target="_blank"><u>How to set up auto-deletion of messages in the mobile app</u></a>
+</p>
+
+<div style="text-align: center;">
+<a href="/images/helpdesk/screenshots/ru/ag/newmessenger/3.jpg" class="ge-modal-img_r m-image">
+<img alt="messenger3.jpg" src="images/image_4.png" title="messenger3.jpg">
+</a>
+</div><br>
+
+
+<h2 id="3">Polls in chats</h2>
+<p>
+    Polls in Bitrix24 help quickly gather employee opinions, collect feedback, and make decisions based on real data. For example, to choose a date for a corporate event, gather feedback on a new process, or decide which logo is better.<br>
+    <a href="https://helpdesk.bitrix24.ru/open/25240550/" target="_blank"><u> Polls in Bitrix24 chats: how to create and configure</u></a>
+</p>
+<p>
+    Polls can be created:
+    </p><ul>
+        <li>in group chats,</li>
+        <li>channels,</li>
+        <li>collabs.</li>
+    </ul>
+<p></p>
+
+<div style="text-align: center;">
+<a href="/images/helpdesk/screenshots/ru/ag/newmessenger/4.png" class="ge-modal-img_r m-image">
+<img alt="messenger4.jpg" src="images/image_5.png" title="messenger4.jpg">
+</a>
+</div> <br>
+
+
+<h2 id="4">Quick access to information</h2>
+<p>
+    Messages, files, and video call recordings remain in the chat and can be found at any time through the sidebar. The sidebar is the side panel of the chat. Here you can access:
+    </p><ul>
+        <li>favorite messages,</li>
+        <li>media and files,</li>
+        <li>links from messages,</li>
+        <li>tasks,</li>
+        <li>meetings.</li>
+    </ul>
+<p></p>
+<p>
+    From favorite messages and links in the sidebar, you can navigate to the context of the discussion. To see the message from which the task was created, click on it.<br>
+    <a href="https://helpdesk.bitrix24.ru/open/17373696/#5" target="_blank"><u>How to open the sidebar</u></a>
+</p>
+<p>Voice messages can be rewound and playback speed can be changed to quickly return to the desired moment.</p>
+
+<div style="text-align: center;">
+<a href="/images/helpdesk/screenshots/ru/ag/newmessenger/5.jpg" class="ge-modal-img_r m-image">
+<img alt="messenger5.jpg" src="images/image_6.png" title="messenger5.jpg">
+</a>
+</div> <br>
+
+
+<h2 id="5">BitrixGPT — a work assistant</h2>
+<p>BitrixGPT is integrated into daily work and can act as an expert in a specific area. We have added more than 30 roles: sales department manager, lawyer, HR, and others. You can use these roles or create your own.</p>
+<p>
+    BitrixGPT will help solve various tasks:
+    </p><ul>
+        <li>formulate a goal and break it down into stages,</li>
+        <li>prepare the structure of a presentation or report,</li>
+        <li>highlight the main points from a large text,</li>
+        <li>understand a complex situation.</li>
+    </ul>
+<p></p>
+<a href="https://helpdesk.bitrix24.ru/open/18505482/" target="_blank"><u>Chat with BitrixGPT</u></a> 
+
+<div style="text-align: center;">
+<a href="/images/helpdesk/screenshots/ru/ag/newmessenger/6.png" class="ge-modal-img_r m-image">
+<img alt="messenger6.jpg" src="images/image_7.png" title="messenger6.jpg">
+</a>
+</div> <br>
+
+
+		<div class="helpdesk-article-note-bw"><h2>In short</h2>
+<ul>
+    <li>The messenger has become the central section for collaboration. Upon entering Bitrix24, the user lands in chats — this helps to immediately engage in communication with colleagues and quickly get involved in current tasks.</li>
+    <li>Messenger 3.0 is a unified workspace where tools are interconnected. There is no need to install and configure different applications — Bitrix24 has everything you need for work: chats, tasks, calendar, documents, and other tools.</li>
+    <li>New employees are automatically added to their department's chats, while dismissed employees lose access to Bitrix24.</li>
+    <li>The chat now has the option for automatic message deletion. Set the retention period for correspondence after which messages will disappear by themselves.</li>
+    <li>Polls in chats help quickly gather employee opinions and make decisions.</li>
+    <li>Messages, files, and video call recordings remain in the chat and can be found at any time through the sidebar.</li>
+    <li>BitrixGPT is integrated into chats and can act as an expert in a specific area.</li>
+</ul></div> <br>
+
+
+
+<b>We recommend reading:</b>
+<ul>
+    <li><a href="https://helpdesk.bitrix24.ru/open/19092894/" target="_blank"><u>CoPilot in Bitrix24 — AI assistant for daily work</u></a></li>
+    <li><a href="https://helpdesk.bitrix24.ru/open/21297742/?sphrase_id=146487884" target="_blank"><u>Bitrix24 Sync: video calls in the Bitrix24 app</u></a> </li>
+</ul></div>
+<div id="bxdynamic_7j2DC4_start" style="display:none"></div><div id="bxdynamic_7j2DC4_end" style="display:none"></div>					<div class="bx-help-post-banner-block"><div id="bxdynamic_y0XwfU_start" style="display:none"></div><div id="bxdynamic_y0XwfU_end" style="display:none"></div></div>			</div>
+
+			<div class="navigation-right-container" id="menu-block-left">
+                                    <div class="bx-helpdesk-search-block">
+                        <div class="bx-helpdesk-search-inner">
+                            <form id="bx-search-form" action="/search.php" method="GET" class="bx-helpdesk-search-form">
+                                <input class="bx-helpdesk-search-form-input" id="bxq" name="q" value="" placeholder="Я ищу" type="text" autocomplete="off">
+                                <input class="bx-helpdesk-search-form-search-btn" type="submit" value="Найти">
+                            </form>
+                            <div id="bxqs"></div>
+                        </div>
+                    </div>
+
+                    
+                                        					<div class="hdsp-topics-section-sidebar-banner"><div id="bxdynamic_2DJmFo_start" style="display:none"></div><div id="bxdynamic_2DJmFo_end" style="display:none"></div></div>					<div class="hdsp-topics-section-sidebar-banner"><div id="bxdynamic_ALOAcH_start" style="display:none"></div><div id="bxdynamic_ALOAcH_end" style="display:none"></div></div>	<div class="bx-helpdesk-section-block" id="helpdesk_article_sections_5CQVy">
+		<div class="bx-helpdesk-section-cnr">
+			<div class="bx-helpdesk-section-title-cnr">
+				<div class="bx-helpdesk-section-title-text">Read ready-made answers</div>
+			</div>
+			<div class="bx-helpdesk-section-list-cnr">
+				<div class="bx-helpdesk-section-list">
+								<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="72193">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">New articles</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="148408">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Bitrix24 Support</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="149484">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Registration and login</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="163442">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Security in Bitrix24</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="46467">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Rates and payment</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="49549">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Getting started</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="156918">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">AI in Bitrix24</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="108537">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">News Feed</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="90967">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Tasks and Projects</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="53533">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1 bx-helpdesk-title-open ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Messenger</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 bx-helpdesk-sub-items-open">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+																		<div class="bx-helpdesk-section-child-section bx-helpdesk-section-child-section-level-1">
+														<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-2 js-section-item-2" data-id="156920">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-2">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-2 js-section-item-title-2 bx-helpdesk-title-open ">
+												<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-2">Messenger 3.0</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-2 js-section-sub-item-2 bx-helpdesk-sub-items-open">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-2 js-section-sub-item-inner">
+																		<div class="bx-helpdesk-section-child-article-list bx-helpdesk-section-child-article-list-level-2 js-section-article-list-2">
+																							<div class="bx-helpdesk-section-child-article-item bx-helpdesk-section-child-article-item-level-2">
+													<div class="bx-helpdesk-section-child-article-item-cnr bx-helpdesk-section-child-article-item-cnr-level-2">
+																												<a href="/open/17373696/" class="bx-helpdesk-section-child-article-link bx-helpdesk-section-child-article-link-level-2  js-article-link " title="Мессенджер: интерфейс и возможности">
+															Messenger: interface and features														</a>
+													</div>
+												</div>
+																								<div class="bx-helpdesk-section-child-article-item bx-helpdesk-section-child-article-item-level-2">
+													<div class="bx-helpdesk-section-child-article-item-cnr bx-helpdesk-section-child-article-item-cnr-level-2">
+																												<a href="/open/17412872/" class="bx-helpdesk-section-child-article-link bx-helpdesk-section-child-article-link-level-2  js-article-link " title="Чаты в Битрикс24: как выбрать подходящий">
+															Chats in Bitrix24: how to choose the right one														</a>
+													</div>
+												</div>
+																								<div class="bx-helpdesk-section-child-article-item bx-helpdesk-section-child-article-item-level-2">
+													<div class="bx-helpdesk-section-child-article-item-cnr bx-helpdesk-section-child-article-item-cnr-level-2">
+																												<a href="/open/18213254/" class="bx-helpdesk-section-child-article-link bx-helpdesk-section-child-article-link-level-2  js-article-link " title="Общий чат компании">
+															Company general chat														</a>
+													</div>
+												</div>
+																								<div class="bx-helpdesk-section-child-article-item bx-helpdesk-section-child-article-item-level-2">
+													<div class="bx-helpdesk-section-child-article-item-cnr bx-helpdesk-section-child-article-item-cnr-level-2">
+																												<a href="/open/25980958/" class="bx-helpdesk-section-child-article-link bx-helpdesk-section-child-article-link-level-2  js-article-link " title="Как получать уведомления из Битрикс24 на электронную почту">
+															How to receive notifications from Bitrix24 via email														</a>
+													</div>
+												</div>
+																								<div class="bx-helpdesk-section-child-article-item bx-helpdesk-section-child-article-item-level-2">
+													<div class="bx-helpdesk-section-child-article-item-cnr bx-helpdesk-section-child-article-item-cnr-level-2">
+																												<a href="/open/18213270/" class="bx-helpdesk-section-child-article-link bx-helpdesk-section-child-article-link-level-2  js-article-link " title="Как создать чат о просроченной задаче">
+															How to create a chat about overdue tasks														</a>
+													</div>
+												</div>
+																								<div class="bx-helpdesk-section-child-article-item bx-helpdesk-section-child-article-item-level-2">
+													<div class="bx-helpdesk-section-child-article-item-cnr bx-helpdesk-section-child-article-item-cnr-level-2">
+																												<a href="/open/25548220/" class="bx-helpdesk-section-child-article-link bx-helpdesk-section-child-article-link-level-2 bx-helpdesk-article-link-selected js-article-link " title="Новый Мессенджер 3.0">
+															New Messenger 3.0														</a>
+													</div>
+												</div>
+																								<div class="bx-helpdesk-section-child-article-item bx-helpdesk-section-child-article-item-level-2">
+													<div class="bx-helpdesk-section-child-article-item-cnr bx-helpdesk-section-child-article-item-cnr-level-2">
+																												<a href="/open/25440238/" class="bx-helpdesk-section-child-article-link bx-helpdesk-section-child-article-link-level-2  js-article-link " title="Как создать групповой чат">
+															How to create a group chat														</a>
+													</div>
+												</div>
+																								<div class="bx-helpdesk-section-child-article-item bx-helpdesk-section-child-article-item-level-2">
+													<div class="bx-helpdesk-section-child-article-item-cnr bx-helpdesk-section-child-article-item-cnr-level-2">
+																												<a href="/open/26987270/" class="bx-helpdesk-section-child-article-link bx-helpdesk-section-child-article-link-level-2  js-article-link " title="Стикеры в Битрикс24 Мессенджере: как создать и отправить ">
+															Stickers in Bitrix24 Messenger: how to create and send														</a>
+													</div>
+												</div>
+																								<div class="bx-helpdesk-section-child-article-item bx-helpdesk-section-child-article-item-level-2">
+													<div class="bx-helpdesk-section-child-article-item-cnr bx-helpdesk-section-child-article-item-cnr-level-2">
+																												<a href="/open/26929068/" class="bx-helpdesk-section-child-article-link bx-helpdesk-section-child-article-link-level-2  js-article-link " title="Уведомления в Битрикс24: новый интерфейс и возможности">
+															Notifications in Bitrix24: new interface and features														</a>
+													</div>
+												</div>
+																						</div>
+																	</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-2 js-section-item-2" data-id="84903">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-2">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-2 js-section-item-title-2  ">
+												<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-2">Chat appearance</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-2 js-section-sub-item-2 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-2 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-2 js-section-item-2" data-id="84897">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-2">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-2 js-section-item-title-2  ">
+												<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-2">Chats</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-2 js-section-sub-item-2 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-2 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-2 js-section-item-2" data-id="84901">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-2">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-2 js-section-item-title-2  ">
+												<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-2">Calls</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-2 js-section-sub-item-2 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-2 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+													</div>
+																				<div class="bx-helpdesk-section-child-article-list bx-helpdesk-section-child-article-list-level-1 js-section-article-list-1">
+																							<div class="bx-helpdesk-section-child-article-item bx-helpdesk-section-child-article-item-level-1">
+													<div class="bx-helpdesk-section-child-article-item-cnr bx-helpdesk-section-child-article-item-cnr-level-1">
+																												<a href="/open/20963046/" class="bx-helpdesk-section-child-article-link bx-helpdesk-section-child-article-link-level-1  js-article-link " title="Каналы: новый формат коммуникаций в компании">
+															Channels: a new format of communication in the company														</a>
+													</div>
+												</div>
+																								<div class="bx-helpdesk-section-child-article-item bx-helpdesk-section-child-article-item-level-1">
+													<div class="bx-helpdesk-section-child-article-item-cnr bx-helpdesk-section-child-article-item-cnr-level-1">
+																												<a href="/open/21297736/" class="bx-helpdesk-section-child-article-link bx-helpdesk-section-child-article-link-level-1  js-article-link " title="Битрикс24 Каналы: как создать и настроить">
+															Bitrix24 Channels: how to create and configure														</a>
+													</div>
+												</div>
+																								<div class="bx-helpdesk-section-child-article-item bx-helpdesk-section-child-article-item-level-1">
+													<div class="bx-helpdesk-section-child-article-item-cnr bx-helpdesk-section-child-article-item-cnr-level-1">
+																												<a href="/open/17724444/" class="bx-helpdesk-section-child-article-link bx-helpdesk-section-child-article-link-level-1  js-article-link " title="Чат группы или проекта">
+															Group or project chat														</a>
+													</div>
+												</div>
+																								<div class="bx-helpdesk-section-child-article-item bx-helpdesk-section-child-article-item-level-1">
+													<div class="bx-helpdesk-section-child-article-item-cnr bx-helpdesk-section-child-article-item-cnr-level-1">
+																												<a href="/open/25148890/" class="bx-helpdesk-section-child-article-link bx-helpdesk-section-child-article-link-level-1  js-article-link " title="Частые вопросы о чатах в Битрикс24">
+															Frequently asked questions about chats in Bitrix24														</a>
+													</div>
+												</div>
+																						</div>
+																	</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="162712">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Collabs</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="45923">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Groups</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="91477">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Calendar</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="90543">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Drive</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="127046">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Knowledge Base</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="105667">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Websites</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="108513">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Online Store</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="143888">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Inventory Accounting</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="106531">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Mail</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="94657">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">CRM</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="162832">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Online Booking</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="158972">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">KEDO</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="160630">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Signature</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="96471">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Marketing</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="121989">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Sales Center</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="122293">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Analytics</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="157396">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">BI Constructor</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="157494">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Automation</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="104395">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">1C and Bitrix24 Integration</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="45989">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Employees</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="56679">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Business Processes</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="45922">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Marketplace</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="106801">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Contact Center</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="45992">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Settings</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="48602">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Employee Widget</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="45939">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Telephony</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="45937">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Bitrix24 App</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="45945">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">General Questions</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="109831">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Bitrix24 Out of the Box</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+						<div class="bx-helpdesk-section-item bx-helpdesk-section-item-level-1 js-section-item-1" data-id="143812">
+				<div class="bx-helpdesk-section-item-cnr bx-helpdesk-section-item-cnr-level-1">
+					<div class="bx-helpdesk-section-item-name-cnr bx-helpdesk-section-item-name-cnr-level-1 js-section-item-title-1  ">
+													<div class="bx-helpdesk-section-item-top-level-icon "></div>
+													<div class="bx-helpdesk-section-item-name bx-helpdesk-section-item-name-level-1">Changes in Articles (Archive)</div>					</div>
+											<div class="bx-helpdesk-section-child-cnr bx-helpdesk-section-child-cnr-level-1 js-section-sub-item-1 ">
+							<div class="bx-helpdesk-section-child bx-helpdesk-section-child-level-1 js-section-sub-item-inner">
+															</div>
+						</div>
+										</div>
+			</div>
+							</div>
+			</div>
+		</div>
+	</div>
+				</div>
+		</div>
+	</div>
+	</div>
+	<div class="footer-section bx-ui-background-gradient-blue">
+	<div class="footer-content">
+			<div class="footer-content__section footer-content__section_categories">
+		<div class="footer-category-menu" data-category-menu="">
+				<div class="footer-category-menu__section">
+		<div class="footer-category-menu__dropdown">
+			<div class="footer-category-menu__title" data-category-menu-title="">Features</div>
+			<div class="footer-category-menu__list">
+										<div class="footer-category-menu__item">
+							<a href="https://www.bitrix24.ru/features/crm/" class="footer-category-menu__link">CRM</a>						</div>
+												<div class="footer-category-menu__item">
+							<a href="https://www.bitrix24.ru/features/chat/" class="footer-category-menu__link">Chat</a>						</div>
+												<div class="footer-category-menu__item">
+							<a href="https://www.bitrix24.ru/features/copilot/" class="footer-category-menu__link">CoPilot</a>						</div>
+												<div class="footer-category-menu__item">
+							<a href="https://www.bitrix24.ru/features/tasks.php" class="footer-category-menu__link">Tasks and Projects</a>						</div>
+												<div class="footer-category-menu__item">
+							<a href="https://www.bitrix24.ru/features/sites.php" class="footer-category-menu__link">Websites</a>						</div>
+												<div class="footer-category-menu__item">
+							<a href="https://www.bitrix24.ru/features/shop.php" class="footer-category-menu__link">Stores</a>						</div>
+									</div>
+		</div>
+	</div>
+		<div class="footer-category-menu__section">
+		<div class="footer-category-menu__dropdown">
+			<div class="footer-category-menu__title" data-category-menu-title="">Help</div>
+			<div class="footer-category-menu__list">
+										<div class="footer-category-menu__item">
+							<a href="https://helpdesk.bitrix24.ru/" class="footer-category-menu__link">Questions and Answers</a>						</div>
+												<div class="footer-category-menu__item">
+							<a href="https://www.bitrix24.ru/features/pages/training.php" class="footer-category-menu__link">Training</a>						</div>
+												<div class="footer-category-menu__item">
+							<a href="https://www.bitrix24.ru/support/webinars.php" class="footer-category-menu__link">Webinars</a>						</div>
+												<div class="footer-category-menu__item">
+							<a href="https://www.bitrix24.ru/journal/" class="footer-category-menu__link">Bitrix24 Journal</a>						</div>
+												<div class="footer-category-menu__item">
+							<a href="https://helpdesk.bitrix24.ru/ticket.php" class="footer-category-menu__link">Ask a question</a>						</div>
+												<div class="footer-category-menu__item">
+							<a href="https://www.bitrix24.ru/reviews/" class="footer-category-menu__link">Reviews</a>						</div>
+									</div>
+		</div>
+	</div>
+		<div class="footer-category-menu__section">
+		<div class="footer-category-menu__dropdown">
+			<div class="footer-category-menu__title" data-category-menu-title="">Implementation</div>
+			<div class="footer-category-menu__list">
+										<div class="footer-category-menu__item">
+							<span class="footer-category-menu__link" data-role="request-crm-form" data-form-params="{&quot;lang&quot;:&quot;ru&quot;,&quot;id&quot;:57,&quot;sec&quot;:&quot;wigzcs&quot;,&quot;loader&quot;:&quot;https:\/\/bitrix24.team\/upload\/crm\/form\/loader_57_wigzcs.js&quot;,&quot;scriptParameters&quot;:&quot;inline\/57\/wigzcs&quot;}">Order implementation</span>						</div>
+												<div class="footer-category-menu__item">
+							<a href="https://www.bitrix24.ru/partners/" class="footer-category-menu__link">Partners</a>						</div>
+												<div class="footer-category-menu__item">
+							<a href="http://partners24.1c-bitrix.ru/" class="footer-category-menu__link">Become a partner</a>						</div>
+												<div class="footer-category-menu__item">
+							<a href="https://www.bitrix24.ru/enterprise/" class="footer-category-menu__link">Bitrix24 for Enterprise</a>						</div>
+												<div class="footer-category-menu__item">
+							<a href="https://www.bitrix24.ru/partners/events/" class="footer-category-menu__link">Partner events</a>						</div>
+									</div>
+		</div>
+	</div>
+		<div class="footer-category-menu__section">
+		<div class="footer-category-menu__dropdown">
+			<div class="footer-category-menu__title" data-category-menu-title="">Prices and rates</div>
+			<div class="footer-category-menu__list">
+										<div class="footer-category-menu__item">
+							<a href="https://www.bitrix24.ru/prices/" class="footer-category-menu__link">How much does it cost?</a>						</div>
+												<div class="footer-category-menu__item">
+							<a href="https://www.bitrix24.ru/prices/self-hosted.php" class="footer-category-menu__link">Box version</a>						</div>
+									</div>
+		</div>
+	</div>
+		<div class="footer-category-menu__section">
+		<div class="footer-category-menu__dropdown">
+			<div class="footer-category-menu__title" data-category-menu-title="">Applications</div>
+			<div class="footer-category-menu__list">
+										<div class="footer-category-menu__item">
+							<a href="https://www.bitrix24.ru/apps/mobile-and-desktop-apps.php" class="footer-category-menu__link">Mobile application</a>						</div>
+												<div class="footer-category-menu__item">
+							<a href="https://www.bitrix24.ru/features/desktop.php" class="footer-category-menu__link">Windows and Mac application</a>						</div>
+												<div class="footer-category-menu__item">
+							<a href="https://www.bitrix24.ru/apps/" class="footer-category-menu__link">Bitrix24 Market</a>						</div>
+												<div class="footer-category-menu__item">
+							<a href="https://www.bitrix24.ru/apps/dev.php" class="footer-category-menu__link">For application developers</a>						</div>
+									</div>
+		</div>
+	</div>
+			</div>
+	</div>
+			<div class="footer-content__section footer-content__section_info">
+				<div class="footer-info-section">
+					<div class="footer-info-section__section">
+						<div class="footer-info-sidebar">
+							<div class="footer-info-sidebar__section footer-info-sidebar__section_menu">
+								<div class="footer-info-sidebar__row">
+									<div class="footer-about-menu">
+											<ul class="footer-about-menu__list">
+						<li class="footer-about-menu__item">
+					<a class="footer-about-menu__link" href="https://www.bitrix24.ru/security/">Security</a>				</li>
+								<li class="footer-about-menu__item">
+					<a class="footer-about-menu__link" href="https://www.bitrix24.ru/about/privacy.php">Privacy</a>				</li>
+								<li class="footer-about-menu__item">
+					<a class="footer-about-menu__link" href="https://www.bitrix24.ru/about/agreement.php">Agreement</a>				</li>
+								<li class="footer-about-menu__item">
+					<a class="footer-about-menu__link" href="https://www.bitrix24.ru/about/">About us</a>				</li>
+								<li class="footer-about-menu__item">
+					<a class="footer-about-menu__link" href="https://career.bitrix24.site/">Vacancies</a>				</li>
+								<li class="footer-about-menu__item">
+					<a class="footer-about-menu__link" href="https://www.bitrix24.ru/about/contacts.php">Contacts</a>				</li>
+					</ul>
+										</div>
+								</div>
+																	<div class="footer-info-sidebar__row">
+									<div class="footer-agreement"></div>
+									</div>									<div class="footer-info-sidebar__row">
+										<div class="footer-consent-menu">
+												<ul class="footer-consent-menu__list">
+						<li class="footer-consent-menu__item">
+					<a class="footer-consent-menu__link" href="https://www.1c-bitrix.ru/download/files/manuals/ru/agreement_2014.htm">Website usage agreement</a>				</li>
+								<li class="footer-consent-menu__item">
+					<a class="footer-consent-menu__link" href="https://www.bitrix24.ru/about/privacy.php">Personal data processing policy</a>				</li>
+								<li class="footer-consent-menu__item">
+					<a class="footer-consent-menu__link" href="https://www.bitrix24.ru/abuse/sites.php">Rules for using Bitrix24.Websites</a>				</li>
+					</ul>
+											</div>
+									</div>
+																</div>
+
+							<div class="footer-info-sidebar__section footer-info-sidebar__section_media">
+								<div class="footer-social-media">
+									
+									<div class="footer-social-media__row footer-social-media__row_align">
+										<div class="footer-social-media__column">
+											<div class="footer-social-media__section"></div>
+										</div>
+
+										<div class="footer-social-media__column footer-social-media__column_social">
+											<div class="footer-social-media__section">
+												<div class="footer-social-network">
+													<ul class="footer-social-network__list">
+				<li class="footer-social-network__item">
+				<a class="footer-social-network__link" href="https://vk.com/bitrix24" aria-label="Vk" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" height="50" viewBox="0 0 576 512"><path d="M545 117.7c3.7-12.5 0-21.7-17.8-21.7h-58.9c-15 0-21.9 7.9-25.6 16.7 0 0-30 73.1-72.4 120.5-13.7 13.7-20 18.1-27.5 18.1-3.7 0-9.4-4.4-9.4-16.9V117.7c0-15-4.2-21.7-16.6-21.7h-92.6c-9.4 0-15 7-15 13.5 0 14.2 21.2 17.5 23.4 57.5v86.8c0 19-3.4 22.5-10.9 22.5-20 0-68.6-73.4-97.4-157.4-5.8-16.3-11.5-22.9-26.6-22.9H38.8c-16.8 0-20.2 7.9-20.2 16.7 0 15.6 20 93.1 93.1 195.5C160.4 378.1 229 416 291.4 416c37.5 0 42.1-8.4 42.1-22.9 0-66.8-3.4-73.1 15.4-73.1 8.7 0 23.7 4.4 58.7 38.1 40 40 46.6 57.9 69 57.9h58.9c16.8 0 25.3-8.4 20.4-25-11.2-34.9-86.9-106.7-90.3-111.5-8.7-11.2-6.2-16.2 0-26.2.1-.1 72-101.3 79.4-135.6z"></path></svg></a>
+			</li>
+						<li class="footer-social-network__item">
+				<a class="footer-social-network__link" href="https://t.me/bitrix24clients" aria-label="Telegram" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" height="50" viewBox="0 0 448 512"><path d="M446.7 98.6l-67.6 318.8c-5.1 22.5-18.4 28.1-37.3 17.5l-103-75.9-49.7 47.8c-5.5 5.5-10.1 10.1-20.7 10.1l7.4-104.9 190.9-172.5c8.3-7.4-1.8-11.5-12.9-4.1L117.8 284 16.2 252.2c-22.1-6.9-22.5-22.1 4.6-32.7L418.2 66.4c18.4-6.9 34.5 4.1 28.5 32.2z"></path></svg></a>
+			</li>
+						<li class="footer-social-network__item">
+				<a class="footer-social-network__link" href="https://tenchat.ru/bitrix24" aria-label="TenChat" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" height="50" viewBox="0 0 531 512"><path d="M443.723 23.558a685.93 685.93 0 0 0-356.446 0 107.038 107.038 0 0 0-76.937 83.206 569.475 569.475 0 0 0 0 216.055 107.055 107.055 0 0 0 76.937 83.187 685.7 685.7 0 0 0 216.739 22.471c9.482-.531 18.793 2.635 26.037 8.817l86.002 73.441c1.592 1.346 3.792 1.649 5.67.758a5.372 5.372 0 0 0 3.072-4.854v-85.292c0-6.144 4.172-11.529 10.032-13.027a522.253 522.253 0 0 0 8.913-2.332A107.061 107.061 0 0 0 520.66 322.8a569.467 569.467 0 0 0 0-216.055 107.047 107.047 0 0 0-76.937-83.187zM376.06 95.121c8.059 0 14.583 6.504 14.583 14.563v51.312a14.56 14.56 0 0 1-8.991 13.454 14.563 14.563 0 0 1-5.573 1.109h-50.445a14.561 14.561 0 0 0-14.564 14.582V329.21a14.564 14.564 0 0 1-14.564 14.563h-57.651a14.574 14.574 0 0 1-13.472-8.986 14.562 14.562 0 0 1-1.111-5.577V190.122a14.563 14.563 0 0 0-14.564-14.563h-50.444a14.565 14.565 0 0 1-14.545-14.563v-51.312c0-8.059 6.523-14.563 14.564-14.563H376.06z"></path></svg></a>
+			</li>
+						<li class="footer-social-network__item">
+				<a class="footer-social-network__link" href="https://www.youtube.com/channel/UCfYCeX2rohHIAuWfAXxLfhg" aria-label="YouTube" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" height="50" viewBox="0 0 576 512"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg></a>
+			</li>
+						<li class="footer-social-network__item">
+				<a class="footer-social-network__link" href="https://zen.yandex.ru/id/5acc6cb24bf161ef0d740c39" aria-label="Yandex Zen" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" height="50" viewBox="0 0 512 512" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.113061 248.319C0.0378629 250.87 0 253.431 0 256V248.32C0.0376932 248.32 0.0753798 248.319 0.113061 248.319ZM248.319 0.113061C247.035 103.829 239.943 162.126 201.024 201.024C162.147 239.943 103.829 247.035 0.113061 248.319C4.10017 113.047 113.047 4.10017 248.319 0.113061ZM256 0C253.431 0 250.87 0.0378629 248.319 0.113061C248.319 0.0753798 248.32 0.0376932 248.32 0H256ZM263.681 0.113061C261.13 0.0378629 258.569 0 256 0H263.68C263.68 0.0376932 263.681 0.0753798 263.681 0.113061ZM511.887 248.319C408.171 247.035 349.874 239.943 310.976 201.024C272.057 162.147 264.965 103.829 263.681 0.113061C398.953 4.10017 507.9 113.047 511.887 248.319ZM512 256C512 253.431 511.962 250.87 511.887 248.319C511.925 248.319 511.962 248.32 512 248.32V256ZM511.887 263.681C511.962 261.13 512 258.569 512 256V263.68C511.962 263.68 511.925 263.681 511.887 263.681ZM263.681 511.887C264.965 408.171 272.057 349.874 310.976 310.976C349.853 272.057 408.171 264.965 511.887 263.681C507.9 398.953 398.953 507.9 263.681 511.887ZM256 512C258.569 512 261.13 511.962 263.681 511.887C263.681 511.925 263.68 511.962 263.68 512H256ZM248.319 511.887C250.87 511.962 253.431 512 256 512H248.32C248.32 511.962 248.319 511.925 248.319 511.887ZM248.319 511.887C113.047 507.9 4.10017 398.953 0.113061 263.681C103.829 264.965 162.126 272.057 201.024 310.976C239.943 349.853 247.035 408.171 248.319 511.887ZM0.113061 263.681C0.0753798 263.681 0.0376932 263.68 0 263.68V256C0 258.569 0.0378629 261.13 0.113061 263.681Z"></path></svg></a>
+			</li>
+						<li class="footer-social-network__item">
+				<a class="footer-social-network__link" href="https://rutube.ru/channel/24776390/" aria-label="Rutube" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" height="50" viewBox="0 0 132 132" fill="none"><path d="M81.536 62.986H42.54V47.556h38.997c2.278 0 3.862.397 4.657 1.09.795.694 1.287 1.98 1.287 3.858v5.541c0 1.98-.492 3.265-1.287 3.959-.795.693-2.379.99-4.657.99v-.007zm2.675-29.98H26V99h16.539V77.53h30.479L87.48 99H106L90.055 77.429c5.878-.871 8.518-2.673 10.695-5.642 2.177-2.97 3.269-7.716 3.269-14.051v-4.948c0-3.758-.398-6.727-1.092-9.002-.694-2.276-1.88-4.255-3.565-6.033-1.78-1.683-3.76-2.868-6.14-3.663-2.378-.693-5.35-1.09-9.01-1.09v.006z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M132 100c0 17.673-14.327 32-32 32H32c-17.673 0-32-14.327-32-32V32C0 14.327 14.327 0 32 0h68c17.673 0 32 14.327 32 32v68zM2 32C2 15.431 15.431 2 32 2h34.03a65.709 65.709 0 0 0 5.291 24.006h5.89V26h7c4.14 0 7.8.446 10.97 1.37l.13.038.128.043c3.33 1.111 6.201 2.821 8.733 5.216l.139.132.132.139c2.377 2.508 4.147 5.42 5.18 8.806.957 3.138 1.396 6.842 1.396 11.044v4.948c0 1.618-.063 3.222-.205 4.79A65.826 65.826 0 0 0 130 65.97V100c0 16.569-13.431 30-30 30H32c-16.569 0-30-13.431-30-30V32z"></path></svg></a>
+			</li>
+			</ul>
+												</div>
+																							</div>
+
+											<div class="footer-social-media__section">
+												<div class="footer-search">
+													<form class="footer-search__form" action="/search.php">
+														<input type="text" name="q" placeholder="Что ищем?" class="footer-search__input">
+														<input type="submit" class="footer-search__submit">
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+									</div>
+			</div>
+						<div class="footer-content__section footer-content__section_copyright">
+						<div class="footer-company-info">
+			<div class="footer-company-info__description">
+				<noindex></noindex>
+			</div>
+		</div>
+				<div class="footer-copyright">
+			<div class="footer-copyright__section footer-copyright__section_description">
+				<div class="footer-copyright__description">
+					<noindex>© 2001-2026 «Bitrix», «1C-Bitrix». Powered by «1C-Bitrix: Site Management»<span class="footer-copyright__age-icon">16+</span></noindex>
+				</div>
+			</div>
+
+			<div class="footer-copyright__section footer-copyright__section_composite">
+				<noindex>
+					<div id="bx-composite-banner"></div>
+				</noindex>
+			</div>
+		</div>
+					</div>
+				</div>
+</div><div id="bxdynamic_gdpr_manager_start" style="display:none"></div><div id="bxdynamic_gdpr_manager_end" style="display:none"></div><div id="bxdynamic_4st5j2_start" style="display:none"></div><div class="bx-main-cookie-policy-settings" data-bx-cookie-policy-section="" data-bx-cookie-policy-section-type="popupsettings">
+	<div class="bx-main-cookie-policy-settings__popup">
+		<div class="bx-main-cookie-policy-settings__close" data-bx-cookie-policy-section-close=""></div>
+		<div class="bx-main-cookie-policy-settings__container">
+			<!--'start_frame_cache_main-gdpr-user-settings_section'-->	<div class="bx-main-user-cookie-settings" data-bx-user-cookie-settings="">
+				<div class="bx-main-user-cookie-settings__content">
+			<div class="bx-main-user-cookie-settings__header">Cookie settings</div>
+			<div class="bx-main-user-cookie-settings__controller" data-bx-list="">
+									<div class="bx-main-user-cookie-settings__switch">
+						<input id="bx-cookie-type-necessary" type="checkbox" class="bx-main-user-cookie-settings__input" checked="">
+						<label for="bx-cookie-type-necessary" class="bx-main-user-cookie-settings__label" data-bx-item="" data-bx-type="necessary">
+						<span class="bx-main-user-cookie-settings__selector bx-main-user-cookie-settings__selector_switch">
+							<span class="bx-main-user-cookie-settings__selector-switch"></span>
+						</span>
+							<span class="bx-main-user-cookie-settings__selector-text">Technical cookies</span>
+						</label>
+					</div>
+										<div class="bx-main-user-cookie-settings__switch">
+						<input id="bx-cookie-type-analytical" type="checkbox" class="bx-main-user-cookie-settings__input" checked="">
+						<label for="bx-cookie-type-analytical" class="bx-main-user-cookie-settings__label" data-bx-item="" data-bx-type="analytical">
+						<span class="bx-main-user-cookie-settings__selector bx-main-user-cookie-settings__selector_switch">
+							<span class="bx-main-user-cookie-settings__selector-switch"></span>
+						</span>
+							<span class="bx-main-user-cookie-settings__selector-text">Analytical cookies</span>
+						</label>
+					</div>
+								</div>
+		</div>
+		<div class="bx-main-user-cookie-settings__content">
+			<div class="bx-main-user-cookie-settings__header"></div>
+
+			<div class="bx-main-user-cookie-settings__description">
+				<p>More in <a target="_blank" href="https://www.1c-bitrix.ru/download/files/manuals/ru/privacy.htm">The policy of LLC «1C-Bitrix» regarding cookies</a></p>            </div>
+		</div>
+	</div>
+<!--'end_frame_cache_main-gdpr-user-settings_section'-->		</div>
+	</div>
+	<div class="bx-main-cookie-policy-settings__overflow"></div>
+</div>
+<div class="bx-main-cookie-policy-sidebar" data-bx-cookie-policy-section="" data-bx-cookie-policy-section-type="slidebar">
+	<div class="bx-main-cookie-policy-sidebar__content">
+		<div class="bx-main-cookie-policy-sidebar__introduce">We use <a target="_blank" href="https://www.1c-bitrix.ru/about/privacy.php">cookies. They help us understand how you interact with the site.</a>Change settings<a class="js-show-gdpr-settings" href="#">OK</a></div>
+		<div class="bx-main-cookie-policy-sidebar__controller">
+							<div class="bx-main-cookie-policy-sidebar__control">
+					<span class="bx-main-cookie-policy-sidebar__button" data-bx-cookie-policy-section-close="">ОК</span>
+				</div>
+						</div>
+	</div>
+</div><div id="bxdynamic_4st5j2_end" style="display:none"></div><div id="bxdynamic_advertising_banner_popup_start" style="display:none"></div><div id="bxdynamic_advertising_banner_popup_end" style="display:none"></div><div id="bxdynamic_footer_epilogue_ol_start" style="display:none"></div><div id="bxdynamic_footer_epilogue_ol_end" style="display:none"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
