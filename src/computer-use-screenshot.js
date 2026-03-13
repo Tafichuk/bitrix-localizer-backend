@@ -151,11 +151,11 @@ async function takeScreenshotWithComputerUse(context, portalUrl, targetDescripti
     await page.waitForTimeout(8000);
     await page.waitForFunction(() => {
       const skeletons = document.querySelectorAll(
-        '.ui-skeleton, [class*="skeleton"], [class*="loader"]'
+        '.ui-skeleton, [class*="skeleton"], [class*="loader"], [class*="loading"]'
       );
       return skeletons.length === 0;
-    }, { timeout: 15000 }).catch(() => {});
-    await page.waitForTimeout(3000);
+    }, { timeout: 25000 }).catch(() => {});
+    await page.waitForTimeout(5000);
 
     // ФИКС 2: URL guard — if we were redirected away from expected section, re-navigate
     if (plan?.url) {
@@ -166,10 +166,10 @@ async function takeScreenshotWithComputerUse(context, portalUrl, targetDescripti
         await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
         await page.waitForTimeout(8000);
         await page.waitForFunction(() => {
-          const s = document.querySelectorAll('.ui-skeleton,[class*="skeleton"],[class*="loader"]');
+          const s = document.querySelectorAll('.ui-skeleton,[class*="skeleton"],[class*="loader"],[class*="loading"]');
           return s.length === 0;
-        }, { timeout: 15000 }).catch(() => {});
-        await page.waitForTimeout(3000);
+        }, { timeout: 25000 }).catch(() => {});
+        await page.waitForTimeout(5000);
       }
     }
 

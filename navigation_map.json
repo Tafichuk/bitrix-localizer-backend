@@ -2138,34 +2138,36 @@
         "url": "/company/personal/user/1/tasks/",
         "click_sequence": [],
         "keywords_ru": [
-          "задачи",
+          "задачи и проекты",
           "список задач",
           "мои задачи",
-          "сортировка задач",
+          "создать задачу",
+          "срок задачи",
+          "исполнитель задачи",
+          "задачи сотрудника",
+          "просроченные задачи",
+          "эффективность задач",
           "фильтр задач",
-          "просроченная задача",
+          "группировка задач",
+          "задачи",
           "подзадача",
-          "фильтр",
           "все задачи",
-          "сайдбар",
-          "боковая панель",
-          "левое меню",
-          "панель навигации"
+          "просроченная задача"
         ],
         "keywords_en": [
-          "tasks",
+          "tasks and projects",
           "task list",
           "my tasks",
-          "task sorting",
+          "create task",
+          "task deadline",
+          "task assignee",
+          "task efficiency",
           "task filter",
-          "overdue task",
+          "task grouping",
+          "tasks",
           "subtask",
-          "filter tasks",
           "all tasks",
-          "sidebar",
-          "side panel",
-          "left menu",
-          "navigation panel"
+          "overdue task"
         ],
         "screenshot": "crawl_tasks_01.png"
       },
@@ -2266,19 +2268,24 @@
           }
         ],
         "keywords_ru": [
-          "канбан",
+          "канбан задач",
           "доска задач",
           "колонки задач",
+          "канбан вид задач",
+          "задачи канбан",
+          "канбан",
           "доска",
           "колонки"
         ],
         "keywords_en": [
-          "kanban",
+          "task kanban",
           "kanban board",
           "task columns",
           "task cards",
-          "board",
-          "columns"
+          "kanban view tasks",
+          "tasks kanban",
+          "kanban",
+          "board"
         ],
         "screenshot": "crawl_tasks_06.png"
       },
