@@ -114,6 +114,26 @@ app.get('/api/stream/:jobId', (req, res) => {
   req.on('close', () => job.listeners.delete(listener));
 });
 
+// Job status for polling (replaces SSE)
+app.get('/api/status/:jobId', (req, res) => {
+  const job = jobs.get(req.params.jobId);
+  if (!job) return res.status(404).json({ error: 'Job not found' });
+
+  const lastProgress = [...job.events].reverse().find(e => e.event === 'progress');
+  const completeEv = job.events.find(e => e.event === 'complete');
+  const errorEv = job.events.find(e => e.event === 'error');
+
+  res.json({
+    status: job.status,
+    progress: lastProgress?.data?.progress || 0,
+    message: lastProgress?.data?.message || '',
+    step: lastProgress?.data?.step || '',
+    downloadUrl: completeEv ? `/api/download/${job.id}` : null,
+    error: errorEv?.data?.message || null,
+    events: job.events.map(e => e.data).filter(Boolean),
+  });
+});
+
 // Download ZIP
 app.get('/api/download/:jobId', (req, res) => {
   const job = jobs.get(req.params.jobId);
